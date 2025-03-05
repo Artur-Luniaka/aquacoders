@@ -1,0 +1,16 @@
+.box {
+  background-color: var(--color-lightgrey);
+  padding: 24px 16px;
+  width: 343px;
+  height: 411px;
+  border-radius: 30px;
+  @media (min-width: 768px) {
+    padding: 32px;
+    width: 704px;
+    height: 498px;
+  }
+  @media (min-width: 1440px) {
+    width: 672px;
+    height: 736px;
+  }
+}
