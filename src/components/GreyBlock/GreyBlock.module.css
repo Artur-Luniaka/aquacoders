@@ -1,16 +1,18 @@
 .box {
   background-color: var(--color-lightgrey);
-  padding: 24px 16px;
+  padding: 40px 20px;
   width: 343px;
-  height: 411px;
   border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   @media (min-width: 768px) {
-    padding: 32px;
+    padding: 41px 32px 35px;
     width: 704px;
-    height: 498px;
   }
   @media (min-width: 1440px) {
+    padding: 41px 32px 33px;
     width: 672px;
-    height: 736px;
   }
 }
