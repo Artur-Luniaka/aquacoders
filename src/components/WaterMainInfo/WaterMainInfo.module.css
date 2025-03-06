@@ -81,13 +81,20 @@
   right: 16px;
   z-index: 10;
   gap: 10px;
+  color: var(--color-white);
   min-width: 142px;
+  transition: color 0.2s ease-out;
 
   @media (min-width: 768px) {
     padding: 18px 30px;
     bottom: 64px;
     right: 32px;
   }
+}
+
+.button:hover,
+.button:focus {
+  color: var(--hover-green);
 }
 
 .plus {
@@ -99,7 +106,6 @@
   line-height: 129%;
   letter-spacing: -0.01em;
   text-align: center;
-  color: var(--color-white);
   @media (min-width: 768px) {
     width: 24px;
     height: 24px;
@@ -115,7 +121,7 @@
   line-height: 129%;
   letter-spacing: -0.01em;
   text-align: center;
-  color: var(--color-white);
+
   width: 84px;
   @media (min-width: 768px) {
     font-size: 16px;
