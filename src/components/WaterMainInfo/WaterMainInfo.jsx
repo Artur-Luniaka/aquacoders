@@ -9,11 +9,11 @@ export const WaterMainInfo = () => {
 
   return (
     <div className={css.container}>
+      <h2 className={css.title}>AquaTrack</h2>
       <div className={css.dayNorma}>
         <p className={css.liters}>1.5 L</p>
         <p className={css.text}> My daily norma</p>
       </div>
-
       <button type="button" className={css.button} onClick={handleClick}>
         <p className={css.plus}>+</p>
 
