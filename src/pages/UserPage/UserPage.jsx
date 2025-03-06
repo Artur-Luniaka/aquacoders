@@ -1,16 +1,15 @@
 import Calendar from "../../components/Calendar/Calendar.jsx";
 import GreenBlock from "../../components/GreenBlock/GreenBlock";
-import GreyBlock from "../../components/GreyBlock/GreyBlock";
-
+import UserGreyBlock from "../../components/UserGreyBlock/UserGreyBlock.jsx";
 const UserPage = () => {
   return (
     <>
       <GreenBlock>
         <h2>Здесь будет контент по Юзеру</h2>
       </GreenBlock>
-      <GreyBlock>
+      <UserGreyBlock>
         <Calendar />
-      </GreyBlock>
+      </UserGreyBlock>
     </>
   );
 };
