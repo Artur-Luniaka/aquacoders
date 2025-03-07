@@ -3,6 +3,7 @@ import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import { RegisterForm } from "../../components/RegisterForm/RegisterForm";
 
+import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 const SignUpPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
 
@@ -27,6 +28,7 @@ const SignUpPage = () => {
       {hideImgBlock && (
         <ImgBlock>
           <h2>Здесь будет контент на картинке,но только для веб версии</h2>
+          <InfoLabels />
         </ImgBlock>
       )}
     </>
