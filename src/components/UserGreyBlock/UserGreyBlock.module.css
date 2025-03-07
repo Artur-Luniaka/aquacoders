@@ -1,8 +1,7 @@
 .box {
-  background-color: var(--color-lightgreen);
+  background-color: var(--color-lightgrey);
   border-radius: 30px;
-  padding: 24px 16px;
-  position: relative;
+  padding: 40px 20px;
   width: 343px;
   @media (min-width: 768px) {
     padding: 32px;
