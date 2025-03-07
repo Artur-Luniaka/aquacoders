@@ -1,11 +1,11 @@
 import React from "react";
-import css from "./DailyNorma.module.css";
+import s from "./DailyNorma.module.css";
 
 const DailyNorma = () => {
   return (
-    <div className={css.day_norma}>
-      <p className={css.liters}>1.5 L</p>
-      <p className={css.text}> My daily norma</p>
+    <div className={s.day_norma}>
+      <p className={s.liters}>1.5 L</p>
+      <p className={s.text}> My daily norma</p>
     </div>
   );
 };
