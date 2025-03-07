@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
+import { RegisterForm } from "../../components/RegisterForm/RegisterForm";
 
 const SignUpPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
@@ -21,7 +22,7 @@ const SignUpPage = () => {
   return (
     <>
       <GreyBlock>
-        <h2>Здесь будет форма регистрации</h2>
+        <RegisterForm />
       </GreyBlock>
       {hideImgBlock && (
         <ImgBlock>
