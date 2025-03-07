@@ -22,6 +22,7 @@ const SignInPage = () => {
   return (
     <>
       <GreyBlock>
+        <Logo />
         <h2>Здесь будет форма логинизации</h2>
       </GreyBlock>
       {hideImgBlock && (
