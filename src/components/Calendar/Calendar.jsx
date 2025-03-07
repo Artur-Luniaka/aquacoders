@@ -2,6 +2,7 @@ import s from "./Calendar.module.css";
 
 import { useState } from "react";
 import CalendarDayStatus from "../CalendarDayStatus/CalendarDayStatus.jsx";
+import CalendarMonthStatus from "../CalendarMonthStatus/CalendarMonthStatus.jsx";
 
 const Calendar = () => {
   const dataFromBackend = [
@@ -66,10 +67,8 @@ const Calendar = () => {
   const [calendarData, setCalendarData] = useState(newFrontendData);
   return (
     <>
-      <div className={s.monthContainer}>
-        <h2 className={s.monthTitle}>Month</h2>
-      </div>
-      <ul className={s.calendarList}>
+      <CalendarMonthStatus />
+      <ul className={s.calendar_list}>
         {calendarData.map((dayInfo) => (
           <CalendarDayStatus
             key={dayInfo.day}
