@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import { RegisterForm } from "../../components/RegisterForm/RegisterForm";
+import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection";
 
-import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 const SignUpPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
 

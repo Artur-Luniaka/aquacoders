@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { Box, Button, TextField, Typography } from "@mui/material";
 import s from "./RegisterForm.module.css";
+import { useState } from "react";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -16,81 +16,99 @@ const validationSchema = Yup.object({
     .required("Repeat Password is required"),
 });
 
+const initialValues = { email: "", password: "", repeatPassword: "" };
+
 export const RegisterForm = () => {
+  const [data, setData] = useState(initialValues);
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: yupResolver(validationSchema),
-  });
+  //   const {
+  //     register,
+  //     handleSubmit,
+  //     formState: { errors, isSubmitting },
+  //   } = useForm({
+  //     resolver: yupResolver(validationSchema),
+  //   });
+  function handleChange({ currentTarget: { name, value } }) {
+    switch (name) {
+      case "email":
+        setData((previous) => ({
+          ...previous,
+          email: value,
+        }));
+        break;
+      case "password":
+        setData((previous) => ({
+          ...previous,
+          password: value,
+        }));
+        break;
+      case "repeatPassword":
+        setData((previous) => ({
+          ...previous,
+          repeatPassword: value,
+        }));
+        break;
+      default:
+        setData(initialValues);
+    }
+  }
 
-  const onSubmit = async (data) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      const response = await /* ваш API виклик для реєстрації */;
-      if (response.token) {
-        navigate("/tracker");
-      }
+      console.log(data);
+      setData(initialValues);
+
+      //   const response = await;
+      //   if (response.token) {
+      //     navigate("/tracker");
+      //   }
     } catch (error) {
       toast.error(error.message || "Registration failed. Try again.");
     }
   };
 
   return (
-    <Box className={s.container}>
-      <Typography
-        variant="h5"
-        gutterBottom
-        className={s.title}
-      >
-        Sign Up
-      </Typography>
+    <div className={s.container}>
+      <h2 className={s.title}>Sign Up</h2>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
         className={s.form}
       >
-        <TextField
-          label="Email"
-          {...register("email")}
-          fullWidth
-          variant="outlined"
+        <input
+          value={data.email}
+          type="email"
+          name="email"
+          placeholder="Email"
           className={s.input}
-          error={!!errors.email}
-          helperText={errors.email?.message}
+          onChange={handleChange}
         />
-        <TextField
-          label="Password"
+        <input
+          value={data.password}
+          name="password"
+          placeholder="Password"
           type="password"
-          {...register("password")}
-          fullWidth
-          variant="outlined"
           className={s.input}
-          error={!!errors.password}
-          helperText={errors.password?.message}
+          onChange={handleChange}
         />
-        <TextField
-          label="Repeat Password"
+        <input
+          value={data.repeatPassword}
+          name="repeatPassword"
+          placeholder="Repeat Password"
           type="password"
-          {...register("repeatPassword")}
-          fullWidth
-          variant="outlined"
           className={s.input}
-          error={!!errors.repeatPassword}
-          helperText={errors.repeatPassword?.message}
+          onChange={handleChange}
         />
-        <Button
+        <button
           className={s.button}
           type="submit"
-          variant="contained"
-          color="primary"
-          fullWidth
-          disabled={isSubmitting}
+          //   disabled={isSubmitting}
         >
           Sign Up
-        </Button>
+        </button>
       </form>
-    </Box>
+    </div>
   );
 };
