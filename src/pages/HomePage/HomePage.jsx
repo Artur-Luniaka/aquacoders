@@ -2,6 +2,8 @@ import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import Logo from "../../components/Logo/Logo";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import MainImg from "../../components/MainImg/MainImg";
+import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
+
 
 const HomePage = () => {
   return (
@@ -12,6 +14,8 @@ const HomePage = () => {
       </GreyBlock>
       <ImgBlock>
         <MainImg />
+        <h2>Тут будет контент на картинке</h2>
+        <InfoLabels />
       </ImgBlock>
     </>
   );

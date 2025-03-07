@@ -1,0 +1,92 @@
+.container {
+    background-color: var(--color-white);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    top: 225px;
+    left: 73px;
+    gap: 8px;
+    width: 198px;
+    height: 70px;
+    border-radius: 15px;
+    padding: 12px;
+  }
+
+.title {
+    font-family: var(--poppins-bold);
+    color: var(--color-darkblue);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0%;
+  }
+
+.slider {
+    max-width:255px;
+    height:8px;
+    border-radius: 9px;
+    border-color: var(--color-lightgrey);
+    border-style: none;
+    border: solid ;
+    color: var(--color-lightgrey);
+    background-color: var(--color-lightgrey);
+  }
+
+.rail{
+    transform: translate(-1px,-5px);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    border: 2px solid var(--color-lightgreen);
+  }
+
+.percentBar {
+    pointer-events: none;
+    width: 174px;
+    font-size: 10px;
+    line-height: 1;
+    opacity: 0.6;
+  }
+
+.fifty {
+    margin-left: 66px;
+    margin-right: 49px;
+   
+  }
+
+@media (min-width: 768px) {
+.container {
+    left: 204px;
+    top: 322px;
+    gap: 6px;
+    width: 295px;
+    height: 106px;
+    padding: 20px;
+  }
+.title {
+    font-size: 15px;
+    line-height: 1.49;
+    font-weight: 700;
+  }
+.percentBar {
+    width: 255px;
+    font-size: 12px;
+     line-height: 1.86;
+  }
+.fifty {
+    margin-left: 100px;
+    margin-right: 84px;
+  }
+  }
+
+@media (min-width: 1440px) {
+  .container {
+    left: 188px;
+    top: 450px;
+      }
+  .title {
+    line-height: 22.4px;
+      }
+  }
