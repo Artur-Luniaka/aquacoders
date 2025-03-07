@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import DailyNorma from "../../DailyNorma/DailyNorma.jsx";
 import AddWater from "../../AddWater/AddWater.jsx";
 
-export const WaterMainInfo = () => {
+const WaterMainInfo = () => {
   return (
     <>
       <DailyNorma />
@@ -11,3 +11,5 @@ export const WaterMainInfo = () => {
     </>
   );
 };
+
+export default WaterMainInfo;
