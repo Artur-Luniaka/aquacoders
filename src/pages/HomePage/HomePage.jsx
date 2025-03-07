@@ -1,14 +1,16 @@
 import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
+import OurHappyCustomers from "../../components/OurHappyCustomers/OurHappyCustomers.jsx";
+import WelcomeSection from "../../components/WelcomeSection/WelcomeSection.jsx";
 
 const HomePage = () => {
   return (
     <>
       <GreyBlock>
-        <h2>Тут будет текстовый контент страницы Home</h2>
+        <WelcomeSection />
       </GreyBlock>
       <ImgBlock>
-        <h2>Тут будет контент на картинке</h2>
+        <OurHappyCustomers />
       </ImgBlock>
     </>
   );
