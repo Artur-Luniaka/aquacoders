@@ -56,7 +56,6 @@ const SignInPage = () => {
           </p>
         </div>
       </GreyBlock>
-
       {hideImgBlock && (
         <ImgBlock>
           <h2>Здесь будет контент на картинке,но только для веб версии</h2>

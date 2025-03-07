@@ -95,6 +95,46 @@
   }
 
   @media (min-width: 768px) {
-    
+    .signinContainer {
+      max-width: 436px;
+      margin: 281px auto;
+    }
+
+    .signinTitle {
+      font-size: 36px;
+    }
+
+    .label {
+      font-size: 16px;
+      line-height: 150%;
+    }
+
+    .input {
+      width: 436px;
+      height: 56px;
+      font-size: 16px;
+      line-height: 150%;
+    }
+
+    .signinButton {
+      width: 436px;
+      font-size: 16px;
+      padding: 18px 191px;
+      height: 60px;
+    }
+
+    .signinForm {
+      gap: 20px;
+    }
+
+    .signupText {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .signinContainer {
+      margin: 169px auto;
+    }
   }
   
