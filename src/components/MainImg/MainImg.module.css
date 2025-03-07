@@ -1,0 +1,9 @@
+img {
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.img_box {
+  width: 100%;
+}

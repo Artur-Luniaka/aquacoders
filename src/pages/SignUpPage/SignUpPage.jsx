@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
+import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
+import Logo from "../../components/Logo/Logo.jsx";
 
 const SignUpPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
@@ -21,11 +23,11 @@ const SignUpPage = () => {
   return (
     <>
       <GreyBlock>
-        <h2>Здесь будет форма регистрации</h2>
+        <Logo />
       </GreyBlock>
       {hideImgBlock && (
         <ImgBlock>
-          <h2>Здесь будет контент на картинке,но только для веб версии</h2>
+          <InfoLabels />
         </ImgBlock>
       )}
     </>
