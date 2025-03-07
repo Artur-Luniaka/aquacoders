@@ -81,18 +81,18 @@
 .plus {
   width: 16px;
   height: 16px;
-  font-family: var(--poppins-bold);
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 129%;
-  letter-spacing: -0.01em;
-  text-align: center;
+  fill: var(--color-white);
+  transition: fill 0.2s ease-in-out;
   @media (min-width: 768px) {
     width: 24px;
     height: 24px;
-    font-size: 16px;
-    line-height: 150%;
   }
+}
+
+.button:hover .plus,
+.button:focus .plus {
+  fill: var(--hover-green);
+  stroke: var(--hover-green);
 }
 
 .addWater {
