@@ -5,7 +5,14 @@
   border-radius: 30px;
   border: 1px solid grey;
   position: relative;
+  
   @media (min-width: 768px) {
+    .box {
+      background-image: image-set(
+        url('../../assets/woman_tab@1x.webp') 1x,
+        url('../../assets/woman_tab@2x.webp') 2x
+      );
+    }
     padding: 32px;
     width: 704px;
     height: 446px;
