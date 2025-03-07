@@ -4,6 +4,7 @@
   padding: 24px 16px;
   position: relative;
   width: 343px;
+<<<<<<< HEAD
   height: 415px;
   background-image: image-set(
     url("../../assets/bottle_mob@1x.webp") 1x,
@@ -23,10 +24,16 @@
     );
     background-position: center 69px;
     background-size: 374px 477px;
+=======
+  @media (min-width: 768px) {
+    padding: 32px;
+    width: 704px;
+>>>>>>> e50f177946fa97c3e2ec49b31e76bb5b445aaa24
   }
 
   @media (min-width: 1440px) {
     width: 672px;
+<<<<<<< HEAD
     height: 736px;
     background-image: image-set(
       url("../../assets/bottle_web@1x.webp") 1x,
@@ -34,5 +41,7 @@
     );
     background-position: center 92px;
     background-size: 472px 604px;
+=======
+>>>>>>> e50f177946fa97c3e2ec49b31e76bb5b445aaa24
   }
 }

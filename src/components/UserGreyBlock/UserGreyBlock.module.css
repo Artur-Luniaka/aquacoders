@@ -1,14 +1,13 @@
 .box {
   background-color: var(--color-lightgrey);
-  padding: 24px 16px;
-  width: 343px;
   border-radius: 30px;
+  padding: 40px 20px;
+  width: 343px;
   @media (min-width: 768px) {
     padding: 32px;
     width: 704px;
   }
   @media (min-width: 1440px) {
-    padding: 32px;
     width: 672px;
   }
 }
