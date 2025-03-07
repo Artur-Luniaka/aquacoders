@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import css from "./AddWater.module.css";
-import icons from "../assets/sprite.svg";
+import icons from "./../assets/sprite.svg";
 
 const AddWater = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

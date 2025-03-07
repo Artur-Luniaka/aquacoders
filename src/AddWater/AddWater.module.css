@@ -10,7 +10,6 @@
   align-items: center;
   bottom: 32px;
   right: 16px;
-  z-index: 10;
   gap: 10px;
   color: var(--color-white);
   max-width: 140px;
@@ -24,11 +23,6 @@
   }
 }
 
-.button:hover,
-.button:focus {
-  color: var(--hover-green);
-}
-
 .plus {
   min-width: 16px;
   height: 16px;
@@ -40,21 +34,25 @@
   }
 }
 
-.button:hover .plus,
-.button:focus .plus {
-  stroke: var(--hover-green);
-}
-
 .add_water {
   font-family: var(--poppins-bold);
   font-weight: 700;
   font-size: 14px;
-  line-height: 129%;
+  line-height: 18px;
   letter-spacing: -0.01em;
   text-align: center;
   min-width: 74px;
   @media (min-width: 768px) {
     font-size: 16px;
-    line-height: 150%;
+    line-height: 24px;
   }
+}
+
+.button:hover,
+.button:focus {
+  color: var(--hover-green);
+}
+.button:hover .plus,
+.button:focus .plus {
+  stroke: var(--hover-green);
 }

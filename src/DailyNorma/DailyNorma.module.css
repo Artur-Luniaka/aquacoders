@@ -4,7 +4,7 @@
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
   background: var(--color-white);
   position: absolute;
-  z-index: 200;
+
   top: 122px;
   left: 16px;
   display: flex;
@@ -29,11 +29,11 @@
   font-family: var(--poppins-bold);
   font-weight: 700;
   font-size: 14px;
-  line-height: 100%;
+  line-height: 14px;
   color: var(--color-darkblue);
   @media (min-width: 768px) {
     font-size: 15px;
-    line-height: 149%;
+    line-height: 23px;
   }
 }
 
@@ -41,11 +41,11 @@
   font-family: var(--poppins-reg);
   font-weight: 400;
   font-size: 10px;
-  line-height: 100%;
+  line-height: 10px;
   min-width: 78px;
   color: rgba(47, 47, 47, 0.6);
   @media (min-width: 768px) {
     font-size: 12px;
-    line-height: 187%;
+    line-height: 23px;
   }
 }
