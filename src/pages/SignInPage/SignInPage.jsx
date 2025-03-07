@@ -3,6 +3,8 @@ import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import { useEffect } from "react";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
+import Logo from "../../components/Logo/Logo.jsx";
+
 const SignInPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
 
@@ -23,11 +25,9 @@ const SignInPage = () => {
     <>
       <GreyBlock>
         <Logo />
-        <h2>Здесь будет форма логинизации</h2>
       </GreyBlock>
       {hideImgBlock && (
         <ImgBlock>
-          <h2>Здесь будет контент на картинке,но только для веб версии</h2>
           <InfoLabels />
         </ImgBlock>
       )}
