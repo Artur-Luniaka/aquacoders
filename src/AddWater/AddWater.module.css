@@ -1,0 +1,58 @@
+.button {
+  border-radius: 30px;
+  padding: 14px 20px;
+  background: var(--color-darkblue);
+  border: none;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  bottom: 32px;
+  right: 16px;
+  gap: 10px;
+  color: var(--color-white);
+  max-width: 140px;
+  transition: color 0.2s ease-out;
+
+  @media (min-width: 768px) {
+    padding: 18px 30px;
+    bottom: 64px;
+    right: 32px;
+    min-width: 178px;
+  }
+}
+
+.plus {
+  min-width: 16px;
+  height: 16px;
+  stroke: var(--color-white);
+  transition: stroke 0.2s ease-out;
+  @media (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.add_water {
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  min-width: 74px;
+  @media (min-width: 768px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.button:hover,
+.button:focus {
+  color: var(--hover-green);
+}
+.button:hover .plus,
+.button:focus .plus {
+  stroke: var(--hover-green);
+}
