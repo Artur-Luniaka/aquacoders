@@ -3,6 +3,7 @@ import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
+import MainImg from "../../components/MainImg/MainImg.jsx";
 
 const SignUpPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
@@ -27,6 +28,7 @@ const SignUpPage = () => {
       </GreyBlock>
       {hideImgBlock && (
         <ImgBlock>
+          <MainImg />
           <InfoLabels />
         </ImgBlock>
       )}
