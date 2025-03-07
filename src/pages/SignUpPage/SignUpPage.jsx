@@ -21,6 +21,7 @@ const SignUpPage = () => {
   return (
     <>
       <GreyBlock>
+        <Logo />
         <h2>Здесь будет форма регистрации</h2>
       </GreyBlock>
       {hideImgBlock && (
