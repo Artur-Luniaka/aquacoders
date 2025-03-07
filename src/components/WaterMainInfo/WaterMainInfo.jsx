@@ -10,7 +10,7 @@ export const WaterMainInfo = () => {
 
   return (
     <>
-      <div className={css.dayNorma}>
+      <div className={css.day_norma}>
         <p className={css.liters}>1.5 L</p>
         <p className={css.text}> My daily norma</p>
       </div>
@@ -18,8 +18,7 @@ export const WaterMainInfo = () => {
         <svg className={css.plus} width="16" height="16">
           <use href={`${icons}#icon-plus`} />
         </svg>
-
-        <p className={css.addWater}>Add water</p>
+        <p className={css.add_water}>Add water</p>
       </button>
     </>
   );
