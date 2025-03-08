@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import s from "./RegisterForm.module.css";
 import { useState } from "react";
@@ -72,43 +72,63 @@ export const RegisterForm = () => {
 
   return (
     <div className={s.container}>
+      <h2 className={s.aqua}>AquaTrack</h2>
       <h2 className={s.title}>Sign Up</h2>
       <form
         onSubmit={handleSubmit}
         className={s.form}
       >
-        <input
-          value={data.email}
-          type="email"
-          name="email"
-          placeholder="Email"
-          className={s.input}
-          onChange={handleChange}
-        />
-        <input
-          value={data.password}
-          name="password"
-          placeholder="Password"
-          type="password"
-          className={s.input}
-          onChange={handleChange}
-        />
-        <input
-          value={data.repeatPassword}
-          name="repeatPassword"
-          placeholder="Repeat Password"
-          type="password"
-          className={s.input}
-          onChange={handleChange}
-        />
+        <label className={s.label}>
+          Email
+          <input
+            value={data.email}
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            className={s.input}
+            onChange={handleChange}
+          />
+        </label>
+        <label className={s.label}>
+          Password
+          <input
+            value={data.password}
+            name="password"
+            placeholder="Enter your password"
+            type="password"
+            className={s.input}
+            onChange={handleChange}
+          />
+        </label>
+        <label className={s.label}>
+          Repeat password
+          <input
+            value={data.repeatPassword}
+            name="repeatPassword"
+            placeholder="Repeat password"
+            type="password"
+            className={s.input}
+            onChange={handleChange}
+          />
+        </label>
         <button
           className={s.button}
           type="submit"
-          //   disabled={isSubmitting}
         >
           Sign Up
         </button>
       </form>
+      <div className={s.paragraph}>
+        <p>
+          Already have account?{" "}
+          <Link
+            to="/signIn"
+            className={s.link}
+          >
+            Sign In
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
