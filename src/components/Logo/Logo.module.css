@@ -1,0 +1,12 @@
+.logo {
+  font: 700 18px/20px var(--poppins-bold);
+  text-transform: uppercase;
+  letter-spacing: -0.18px;
+  text-align: center;
+  color: var(--color-darkblue);
+
+  @media screen and (min-width: 768px) {
+    font: 700 24px/24px var(--poppins-bold);
+    letter-spacing: -0.24px;
+  }
+}
