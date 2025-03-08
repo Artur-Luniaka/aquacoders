@@ -1,11 +1,11 @@
 import s from "./GreyBlock.module.css";
-import Signin from "../Signin/Signin";
+import SignInForm from "../SigninForm/SignInForm";
 
 const GreyBlock = ({ children }) => {
   return (
     <div className={s.box}>
       {children}
-      <Signin />
+      <SignInForm />
     </div>
   );
 };
