@@ -1,9 +1,14 @@
-import { useForm } from "react-hook-form"; 
+import React from "react";
+import { useForm } from "react-hook-form";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import s from "./SignInForm.module.css";
-import { yupResolver } from "@hookform/resolvers/yup/src/yup.js";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const SignInForm = () => {
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email format")
@@ -19,8 +24,22 @@ const SignInForm = () => {
     resolver: yupResolver(validationSchema)
   });
 
-  const onSubmit = (data) => {
-    console.log("Form data:", data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("/api/signin", data);
+
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        navigate("/tracker");
+      } else {
+        alert("Authentication error. Please try again.");
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Something went wrong. Please try again later.";
+      alert(errorMessage);
+    }
   };
 
   return (
@@ -59,7 +78,7 @@ const SignInForm = () => {
       </form>
       <p className={s.signupText}>
         Don’t have an account?{" "}
-        <a href="#" className={s.signupLink}>
+        <a href="/signup" className={s.signupLink}>
           Sign Up
         </a>
       </p>

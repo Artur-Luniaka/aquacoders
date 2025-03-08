@@ -3,6 +3,15 @@
     max-width: 320px; 
     text-align: center;
     margin: 192px auto;
+
+    @media (min-width: 768px) {
+      max-width: 436px;
+      margin: 249px auto;
+    }
+  
+    @media (min-width: 1440px) {
+      margin: 137px auto;
+    }
   }
 
   .signinTitle {
@@ -14,6 +23,10 @@
     text-align: left;
     margin-bottom: 32px;
     color: var(--color-darkblue);
+
+    @media (min-width: 768px) {
+      font-size: 36px;
+    }
   }
 
   .signinForm {
@@ -21,6 +34,10 @@
     flex-direction: column;
     gap: 16px;
     margin-bottom: 16px; 
+
+    @media (min-width: 768px) {
+      gap: 20px;
+    }
   }
 
   .inputGroup {
@@ -37,6 +54,11 @@
     line-height: 129%;
     letter-spacing: -0.01em;
     color: var(--main-text);
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+      line-height: 150%;
+    }
   }
 
   .input {
@@ -48,6 +70,14 @@
     width: 311px;
     height: 50px;
     background-color: #f0eff4;
+
+    @media (min-width: 768px) {
+      width: 436px;
+      height: 56px;
+      font-size: 16px;
+      line-height: 150%;
+    }
+  
   }
 
   .signinButton {
@@ -65,6 +95,13 @@
     padding: 16px 131px;
     width: 311px;
     height: 50px;
+
+    @media (min-width: 768px) {
+      width: 436px;
+      font-size: 16px;
+      padding: 18px 191px;
+      height: 60px;
+    }
   }
   
   .signinButton:hover {
@@ -79,6 +116,10 @@
     letter-spacing: -0.01em;
     color: rgba(47, 47, 47, 0.5);
     text-decoration: none;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
   }
   
   .signupLink {
@@ -93,7 +134,7 @@
     text-decoration: underline;
   }
 
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     .signinContainer {
       max-width: 436px;
       margin: 249px auto;
@@ -135,5 +176,5 @@
     .signinContainer {
       margin: 137px auto;
     }
-  }
+  } */
   
