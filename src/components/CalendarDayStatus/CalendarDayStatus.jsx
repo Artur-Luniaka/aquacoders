@@ -10,7 +10,7 @@ const CalendarDayStatus = ({
 }) => {
   const { day, month, year, stats, isActive, date } = dayInfo;
 
-  const handleClick = (clickedDay, date) => {
+  const handleClick = (clickedDay) => {
     if (
       year > currentYear ||
       (year === currentYear && month > currentMonth) ||
@@ -28,7 +28,7 @@ const CalendarDayStatus = ({
         return prevData;
       }
 
-      console.log("То что по идеи летит на бекенд:", date);
+      //"Тут по идеи летит запрос на бекенд
 
       return prevData.map((item) =>
         item.day === clickedDay
@@ -36,25 +36,16 @@ const CalendarDayStatus = ({
           : { ...item, isActive: false }
       );
     });
-
   };
 
   return (
-    <li className={s.dayItem} onClick={() => handleClick(day, date)}>
+    <li className={s.day_item} onClick={() => handleClick(day, date)}>
       <span
-        className={clsx(
-          s.number,
-          currentDay === day && isActive && s.currentActiveDay,
-          currentDay === day &&
-            !isActive &&
-            stats === 100 &&
-            s.currentNotActiveDayHigh,
-          currentDay === day &&
-            !isActive &&
-            stats < 100 &&
-            s.currentNotActiveDayLow,
-          currentDay !== day && isActive && s.notCurrentActiveDay,
-          stats < 100 && s.lowPercent
+        className={clsx(s.number,
+          currentDay === day && isActive && s.current_active_day,
+          currentDay === day && !isActive && (stats === 100 || stats < 100) && s.current_not_active_day,
+          currentDay !== day && isActive && s.not_current_active_day,
+          stats < 100 && s.low_percent
         )}
       >
         {day}

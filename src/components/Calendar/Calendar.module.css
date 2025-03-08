@@ -1,51 +1,17 @@
-.monthTitle {
-  font-family: var(--poppins-bold);
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-}
-
-.monthContainer{
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-}
-
-.calendarList {
+.calendar_list {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
   row-gap: 20px;
   column-gap: 18px;
-  margin-top: 24px;
-}
 
-@media screen and (min-width: 768px) {
-  .calendarList {
+  @media screen and (min-width: 768px) {
     row-gap: 15px;
     column-gap: 48px;
   }
-
-  .monthTitle {
-    font-size: 28px;
-    line-height: 32px;
-  }
-
-  .monthContainer{
-	width: 98%;
-}
-}
-
-@media screen and (min-width: 1440px) {
-  .calendarList {
+  @media screen and (min-width: 1440px) {
     row-gap: 15px;
     column-gap: 43px;
   }
-
-  .monthContainer{
-	width: 101.5%;
-}
 }
