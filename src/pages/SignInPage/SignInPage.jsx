@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
+import MainImg from "../../components/MainImg/MainImg.jsx";
 
 const SignInPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
@@ -28,6 +29,7 @@ const SignInPage = () => {
       </GreyBlock>
       {hideImgBlock && (
         <ImgBlock>
+          <MainImg />
           <InfoLabels />
         </ImgBlock>
       )}
