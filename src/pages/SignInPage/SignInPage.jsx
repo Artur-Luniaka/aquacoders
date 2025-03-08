@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GreyBlock from "../../components/GreyBlock/GreyBlock";
-import { useEffect } from "react";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
