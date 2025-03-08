@@ -4,7 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import s from "./RegisterForm.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import sprite from "../../assets/sprite.svg";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -16,101 +17,89 @@ const validationSchema = Yup.object({
     .required("Repeat Password is required"),
 });
 
-const initialValues = { email: "", password: "", repeatPassword: "" };
-
 export const RegisterForm = () => {
-  const [data, setData] = useState(initialValues);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  //   const {
-  //     register,
-  //     handleSubmit,
-  //     formState: { errors, isSubmitting },
-  //   } = useForm({
-  //     resolver: yupResolver(validationSchema),
-  //   });
-  function handleChange({ currentTarget: { name, value } }) {
-    switch (name) {
-      case "email":
-        setData((previous) => ({
-          ...previous,
-          email: value,
-        }));
-        break;
-      case "password":
-        setData((previous) => ({
-          ...previous,
-          password: value,
-        }));
-        break;
-      case "repeatPassword":
-        setData((previous) => ({
-          ...previous,
-          repeatPassword: value,
-        }));
-        break;
-      default:
-        setData(initialValues);
-    }
-  }
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitSuccessful },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const togglePasswordVisibility = () => {
+    setShowPassword((previous) => !previous);
+  };
 
+  const onSubmit = async (data) => {
     try {
       console.log(data);
-      setData(initialValues);
-
-      //   const response = await;
-      //   if (response.token) {
-      //     navigate("/tracker");
-      //   }
     } catch (error) {
       toast.error(error.message || "Registration failed. Try again.");
     }
   };
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
+
   return (
     <div className={s.container}>
-      <h2 className={s.aqua}>AquaTrack</h2>
       <h2 className={s.title}>Sign Up</h2>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className={s.form}
       >
         <label className={s.label}>
           Email
           <input
-            value={data.email}
+            {...register("email")}
             type="email"
-            name="email"
             placeholder="Enter your email"
             className={s.input}
-            onChange={handleChange}
           />
+          {errors.email && <span>{errors.email.message}</span>}
         </label>
+
         <label className={s.label}>
           Password
           <input
-            value={data.password}
-            name="password"
+            {...register("password")}
+            type={showPassword ? "text" : "password"}
             placeholder="Enter your password"
-            type="password"
             className={s.input}
-            onChange={handleChange}
           />
+          <button
+            onClick={togglePasswordVisibility}
+            type="button"
+          >
+            <svg className={s.icon}>
+              <use
+                href={`${sprite}#${showPassword ? "icon-open-eye" : "icon-closed-eye"}`}
+              />
+            </svg>
+          </button>
+          {errors.password && <span>{errors.password.message}</span>}
         </label>
+
         <label className={s.label}>
           Repeat password
           <input
-            value={data.repeatPassword}
-            name="repeatPassword"
-            placeholder="Repeat password"
+            {...register("repeatPassword")}
             type="password"
+            placeholder="Repeat password"
             className={s.input}
-            onChange={handleChange}
           />
+          {errors.repeatPassword && (
+            <span>{errors.repeatPassword.message}</span>
+          )}
         </label>
+
         <button
           className={s.button}
           type="submit"
@@ -118,9 +107,10 @@ export const RegisterForm = () => {
           Sign Up
         </button>
       </form>
+
       <div className={s.paragraph}>
         <p>
-          Already have account?{" "}
+          Already have an account?{" "}
           <Link
             to="/signIn"
             className={s.link}
