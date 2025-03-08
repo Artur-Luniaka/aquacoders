@@ -1,4 +1,4 @@
-.infoContainer {
+.info_container {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
@@ -11,7 +11,7 @@
     border-radius: 30px;
     font-size: 12px;
   }
-    .infoList{
+    .info_list{
       position: absolute;
       display: flex;
       flex-wrap: wrap;

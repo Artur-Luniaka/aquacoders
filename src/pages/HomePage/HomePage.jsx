@@ -1,6 +1,6 @@
 import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
-import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
+import AdvantagesSection from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 
 const HomePage = () => {
   return (
@@ -10,7 +10,7 @@ const HomePage = () => {
       </GreyBlock>
       <ImgBlock>
         <h2>Тут будет контент на картинке</h2>
-        <InfoLabels />
+        <AdvantagesSection />
       </ImgBlock>
     </>
   );
