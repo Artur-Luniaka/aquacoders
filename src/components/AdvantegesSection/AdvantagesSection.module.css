@@ -1,67 +1,64 @@
-.info_container {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
+.info_container{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
   
-  .label {
-    font-family: var(--poppins-reg);
-    padding: 8px 16px;
-    line-height: 1.16;
-    border-radius: 30px;
-    font-size: 12px;
-  }
-    .info_list{
-      position: absolute;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      height: 78px;
-      left: 120px;
-      top: 265px;
-    }
+.label{
+  font-family: var(--poppins-reg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  padding: 9px 12px;
+  line-height: 1;
+  border-radius: 30px;
+  font-size: 8px;
+  text-align: center;
 
-  .dark {
-    background-color: var(--color-darkblue);
-    color: var(--color-white);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .dark::before {
-    content: "●";
-    color:  var(--color-lightgreen);
-  }
-  
-  .green {
-    background-color: var(--color-lightgreen);
-    color: var(--color-darkblue)
-  }
-  
-  .white {
-    background-color: var(--color-white);
-    color: var(--color-darkblue);
-    border: 1px solid #ddd;
-  }
-
-  @media (min-width: 768px) {
-    .infoList {
-        top: 336px;
-        bottom: 32px;
-        left: 430px;
+@media (min-width: 768px) {
+  font-size: 12px;
     }
+}
+
+.info_list{
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  left: 159px;
+  top: 265px;
+
+@media (min-width: 768px) {
+  top: 336px;
+  bottom: 32px;
+  left: 430px;
+  gap: 10px;
+    }
+@media (min-width: 1440px) {
+  top: 594px;
+  bottom: 64px;
+  left: 398px;
+    }
+}
+
+.dark{
+  background-color: var(--color-darkblue);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  gap: 5px;
   }
 
-  @media (min-width: 1440px) {
-    .infoList {
-      top: 594px;
-      bottom: 64px;
-      left: 398px;
-    }
-    .label{
-      font-size:15px;
-      line-height:22.4px;
-    }
+.dark::before{
+  content: "●"; 
+  color:  var(--color-lightgreen);
+}
 
-  }
+.green{
+  background-color: var(--color-lightgreen);
+  color: var(--color-darkblue)
+}
+
+.white{
+  background-color: var(--color-white);
+  color: var(--color-darkblue);
+}

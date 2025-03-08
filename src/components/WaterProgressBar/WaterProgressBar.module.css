@@ -16,7 +16,6 @@
       top: 322px;
       gap: 6px;
       width: 295px;
-      height: 106px;
       padding: 20px;
     }
 
@@ -31,11 +30,11 @@
     color: var(--color-darkblue);
     font-weight: 700;
     font-size: 14px; 
-    line-height: 100%;
+    line-height: 1;
 
     @media (min-width: 768px) {
     font-size: 15px;
-    line-height: 149%;
+    line-height: 1.49333;
     }
   }
 
@@ -65,22 +64,25 @@
     pointer-events: none;
     width: 174px;
     font-size: 10px;
-    line-height: 100%;
+    line-height: 1.86667;
 
     @media (min-width: 768px) {
      width: 255px;
      font-size: 12px;
-     line-height: 187%;
+     line-height: 1.86667;
     }
   }
 
 .fifty {
     margin-left: 66px;
     margin-right: 49px;
+    line-height: 1;
+    font-weight: 400;
+    font-size: 10px;
 
     @media (min-width: 768px) {
      margin-left: 100px;
      margin-right: 84px;
+     line-height: 1.86667;
     }
-   
   }
