@@ -61,43 +61,59 @@ export const RegisterForm = () => {
             {...register("email")}
             type="email"
             placeholder="Enter your email"
-            className={s.input}
+            className={`${s.input} ${errors.email ? s.errorInput : ""}`}
           />
-          {errors.email && <span>{errors.email.message}</span>}
+          <span className={s.errorMessage}>{errors.email?.message}</span>
         </label>
 
         <label className={s.label}>
           Password
-          <input
-            {...register("password")}
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter your password"
-            className={s.input}
-          />
-          <button
-            onClick={togglePasswordVisibility}
-            type="button"
-          >
-            <svg className={s.icon}>
-              <use
-                href={`${sprite}#${showPassword ? "icon-open-eye" : "icon-closed-eye"}`}
-              />
-            </svg>
-          </button>
-          {errors.password && <span>{errors.password.message}</span>}
+          <div className={s.inputContainer}>
+            <input
+              {...register("password")}
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              className={`${s.input} ${errors.password ? s.errorInput : ""}`}
+            />
+            <button
+              className={s.iconBtn}
+              onClick={togglePasswordVisibility}
+              type="button"
+            >
+              <svg className={s.icon}>
+                <use
+                  href={`${sprite}#${showPassword ? "icon-open-eye" : "icon-closed-eye"}`}
+                />
+              </svg>
+            </button>
+          </div>
+          <span className={s.errorMessage}>{errors.password?.message}</span>
         </label>
 
         <label className={s.label}>
           Repeat password
-          <input
-            {...register("repeatPassword")}
-            type="password"
-            placeholder="Repeat password"
-            className={s.input}
-          />
-          {errors.repeatPassword && (
-            <span>{errors.repeatPassword.message}</span>
-          )}
+          <div className={s.inputContainer}>
+            <input
+              {...register("repeatPassword")}
+              type={showPassword ? "text" : "password"}
+              placeholder="Repeat password"
+              className={`${s.input} ${errors.repeatPassword ? s.errorInput : ""}`}
+            />
+            <button
+              className={s.iconBtn}
+              onClick={togglePasswordVisibility}
+              type="button"
+            >
+              <svg className={s.icon}>
+                <use
+                  href={`${sprite}#${showPassword ? "icon-open-eye" : "icon-closed-eye"}`}
+                />
+              </svg>
+            </button>
+          </div>
+          <span className={s.errorMessage}>
+            {errors.repeatPassword?.message}
+          </span>
         </label>
 
         <button
@@ -110,7 +126,7 @@ export const RegisterForm = () => {
 
       <div className={s.paragraph}>
         <p>
-          Already have an account?{" "}
+          Already have account?{" "}
           <Link
             to="/signIn"
             className={s.link}

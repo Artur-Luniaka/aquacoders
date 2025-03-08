@@ -25,8 +25,8 @@ const SignUpPage = () => {
   return (
     <>
       <GreyBlock>
-        <RegisterForm />
         <Logo />
+        <RegisterForm />
       </GreyBlock>
       {hideImgBlock && (
         <ImgBlock>
