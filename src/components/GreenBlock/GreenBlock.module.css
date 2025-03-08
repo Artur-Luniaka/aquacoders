@@ -4,14 +4,34 @@
   padding: 24px 16px;
   position: relative;
   width: 343px;
-  height: 415px;
+  min-height: 415px;
+  background-image: image-set(
+    url("../../assets/bottle_mob@1x.webp") 1x,
+    url("../../assets/bottle_mob@2x.webp") 2x
+  );
+  background-size: 262px 335px;
+  background-repeat: no-repeat;
+  background-position: center 50px;
+
   @media (min-width: 768px) {
     padding: 32px;
     width: 704px;
-    height: 578px;
+    min-height: 578px;
+    background-image: image-set(
+      url("../../assets/bottle_tab@1x.webp") 1x,
+      url("../../assets/bottle_tab@2x.webp") 2x
+    );
+    background-position: center 69px;
+    background-size: 374px 477px;
   }
   @media (min-width: 1440px) {
     width: 672px;
-    height: 736px;
+    min-height: 736px;
+    background-image: image-set(
+      url("../../assets/bottle_web@1x.webp") 1x,
+      url("../../assets/bottle_web@2x.webp") 2x
+    );
+    background-position: center 92px;
+    background-size: 472px 604px;
   }
 }

@@ -1,17 +1,21 @@
+import Calendar from "../../components/Calendar/Calendar.jsx";
 import GreenBlock from "../../components/GreenBlock/GreenBlock";
-import GreyBlock from "../../components/GreyBlock/GreyBlock";
-import WaterProgressBar from "../../components/WaterProgressBar/WaterProgressBar.jsx";
+import ProgressBar from "../../components/WaterProgressBar/WaterProgressBar.jsx";
+import UserGreyBlock from "../../components/UserGreyBlock/UserGreyBlock.jsx";
+import AddWaterBtn from "../../components/AddWaterBtn/AddWaterBtn.jsx";
+import DailyNorma from "../../components/DailyNorma/DailyNorma.jsx";
 
 const UserPage = () => {
   return (
     <>
       <GreenBlock>
-        <h2>Здесь будет контент по Юзеру</h2>
+        <DailyNorma />
         <WaterProgressBar />
+        <AddWaterBtn />
       </GreenBlock>
-      <GreyBlock>
-        <h2>Здесь тоже будет контент по юзеру</h2>
-      </GreyBlock>
+      <UserGreyBlock>
+        <Calendar />
+      </UserGreyBlock>
     </>
   );
 };

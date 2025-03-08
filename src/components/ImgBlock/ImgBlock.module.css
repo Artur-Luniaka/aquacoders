@@ -1,17 +1,11 @@
 .box {
-  padding: 16px;
   width: 343px;
-  height: 353px;
   border-radius: 30px;
-  border: 1px solid grey;
   position: relative;
   @media (min-width: 768px) {
-    padding: 32px;
     width: 704px;
-    height: 446px;
   }
   @media (min-width: 1440px) {
     width: 672px;
-    height: 736px;
   }
 }
