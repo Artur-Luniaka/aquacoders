@@ -4,6 +4,7 @@ import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import AdvantagesSection from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
 import MainImg from "../../components/MainImg/MainImg.jsx";
+import OurHappyCustomers from "../../components/OurHappyCustomers/OurHappyCustomers.jsx";
 
 const SignInPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
@@ -29,6 +30,7 @@ const SignInPage = () => {
       {hideImgBlock && (
         <ImgBlock>
           <MainImg />
+          <OurHappyCustomers />
           <AdvantagesSection />
         </ImgBlock>
       )}
