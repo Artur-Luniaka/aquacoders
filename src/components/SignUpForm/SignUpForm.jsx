@@ -61,22 +61,22 @@ export const SignUpForm = () => {
             {...register("email")}
             type="email"
             placeholder="Enter your email"
-            className={`${s.input} ${errors.email ? s.errorInput : ""}`}
+            className={`${s.input} ${errors.email ? s.error_input : ""}`}
           />
-          <span className={s.errorMessage}>{errors.email?.message}</span>
+          <span className={s.error_message}>{errors.email?.message}</span>
         </label>
 
         <label className={s.label}>
           Password
-          <div className={s.inputContainer}>
+          <div className={s.input_container}>
             <input
               {...register("password")}
               type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
-              className={`${s.input} ${errors.password ? s.errorInput : ""}`}
+              className={`${s.input} ${errors.password ? s.error_input : ""}`}
             />
             <button
-              className={s.iconBtn}
+              className={s.icon_btn}
               onClick={togglePasswordVisibility}
               type="button"
             >
@@ -87,20 +87,20 @@ export const SignUpForm = () => {
               </svg>
             </button>
           </div>
-          <span className={s.errorMessage}>{errors.password?.message}</span>
+          <span className={s.error_message}>{errors.password?.message}</span>
         </label>
 
         <label className={s.label}>
           Repeat password
-          <div className={s.inputContainer}>
+          <div className={s.input_container}>
             <input
               {...register("repeatPassword")}
               type={showPassword ? "text" : "password"}
               placeholder="Repeat password"
-              className={`${s.input} ${errors.repeatPassword ? s.errorInput : ""}`}
+              className={`${s.input} ${errors.repeatPassword ? s.error_input : ""}`}
             />
             <button
-              className={s.iconBtn}
+              className={s.icon_btn}
               onClick={togglePasswordVisibility}
               type="button"
             >
@@ -111,7 +111,7 @@ export const SignUpForm = () => {
               </svg>
             </button>
           </div>
-          <span className={s.errorMessage}>
+          <span className={s.error_message}>
             {errors.repeatPassword?.message}
           </span>
         </label>

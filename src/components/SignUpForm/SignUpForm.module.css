@@ -90,7 +90,7 @@
   }
 }
 
-.errorInput {
+.error_input {
   border-color: var(--error-color);
   color: var(--error-color);
 }
@@ -139,10 +139,10 @@
   color: var(--hover-green);
 }
 
-.inputContainer {
+.input_container {
   position: relative;
 }
-.iconBtn {
+.icon_btn {
   all: unset;
   display: flex;
   align-items: center;
@@ -161,7 +161,7 @@
   fill: none;
 }
 
-.errorMessage {
+.error_message {
   position: absolute;
   bottom: 0;
   left: 0;
