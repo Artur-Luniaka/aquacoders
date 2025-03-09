@@ -11,10 +11,6 @@ const MainImg = () => {
     <div className={css.img_box}>
       <picture>
         <source
-          srcSet={`${womanMob1x} 1x, ${womanMob2x} 2x`}
-          media="(max-width: 767px)"
-        />
-        <source
           srcSet={`${womanTab1x} 1x, ${womanTab2x} 2x`}
           media="(min-width: 768px) and (max-width: 1439px)"
         />
@@ -25,6 +21,7 @@ const MainImg = () => {
         <img
           className={css.img}
           src={womanMob1x}
+          srcSet={`${womanMob2x} 2x`}
           alt="Girl with water"
           width="704"
           height="446"
