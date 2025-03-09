@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import s from "./RegisterForm.module.css";
+import s from "./SignUpForm.module.css";
 import { useEffect, useState } from "react";
 import sprite from "../../assets/sprite.svg";
 
@@ -17,7 +17,7 @@ const validationSchema = Yup.object({
     .required("Repeat Password is required"),
 });
 
-export const RegisterForm = () => {
+export const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   // const navigate = useNavigate();
 
@@ -126,7 +126,7 @@ export const RegisterForm = () => {
 
       <div>
         <p className={s.paragraph}>
-          Already have account?{" "}
+          Already have an account?{" "}
           <Link
             to="/signIn"
             className={s.link}
