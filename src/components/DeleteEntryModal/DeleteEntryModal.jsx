@@ -8,12 +8,8 @@ const DeleteEntryModal = () => {
         <h2 className={s.title}>Delete entry</h2>
         <p className={s.text}>Are you sure you want to delete the entry?</p>
         <div className={s.buttons_container}>
-        <button className={s.delete} onClick={onDelete}>
-            Delete
-          </button>
-          <button className={s.cancel} onClick={onClose}>
-            Cancel
-          </button>
+          <button className={s.delete}>Delete</button>
+          <button className={s.cancel}>Cancel</button>
         </div>
       </div>
     </Modal>
