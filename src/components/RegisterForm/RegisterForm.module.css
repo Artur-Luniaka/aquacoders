@@ -74,13 +74,20 @@
 
 .input {
   font-family: var(--poppins-reg);
-  width: 100%;
+  min-width: 311px;
+  max-width: 311px;
   height: 56px;
   border-radius: 15px;
   padding: 16px;
   border: 1px solid var(--input-inactive-focus-col);
   font-size: 16px;
   background-color: transparent;
+  color: rgba(47, 47, 47, 0.6);
+
+  @media (min-width: 768px) {
+    min-width: 435px;
+    max-width: 435px;
+  }
 }
 
 .errorInput {
@@ -89,7 +96,8 @@
 }
 
 .button {
-  width: 100%;
+  min-width: 311px;
+  max-width: 311px;
   height: 60px;
   border-radius: 30px;
   background: var(--color-lightgreen);
@@ -101,19 +109,30 @@
   font-size: 16px;
   line-height: 24px;
   color: var(--color-darkblue);
-  margin-top: 32px;
+  margin-top: 12px;
   margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    min-width: 436px;
+    max-width: 436px;
+  }
 }
 
 .button:hover,
 .button:active {
   background: var(--hover-green);
 }
+.paragraph {
+  text-align: center;
+  color: rgba(47, 47, 47, 0.5);
+  font-family: var(--poppins-reg);
+}
 
 .link {
-  color: var(--color-lightgreen);
+  font-family: var(--poppins-bold);
+  color: var(--color-black);
   font-weight: 700;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .link:hover {
@@ -129,16 +148,17 @@
   align-items: center;
   position: absolute;
   top: 50%;
-  right: 16px;
+  right: 5px;
   transform: translateY(-50%);
+  padding-right: 16px;
 }
 
 .icon {
   width: 20px;
   height: 20px;
-
   cursor: pointer;
   color: #2f2f2f;
+  font-weight: 300;
 }
 
 .errorMessage {
@@ -150,8 +170,4 @@
   font-size: 14px;
   line-height: 1.2;
   color: var(--error-color);
-}
-
-.paragraph {
-  text-align: center;
 }

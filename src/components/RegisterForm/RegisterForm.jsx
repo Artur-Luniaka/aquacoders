@@ -6,6 +6,8 @@ import { toast } from "react-hot-toast";
 import s from "./RegisterForm.module.css";
 import { useEffect, useState } from "react";
 import sprite from "../../assets/sprite.svg";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -80,11 +82,11 @@ export const RegisterForm = () => {
               onClick={togglePasswordVisibility}
               type="button"
             >
-              <svg className={s.icon}>
-                <use
-                  href={`${sprite}#${showPassword ? "icon-open-eye" : "icon-closed-eye"}`}
-                />
-              </svg>
+              {showPassword ? (
+                <FaRegEyeSlash className={s.icon} />
+              ) : (
+                <FaRegEye className={s.icon} />
+              )}
             </button>
           </div>
           <span className={s.errorMessage}>{errors.password?.message}</span>
@@ -104,11 +106,11 @@ export const RegisterForm = () => {
               onClick={togglePasswordVisibility}
               type="button"
             >
-              <svg className={s.icon}>
-                <use
-                  href={`${sprite}#${showPassword ? "icon-open-eye" : "icon-closed-eye"}`}
-                />
-              </svg>
+              {showPassword ? (
+                <FaRegEyeSlash className={s.icon} />
+              ) : (
+                <FaRegEye className={s.icon} />
+              )}
             </button>
           </div>
           <span className={s.errorMessage}>
@@ -124,9 +126,9 @@ export const RegisterForm = () => {
         </button>
       </form>
 
-      <div className={s.paragraph}>
-        <p>
-          Already have account?{" "}
+      <div>
+        <p className={s.paragraph}>
+          Already have an account?{" "}
           <Link
             to="/signIn"
             className={s.link}
