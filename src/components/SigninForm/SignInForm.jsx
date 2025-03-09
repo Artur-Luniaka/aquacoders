@@ -1,45 +1,27 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import s from "./SignInForm.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const SignInForm = () => {
-  const navigate = useNavigate();
-
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email format")
       .required("Email is required"),
-    password: Yup.string().required("Password is required")
+    password: Yup.string().required("Password is required"),
   });
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema),
   });
 
   const onSubmit = async (data) => {
-    try {
-      const response = await axios.post("/api/signin", data);
-
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        navigate("/tracker");
-      } else {
-        alert("Authentication error. Please try again.");
-      }
-    } catch (error) {
-      const errorMessage =
-        error.response?.data?.message ||
-        "Something went wrong. Please try again later.";
-      alert(errorMessage);
-    }
+    console.log(data);
   };
 
   return (
@@ -57,7 +39,9 @@ const SignInForm = () => {
             className={s.input}
             {...register("email")}
           />
-          {errors.email && <p className={s.errorText}>{errors.email.message}</p>}
+          {errors.email && (
+            <p className={s.errorText}>{errors.email.message}</p>
+          )}
         </div>
         <div className={s.inputGroup}>
           <label htmlFor="password" className={s.label}>
@@ -70,7 +54,9 @@ const SignInForm = () => {
             className={s.input}
             {...register("password")}
           />
-          {errors.password && <p className={s.errorText}>{errors.password.message}</p>}
+          {errors.password && (
+            <p className={s.errorText}>{errors.password.message}</p>
+          )}
         </div>
         <button type="submit" className={s.signinButton}>
           Sign In
