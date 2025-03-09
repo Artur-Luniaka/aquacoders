@@ -6,6 +6,7 @@ import AdvantagesSection from "../../components/AdvantegesSection/AdvantagesSect
 import WelcomeSection from "../../components/WelcomeSection/WelcomeSection.jsx";
 import OurHappyCustomers from "../../components/OurHappyCustomers/OurHappyCustomers.jsx";
 
+
 const HomePage = () => {
   return (
     <>
