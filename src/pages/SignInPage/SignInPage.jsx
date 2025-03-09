@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GreyBlock from "../../components/GreyBlock/GreyBlock";
-import { useEffect } from "react";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import AdvantagesSection from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
+import MainImg from "../../components/MainImg/MainImg.jsx";
 
 const SignInPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
@@ -28,6 +28,7 @@ const SignInPage = () => {
       </GreyBlock>
       {hideImgBlock && (
         <ImgBlock>
+          <MainImg />
           <InfoLabels />
           <h2>Здесь будет контент на картинке,но только для веб версии</h2>
           <AdvantagesSection />
