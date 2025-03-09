@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import GreyBlock from "../../components/GreyBlock/GreyBlock";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
-import InfoLabels from "../../components/AdvantegesSection/AdvantagesSection.jsx";
+import AdvantagesSection from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
 import MainImg from "../../components/MainImg/MainImg.jsx";
 
@@ -28,6 +28,7 @@ const SignUpPage = () => {
       </GreyBlock>
       {hideImgBlock && (
         <ImgBlock>
+          <AdvantagesSection />
           <MainImg />
           <InfoLabels />
         </ImgBlock>
