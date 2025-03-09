@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import s from "./RegisterForm.module.css";
+import s from "./SignUpForm.module.css";
 import { useEffect, useState } from "react";
 import sprite from "../../assets/sprite.svg";
 
@@ -17,9 +17,9 @@ const validationSchema = Yup.object({
     .required("Repeat Password is required"),
 });
 
-export const RegisterForm = () => {
+export const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const {
     register,
@@ -61,22 +61,22 @@ export const RegisterForm = () => {
             {...register("email")}
             type="email"
             placeholder="Enter your email"
-            className={`${s.input} ${errors.email ? s.errorInput : ""}`}
+            className={`${s.input} ${errors.email ? s.error_input : ""}`}
           />
-          <span className={s.errorMessage}>{errors.email?.message}</span>
+          <span className={s.error_message}>{errors.email?.message}</span>
         </label>
 
         <label className={s.label}>
           Password
-          <div className={s.inputContainer}>
+          <div className={s.input_container}>
             <input
               {...register("password")}
               type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
-              className={`${s.input} ${errors.password ? s.errorInput : ""}`}
+              className={`${s.input} ${errors.password ? s.error_input : ""}`}
             />
             <button
-              className={s.iconBtn}
+              className={s.icon_btn}
               onClick={togglePasswordVisibility}
               type="button"
             >
@@ -87,20 +87,20 @@ export const RegisterForm = () => {
               </svg>
             </button>
           </div>
-          <span className={s.errorMessage}>{errors.password?.message}</span>
+          <span className={s.error_message}>{errors.password?.message}</span>
         </label>
 
         <label className={s.label}>
           Repeat password
-          <div className={s.inputContainer}>
+          <div className={s.input_container}>
             <input
               {...register("repeatPassword")}
               type={showPassword ? "text" : "password"}
               placeholder="Repeat password"
-              className={`${s.input} ${errors.repeatPassword ? s.errorInput : ""}`}
+              className={`${s.input} ${errors.repeatPassword ? s.error_input : ""}`}
             />
             <button
-              className={s.iconBtn}
+              className={s.icon_btn}
               onClick={togglePasswordVisibility}
               type="button"
             >
@@ -111,7 +111,7 @@ export const RegisterForm = () => {
               </svg>
             </button>
           </div>
-          <span className={s.errorMessage}>
+          <span className={s.error_message}>
             {errors.repeatPassword?.message}
           </span>
         </label>
@@ -124,9 +124,9 @@ export const RegisterForm = () => {
         </button>
       </form>
 
-      <div className={s.paragraph}>
-        <p>
-          Already have account?{" "}
+      <div>
+        <p className={s.paragraph}>
+          Already have an account?{" "}
           <Link
             to="/signIn"
             className={s.link}
