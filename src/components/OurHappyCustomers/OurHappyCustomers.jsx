@@ -21,7 +21,7 @@ const OurHappyCustomers = () => {
           <picture>
             <source
               srcSet={`${Customer3} 1x, ${Customer4} 2x`}
-              media="(min-width: 768px) and (max-width: 1439px)"
+              media="(min-width: 768px)"
             />
             <source
               srcSet={`${Customer3} 1x, ${Customer4} 2x`}
@@ -37,7 +37,7 @@ const OurHappyCustomers = () => {
           <picture>
             <source
               srcSet={`${Customer7} 1x, ${Customer8} 2x`}
-              media="(min-width: 768px) and (max-width: 1439px)"
+              media="(min-width: 768px)"
             />
             <source
               srcSet={`${Customer7} 1x, ${Customer8} 2x`}
@@ -53,7 +53,7 @@ const OurHappyCustomers = () => {
           <picture>
             <source
               srcSet={`${Customer11} 1x, ${Customer12} 2x`}
-              media="(min-width: 768px) and (max-width: 1439px)"
+              media="(min-width: 768px)"
             />
             <source
               srcSet={`${Customer11} 1x, ${Customer12} 2x`}
