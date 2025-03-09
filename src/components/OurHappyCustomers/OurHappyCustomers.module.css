@@ -1,0 +1,99 @@
+.happy_customers {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 98px;
+    left: 15px;
+    background-color: var(--color-white);
+    padding: 10px 14px;
+    border-radius: 30px;
+    box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+    width: 160px;
+}
+
+.avatars {
+    display: flex;
+    align-items: center;
+}
+
+.image {
+    display: flex;
+    position: relative;
+    width: 70px;
+}
+
+.image img {
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.images_girl {
+    z-index: 3;
+    left: 2;
+    bottom: -14px;
+}
+
+.images_boy {
+    z-index: 2;
+    left: 16px;
+    bottom: -14px;
+}
+
+.images_girl_ano {
+    z-index: 1;
+    left: 33px;
+    bottom: -14px;
+}
+
+.paragraph {
+    font-family: var(--poppins-bold);
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.2;
+    color: var(--color-darkblue);
+    margin-left: 15px;
+}
+
+.highlight {
+    color: var(--color-lightgreen);
+}
+
+@media (min-width: 768px) {
+    .happy_customers {
+        padding: 10px 20px;
+        width: 237px;
+    }
+
+    .paragraph {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-left: 15px;
+        text-align: end;
+    }
+
+    .images_girl {
+        z-index: 3;
+        left: 2;
+        bottom: -22px;
+    }
+    
+    .images_boy {
+        z-index: 2;
+        left: 30px;
+        bottom: -22px;
+    }
+    
+    .images_girl_ano {
+        z-index: 1;
+        left: 58px;
+        bottom: -22px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .happy_customers {
+        bottom: 130px;
+        left: 30px;
+    }
+}
