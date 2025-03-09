@@ -30,7 +30,6 @@ const SignUpPage = () => {
         <ImgBlock>
           <AdvantagesSection />
           <MainImg />
-          <InfoLabels />
         </ImgBlock>
       )}
     </>

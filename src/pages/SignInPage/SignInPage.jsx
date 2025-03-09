@@ -29,8 +29,6 @@ const SignInPage = () => {
       {hideImgBlock && (
         <ImgBlock>
           <MainImg />
-          <InfoLabels />
-          <h2>Здесь будет контент на картинке,но только для веб версии</h2>
           <AdvantagesSection />
         </ImgBlock>
       )}
