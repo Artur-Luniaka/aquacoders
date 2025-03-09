@@ -41,6 +41,7 @@
   letter-spacing: -0.01em;
   border-radius: 50%;
   background-color: var(--color-white);
+  color: var(--color-darkblue);
   cursor: pointer;
   @media screen and (min-width: 768px) {
     width: 38px;
