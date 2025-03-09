@@ -1,6 +1,5 @@
 import s from "./AdvantagesSection.module.css";
 
-
 const AdvantagesSection = () => {
   return (
     <div className={s.info_container}>
