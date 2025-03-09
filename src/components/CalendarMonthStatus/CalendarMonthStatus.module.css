@@ -4,6 +4,7 @@
   font-size: 20px;
   line-height: 120%;
   letter-spacing: -0.01em;
+  color: var(--color-darkblue);
   @media screen and (min-width: 768px) {
     font-size: 28px;
     line-height: 114%;
@@ -11,16 +12,18 @@
 }
 
 .month_container {
-  width: 100%;
+  width: 303px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
   @media screen and (min-width: 768px) {
-    width: 98%;
+    width: 621px;
+    margin-left: 8px;
   }
   @media screen and (min-width: 1440px) {
-    width: 101.5%;
+    margin-left: 0;
+    width: 608px;
   }
 }
 
@@ -37,6 +40,7 @@
 .icon_diagram {
   width: 20px;
   height: 20px;
+  opacity: 0.5;
   @media screen and (min-width: 768px) {
     width: 24px;
     height: 24px;
