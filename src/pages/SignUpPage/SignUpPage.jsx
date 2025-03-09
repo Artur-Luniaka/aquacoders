@@ -4,7 +4,8 @@ import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import AdvantagesSection from "../../components/AdvantegesSection/AdvantagesSection.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
 import MainImg from "../../components/MainImg/MainImg.jsx";
-import { SignUpForm } from "../../components/SignUpForm/SignUpForm.jsx";
+import SignUpForm from "../../components/SignUpForm/SignUpForm.jsx";
+import OurHappyCustomers from "../../components/OurHappyCustomers/OurHappyCustomers.jsx";
 
 const SignUpPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
@@ -32,6 +33,7 @@ const SignUpPage = () => {
         <ImgBlock>
           <AdvantagesSection />
           <MainImg />
+          <OurHappyCustomers />
         </ImgBlock>
       )}
     </>
