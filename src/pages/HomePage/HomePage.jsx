@@ -1,16 +1,23 @@
 import GreyBlock from "../../components/GreyBlock/GreyBlock";
+import Logo from "../../components/Logo/Logo";
 import ImgBlock from "../../components/ImgBlock/ImgBlock";
 import SignInForm from "../../components/SigninForm/SignInForm";
+import MainImg from "../../components/MainImg/MainImg";
+import AdvantagesSection from "../../components/AdvantegesSection/AdvantagesSection.jsx";
+import WelcomeSection from "../../components/WelcomeSection/WelcomeSection.jsx";
+import OurHappyCustomers from "../../components/OurHappyCustomers/OurHappyCustomers.jsx";
 
 const HomePage = () => {
   return (
     <>
       <GreyBlock>
-        <h2>Тут будет текстовый контент страницы Home</h2>
-        <SignInForm />
+        <Logo />
+        <WelcomeSection />
       </GreyBlock>
       <ImgBlock>
-        <h2>Тут будет контент на картинке</h2>
+        <MainImg />
+        <AdvantagesSection />
+        <OurHappyCustomers />
       </ImgBlock>
     </>
   );
