@@ -19,7 +19,7 @@ const validationSchema = Yup.object({
 
 export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const {
     register,
