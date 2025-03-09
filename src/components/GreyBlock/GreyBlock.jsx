@@ -1,13 +1,7 @@
 import s from "./GreyBlock.module.css";
-// import Signin from "../Signin/Signin";
 
 const GreyBlock = ({ children }) => {
-  return (
-    <div className={s.box}>
-      {children}
-      {/* <Signin /> */}
-    </div>
-  );
+  return <div className={s.box}>{children}</div>;
 };
 
 export default GreyBlock;

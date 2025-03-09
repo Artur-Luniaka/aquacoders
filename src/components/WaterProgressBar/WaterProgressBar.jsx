@@ -1,19 +1,19 @@
 import s from './WaterProgressBar.module.css';
 
-const ProgressBar = () => {
+const WaterProgressBar = () => {
 
 return (
     <div className={s.container}>
       
       <p className={s.title}>Today</p>
       <div className={s.slider}><div className={s.rail}></div></div>
-        <div className={s.percentBar}>
-            <a>0%</a>
-            <a className={s.fifty}>50%</a>
-            <a>100%</a>
+        <div className={s.percent_bar}>
+            <p>0%</p>
+            <p className={s.fifty}>50%</p>
+            <p>100%</p>
         </div>
     </div>
 
   );
 }
-export default ProgressBar;
+export default WaterProgressBar;
