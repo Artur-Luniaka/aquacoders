@@ -1,91 +1,108 @@
 .container{
-    text-align: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-    font-family: var(--poppins-bold);
-    color: var(--color-darkblue);
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    @media (min-width: 768px) {
-    font-size: 28px;
-    line-height: 1.14286;
-    letter-spacing: -0.01em;
-      }
-  }
+  font-family: var(--poppins-bold);
+  color: var(--color-darkblue);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  padding-bottom: 16px;
   
-  .text {
-    font-family: var(--poppins-bold);
-    color: var(--color-darkblue);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.28571;
-    letter-spacing: -0.01em;
+  @media (min-width: 768px) {
+  font-size: 28px;
+  line-height: 1.14286;
+  letter-spacing: -0.01em;
+  padding-bottom: 24px;
+    }
+}
 
-    @media (min-width: 768px) {
-        font-size: 18px;
-        line-height: 1.33333;
-          }
-  }
-  
-  .buttons_container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-  }
-  
-  .delete,
-  .cancel{
-    width:304px;
-    height:46px;
-    gap: 10px;
-    border-radius: 30px;
-    padding: 14px 126px;
-    height: 60px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 1.28571;
-    letter-spacing: -0.01em;
-    text-align: center;
+.text {
+  font-family: var(--poppins-reg);
+  color: var(--color-darkblue);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  padding-bottom: 28px;
 
-    @media (min-width: 768px) {
-        font-size: 16px;
-        line-height: 1.5;
+
+  @media (min-width: 768px) {
+      font-size: 18px;
+      line-height: 1.33333; 
+      padding-bottom: 24px;
         }
-        
-  }
-  
-  .cancel {
-    color: rgba(50, 63, 71, 0.3);
-    background-color: var(--color-lightgrey);
+}
 
-    @media (min-width: 768px) {
-    width: 176px;
+.buttons_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 9px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 10px;
     }
-  }
-  .delete {
+}
 
-    @media (min-width: 768px) {
-    width: 170px;
-    }
+.delete,
+.cancel{
+  font-family: var(--poppins-bold);
+  color: var(--color-darkblue);
+  font-weight: 700;
+  width:304px;
+  height:46px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+
+  @media (min-width: 768px) {
+      font-size: 16px;
+      line-height: 1.5;
+      }
+      
+}
+
+.cancel {
+  color: rgba(50, 63, 71, 0.3);
+  background-color: var(--color-lightgrey);
+  transition: color 0.5s ease;
+  &:hover{
     color: var(--color-darkblue);
-    background-color: var(--color-lightgreen);
+  }
+  &:focus{
+    color: var(--color-darkblue);
   }
 
-  .cancel:hover,
-  .cancel:focus {
-    transition: 0.5s ease;
-    color: var(--color-darkblue);
+  @media (min-width: 768px) {
+  height: 60px;
+  width: 170px;
   }
-  
-  .delete:hover
-  {
-    color:  var(--hover-green);
+}
+
+
+.delete {
+  color: var(--color-darkblue);
+  background-color: var(--color-lightgreen);
+  transition: background-color 0.5s ease;
+  &:hover{
+    background-color: #87d28d;
   }
-  .logout:focus {
-    transition: 0.5s ease;
+  &:focus{
+    background-color: #87d28d;
   }
+  @media (min-width: 768px) {
+  height: 60px;
+  width: 170px;
+  }
+}
