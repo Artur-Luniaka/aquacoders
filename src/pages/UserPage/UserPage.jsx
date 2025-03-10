@@ -11,7 +11,6 @@ import EditWater from "../../components/EditWater/EditWater.jsx";
 const UserPage = () => {
   return (
     <>
-      <EditWater />
       <GreenBlock>
         <Logo />
         <DailyNorma />
