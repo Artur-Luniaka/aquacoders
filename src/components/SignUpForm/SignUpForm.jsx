@@ -54,36 +54,38 @@ const SignUpForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         className={s.form}
       >
-        <label
-          htmlFor="email"
-          className={s.label}
-        >
-          Email
-        </label>
-        <input
-          {...register("email")}
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          className={`${s.input} ${errors.email ? s.error_input : ""}`}
-        />
-        {errors.email && (
-          <p className={s.error_message}>{errors.email?.message}</p>
-        )}
-        <label
-          htmlFor="password"
-          className={s.label}
-        >
-          Password
-        </label>
-        <div className={s.input_container}>
+        <div className={s.inputGroup}>
+          <label
+            htmlFor="email"
+            className={s.label}
+          >
+            Email
+          </label>
+          <input
+            {...register("email")}
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            className={`${s.input} ${errors.email ? s.error_input : ""}`}
+          />
+          {errors.email && (
+            <p className={s.error_message}>{errors.email?.message}</p>
+          )}
+        </div>
+        <div className={s.inputGroup}>
+          <label
+            htmlFor="password"
+            className={s.label}
+          >
+            Password
+          </label>
           <input
             {...register("password")}
             id="password"
             type={showPassword ? "text" : "password"}
             placeholder="Enter your password"
             className={`${s.input} ${errors.password ? s.error_input : ""}`}
-          />
+          />{" "}
           <button
             className={s.icon_btn}
             onClick={togglePasswordVisibility}
@@ -95,17 +97,17 @@ const SignUpForm = () => {
               />
             </svg>
           </button>
+          {errors.password && (
+            <p className={s.error_message}>{errors.password?.message}</p>
+          )}{" "}
         </div>
-        {errors.password && (
-          <p className={s.error_message}>{errors.password?.message}</p>
-        )}
-        <label
-          htmlFor="repeatPassword"
-          className={s.label}
-        >
-          Repeat password
-        </label>
-        <div className={s.input_container}>
+        <div className={s.inputGroup}>
+          <label
+            htmlFor="repeatPassword"
+            className={s.label}
+          >
+            Repeat password
+          </label>
           <input
             id="repeatPassword"
             {...register("repeatPassword")}
@@ -126,11 +128,10 @@ const SignUpForm = () => {
               />
             </svg>
           </button>
+          {errors.password && (
+            <p className={s.error_message}>{errors.repeatPassword?.message}</p>
+          )}
         </div>
-        {errors.password && (
-          <p className={s.error_message}>{errors.repeatPassword?.message}</p>
-        )}
-
         <button
           className={s.button}
           type="submit"
