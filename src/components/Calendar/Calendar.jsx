@@ -4,7 +4,13 @@ import { useState } from "react";
 import CalendarDayStatus from "../CalendarDayStatus/CalendarDayStatus.jsx";
 import CalendarMonthStatus from "../CalendarMonthStatus/CalendarMonthStatus.jsx";
 
+const currentDay = new Date().getDate();
+const currentMonth = new Date().getMonth() + 1;
+const currentYear = new Date().getFullYear();
+
 const Calendar = () => {
+  const [clickedDay, setClickedDay] = useState(currentDay);
+
   const dataFromBackend = [
     { date: "2025-03-01", stats: 100 },
     { date: "2025-03-02", stats: 99 },
@@ -39,9 +45,7 @@ const Calendar = () => {
     { date: "2025-03-31", stats: 0 },
   ];
 
-  const currentDay = new Date().getDate();
-  const currentMonth = new Date().getMonth() + 1;
-  const currentYear = new Date().getFullYear();
+
 
   const newFrontendData = dataFromBackend.map((item) => {
     const parsedDay = Number(item.date.slice(8, 10));
@@ -67,7 +71,12 @@ const Calendar = () => {
   const [calendarData, setCalendarData] = useState(newFrontendData);
   return (
     <>
-      <CalendarMonthStatus />
+      <CalendarMonthStatus
+        currentMonth={currentMonth}
+        currentYear={currentYear}
+        clickedDay={clickedDay}
+        currentDay={currentDay}
+      />
       <ul className={s.calendar_list}>
         {calendarData.map((dayInfo) => (
           <CalendarDayStatus
@@ -77,6 +86,7 @@ const Calendar = () => {
             currentDay={currentDay}
             currentMonth={currentMonth}
             currentYear={currentYear}
+            setClickedDay={setClickedDay}
           />
         ))}
       </ul>
