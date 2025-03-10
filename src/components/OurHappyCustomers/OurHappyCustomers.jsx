@@ -20,12 +20,8 @@ const OurHappyCustomers = () => {
         <div className={s.image}>
           <picture>
             <source
-              srcSet={`${Customer1} 1x, ${Customer2} 2x`}
-              media="(max-width: 767px)"
-            />
-            <source
               srcSet={`${Customer3} 1x, ${Customer4} 2x`}
-              media="(min-width: 768px) and (max-width: 1439px)"
+              media="(min-width: 768px)"
             />
             <source
               srcSet={`${Customer3} 1x, ${Customer4} 2x`}
@@ -34,32 +30,30 @@ const OurHappyCustomers = () => {
             <img
               className={s.images_girl}
               src={Customer1}
+              srcSet={`${Customer2} 2x`}
               alt="Girl customer"
             />
           </picture>
           <picture>
             <source
-              srcSet={`${Customer5} 1x, ${Customer6} 2x`}
-              media="(max-width: 767px)"
-            />
-            <source
               srcSet={`${Customer7} 1x, ${Customer8} 2x`}
-              media="(min-width: 768px) and (max-width: 1439px)"
+              media="(min-width: 768px)"
             />
             <source
               srcSet={`${Customer7} 1x, ${Customer8} 2x`}
               media="(min-width: 1440px)"
             />
-            <img className={s.images_boy} src={Customer5} alt="Boy customer" />
+            <img
+              className={s.images_boy}
+              src={Customer5}
+              alt="Boy customer"
+              srcSet={`${Customer6} 2x`}
+            />
           </picture>
           <picture>
             <source
-              srcSet={`${Customer9} 1x, ${Customer10} 2x`}
-              media="(max-width: 767px)"
-            />
-            <source
               srcSet={`${Customer11} 1x, ${Customer12} 2x`}
-              media="(min-width: 768px) and (max-width: 1439px)"
+              media="(min-width: 768px)"
             />
             <source
               srcSet={`${Customer11} 1x, ${Customer12} 2x`}
@@ -69,6 +63,7 @@ const OurHappyCustomers = () => {
               className={s.images_girl_ano}
               src={Customer9}
               alt="Girl customer"
+              srcSet={`${Customer10} 2x`}
             />
           </picture>
         </div>

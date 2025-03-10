@@ -9,12 +9,13 @@ const AdvantagesSection = () => {
         </li>
         <li className={s.info_item}>
           <p className={`${s.label} ${s.green}`}>View statistics</p>
-      </li>
+        </li>
       <li className={s.info_item}>
           <p className={`${s.label} ${s.white}`}>Personal rate setting</p>
       </li>
       </ul>
     </div>
   );
+ 
 };
 export default AdvantagesSection;

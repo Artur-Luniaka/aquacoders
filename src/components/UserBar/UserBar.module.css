@@ -1,0 +1,113 @@
+.drop_down_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 40px;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 621px;
+    margin-left: 8px;
+  }
+  @media screen and (min-width: 1440px) {
+    margin-left: 0;
+    max-width: 608px;
+  }
+}
+
+.current_name {
+  font-family: var(--gilroy-reg);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  color: var(--color-darkblue);
+  @media screen and (min-width: 768px) {
+    font-size: 36px;
+    line-height: 1.05556;
+    margin-bottom: 0;
+  }
+}
+
+.current_name > span {
+  font-family: var(--gilroy-bold);
+  font-weight: 700;
+  @media screen and (min-width: 768px) {
+    font-size: 36px;
+    line-height: 1.05556;
+  }
+}
+
+.menu_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 30px;
+  padding: 6px 12px;
+  background-color: var(--color-darkblue);
+  @media screen and (min-width: 768px) {
+    gap: 10px;
+  }
+}
+
+.menu_container > span {
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: var(--color-white);
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+.user_avatar_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 100%;
+  overflow: hidden;
+  @media screen and (min-width: 768px) {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.button_down {
+  background-color: transparent;
+  margin-top: 5px;
+  transition: transform 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  @media screen and (min-width: 768px) {
+    margin-top: 7.5px;
+  }
+}
+
+.button_down_rotate {
+  transform: rotate(180deg);
+  margin-top: 0;
+}
+
+.user_avatar {
+  max-width: 100%;
+}
+
+.icon_arrow {
+  fill: none;
+  stroke: var(--color-white);
+  width: 16px;
+  height: 10px;
+  @media screen and (min-width: 768px) {
+    margin-top: 3px;
+    width: 20px;
+    height: 15px;
+  }
+}
