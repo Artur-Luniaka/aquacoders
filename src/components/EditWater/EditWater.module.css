@@ -7,6 +7,22 @@
   }
 }
 
+.title {
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-darkblue);
+  margin-bottom: 24px;
+  width: 248px;
+  @media (min-width: 768px) {
+    font-size: 28px;
+    line-height: 1.143;
+    width: 347px;
+  }
+}
+
 .text {
   font-family: var(--poppins-bold);
   font-weight: 700;
