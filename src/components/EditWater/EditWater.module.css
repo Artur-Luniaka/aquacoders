@@ -44,9 +44,10 @@
   font-size: 14px;
   line-height: 1.286;
   letter-spacing: -0.01em;
+  margin-bottom: 8px;
   color: var(--color-darkblue);
   display: block;
-  margin-bottom: 8px;
+
   @media (min-width: 768px) {
     font-size: 16px;
     line-height: 1.5;
