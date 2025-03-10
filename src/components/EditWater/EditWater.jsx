@@ -71,7 +71,6 @@ const EditWater = ({ onCloseModal }) => {
 
   return (
     <Modal onCloseModal={onCloseModal}>
-      <h3 className={s.title}>Edit the entered amount of water</h3>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <p className={s.text}>Correct entered data:</p>
         <p className={s.label}>Amount of water:</p>
