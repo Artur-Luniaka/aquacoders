@@ -33,11 +33,10 @@
   .signin_form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
     margin-bottom: 16px; 
 
     @media (min-width: 768px) {
-      gap: 20px;
+      gap: 0px;
     }
   }
 
@@ -45,18 +44,59 @@
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 8px;
   }
 
   .input_error {
-    border: 1px solid var(--error-color); 
+    border-color: var(--error-color);
+    color: var(--error-color);
+  }
+
+  .password_wrapper {
+    position: relative;  
+    display: inline-block; 
+    width: max-content;     
   }
   
-  .error_text {
-    color: var(--error-color);
-    font-size: 12px;
-    margin-top: 4px;
+  .password_wrapper input {
+    padding-right: 40px; 
   }
+  
+  .icon_btn {
+    position: absolute;
+    right: 10px;           
+    top: 50%;              
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .icon {
+    width: 18px;  
+    height: 18px;
+    stroke: #2f2f2f;
+    background: inherit;
+    fill: none;
+  }
+  
+  .error_text,
+.error_placeholder {
+  font-family: var(--poppins-reg);
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+  min-height: 16px; 
+  line-height: 1.2;
+}
+
+.error_text {
+  color: var(--error-color);
+}
+
+.error_placeholder {
+  visibility: hidden; 
+}
 
   .label {
     font-family: var(--poppins-bold);
@@ -65,6 +105,7 @@
     line-height: 129%;
     letter-spacing: -0.01em;
     color: var(--color-black);
+    margin-bottom: 8px;
 
     @media (min-width: 768px) {
       font-size: 16px;
@@ -90,10 +131,6 @@
     }
   
   }
-
-  /* input:required:invalid {
-    border: 1px solid var(--error-color);
-  } */
 
   .signin_button {
     font-family: var(--poppins-bold);
