@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./EditWater.module.css";
+import Modal from "../Modal/Modal.jsx";
 
 const EditWater = () => {
   const { register, handleSubmit, setValue, watch } = useForm({
