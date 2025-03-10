@@ -1,3 +1,12 @@
+.container {
+  padding: 40px 20px 40px 20px;
+  width: 343px;
+  @media (min-width: 768px) {
+    padding: 40px;
+    width: 518px;
+  }
+}
+
 .text {
   font-family: var(--poppins-bold);
   font-weight: 700;
