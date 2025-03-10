@@ -7,10 +7,12 @@ const CalendarDayStatus = ({
   currentDay,
   currentMonth,
   currentYear,
+  setClickedDay
 }) => {
   const { day, month, year, stats, isActive, date } = dayInfo;
 
   const handleClick = (clickedDay) => {
+    setClickedDay(clickedDay)
     if (
       year > currentYear ||
       (year === currentYear && month > currentMonth) ||
