@@ -19,7 +19,6 @@ const validationSchema = Yup.object({
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const navigate = useNavigate();
 
   const {
     register,
@@ -51,10 +50,7 @@ const SignUpForm = () => {
   return (
     <div className={s.container}>
       <h2 className={s.title}>Sign Up</h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={s.form}
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <label className={s.label}>
           Email
           <input
@@ -82,7 +78,9 @@ const SignUpForm = () => {
             >
               <svg className={s.icon}>
                 <use
-                  href={`${sprite}#${showPassword ? "icon-open-eye" : "icon-closed-eye"}`}
+                  href={`${sprite}#${
+                    showPassword ? "icon-eye" : "icon-eye-off"
+                  }`}
                 />
               </svg>
             </button>
@@ -97,7 +95,9 @@ const SignUpForm = () => {
               {...register("repeatPassword")}
               type={showPassword ? "text" : "password"}
               placeholder="Repeat password"
-              className={`${s.input} ${errors.repeatPassword ? s.error_input : ""}`}
+              className={`${s.input} ${
+                errors.repeatPassword ? s.error_input : ""
+              }`}
             />
             <button
               className={s.icon_btn}
@@ -106,7 +106,9 @@ const SignUpForm = () => {
             >
               <svg className={s.icon}>
                 <use
-                  href={`${sprite}#${showPassword ? "icon-open-eye" : "icon-closed-eye"}`}
+                  href={`${sprite}#${
+                    showPassword ? "icon-eye" : "icon-eye-off"
+                  }`}
                 />
               </svg>
             </button>
@@ -116,10 +118,7 @@ const SignUpForm = () => {
           </span>
         </label>
 
-        <button
-          className={s.button}
-          type="submit"
-        >
+        <button className={s.button} type="submit">
           Sign Up
         </button>
       </form>
@@ -127,10 +126,7 @@ const SignUpForm = () => {
       <div>
         <p className={s.paragraph}>
           Already have an account?{" "}
-          <Link
-            to="/signIn"
-            className={s.link}
-          >
+          <Link to="/signIn" className={s.link}>
             Sign In
           </Link>
         </p>
