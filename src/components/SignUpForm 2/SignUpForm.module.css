@@ -104,6 +104,7 @@
   margin-bottom: 16px;
 }
 
+.button:hover,
 .button:active {
   background: var(--hover-green);
 }
