@@ -6,7 +6,6 @@ import AddWaterBtn from "../../components/AddWaterBtn/AddWaterBtn.jsx";
 import DailyNorma from "../../components/DailyNorma/DailyNorma.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
 import UserBar from "../../components/UserBar/UserBar.jsx";
-import EditWater from "../../components/EditWater/EditWater.jsx";
 
 const UserPage = () => {
   return (

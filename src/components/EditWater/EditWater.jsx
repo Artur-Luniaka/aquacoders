@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Modal from "../Modal/Modal.jsx";
 import { useForm } from "react-hook-form";
 import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
