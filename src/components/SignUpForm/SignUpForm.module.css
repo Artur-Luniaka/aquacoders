@@ -1,4 +1,4 @@
-.container {
+/* .container {
   width: 100%;
   max-width: 320px;
   text-align: center;
@@ -7,14 +7,31 @@
   @media (min-width: 768px) {
     max-width: 436px;
     /* margin: 249px auto; */
+/* } */
+
+/* @media (min-width: 1440px) { */
+/* margin: 137px auto; */
+/* } */
+/* }  */
+
+.container {
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  margin: 192px auto;
+
+  @media (min-width: 768px) {
+    max-width: 436px;
+    margin: 249px auto;
   }
 
   @media (min-width: 1440px) {
-    /* margin: 137px auto; */
+    margin: auto;
+    margin-top: 137px;
   }
 }
 
-.title {
+/* .title {
   font-family: var(--poppins-bold);
   font-weight: 700;
   font-size: 32px;
@@ -32,8 +49,24 @@
   @media (min-width: 1440px) {
     margin-top: 71px;
   }
+} */
+
+.title {
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+  text-align: left;
+  margin-bottom: 32px;
+  color: var(--color-darkblue);
+
+  @media (min-width: 768px) {
+    font-size: 36px;
+  }
 }
-.form {
+
+/* .form {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -41,6 +74,16 @@
 
   @media (min-width: 768px) {
     gap: 20px;
+  }
+} */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    gap: 0px;
   }
 }
 
@@ -51,6 +94,7 @@
   line-height: 129%;
   letter-spacing: -0.01em;
   color: var(--main-text);
+  margin-bottom: 8px;
 
   @media (min-width: 768px) {
     font-size: 16px;
@@ -59,14 +103,32 @@
 }
 
 .input_group {
-  position: relative;
+  /* position: relative;
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 8px; */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .input {
+  /* font-family: var(--poppins-reg);
+  outline: none;
+  border: 1px solid rgba(47, 47, 47, 0.2);
+  border-radius: 15px;
+  padding: 16px 40px 16px 16px;
+  width: 311px;
+  height: 50px;
+  background-color: #f0eff4;
+
+  @media (min-width: 768px) {
+    width: 436px;
+    height: 56px;
+    font-size: 16px;
+    line-height: 150%;
+  } */
   font-family: var(--poppins-reg);
   outline: none;
   border: 1px solid rgba(47, 47, 47, 0.2);
@@ -89,6 +151,16 @@
   color: var(--error-color);
 }
 
+.password_wrapper {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+}
+
+.password_wrapper input {
+  padding-right: 40px;
+}
+
 .button {
   font-family: var(--poppins-bold);
   background-color: var(--color-lightgreen);
@@ -101,25 +173,34 @@
   cursor: pointer;
   transition: background-color 0.5s ease;
   border-radius: 30px;
-  padding: 16px 120px; /* Паддінги по вертикалі і горизонталі */
+  padding: 16px 120px;
   width: 311px;
   margin-top: 11px;
 
   @media (min-width: 768px) {
     width: 436px;
     font-size: 16px;
-    padding: 18px 180px; /* Більші паддінги на ширших екранах */
+    padding: 18px 180px;
   }
 }
 
 .button:hover,
 .button:focus {
-  background: var(--hover-green);
+  background-color: var(--hover-green);
 }
+
 .paragraph {
-  text-align: center;
-  color: rgba(47, 47, 47, 0.5);
   font-family: var(--poppins-reg);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.5);
+  text-decoration: none;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 .link {
@@ -129,8 +210,12 @@
   text-decoration: underline;
 }
 
+.link:hover {
+  text-decoration: underline;
+}
+
 .icon_btn {
-  all: unset;
+  /* all: unset;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +223,16 @@
   top: 50%;
   right: 16px;
   transform: translateY(-50%);
+  cursor: pointer; */
+
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
   cursor: pointer;
+  outline: none;
 }
 
 .icon {
@@ -150,13 +244,28 @@
   fill: none;
 }
 
-.error_message {
-  display: flex;
+.error_message,
+.error_placeholder {
+  /* display: flex;
   justify-content: flex-start;
   align-items: center;
   font-family: var(--poppins-reg);
   font-weight: 400;
   font-size: 14px;
   line-height: 1.2;
+  color: var(--error-color); */
+  font-family: var(--poppins-reg);
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+  min-height: 16px;
+  line-height: 1.2;
+}
+
+.error_message {
   color: var(--error-color);
+}
+
+.error_placeholder {
+  visibility: hidden;
 }
