@@ -37,7 +37,9 @@
     line-height: 1.49333;
     }
   }
-
+.percent_bar_hundred{
+  width: 30px;
+}
 .slider {
     max-width:255px;
     height:6px;
@@ -59,12 +61,14 @@
   }
 
 .percent_bar {
+    font-family: var(--poppins-reg);
+    color:rgba(47, 47, 47, 0.6);
     display: flex;
     font-weight: 400;
     pointer-events: none;
     width: 174px;
     font-size: 10px;
-    line-height: 1.86667;
+    line-height: 1;
 
     @media (min-width: 768px) {
      width: 255px;
@@ -76,13 +80,9 @@
 .fifty {
     margin-left: 66px;
     margin-right: 49px;
-    line-height: 1;
-    font-weight: 400;
-    font-size: 10px;
 
     @media (min-width: 768px) {
      margin-left: 100px;
      margin-right: 84px;
-     line-height: 1.86667;
     }
   }
