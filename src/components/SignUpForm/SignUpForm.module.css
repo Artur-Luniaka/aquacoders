@@ -35,30 +35,37 @@
 }
 
 .form {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    gap: 20px;
+  }
 }
 
 .label {
   font-family: var(--poppins-bold);
   font-weight: 700;
-  position: relative;
-  color: var(--color-black);
   font-size: 14px;
-  line-height: 18px;
-  padding-top: 6px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  /* gap: 8px; */
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--main-text);
 
   @media (min-width: 768px) {
     font-size: 16px;
-    line-height: 24px;
+    line-height: 150%;
   }
+}
+
+.inputGroup {
+  position: relative;
+
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .input {
@@ -123,22 +130,16 @@
   text-decoration: underline;
 }
 
-.input_container {
-  position: relative;
-}
 .icon_btn {
   all: unset;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: absolute;
-  top: 50%;
-  right: 0;
+  top: 52%;
+  right: 16px;
   transform: translateY(-50%);
-  margin-right: 16px;
-
-  @media (min-width: 768px) {
-    margin-right: 0;
-  }
+  cursor: pointer;
 }
 
 .icon {
