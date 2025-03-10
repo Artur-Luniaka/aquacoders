@@ -1,0 +1,63 @@
+.drop_menu {
+  position: absolute;
+  bottom: -76px;
+  right: 167px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 28px 14px 20px;
+  width: 137px;
+  gap: 8px;
+  background-color: var(--color-white);
+  border-radius: 15px;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 250ms cubic-bezier(0.215, 0.61, 0.355, 1),
+    visibility 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  @media screen and (min-width: 768px) {
+    bottom: -90px;
+    right: 0;
+    padding: 14px 57px 14px 20px;
+    width: 157px;
+  }
+}
+
+.drop_menu_open {
+  opacity: 1;
+  pointer-events: painted;
+  visibility: visible;
+}
+
+.drop_button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: transparent;
+  gap: 8px;
+}
+
+.drop_button_opacity {
+  opacity: 0.5;
+}
+
+.drop_button > span {
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: var(--color-darkblue);
+  white-space: nowrap;
+  @media screen and (min-width: 768px) {
+    font-size: 15px;
+    line-height: 1.49333;
+  }
+}
+
+.drop_icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--color-darkblue);
+}
