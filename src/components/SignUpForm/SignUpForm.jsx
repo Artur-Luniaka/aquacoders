@@ -50,75 +50,91 @@ const SignUpForm = () => {
   return (
     <div className={s.container}>
       <h2 className={s.title}>Sign Up</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-        <label className={s.label}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={s.form}
+      >
+        <label
+          htmlFor="email"
+          className={s.label}
+        >
           Email
-          <input
-            {...register("email")}
-            type="email"
-            placeholder="Enter your email"
-            className={`${s.input} ${errors.email ? s.error_input : ""}`}
-          />
-          <span className={s.error_message}>{errors.email?.message}</span>
         </label>
-
-        <label className={s.label}>
+        <input
+          {...register("email")}
+          id="email"
+          type="email"
+          placeholder="Enter your email"
+          className={`${s.input} ${errors.email ? s.error_input : ""}`}
+        />
+        {errors.email && (
+          <p className={s.error_message}>{errors.email?.message}</p>
+        )}
+        <label
+          htmlFor="password"
+          className={s.label}
+        >
           Password
-          <div className={s.input_container}>
-            <input
-              {...register("password")}
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              className={`${s.input} ${errors.password ? s.error_input : ""}`}
-            />
-            <button
-              className={s.icon_btn}
-              onClick={togglePasswordVisibility}
-              type="button"
-            >
-              <svg className={s.icon}>
-                <use
-                  href={`${sprite}#${
-                    showPassword ? "icon-eye" : "icon-eye-off"
-                  }`}
-                />
-              </svg>
-            </button>
-          </div>
-          <span className={s.error_message}>{errors.password?.message}</span>
         </label>
-
-        <label className={s.label}>
+        <div className={s.input_container}>
+          <input
+            {...register("password")}
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your password"
+            className={`${s.input} ${errors.password ? s.error_input : ""}`}
+          />
+          <button
+            className={s.icon_btn}
+            onClick={togglePasswordVisibility}
+            type="button"
+          >
+            <svg className={s.icon}>
+              <use
+                href={`${sprite}#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+              />
+            </svg>
+          </button>
+        </div>
+        {errors.password && (
+          <p className={s.error_message}>{errors.password?.message}</p>
+        )}
+        <label
+          htmlFor="repeatPassword"
+          className={s.label}
+        >
           Repeat password
-          <div className={s.input_container}>
-            <input
-              {...register("repeatPassword")}
-              type={showPassword ? "text" : "password"}
-              placeholder="Repeat password"
-              className={`${s.input} ${
-                errors.repeatPassword ? s.error_input : ""
-              }`}
-            />
-            <button
-              className={s.icon_btn}
-              onClick={togglePasswordVisibility}
-              type="button"
-            >
-              <svg className={s.icon}>
-                <use
-                  href={`${sprite}#${
-                    showPassword ? "icon-eye" : "icon-eye-off"
-                  }`}
-                />
-              </svg>
-            </button>
-          </div>
-          <span className={s.error_message}>
-            {errors.repeatPassword?.message}
-          </span>
         </label>
+        <div className={s.input_container}>
+          <input
+            id="repeatPassword"
+            {...register("repeatPassword")}
+            type={showPassword ? "text" : "password"}
+            placeholder="Repeat password"
+            className={`${s.input} ${
+              errors.repeatPassword ? s.error_input : ""
+            }`}
+          />
+          <button
+            className={s.icon_btn}
+            onClick={togglePasswordVisibility}
+            type="button"
+          >
+            <svg className={s.icon}>
+              <use
+                href={`${sprite}#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+              />
+            </svg>
+          </button>
+        </div>
+        {errors.password && (
+          <p className={s.error_message}>{errors.repeatPassword?.message}</p>
+        )}
 
-        <button className={s.button} type="submit">
+        <button
+          className={s.button}
+          type="submit"
+        >
           Sign Up
         </button>
       </form>
@@ -126,7 +142,10 @@ const SignUpForm = () => {
       <div>
         <p className={s.paragraph}>
           Already have an account?{" "}
-          <Link to="/signIn" className={s.link}>
+          <Link
+            to="/signin"
+            className={s.link}
+          >
             Sign In
           </Link>
         </p>
