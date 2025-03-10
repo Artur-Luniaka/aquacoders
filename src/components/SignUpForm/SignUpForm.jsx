@@ -54,7 +54,7 @@ const SignUpForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         className={s.form}
       >
-        <div className={s.inputGroup}>
+        <div className={s.input_group}>
           <label
             htmlFor="email"
             className={s.label}
@@ -72,7 +72,7 @@ const SignUpForm = () => {
             <p className={s.error_message}>{errors.email?.message}</p>
           )}
         </div>
-        <div className={s.inputGroup}>
+        <div className={s.input_group}>
           <label
             htmlFor="password"
             className={s.label}
@@ -101,7 +101,7 @@ const SignUpForm = () => {
             <p className={s.error_message}>{errors.password?.message}</p>
           )}{" "}
         </div>
-        <div className={s.inputGroup}>
+        <div className={s.input_group}>
           <label
             htmlFor="repeatPassword"
             className={s.label}
@@ -139,18 +139,15 @@ const SignUpForm = () => {
           Sign Up
         </button>
       </form>
-
-      <div>
-        <p className={s.paragraph}>
-          Already have an account?{" "}
-          <Link
-            to="/signin"
-            className={s.link}
-          >
-            Sign In
-          </Link>
-        </p>
-      </div>
+      <p className={s.paragraph}>
+        Already have an account?{" "}
+        <Link
+          to="/signin"
+          className={s.link}
+        >
+          Sign In
+        </Link>
+      </p>
     </div>
   );
 };

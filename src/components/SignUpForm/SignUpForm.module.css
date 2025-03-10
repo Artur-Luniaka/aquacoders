@@ -2,20 +2,15 @@
   width: 100%;
   max-width: 320px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  margin: 0 auto;
-  margin-top: 126px;
+  margin: 0px auto;
 
   @media (min-width: 768px) {
-    max-width: 400px;
-    margin-top: 171px;
+    max-width: 436px;
+    /* margin: 249px auto; */
   }
+
   @media (min-width: 1440px) {
-    margin-top: 74px;
+    /* margin: 137px auto; */
   }
 }
 
@@ -26,14 +21,18 @@
   line-height: 100%;
   letter-spacing: -0.01em;
   text-align: left;
+  margin-top: 126px;
   margin-bottom: 32px;
   color: var(--color-darkblue);
 
   @media (min-width: 768px) {
+    margin-top: 171px;
     font-size: 36px;
   }
+  @media (min-width: 1440px) {
+    margin-top: 71px;
+  }
 }
-
 .form {
   display: flex;
   flex-direction: column;
@@ -59,9 +58,8 @@
   }
 }
 
-.inputGroup {
+.input_group {
   position: relative;
-
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -73,7 +71,7 @@
   outline: none;
   border: 1px solid rgba(47, 47, 47, 0.2);
   border-radius: 15px;
-  padding: 16px 16px 16px;
+  padding: 16px 40px 16px 16px;
   width: 311px;
   height: 50px;
   background-color: #f0eff4;
@@ -93,23 +91,24 @@
 
 .button {
   font-family: var(--poppins-bold);
-  font-weight: 700;
-  height: 60px;
-  border-radius: 30px;
-  background: var(--color-lightgreen);
+  background-color: var(--color-lightgreen);
   border: none;
+  color: var(--color-black);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  text-align: center;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--color-darkblue);
-  margin-top: 32px;
+  transition: background-color 0.5s ease;
+  border-radius: 30px;
+  padding: 16px 120px; /* Паддінги по вертикалі і горизонталі */
+  width: 311px;
+  margin-top: 11px;
 
   @media (min-width: 768px) {
-    min-width: 436px;
-    max-width: 436px;
+    width: 436px;
+    font-size: 16px;
+    padding: 18px 180px; /* Більші паддінги на ширших екранах */
   }
 }
 
@@ -136,7 +135,7 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 52%;
+  top: 50%;
   right: 16px;
   transform: translateY(-50%);
   cursor: pointer;
