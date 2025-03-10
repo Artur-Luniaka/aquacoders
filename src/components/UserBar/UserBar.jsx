@@ -72,10 +72,7 @@ const UserBar = () => {
               {userName.slice(0, 32)}
             </span>
           )}
-          <span
-            onMouseEnter={handleMouseHoverEnter}
-            onMouseLeave={handleMouseHoverLeave}
-          >
+          <span>
             {userName.length > 10
               ? `${userName.slice(0, 10)}...`
               : userName.length === 0
