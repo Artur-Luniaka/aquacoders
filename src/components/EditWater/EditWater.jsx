@@ -5,7 +5,7 @@ import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./EditWater.module.css";
 
-const EditWater = ({ onCloseModal }) => {
+const EditWater = () => {
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { amountOfWater: 50, time: "" },
   });
@@ -70,66 +70,64 @@ const EditWater = ({ onCloseModal }) => {
   };
 
   return (
-    <Modal onCloseModal={onCloseModal}>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-        <p className={s.text}>Correct entered data:</p>
-        <p className={s.label}>Amount of water:</p>
-        <div className={s.water_and_buttons}>
-          <button
-            type="button"
-            className={s.button}
-            onClick={handleClickMinus}
-            disabled={amountOfWater <= 50}
-          >
-            <svg className={s.icon}>
-              <use href={icons + "#icon-minus"} />
-            </svg>
-          </button>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+      <p className={s.text}>Correct entered data:</p>
+      <p className={s.label}>Amount of water:</p>
+      <div className={s.water_and_buttons}>
+        <button
+          type="button"
+          className={s.button}
+          onClick={handleClickMinus}
+          disabled={amountOfWater <= 50}
+        >
+          <svg className={s.icon}>
+            <use href={icons + "#icon-minus"} />
+          </svg>
+        </button>
 
-          <p className={s.water_amount}>{`${amountOfWater} ml`}</p>
-          <button
-            type="button"
-            className={s.button}
-            onClick={handleClickPlus}
-            disabled={amountOfWater >= 5000}
-          >
-            <svg className={s.icon}>
-              <use href={icons + "#icon-plus"} />
-            </svg>
-          </button>
-        </div>
+        <p className={s.water_amount}>{`${amountOfWater} ml`}</p>
+        <button
+          type="button"
+          className={s.button}
+          onClick={handleClickPlus}
+          disabled={amountOfWater >= 5000}
+        >
+          <svg className={s.icon}>
+            <use href={icons + "#icon-plus"} />
+          </svg>
+        </button>
+      </div>
 
-        <label className={s.label} htmlFor="time">
-          Recording time:
-        </label>
+      <label className={s.label} htmlFor="time">
+        Recording time:
+      </label>
 
-        <input
-          id="time"
-          name="time"
-          className={s.input}
-          value={timeValue}
-          placeholder="--:--"
-          onChange={handleChangeTime}
-          inputMode="numeric"
-          maxLength={5}
-        />
+      <input
+        id="time"
+        name="time"
+        className={s.input}
+        value={timeValue}
+        placeholder="--:--"
+        onChange={handleChangeTime}
+        inputMode="numeric"
+        maxLength={5}
+      />
 
-        <label className={s.amount} htmlFor="yourInput">
-          Enter the value of the water used:
-        </label>
-        <input
-          id="yourInput"
-          name="yourInput"
-          className={s.input}
-          {...register("amountOfWater")}
-          onChange={handleWaterAmountChange}
-          value={amountOfWater}
-          maxLength={4}
-          type="number"
-        />
-        <SaveButton />
-      </form>
-    </Modal>
+      <label className={s.amount} htmlFor="yourInput">
+        Enter the value of the water used:
+      </label>
+      <input
+        id="yourInput"
+        name="yourInput"
+        className={s.input}
+        {...register("amountOfWater")}
+        onChange={handleWaterAmountChange}
+        value={amountOfWater}
+        maxLength={4}
+        type="number"
+      />
+      <SaveButton />
+    </form>
   );
 };
 
