@@ -27,8 +27,7 @@ const SignInForm = () => {
   return (
     <div className={s.signin_container}>
       <h2 className={s.signin_title}>Sign In</h2>
-      <form className={s.signin_form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={s.input_list}>
+      <form className={s.signin_form} noValidate onSubmit={handleSubmit(onSubmit)}>
         <div className={s.input_group}>
           <label htmlFor="email" className={s.label}>
             Email
@@ -37,7 +36,7 @@ const SignInForm = () => {
             type="email"
             id="email"
             placeholder="Enter your email"
-            className={s.input}
+            className={errors.email ? `${s.input} ${s.inputError}` : s.input}
             {...register("email")}
           />
           {errors.email && (
@@ -52,18 +51,18 @@ const SignInForm = () => {
             type="password"
             id="password"
             placeholder="Enter your password"
-            className={s.input}
+            className={errors.password ? `${s.input} ${s.inputError}` : s.input}
             {...register("password")}
           />
           {errors.password && (
             <p className={s.error_text}>{errors.password.message}</p>
           )}
         </div>
-        </div>
+        
         <button type="submit" className={s.signin_button}>
           Sign In
         </button>
-      </form>
+        </form>
       <p className={s.signup_text}>
         Don’t have an account?{" "}
         <a href="/signup" className={s.signup_link}>
