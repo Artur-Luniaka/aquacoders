@@ -6,6 +6,7 @@ import AddWaterBtn from "../../components/AddWaterBtn/AddWaterBtn.jsx";
 import DailyNorma from "../../components/DailyNorma/DailyNorma.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
 import UserBar from "../../components/UserBar/UserBar.jsx";
+import DailyWaterList from "../../components/DailyWaterList/DailyWaterList.jsx";
 
 const UserPage = () => {
   return (
@@ -18,6 +19,7 @@ const UserPage = () => {
       </GreenBlock>
       <UserGreyBlock>
         <UserBar />
+        <DailyWaterList />
         <Calendar />
       </UserGreyBlock>
     </>
