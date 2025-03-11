@@ -1,0 +1,173 @@
+.title_modal {
+  font: 20px/24px var(--poppins-bold);
+  line-height: -0.2px;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font: 14px/18px var(--poppins-reg);
+  line-height: -1;
+  gap: 24px;
+  width: 100%;
+}
+.avatar {
+  display: flex;
+  align-self: center;
+  width: 75px;
+  height: 75px;
+  background-color: var(--hover-green);
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.icon_box {
+  position: relative;
+  padding-left: 25px;
+}
+.icon {
+  position: absolute;
+  top: -1px;
+  left: 6px;
+}
+
+.input_hide_upload {
+  display: none;
+}
+
+.upload_box {
+  display: flex;
+  flex-direction: column;
+}
+.content_box {
+  width: 100%;
+  @media screen and (min-width: 1440px) {
+    display: flex;
+    justify-content: baseline;
+    gap: 40px;
+    ::last-child {
+      padding-top: 86px;
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .part_content {
+    width: 50%;
+  }
+  .part_content:last-child {
+    padding-top: 68px;
+  }
+}
+.radio_title {
+  font: 16px/18px var(--poppins-bold);
+  margin-bottom: 14px;
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 8px;
+  }
+}
+
+.radio_gender {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.radio_group {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+}
+
+.radio_label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.radio_input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom_radio {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--hover-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.radio_input:checked + .custom_radio::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: var(--hover-green);
+  border-radius: 50%;
+}
+
+.input_box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.input {
+  outline: none;
+  border-radius: 15px;
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  margin-bottom: 14px;
+  color: #000;
+  font: 14px/18px var(--poppins-reg);
+}
+.daily_box {
+  margin-bottom: 24px;
+}
+
+.formula {
+  font: 14px/18px var(--poppins-bold);
+  color: var(--color-lightgreen);
+  margin-bottom: 14px;
+}
+.title_formula {
+  margin-bottom: 4px;
+}
+
+.description_formula {
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 15px;
+  color: var(--color-black);
+  margin-bottom: 14px;
+}
+.green {
+  color: var(--color-lightgreen);
+  font-weight: 800;
+}
+
+.title_bold {
+  font: 16px/20px var(--poppins-bold);
+}
+.user_description {
+  margin-bottom: 8px;
+}
+.result_text {
+  margin-bottom: 5px;
+}
+.margin {
+  margin-bottom: 14px;
+}
+.title_bold {
+  margin-bottom: 8px;
+}
