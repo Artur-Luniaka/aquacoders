@@ -3,10 +3,11 @@
   display: flex;
   flex-direction: column;
   width: 344px;
-  padding: 40px 20px 40px 20px;
+  padding: 20px;
+
   @media (min-width: 768px) {
     width: 516px;
-    padding: 40px 80px 40px 80px;
+    padding: 40px;
   }
 }
 
@@ -35,7 +36,6 @@
   line-height: 1.28571;
   letter-spacing: -0.01em;
   margin-bottom: 28px;
-
   @media (min-width: 768px) {
       font-size: 18px;
       line-height: 1.33333; 
@@ -62,8 +62,11 @@
   color: var(--color-darkblue);
   font-weight: 700;
   width:304px;
-  height:46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 30px;
+  padding: 16px 0;
   border: none;
   cursor: pointer;
   font-size: 14px;
@@ -90,7 +93,6 @@
   }
 
   @media (min-width: 768px) {
-  height: 60px;
   width: 170px;
   }
 }
@@ -107,7 +109,6 @@
     background-color: #87d28d;
   }
   @media (min-width: 768px) {
-  height: 60px;
   width: 170px;
   }
 }
