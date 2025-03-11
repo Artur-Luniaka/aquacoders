@@ -2,20 +2,16 @@
   width: 100%;
   max-width: 320px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  margin: 0 auto;
-  margin-top: 126px;
+  margin: 192px auto;
 
   @media (min-width: 768px) {
-    max-width: 400px;
-    margin-top: 171px;
+    max-width: 436px;
+    margin: 249px auto;
   }
+
   @media (min-width: 1440px) {
-    margin-top: 74px;
+    margin: auto;
+    margin-top: 137px;
   }
 }
 
@@ -37,11 +33,10 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   margin-bottom: 16px;
 
   @media (min-width: 768px) {
-    gap: 20px;
+    gap: 0px;
   }
 }
 
@@ -52,6 +47,7 @@
   line-height: 129%;
   letter-spacing: -0.01em;
   color: var(--main-text);
+  margin-bottom: 8px;
 
   @media (min-width: 768px) {
     font-size: 16px;
@@ -59,13 +55,10 @@
   }
 }
 
-.inputGroup {
-  position: relative;
-
+.input_group {
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
 .input {
@@ -73,7 +66,7 @@
   outline: none;
   border: 1px solid rgba(47, 47, 47, 0.2);
   border-radius: 15px;
-  padding: 16px 16px 16px;
+  padding: 16px 40px 16px 16px;
   width: 311px;
   height: 50px;
   background-color: #f0eff4;
@@ -85,42 +78,66 @@
     line-height: 150%;
   }
 }
+.input:active,
+.input:focus {
+  border: 1px solid rgba(47, 47, 47, 0.4);
+}
 
 .error_input {
   border-color: var(--error-color);
   color: var(--error-color);
 }
 
+.password_wrapper {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+}
+
+.password_wrapper input {
+  padding-right: 40px;
+}
+
 .button {
   font-family: var(--poppins-bold);
-  font-weight: 700;
-  height: 60px;
-  border-radius: 30px;
-  background: var(--color-lightgreen);
+  background-color: var(--color-lightgreen);
   border: none;
+  color: var(--color-black);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  text-align: center;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--color-darkblue);
-  margin-top: 32px;
+  transition: background-color 0.5s ease;
+  border-radius: 30px;
+  padding: 16px 120px;
+  width: 311px;
+  margin-top: 11px;
 
   @media (min-width: 768px) {
-    min-width: 436px;
-    max-width: 436px;
+    width: 436px;
+    font-size: 16px;
+    padding: 18px 180px;
   }
 }
 
 .button:hover,
 .button:focus {
-  background: var(--hover-green);
+  background-color: var(--hover-green);
 }
+
 .paragraph {
-  text-align: center;
-  color: rgba(47, 47, 47, 0.5);
   font-family: var(--poppins-reg);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.5);
+  text-decoration: none;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 .link {
@@ -130,16 +147,19 @@
   text-decoration: underline;
 }
 
+.link:hover {
+  text-decoration: underline;
+}
+
 .icon_btn {
-  all: unset;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  top: 52%;
-  right: 16px;
+  right: 10px;
+  top: 50%;
   transform: translateY(-50%);
+  background: none;
+  border: none;
   cursor: pointer;
+  outline: none;
 }
 
 .icon {
@@ -151,13 +171,20 @@
   fill: none;
 }
 
-.error_message {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.error_message,
+.error_placeholder {
   font-family: var(--poppins-reg);
-  font-weight: 400;
+  display: block;
   font-size: 14px;
+  margin-top: 4px;
+  min-height: 16px;
   line-height: 1.2;
+}
+
+.error_message {
   color: var(--error-color);
+}
+
+.error_placeholder {
+  visibility: hidden;
 }

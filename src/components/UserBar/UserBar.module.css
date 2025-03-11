@@ -111,3 +111,25 @@
     height: 15px;
   }
 }
+
+.full_name.full_name1 {
+  position: absolute;
+  top: -30px;
+  left: 2px;
+  opacity: 0.5;
+  color: var(--color-darkblue);
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  background-color: #2f2f2f29;
+  padding: 3px 8px;
+  border-radius: 10px;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.5;
+    top: 49px;
+    left: 99px;
+  }
+}

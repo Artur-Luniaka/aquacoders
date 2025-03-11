@@ -11,12 +11,10 @@ import { selectAvatarURL } from "../../redux/user/selectors.js";
 
 const UserBar = () => {
   const [dropStatus, setDropStatus] = useState(false);
-  const userName = "Nadia";
-  const userURL = useSelector(selectAvatarURL);
+  const [showFullName, setShowFullName] = useState(false);
 
-  const handleClick = () => {
-    setDropStatus((prev) => !prev);
-  };
+  const userName = "Александрополиский Величавенко12345";
+  const userURL = useSelector(selectAvatarURL);
 
   useEffect(() => {
     const handleBodyClick = (e) => {
@@ -33,18 +31,54 @@ const UserBar = () => {
     };
   }, [dropStatus]);
 
+  const handleMouseHoverEnter = () => {
+    if (userName.length > 10) {
+      setShowFullName(true);
+    }
+  };
+
+  const handleMouseHoverLeave = () => {
+    if (userName.length > 10) {
+      setShowFullName(false);
+    }
+  };
+
   return (
     <section className={s.drop_down_container}>
-      <h2 className={s.current_name}>
-        Hello<span>, {userName.slice(0, 14)}!</span>
+      <h2
+        className={s.current_name}
+        onMouseEnter={handleMouseHoverEnter}
+        onMouseLeave={handleMouseHoverLeave}
+      >
+        Hello
+        <span>
+          ,{" "}
+          {userName.length > 10
+            ? `${userName.slice(0, 10)}...`
+            : userName.length === 0
+            ? "User"
+            : userName}
+          !
+        </span>
       </h2>
       <div onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
           className={s.menu_container}
-          onClick={handleClick}
+          onClick={() => setDropStatus((prev) => !prev)}
         >
-          <span>{userName.slice(0, 14)}</span>
+          {showFullName && (
+            <span className={`${s.full_name} ${s.full_name1}`}>
+              {userName.slice(0, 32)}
+            </span>
+          )}
+          <span>
+            {userName.length > 10
+              ? `${userName.slice(0, 10)}...`
+              : userName.length === 0
+              ? "User"
+              : userName}
+          </span>
           <span className={s.user_avatar_container}>
             <img className={s.user_avatar} src={userURL} alt={userName} />
           </span>
