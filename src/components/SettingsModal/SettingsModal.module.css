@@ -1,3 +1,15 @@
+.modal_settings {
+  width: 343px;
+  padding: 40px 20px;
+  height: 90vh;
+  @media screen and (min-width: 768px) {
+    width: 648px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 920px;
+  }
+}
+
 .title_modal {
   font: 20px/24px var(--poppins-bold);
   line-height: -0.2px;
@@ -13,6 +25,7 @@
   line-height: -1;
   gap: 24px;
   width: 100%;
+  margin-bottom: 40px;
 }
 .avatar {
   display: flex;
@@ -30,8 +43,17 @@
 }
 .icon {
   position: absolute;
-  top: -1px;
+  top: 3px;
   left: 6px;
+  stroke-width: 0.5;
+  width: 15px;
+  height: 15px;
+}
+@media screen and (min-width: 1440px) {
+  .upload_text {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .input_hide_upload {
@@ -41,15 +63,20 @@
 .upload_box {
   display: flex;
   flex-direction: column;
+  margin-bottom: 16px;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 0;
+  }
 }
-.content_box {
+.box {
   width: 100%;
+  margin-bottom: 40px;
   @media screen and (min-width: 1440px) {
     display: flex;
     justify-content: baseline;
     gap: 40px;
     ::last-child {
-      padding-top: 86px;
+      padding-top: 72px;
     }
   }
 }
@@ -63,7 +90,7 @@
   }
 }
 .radio_title {
-  font: 16px/18px var(--poppins-bold);
+  font: 16px/20px var(--poppins-bold);
   margin-bottom: 14px;
   @media screen and (min-width: 1440px) {
     margin-bottom: 8px;
@@ -134,7 +161,9 @@
 .daily_box {
   margin-bottom: 24px;
 }
-
+.user_data {
+  margin-bottom: 40px;
+}
 .formula {
   font: 14px/18px var(--poppins-bold);
   color: var(--color-lightgreen);
@@ -157,7 +186,8 @@
 }
 
 .title_bold {
-  font: 16px/20px var(--poppins-bold);
+  font: 16px/18px var(--poppins-bold);
+  margin-bottom: 8px;
 }
 .user_description {
   margin-bottom: 8px;
@@ -168,6 +198,10 @@
 .margin {
   margin-bottom: 14px;
 }
-.title_bold {
-  margin-bottom: 8px;
+.water_intake {
+  display: flex;
+  flex-direction: column;
+}
+.water_intake .input {
+  margin-bottom: 0;
 }
