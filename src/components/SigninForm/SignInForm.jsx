@@ -4,6 +4,9 @@ import * as Yup from "yup";
 import s from "./SignInForm.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import sprite from "../../assets/sprite.svg";
+import { useDispatch } from "react-redux";
+import { signIn } from "../../redux/auth/operations/signInThunk";
+import toast from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -14,6 +17,7 @@ const validationSchema = Yup.object().shape({
 
 const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -28,13 +32,21 @@ const SignInForm = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
+    try {
+      dispatch(signIn(data));
+    } catch (e) {
+      toast.error(e.message || "Authorization failed. Try again.");
+    }
   };
 
   return (
     <div className={s.signin_container}>
       <h2 className={s.signin_title}>Sign In</h2>
-      <form className={s.signin_form} noValidate onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={s.signin_form}
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className={s.input_group}>
           <label htmlFor="email" className={s.label}>
             Email
@@ -61,7 +73,9 @@ const SignInForm = () => {
               type={showPassword ? "text" : "password"}
               id="password"
               placeholder="Enter your password"
-              className={errors.password ? `${s.input} ${s.inputError}` : s.input}
+              className={
+                errors.password ? `${s.input} ${s.inputError}` : s.input
+              }
               {...register("password")}
             />
             <button
@@ -99,4 +113,3 @@ const SignInForm = () => {
 };
 
 export default SignInForm;
-
