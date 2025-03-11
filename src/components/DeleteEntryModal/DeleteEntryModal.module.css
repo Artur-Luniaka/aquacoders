@@ -2,6 +2,12 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  width: 344px;
+  padding: 40px 20px 40px 20px;
+  @media (min-width: 768px) {
+    width: 516px;
+    padding: 40px 80px 40px 80px;
+  }
 }
 
 .title {
@@ -11,13 +17,13 @@
   font-size: 20px;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  padding-bottom: 16px;
+  margin-bottom: 16px;
   
   @media (min-width: 768px) {
   font-size: 28px;
   line-height: 1.14286;
   letter-spacing: -0.01em;
-  padding-bottom: 24px;
+  margin-bottom: 24px;
     }
 }
 
@@ -28,13 +34,12 @@
   font-size: 14px;
   line-height: 1.28571;
   letter-spacing: -0.01em;
-  padding-bottom: 28px;
-
+  margin-bottom: 28px;
 
   @media (min-width: 768px) {
       font-size: 18px;
       line-height: 1.33333; 
-      padding-bottom: 24px;
+      margin-bottom: 24px;
         }
 }
 

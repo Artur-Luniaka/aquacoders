@@ -8,7 +8,7 @@ return (
       <div className={s.slider}><div className={s.rail}></div></div>
         <div className={s.percent_bar}>
             <span className={s.percent_bar_item}>0%</span>
-            <span className={`${s.percent_bar_item} ${s.fifty}`}>50%</span>
+            <span className={s.percent_bar_item}>50%</span>
             <span className={s.percent_bar_item}>100%</span>
         </div>
     </div>

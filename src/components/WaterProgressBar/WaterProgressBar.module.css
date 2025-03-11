@@ -63,6 +63,8 @@
   display: flex;
   pointer-events: none;
   width: 174px;
+  justify-content: space-between;
+  align-items: center;
 
   @media (min-width: 768px) {
    width: 255px;
@@ -78,20 +80,11 @@
   font-weight: 400;
   pointer-events: none;
   font-size: 10px;
+  align-items: center;
   line-height: 1;
+  
   @media (min-width: 768px) {
     font-size: 12px;
     line-height: 1.86667;
    }
-}
-
-
-.fifty {
-  margin-left: 66px;
-  margin-right: 49px;
-
-  @media (min-width: 768px) {
-   margin-left: 100px;
-   margin-right: 84px;
-  }
 }
