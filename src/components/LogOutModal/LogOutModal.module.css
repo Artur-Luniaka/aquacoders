@@ -1,113 +1,114 @@
 .container{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    width: 344px;
-    padding: 40px 20px 40px 20px;
-    @media (min-width: 768px) {
-      width: 516px;
-      padding: 40px 80px 40px 80px;
-    }
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 344px;
+  padding: 20px;
+
+  @media (min-width: 768px) {
+    width: 516px;
+    padding: 40px;
+  }
 }
 
 .title {
-    font-family: var(--poppins-bold);
-    color: var(--color-darkblue);
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    margin-bottom: 16px;
-    
-    @media (min-width: 768px) {
-    font-size: 28px;
-    line-height: 1.14286;
-    letter-spacing: -0.01em;
-    margin-bottom: 24px;
-      }
-  }
+  font-family: var(--poppins-bold);
+  color: var(--color-darkblue);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
   
-  .text {
-    font-family: var(--poppins-reg);
-    color: var(--color-darkblue);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.28571;
-    letter-spacing: -0.01em;
-    margin-bottom: 28px;
+  @media (min-width: 768px) {
+  font-size: 28px;
+  line-height: 1.14286;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+    }
+}
 
-    @media (min-width: 768px) {
-        font-size: 18px;
-        line-height: 1.33333; 
-        margin-bottom: 24px;
-          }
-  }
-  
-  .buttons_container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 9px;
-
-    @media (min-width: 768px) {
-      flex-direction: row;
-      gap: 10px;
-      }
-  }
-
-  .logout,
-  .cancel{
-    font-family: var(--poppins-bold);
-    color: var(--color-darkblue);
-    font-weight: 700;
-    width:304px;
-    height:46px;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 1.28571;
-    letter-spacing: -0.01em;
-    text-align: center;
-
-    @media (min-width: 768px) {
-        font-size: 16px;
-        line-height: 1.5;
+.text {
+  font-family: var(--poppins-reg);
+  color: var(--color-darkblue);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  @media (min-width: 768px) {
+      font-size: 18px;
+      line-height: 1.33333; 
+      margin-bottom: 24px;
         }
-        
-  }
-  
-  .cancel {
-    color: rgba(50, 63, 71, 0.3);
-    background-color: var(--color-lightgrey);
-    transition: color 0.5s ease;
-    &:hover{
-      color: var(--color-darkblue);
-    }
-    &:focus{
-      color: var(--color-darkblue);
-    }
+}
 
-    @media (min-width: 768px) {
-    height: 60px;
-    width: 170px;
+.buttons_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 9px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 10px;
     }
-  }
+}
 
+.logout,
+.cancel{
+  font-family: var(--poppins-bold);
+  color: var(--color-darkblue);
+  font-weight: 700;
+  width:304px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  padding: 16px 0;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
 
-  .logout {
+  @media (min-width: 768px) {
+      font-size: 16px;
+      line-height: 1.5;
+      }
+      
+}
+
+.cancel {
+  color: rgba(50, 63, 71, 0.3);
+  background-color: var(--color-lightgrey);
+  transition: color 0.5s ease;
+  &:hover{
     color: var(--color-darkblue);
-    background-color: var(--color-lightgreen);
-    transition: background-color 0.5s ease;
-    &:hover{
-      background-color: #87d28d;
-    }
-    &:focus{
-      background-color: #87d28d;
-    }
-    @media (min-width: 768px) {
-    height: 60px;
-    width: 170px;
-    }
   }
+  &:focus{
+    color: var(--color-darkblue);
+  }
+
+  @media (min-width: 768px) {
+  width: 170px;
+  }
+}
+
+
+.logout {
+  color: var(--color-darkblue);
+  background-color: var(--color-lightgreen);
+  transition: background-color 0.5s ease;
+  &:hover{
+    background-color: #87d28d;
+  }
+  &:focus{
+    background-color: #87d28d;
+  }
+  @media (min-width: 768px) {
+  width: 170px;
+  }
+}
