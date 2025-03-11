@@ -11,15 +11,15 @@
   color: var(--color-white);
   min-width: 140px;
   transition: color 0.5s ease;
-  margin-top: 313px;
+  margin-top: 293px;
   margin-left: auto;
   @media (min-width: 768px) {
     padding: 18px 30px;
-    margin-top: 422px;
+    margin-top: 398px;
     min-width: 178px;
   }
   @media (min-width: 1440px) {
-    margin-top: 580px;
+    margin-top: 556px;
   }
 }
 
