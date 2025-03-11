@@ -4,7 +4,7 @@ import SaveButton from "../SaveButton/SaveButton.jsx";
 import Modal from "../Modal/Modal.jsx";
 import s from "./AddWater.module.css";
 
-const AddWater = ({ onCloseModal }) => {
+const AddWaterForm = ({ onCloseModal }) => {
   const { register, handleSubmit, setValue } = useForm();
   const [waterAmount, setWaterAmount] = useState(50);
 
@@ -71,5 +71,5 @@ const AddWater = ({ onCloseModal }) => {
   );
 };
 
-export default AddWater;
+export default AddWaterForm;
 

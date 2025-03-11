@@ -23,9 +23,10 @@
   letter-spacing: -0.01em;
   color: var(--color-darkblue);
   margin-bottom: 24px;
-    @media (min-width: 768px) {
-    font-size: 28px;
-    line-height: 1.143;
+   /* width: 248px; */
+  @media (min-width: 768px) {
+  font-size: 28px;
+  line-height: 1.143;
      }
 }
 
@@ -81,10 +82,12 @@
 
 
 .water_display {
-  padding: 10px 20px;
+  border-radius: 30px;
+  padding: 11px 20px;
+  outline: none;
   background-color:var(--color-darkblue);
   color: var(--color-white);
-  border-radius: 20px; ;
+ 
   font-weight: bold;
   font-size: 16px;
   transition: border 0.5s ease;
