@@ -1,0 +1,86 @@
+.water_item_container {
+  width: 149px;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--color-white);
+  border-radius: 15px;
+  @media screen and (min-width: 768px) {
+    width: 192px;
+    height: 86px;
+    gap: 20px;
+  }
+}
+.item_info_block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 6px;
+  @media screen and (min-width: 768px) {
+    gap: 0;
+  }
+}
+.value {
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-darkblue);
+  @media screen and (min-width: 768px) {
+    font-size: 15px;
+    line-height: 1.49333;
+  }
+}
+.time {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(47, 47, 47, 0.6);
+  @media screen and (min-width: 768px) {
+    font-size: 12px;
+    line-height: 1.86667;
+  }
+}
+.icon_cup {
+  width: 31.2px;
+  height: 34px;
+  @media screen and (min-width: 768px) {
+    width: 36px;
+    height: 38px;
+  }
+}
+.edit_btns_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  @media screen and (min-width: 768px) {
+    gap: 14px;
+  }
+}
+.edit_btn {
+  background-color: transparent;
+}
+.icon_editing {
+  fill: none;
+  width: 14px;
+  height: 14px;
+  stroke: var(--color-darkblue);
+  @media screen and (min-width: 768px) {
+    width: 16px;
+    height: 16px;
+  }
+}
+.icon_trash {
+  fill: none;
+  stroke: var(--color-darkblue);
+  width: 14px;
+  height: 14px;
+  @media screen and (min-width: 768px) {
+    width: 16px;
+    height: 16px;
+  }
+}

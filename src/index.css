@@ -39,3 +39,10 @@ button {
   border: none;
   outline: none;
 }
+
+.swiper-pagination-progressbar-fill {
+  background-color: var(
+    --color-darkblue
+  ) !important; /* Цвет заполненной части */
+  border-radius: 9px !important;
+}
