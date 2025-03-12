@@ -2,16 +2,19 @@
   width: 100%;
   max-width: 320px;
   text-align: center;
-  margin: 192px auto;
+  margin-bottom: 103px;
+  margin-top: 126px;
 
   @media (min-width: 768px) {
     max-width: 436px;
-    margin: 249px auto;
+    margin-top: 171px;
+    margin-left: 102px;
+    margin-bottom: 195px;
   }
 
   @media (min-width: 1440px) {
     margin: auto;
-    margin-top: 137px;
+    margin-top: 74px;
   }
 }
 
