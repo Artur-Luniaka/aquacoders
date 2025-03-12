@@ -22,8 +22,7 @@
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: var(--color-darkblue);
-  margin-bottom: 24px;
-   /* width: 248px; */
+  margin-bottom: 20px;
   @media (min-width: 768px) {
   font-size: 28px;
   line-height: 1.143;
@@ -31,6 +30,8 @@
 }
 
 .text {
+  margin: 0;
+  padding: 0;
   font-family: var(--poppins-bold);
   font-weight: 700;
   font-size: 16px;
@@ -47,9 +48,8 @@
 
 .water_controls {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 8px;
+  margin-bottom: 16px;
 }
 
 .water_btn {
@@ -66,17 +66,29 @@
   align-items: center;
   justify-content: center;
   transition: border 0.5s ease;
-
-   @media (min-width: 768px) {
+  @media (min-width: 768px) {
   width: 43px;
   height: 43px;
   }
 }
 
-.water_btn:active,
-.water_btn:hover,
-.water_btn:focus {
-  border: 1px solid var(--color-lightgrey);
+.icon {
+  stroke: var(--color-darkblue);
+}
+
+.water_btn:disabled {
+  border: 1.5px solid var(--input-inactive-focus-col);
+  cursor: default;
+}
+
+.water_btn :disabled .icon {
+  stroke: var(--input-inactive-focus-col);
+}
+
+
+.water_btn svg {
+  width: 24px;
+  height: 24px;
 }
 
 
@@ -86,14 +98,26 @@
   padding: 11px 20px;
   outline: none;
   background-color:var(--color-darkblue);
+  border: none;
+  
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.286;
   color: var(--color-white);
+  min-width: 81px;
+  text-align: center;
+  @media (min-width: 768px) {
+  min-width: 86px;
+  font-size: 15px;
+  line-height: 1.493;
+  padding: 11px 20px 12px 20px;
+  }
+  
  
-  font-weight: bold;
-  font-size: 16px;
-  transition: border 0.5s ease;
 }
 
-label {
+.label {
  font-family: var(--poppins-reg);
   font-weight: 400;
   font-size: 14px;
@@ -109,18 +133,63 @@ label {
   }
 }
 
+.amount {
+  display: block;
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-align: left;
+  margin-bottom: 8px;
+  color: var(--color-darkblue);
+  @media (min-width: 768px) {
+    font-size: 18px;
+    line-height: 1.334;
+  }
+}
+
+
 input {
   width: 100%;
+  min-width: 303px;
   box-sizing: border-box;
-  padding: 14px 16px;
   border: 1px solid var(--color-black);
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 15px;
+  padding: 13px 0px 13px 16px;
+  margin-bottom: 24px;
+  font-family: var(--poppins-reg);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.286;
+  letter-spacing: -0.01em;
+  color: var(--color-black);
+  transition: border 0.5s ease;
+
+  @media (min-width: 768px) {
+    padding: 15px 0px 15px 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    min-width: 438px;
+ }
+ 
 }
 
 .input:active,
 .input:hover,
 .input:focus {
+  outline: none;
+  outline-offset: 0;
    border: 1px solid var(--color-lightgrey);
 }
+
+
+
+
+
+
+
+
+
+
 

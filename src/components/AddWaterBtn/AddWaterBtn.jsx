@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import s from "./AddWaterBtn.module.css";
 import icons from "../../assets/sprite.svg";
 
-const AddWaterBtn = () => {
+const AddWater = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleClick = () => {
     setIsModalOpen(true);
@@ -18,4 +18,4 @@ const AddWaterBtn = () => {
   );
 };
 
-export default AddWaterBtn;
+export default AddWater;
