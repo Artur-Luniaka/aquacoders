@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import toast from "react-hot-toast";
 import Modal from "../Modal/Modal.jsx";
 import s from "./DeleteEntryModal.module.css";
