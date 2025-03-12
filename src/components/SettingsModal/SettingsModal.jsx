@@ -108,13 +108,15 @@ const SettingsForm = () => {
                 </div>
                 <div className={s.daily_box}>
                   <div className={s.radio_title}>My daily norma</div>
-                  <div className={s.box_formula}>
-                    <p className={s.title_formula}>For woman:</p>
-                    <div className={s.formula}>V=(M*0,03) + (T*0,4)</div>
-                  </div>
-                  <div className={s.box_formula}>
-                    <p className={s.title_formula}>For man:</p>
-                    <div className={s.formula}>V=(M*0,04) + (T*0,6)</div>
+                  <div className={s.formulas_box}>
+                    <div className={s.box_formula}>
+                      <p className={s.title_formula}>For woman:</p>
+                      <div className={s.formula}>V=(M*0,03) + (T*0,4)</div>
+                    </div>
+                    <div className={s.box_formula}>
+                      <p className={s.title_formula}>For man:</p>
+                      <div className={s.formula}>V=(M*0,04) + (T*0,6)</div>
+                    </div>
                   </div>
                   <p className={s.description_formula}>
                     <span className={s.green}>* </span>V is the volume of the
@@ -123,7 +125,7 @@ const SettingsForm = () => {
                     commensurate in terms of loads (in the absence of these, you
                     must set 0)
                   </p>
-                  <span>
+                  <span className={s.active_time}>
                     <span className={s.green}>! </span>Active time in hours
                   </span>
                 </div>
@@ -154,7 +156,7 @@ const SettingsForm = () => {
                   </div>
                   <div className={s.result_text}>
                     The required amount of water in liters per day:
-                    <div className={clsx(s.green, s.margin)}>1.8 L</div>
+                    <span className={clsx(s.green, s.margin)}> 1.8L</span>
                   </div>
                   <div className={s.water_intake}>
                     <label htmlFor="water-intake" className={s.title_bold}>
