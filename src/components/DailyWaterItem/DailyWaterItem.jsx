@@ -2,7 +2,6 @@ import s from "./DailyWaterItem.module.css";
 import sprite from "../../assets/sprite.svg";
 
 const DailyWaterItem = ({ volume, date }) => {
-  console.log(date.slice(11, 13));
   return (
     <div className={s.water_item_container}>
       <svg className={s.icon_cup}>
