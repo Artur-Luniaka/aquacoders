@@ -1,21 +1,9 @@
 import s from "./CalendarMonthStatus.module.css";
 import sprite from "../../assets/sprite.svg";
 import { useEffect, useState } from "react";
-
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+import { useDispatch } from "react-redux";
+import { getMonthlyDate } from "../../redux/water/operations/getMonthlyDate.js";
+import { months } from "./month.js";
 
 const CalendarMonthStatus = ({
   currentMonth,
@@ -23,21 +11,15 @@ const CalendarMonthStatus = ({
   clickedDay,
   currentDay,
 }) => {
-  const [monthNumber, setMonthNumber] = useState(() => {
-    const month = localStorage.getItem("month");
-    return !month ? currentMonth : JSON.parse(month);
-  });
-  const [yearNumber, setYearNumber] = useState(() => {
-    const year = localStorage.getItem("year");
-    return !year ? currentYear : JSON.parse(year);
-  });
+  const [monthNumber, setMonthNumber] = useState(currentMonth);
+  const [yearNumber, setYearNumber] = useState(currentYear);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    localStorage.setItem("month", JSON.stringify(monthNumber));
-    localStorage.setItem("year", JSON.stringify(yearNumber));
-
-    //запрос на бек в формате "03-2025" после которого календарь обновляется
-  }, [monthNumber, yearNumber]);
+    dispatch(
+      getMonthlyDate(`${yearNumber}-${monthNumber.toString().padStart(2, "0")}`)
+    );
+  }, [dispatch, yearNumber, monthNumber]);
 
   const handleClickRight = () => {
     if (yearNumber > currentYear + 10) {

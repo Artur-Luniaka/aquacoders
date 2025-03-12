@@ -1,18 +1,22 @@
+import { useDispatch } from "react-redux";
 import s from "./CalendarDayStatus.module.css";
 import clsx from "clsx";
+import { getDailyInfo } from "../../redux/water/operations/getDailyInfo.js";
 
 const CalendarDayStatus = ({
-  setCalendarData,
   dayInfo,
   currentDay,
   currentMonth,
   currentYear,
-  setClickedDay
+  setClickedDay,
+  setCalendarData,
 }) => {
   const { day, month, year, stats, isActive, date } = dayInfo;
 
-  const handleClick = (clickedDay) => {
-    setClickedDay(clickedDay)
+  const dispatch = useDispatch();
+
+  const handleClick = (clickedDay, date) => {
+    setClickedDay(clickedDay);
     if (
       year > currentYear ||
       (year === currentYear && month > currentMonth) ||
@@ -30,7 +34,7 @@ const CalendarDayStatus = ({
         return prevData;
       }
 
-      //"Тут по идеи летит запрос на бекенд
+      dispatch(getDailyInfo(date));
 
       return prevData.map((item) =>
         item.day === clickedDay
@@ -41,11 +45,25 @@ const CalendarDayStatus = ({
   };
 
   return (
-    <li className={s.day_item} onClick={() => handleClick(day, date)}>
+    <button
+      type="button"
+      className={s.day_item}
+      onClick={() => handleClick(day, date)}
+    >
       <span
-        className={clsx(s.number,
-          currentDay === day && isActive && s.current_active_day,
-          currentDay === day && !isActive && (stats === 100 || stats < 100) && s.current_not_active_day,
+        className={clsx(
+          s.number,
+          currentDay === day &&
+            isActive &&
+            currentMonth === month &&
+            currentYear === year &&
+            s.current_active_day,
+          currentDay === day &&
+            currentMonth === month &&
+            currentYear === year &&
+            !isActive &&
+            (stats === 100 || stats < 100) &&
+            s.current_not_active_day,
           currentDay !== day && isActive && s.not_current_active_day,
           stats < 100 && s.low_percent
         )}
@@ -53,7 +71,7 @@ const CalendarDayStatus = ({
         {day}
       </span>
       <span className={s.percent}>{stats}%</span>
-    </li>
+    </button>
   );
 };
 
