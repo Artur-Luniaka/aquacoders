@@ -134,13 +134,6 @@ const SignUpForm = () => {
               </svg>
             </button>
           </div>
-          {errors.password ? (
-            <span className={s.error_message}>
-              {errors.repeatPassword.message}
-            </span>
-          ) : (
-            <span className={s.error_placeholder}></span>
-          )}
         </div>
         <button className={s.button} type="submit">
           Sign Up
