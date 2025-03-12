@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import s from "./DailyWaterList.module.css";
 import sprite from "../../assets/sprite.svg";
 import DailyWaterItem from "../DailyWaterItem/DailyWaterItem.jsx";
@@ -6,10 +6,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Keyboard, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import EditWater from "../EditWater/EditWater.jsx";
+import DeleteEntryModal from "../DeleteEntryModal/DeleteEntryModal.jsx";
 
 const DailyWaterList = () => {
   const paginationRef = useRef(null);
   const swiperRef = useRef(null);
+
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const testDailyArr = [
     {
@@ -105,7 +110,12 @@ const DailyWaterList = () => {
           >
             {testDailyArr.map(({ _id, volume, date }) => (
               <SwiperSlide className={s.water_list} key={_id}>
-                <DailyWaterItem volume={volume} date={date} />
+                <DailyWaterItem
+                  volume={volume}
+                  date={date}
+                  onEdit={() => setEditModalOpen(true)}
+                  onDelete={() => setDeleteModalOpen(true)}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -114,6 +124,12 @@ const DailyWaterList = () => {
             className={`${s.custom_pagination} swiper-pagination`}
           ></div>
         </div>
+      )}
+      {editModalOpen && (
+        <EditWater onCloseModal={() => setEditModalOpen(false)} />
+      )}
+      {deleteModalOpen && (
+        <DeleteEntryModal onCloseModal={() => setDeleteModalOpen(false)} />
       )}
     </section>
   );
