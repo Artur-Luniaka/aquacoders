@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import s from "./SignInForm.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
-import sprite from "../../assets/sprite.svg";
 import { useDispatch } from "react-redux";
 import { signIn } from "../../redux/auth/operations/signInThunk";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import s from "./SignInForm.module.css";
+import sprite from "../../assets/sprite.svg";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,11 +32,14 @@ const SignInForm = () => {
   };
 
   const onSubmit = async (data) => {
-    try {
-      dispatch(signIn(data));
-    } catch (e) {
-      toast.error(e.message || "Authorization failed. Try again.");
-    }
+    toast.promise(
+      dispatch(signIn(data)).unwrap(),
+      {
+        loading: "Signing in...",
+        success: "Successfully signed in!",
+        error: "Login failed. Please check your credentials.",
+      }
+    );
   };
 
   return (
@@ -59,10 +61,8 @@ const SignInForm = () => {
             className={errors.email ? `${s.input} ${s.inputError}` : s.input}
             {...register("email")}
           />
-          {errors.email ? (
+          {errors.email && (
             <span className={s.error_text}>{errors.email.message}</span>
-          ) : (
-            <span className={s.error_placeholder}></span>
           )}
         </div>
         <div className={s.input_group}>
@@ -93,10 +93,8 @@ const SignInForm = () => {
               </svg>
             </button>
           </div>
-          {errors.password ? (
+          {errors.password && (
             <span className={s.error_text}>{errors.password.message}</span>
-          ) : (
-            <span className={s.error_placeholder}></span>
           )}
         </div>
         <button type="submit" className={s.signin_button}>
@@ -105,9 +103,9 @@ const SignInForm = () => {
       </form>
       <p className={s.signup_text}>
         Don’t have an account?{" "}
-        <Link to="/signup" className={s.signup_link}>
+        <a href="/signup" className={s.signup_link}>
           Sign Up
-        </Link>
+        </a>
       </p>
     </div>
   );
