@@ -7,6 +7,7 @@ import sprite from "../../assets/sprite.svg";
 import { useDispatch } from "react-redux";
 import { signIn } from "../../redux/auth/operations/signInThunk";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -104,9 +105,9 @@ const SignInForm = () => {
       </form>
       <p className={s.signup_text}>
         Don’t have an account?{" "}
-        <a href="/signup" className={s.signup_link}>
+        <Link to="/signup" className={s.signup_link}>
           Sign Up
-        </a>
+        </Link>
       </p>
     </div>
   );
