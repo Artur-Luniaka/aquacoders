@@ -1,29 +1,18 @@
 import Modal from "../Modal/Modal.jsx";
 import s from "./LogOutModal.module.css";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { logOut } from "../../redux/auth/operations/logOutThunk";
 
 const LogOutModal = ({ onClose }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleLogOut = () => {
-    toast.promise(
-      dispatch(logOut()),
-      {
-        loading: "Logging out...",
-        success: "You have successfully logged out!",
-        error: "Logout failed. Please try again."
-      }
-    )
-      .then(() => {
-        navigate("/signin");
-      })
-      .finally(() => {
-        onClose();
-      });
+    toast.promise(dispatch(logOut()).unwrap(), {
+      loading: "Logging out...",
+      success: "You have successfully logged out!",
+      error: "Logout failed. Please try again.",
+    });
   };
 
   return (
@@ -45,4 +34,3 @@ const LogOutModal = ({ onClose }) => {
 };
 
 export default LogOutModal;
-
