@@ -15,9 +15,7 @@ const validationSchema = Yup.object({
     .min(5, "Password must be at least 5 characters")
     .max(50, "Password must be maximum 50 characters")
     .required("Password is required"),
-  repeatPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Passwords must match")
-    .required("Repeat Password is required"),
+  repeatPassword: Yup.string().required("Repeat Password is required"),
 });
 
 const SignUpForm = () => {
@@ -37,12 +35,21 @@ const SignUpForm = () => {
     setShowPassword((previous) => !previous);
   };
 
-  const onSubmit = async ({ email, password }) => {
+  const onSubmit = async ({ email, password, repeatPassword }) => {
+    if (password !== repeatPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
+
     try {
-      await dispatch(signUp({ email, password })).unwrap();
+      await toast.promise(dispatch(signUp({ email, password })).unwrap(), {
+        loading: "Signing up...",
+        success: "Account created successfully!",
+        error: (error) => error.message || "Registration failed. Try again.",
+      });
       navigate("/signin");
     } catch (error) {
-      toast.error(error.message || "Registration failed. Try again.");
+      toast.error(error.message || "Something went wrong. Please try again.");
     }
   };
 
