@@ -1,9 +1,12 @@
 .modal_settings {
-  width: 343px;
+  min-width: 343px;
   padding: 40px 20px;
+  margin-bottom: 40px;
   height: 90vh;
+  color: var(--color-darkblue);
   @media screen and (min-width: 768px) {
     width: 648px;
+    padding: 40px;
   }
   @media screen and (min-width: 1440px) {
     width: 920px;
@@ -14,6 +17,7 @@
   font: 20px/24px var(--poppins-bold);
   line-height: -0.2px;
   margin-bottom: 20px;
+  color: var(--color-darkblue);
 }
 
 .form {
@@ -25,7 +29,6 @@
   line-height: -1;
   gap: 24px;
   width: 100%;
-  margin-bottom: 40px;
 }
 .avatar {
   display: flex;
@@ -48,6 +51,8 @@
   stroke-width: 0.5;
   width: 15px;
   height: 15px;
+  fill: none;
+  stroke: var(--color-darkblue);
 }
 @media screen and (min-width: 1440px) {
   .upload_text {
@@ -92,6 +97,7 @@
 .radio_title {
   font: 16px/20px var(--poppins-bold);
   margin-bottom: 14px;
+  color: var(--color-darkblue);
   @media screen and (min-width: 1440px) {
     margin-bottom: 8px;
   }
@@ -160,6 +166,9 @@
 }
 .daily_box {
   margin-bottom: 24px;
+  @media screen and (min-width: 1440px) {
+    margin-bottom: 0;
+  }
 }
 .user_data {
   margin-bottom: 40px;
@@ -175,9 +184,9 @@
 
 .description_formula {
   padding: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 15px;
-  color: var(--color-black);
+  color: rgba(0, 0, 0, 0.35);
   margin-bottom: 14px;
 }
 .green {

@@ -6,9 +6,10 @@ import SaveButton from "../../components/SaveButton/SaveButton.jsx";
 import s from "./SettingsModal.module.css";
 import clsx from "clsx";
 import sprite from "../../assets/sprite.svg";
+import { selectAvatarUrl } from "../../redux/auth/selectors.js";
 
 const SettingsForm = () => {
-  const avatarURL = useSelector((state) => state.user.avatarURL);
+  const userURL = useSelector(selectAvatarUrl);
   const { register, handleSubmit } = useForm({
     defaultValues: {
       name: "",
@@ -34,17 +35,11 @@ const SettingsForm = () => {
           className={s.form}
         >
           <div className={s.upload_box}>
-            <img src={avatarURL} alt="Avatar" className={s.avatar} />
+            <img className={s.avatar} src={userURL} alt="Avatar" />
+
             <label htmlFor="file-upload" className={s.uploadLabel}>
               <span className={s.icon_box}>
-                <svg
-                  className={s.icon}
-                  width="18"
-                  height="18"
-                  stroke="black"
-                  strokeWidth="1"
-                  vectorEffect="non-scaling-stroke"
-                >
+                <svg className={s.icon} width="18" height="18">
                   <use href={sprite + "#icon-upload-photo"}></use>
                   {/* <use href="/src/assets/sprite.svg#icon-upload-photo"></use> */}
                 </svg>
@@ -173,7 +168,7 @@ const SettingsForm = () => {
                 </div>
               </div>
             </div>
-            <div>
+            <div style={{ marginBottom: "40px" }}>
               <SaveButton />
             </div>
           </div>
