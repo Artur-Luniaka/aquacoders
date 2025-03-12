@@ -3,10 +3,11 @@
 #root {
   max-width: 100%;
   margin: 0 auto;
-  padding: 16px;
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin: auto;
 
   @media (min-width: 375px) {
     max-width: 375px;
@@ -14,7 +15,7 @@
 
   @media (min-width: 768px) {
     max-width: 768px;
-    padding: 32px;
+    padding: 0 32px;
   }
 
   @media (min-width: 1440px) {
