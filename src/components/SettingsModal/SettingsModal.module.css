@@ -18,6 +18,10 @@
   line-height: -0.2px;
   margin-bottom: 20px;
   color: var(--color-darkblue);
+  @media screen and (min-width: 768px) {
+    font-size: 28px;
+    line-height: 32px;
+  }
 }
 
 .form {
@@ -27,7 +31,6 @@
   align-items: center;
   font: 14px/18px var(--poppins-reg);
   line-height: -1;
-  gap: 24px;
   width: 100%;
 }
 .avatar {
@@ -54,8 +57,12 @@
   fill: none;
   stroke: var(--color-darkblue);
 }
-@media screen and (min-width: 1440px) {
-  .upload_text {
+
+.upload_text {
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--color-black);
+  @media screen and (min-width: 768px) {
     font-size: 16px;
     line-height: 24px;
   }
@@ -68,9 +75,9 @@
 .upload_box {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-bottom: 40px;
+
   @media screen and (min-width: 768px) {
-    margin-bottom: 0;
   }
 }
 .box {
@@ -188,10 +195,28 @@
   border-radius: 15px;
   color: rgba(0, 0, 0, 0.35);
   margin-bottom: 14px;
+  font-size: 14px;
+  line-height: 18px;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 .green {
+  font-size: 14px;
+  line-height: 18px;
   color: var(--color-lightgreen);
   font-weight: 800;
+  @media screen and (min-width: 768px) {
+    font-size: 15px;
+    line-height: 22.4px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .formulas_box {
+    display: flex;
+    gap: 28px;
+  }
 }
 
 .title_bold {
@@ -201,8 +226,23 @@
 .user_description {
   margin-bottom: 8px;
 }
+.user_description,
+.result_text,
+.active_time {
+  color: var(--color-black);
+  font-size: 14px;
+  line-height: 18px;
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
 .result_text {
   margin-bottom: 5px;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 14px;
+  }
 }
 .margin {
   margin-bottom: 14px;

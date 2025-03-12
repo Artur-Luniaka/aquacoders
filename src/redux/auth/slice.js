@@ -26,6 +26,10 @@ const authSlice = createSlice({
         state.user = initialState;
         state.isLoggedIn = false;
       });
+    // .addCase(refreshToken.fulfilled, (state, action) => {
+    //   state.token = action.payload.data.accessToken;
+    //   state.isLoggedIn = true;
+    // });
   },
 });
 
