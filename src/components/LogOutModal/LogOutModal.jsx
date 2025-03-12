@@ -27,7 +27,7 @@ const LogOutModal = ({ onClose }) => {
   };
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onCloseModal={onClose}>
       <div className={s.container}>
         <h2 className={s.title}>Log out</h2>
         <p className={s.text}>Do you really want to leave?</p>
@@ -45,3 +45,4 @@ const LogOutModal = ({ onClose }) => {
 };
 
 export default LogOutModal;
+
