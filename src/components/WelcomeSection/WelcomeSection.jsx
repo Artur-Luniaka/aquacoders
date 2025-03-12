@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./WelcomeSection.module.css";
+import { Link } from "react-router-dom"; 
 
 const WelcomeSection = () => {
   return (
@@ -7,8 +8,8 @@ const WelcomeSection = () => {
       <p className={s.text}>Record daily water intake and track</p>
       <h1 className={s.title}>Water consumption tracker</h1>
       <div className={s.btn_container}>
-        <button className={s.btn_try}>Try tracker</button>
-        <button className={s.btn_sign}>Sign in</button>
+        <Link to="/signup" className={s.btn_try}>Try tracker</Link>
+        <Link to="/signin" className={s.btn_sign}>Sign in</Link>
       </div>
     </div>
   );
