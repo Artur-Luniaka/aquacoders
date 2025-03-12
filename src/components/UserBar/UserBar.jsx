@@ -6,15 +6,14 @@ import sprite from "../../assets/sprite.svg";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
-
-import { selectAvatarURL } from "../../redux/user/selectors.js";
+import { selectAvatarUrl } from "../../redux/auth/selectors.js";
 
 const UserBar = () => {
   const [dropStatus, setDropStatus] = useState(false);
   const [showFullName, setShowFullName] = useState(false);
 
   const userName = "Александрополиский Величавенко12345";
-  const userURL = useSelector(selectAvatarURL);
+  const userURL = useSelector(selectAvatarUrl);
 
   useEffect(() => {
     const handleBodyClick = (e) => {

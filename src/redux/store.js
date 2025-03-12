@@ -12,12 +12,12 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import { authReducer } from "./auth/slice.js";
-import { userReducer } from "./user/slice.js";
+import { waterReducer } from "./water/slice.js";
 
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["token"],
+  whitelist: ["token", "isLoggedIn"],
 };
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
@@ -25,7 +25,7 @@ const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
-    user: userReducer,
+    water: waterReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

@@ -1,16 +1,19 @@
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import s from "./SignUpForm.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import sprite from "../../assets/sprite.svg";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../redux/auth/operations/signUpThunk";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
+    .min(5, "Password must be at least 5 characters")
+    .max(50, "Password must be maximum 50 characters")
     .required("Password is required"),
   repeatPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
@@ -19,12 +22,13 @@ const validationSchema = Yup.object({
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
@@ -33,32 +37,21 @@ const SignUpForm = () => {
     setShowPassword((previous) => !previous);
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async ({ email, password }) => {
     try {
-      console.log(data);
+      await dispatch(signUp({ email, password })).unwrap();
+      navigate("/signin");
     } catch (error) {
       toast.error(error.message || "Registration failed. Try again.");
     }
   };
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful, reset]);
-
   return (
     <div className={s.container}>
       <h2 className={s.title}>Sign Up</h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={s.form}
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <div className={s.input_group}>
-          <label
-            htmlFor="email"
-            className={s.label}
-          >
+          <label htmlFor="email" className={s.label}>
             Email
           </label>
           <input
@@ -75,10 +68,7 @@ const SignUpForm = () => {
           )}
         </div>
         <div className={s.input_group}>
-          <label
-            htmlFor="password"
-            className={s.label}
-          >
+          <label htmlFor="password" className={s.label}>
             Password
           </label>
           <div className={s.password_wrapper}>
@@ -96,7 +86,9 @@ const SignUpForm = () => {
             >
               <svg className={s.icon}>
                 <use
-                  href={`${sprite}#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+                  href={`${sprite}#${
+                    showPassword ? "icon-eye" : "icon-eye-off"
+                  }`}
                 />
               </svg>
             </button>
@@ -108,10 +100,7 @@ const SignUpForm = () => {
           )}
         </div>
         <div className={s.input_group}>
-          <label
-            htmlFor="repeatPassword"
-            className={s.label}
-          >
+          <label htmlFor="repeatPassword" className={s.label}>
             Repeat password
           </label>
           <div className={s.password_wrapper}>
@@ -131,7 +120,9 @@ const SignUpForm = () => {
             >
               <svg className={s.icon}>
                 <use
-                  href={`${sprite}#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+                  href={`${sprite}#${
+                    showPassword ? "icon-eye" : "icon-eye-off"
+                  }`}
                 />
               </svg>
             </button>
@@ -144,19 +135,13 @@ const SignUpForm = () => {
             <span className={s.error_placeholder}></span>
           )}
         </div>
-        <button
-          className={s.button}
-          type="submit"
-        >
+        <button className={s.button} type="submit">
           Sign Up
         </button>
       </form>
       <p className={s.paragraph}>
         Already have an account?{" "}
-        <Link
-          to="/signin"
-          className={s.link}
-        >
+        <Link to="/signin" className={s.link}>
           Sign In
         </Link>
       </p>
