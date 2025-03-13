@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import EditWater from "../EditWater/EditWater.jsx";
 import DeleteEntryModal from "../DeleteEntryModal/DeleteEntryModal.jsx";
+import AddWaterForm from "../AddWaterForm/AddWaterForm.jsx";
 
 const DailyWaterList = () => {
   const paginationRef = useRef(null);
@@ -16,6 +17,12 @@ const DailyWaterList = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const onOpenModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+    
+  
   const testDailyArr = [
     {
       _id: "67a1f598a6ed72da1c331fd",
@@ -68,7 +75,7 @@ const DailyWaterList = () => {
     <section>
       <div className={s.day_top_info}>
         <h2 className={s.current_day_title}>Today</h2>
-        <button type="button" className={s.add_water_btn}>
+        <button onClick={onOpenModal} type="button" className={s.add_water_btn}>
           <span className={s.icon_plus_container}>
             <svg className={s.icon_plus}>
               <use href={sprite + "#icon-plus"} />
@@ -76,6 +83,7 @@ const DailyWaterList = () => {
           </span>
           Add water
         </button>
+      {isModalOpen && <AddWaterForm onCloseModal={closeModal} />}
       </div>
 
       {/* Якщо масив пустий, показуємо повідомлення */}
