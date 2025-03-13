@@ -4,6 +4,7 @@ import { signUp } from "./operations/signUpThunk.js";
 import { signIn } from "./operations/signInThunk.js";
 import { getCurrentUser } from "./operations/getCurrentUser.js";
 import { logOut } from "./operations/logOutThunk.js";
+import { refreshAccessToken } from "./operations/refreshAccessToken.js";
 
 const authSlice = createSlice({
   name: "auth",
@@ -20,6 +21,8 @@ const authSlice = createSlice({
       })
       .addCase(signIn.fulfilled, (state, action) => {
         state.token = action.payload.data.accessToken;
+        state.refreshToken = action.payload.data.refreshToken;
+        state.sessionId = action.payload.data.sessionId;
         state.isLoggedIn = true;
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
@@ -29,6 +32,12 @@ const authSlice = createSlice({
         state.token = null;
         state.user = initialState;
         state.isLoggedIn = false;
+      })
+      .addCase(refreshAccessToken.fulfilled, (state, action) => {
+        state.token = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
+        state.sessionId = action.payload.sessionId;
+        state.isLoggedIn = true;
       });
   },
 });

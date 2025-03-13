@@ -44,7 +44,7 @@ const AddWaterForm = ({ onCloseModal }) => {
   const onSubmit = (data) => {
     const validatedAmount = Math.min(5000, data.waterUsed);
     setValue("waterUsed", validatedAmount);
-   
+
     onCloseModal();
   };
 
@@ -126,4 +126,3 @@ const AddWaterForm = ({ onCloseModal }) => {
 };
 
 export default AddWaterForm;
-

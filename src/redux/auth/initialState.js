@@ -10,6 +10,8 @@ export const initialState = {
     avatarUrl: "",
   },
   token: null,
+  refreshToken: null,
+  sessionId: null,
   errorMessage: null,
   isLoading: false,
   isLoggedIn: false,
