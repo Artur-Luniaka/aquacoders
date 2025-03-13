@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./EditWater.module.css";
 import Modal from "../Modal/Modal.jsx";
+import toast from "react-hot-toast";
 
-const EditWater = () => {
+const EditWater = ({ onCloseModal }) => {
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { amountOfWater: 50, time: "" },
   });
@@ -20,6 +22,15 @@ const EditWater = () => {
     setTimeValue(formattedTime);
     setValue("time", formattedTime);
   }, [setValue]);
+
+  const handleSave = (data) => {
+    try {
+      toast.success("Successfully saved edited data!");
+      onCloseModal();
+    } catch (error) {
+      toast.error("Data hasn't been changed... Try again!");
+    }
+  };
 
   const handleChangeTime = (event) => {
     let inputTime = event.target.value;
@@ -57,6 +68,7 @@ const EditWater = () => {
     const validatedAmount = Math.min(5000, data.amountOfWater);
     setValue("amountOfWater", validatedAmount);
     console.log({ ...data, amountOfWater: validatedAmount });
+    handleSave(data);
   };
 
   const handleClickMinus = (event) => {
@@ -70,7 +82,7 @@ const EditWater = () => {
   };
 
   return (
-    <Modal>
+    <Modal onCloseModal={onCloseModal}>
       <div className={s.container}>
         <h3 className={s.title}>Edit the entered amount of water</h3>
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
