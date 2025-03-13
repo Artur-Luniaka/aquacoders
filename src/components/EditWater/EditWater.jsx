@@ -6,11 +6,14 @@ import icons from "../../assets/sprite.svg";
 import s from "./EditWater.module.css";
 import Modal from "../Modal/Modal.jsx";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 const EditWater = ({ onCloseModal }) => {
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { amountOfWater: 50, time: "" },
   });
+
+  const dispatch = useDispatch();
 
   const amountOfWater = watch("amountOfWater");
 
@@ -22,15 +25,6 @@ const EditWater = ({ onCloseModal }) => {
     setTimeValue(formattedTime);
     setValue("time", formattedTime);
   }, [setValue]);
-
-  const handleSave = (data) => {
-    try {
-      toast.success("Successfully saved edited data!");
-      onCloseModal();
-    } catch (error) {
-      toast.error("Data hasn't been changed... Try again!");
-    }
-  };
 
   const handleChangeTime = (event) => {
     let inputTime = event.target.value;
@@ -64,11 +58,20 @@ const EditWater = ({ onCloseModal }) => {
     }
   };
 
-  const onSubmit = (data) => {
-    const validatedAmount = Math.min(5000, data.amountOfWater);
-    setValue("amountOfWater", validatedAmount);
-    console.log({ ...data, amountOfWater: validatedAmount });
-    handleSave(data);
+  const onSubmit = async (data) => {
+    try {
+      const validatedAmount = Math.min(5000, data.amountOfWater);
+      setValue("amountOfWater", validatedAmount);
+
+      await toast.promise(dispatch(editWater(data)).unwrap(), {
+        loading: "Processing...",
+        success: "Successfully saved edited data!",
+        error: "Failed to update water data. Try again!",
+      });
+      onCloseModal();
+    } catch (e) {
+      toast.error(e.message || "Something went wrong. Please try again.");
+    }
   };
 
   const handleClickMinus = (event) => {
