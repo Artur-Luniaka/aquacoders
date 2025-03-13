@@ -2,14 +2,11 @@
   width: 100%;
   max-width: 320px;
   text-align: center;
-  margin-bottom: 103px;
-  margin-top: 126px;
+  margin: 126px auto 103px;
 
   @media (min-width: 768px) {
     max-width: 436px;
-    margin-top: 171px;
-    margin-left: 102px;
-    margin-bottom: 195px;
+    margin: 171px auto 195px;
   }
 
   @media (min-width: 1440px) {
