@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-// import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Modal from "../../components/Modal/Modal.jsx";
 import SaveButton from "../../components/SaveButton/SaveButton.jsx";
@@ -9,18 +9,47 @@ import { selectAvatarUrl } from "../../redux/auth/selectors.js";
 import avatarPlaceholder from "../../assets/avatar.png";
 
 const SettingsForm = () => {
-  const avatarUrl = useSelector(selectAvatarUrl);
-  const avatarSrc = avatarUrl || avatarPlaceholder;
+  const avatarUrlFromStore = useSelector(selectAvatarUrl);
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, watch } = useForm({
     defaultValues: {
       name: "",
       email: "",
       weight: "",
       sportTime: "",
       gender: "",
+      photo: null,
     },
   });
+
+  const weight = watch("weight") || 0;
+  const sportTime = watch("sportTime") || 0;
+  const gender = watch("gender");
+
+  const [imagePreview, setImagePreview] = useState(
+    avatarUrlFromStore || avatarPlaceholder
+  );
+
+  const handlePhotoChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+  const [waterIntake, setWaterIntake] = useState("1.8");
+
+  useEffect(() => {
+    const calculateWaterIntake = () => {
+      if (!weight && !sportTime) return "1.8";
+      if (!gender) return "1.8";
+      return gender === "woman"
+        ? (weight * 0.03 + sportTime * 0.4).toFixed(1)
+        : (weight * 0.04 + sportTime * 0.6).toFixed(1);
+    };
+
+    setWaterIntake(calculateWaterIntake());
+  }, [weight, sportTime, gender]);
 
   const onSubmit = (data) => {
     console.log("Form Data:", data);
@@ -37,9 +66,9 @@ const SettingsForm = () => {
           className={s.form}
         >
           <div className={s.upload_box}>
-            <img className={s.avatar} src={avatarSrc} alt="Avatar" />
+            <img className={s.avatar} src={imagePreview} alt="Avatar" />
 
-            <label htmlFor="file-upload" className={s.uploadLabel}>
+            <label htmlFor="file-upload">
               <span className={s.icon_box}>
                 <svg className={s.icon} width="18" height="18">
                   {/* <use href={sprite + "#icon-upload-photo"}></use> */}
@@ -51,9 +80,10 @@ const SettingsForm = () => {
             <input
               type="file"
               id="file-upload"
-              name="photo"
               accept="image/*"
               className={s.input_hide_upload}
+              {...register("photo")}
+              onChange={handlePhotoChange}
             />
           </div>
           <div className={s.content_box}>
@@ -155,9 +185,18 @@ const SettingsForm = () => {
                     />
                   </div>
                   <div className={s.result_text}>
-                    The required amount of water in liters per day:
-                    <span className={clsx(s.green, s.margin)}> 1.8L</span>
+                    <label htmlFor="required-water" className={s.title_bold}>
+                      The required amount of water in liters per day:
+                    </label>
+                    <input
+                      type="text"
+                      id="required-water"
+                      className={clsx(s.input, s.green, s.margin)}
+                      value={`${waterIntake()}L`}
+                      readOnly
+                    />
                   </div>
+
                   <div className={s.water_intake}>
                     <label htmlFor="water-intake" className={s.title_bold}>
                       Write down how much water you will drink:
