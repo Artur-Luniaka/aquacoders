@@ -44,32 +44,41 @@ const CalendarDayStatus = ({
     });
   };
 
+  const checkButtonState = () => {
+    return clsx(
+      s.number,
+      currentDay === day &&
+        isActive &&
+        currentMonth === month &&
+        currentYear === year &&
+        s.current_active_day,
+      currentDay === day &&
+        currentMonth === month &&
+        currentYear === year &&
+        !isActive &&
+        (stats === 100 || stats < 100) &&
+        s.current_not_active_day,
+      currentDay !== day && isActive && s.not_current_active_day,
+      currentMonth <= month &&
+        day > currentDay &&
+        currentYear <= year &&
+        s.future_days,
+      stats < 100 && s.low_percent
+    );
+  };
+
+  const checkFutureDay = () => {
+    return currentMonth <= month && day > currentDay && currentYear <= year;
+  };
+  
   return (
     <button
+      disabled={checkFutureDay()}
       type="button"
       className={s.day_item}
       onClick={() => handleClick(day, date)}
     >
-      <span
-        className={clsx(
-          s.number,
-          currentDay === day &&
-            isActive &&
-            currentMonth === month &&
-            currentYear === year &&
-            s.current_active_day,
-          currentDay === day &&
-            currentMonth === month &&
-            currentYear === year &&
-            !isActive &&
-            (stats === 100 || stats < 100) &&
-            s.current_not_active_day,
-          currentDay !== day && isActive && s.not_current_active_day,
-          stats < 100 && s.low_percent
-        )}
-      >
-        {day}
-      </span>
+      <span className={checkButtonState()}>{day}</span>
       <span className={s.percent}>{stats}%</span>
     </button>
   );

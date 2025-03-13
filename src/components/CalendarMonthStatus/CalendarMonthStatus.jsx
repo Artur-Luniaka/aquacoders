@@ -10,6 +10,7 @@ const CalendarMonthStatus = ({
   currentYear,
   clickedDay,
   currentDay,
+  setCalendarData
 }) => {
   const [monthNumber, setMonthNumber] = useState(currentMonth);
   const [yearNumber, setYearNumber] = useState(currentYear);
@@ -28,8 +29,10 @@ const CalendarMonthStatus = ({
     if (monthNumber === 12) {
       setMonthNumber(0);
       setYearNumber((prev) => prev + 1);
+      setCalendarData([])
     }
     setMonthNumber((prev) => prev + 1);
+    setCalendarData([])
   };
 
   const handleClickLeft = () => {
@@ -39,18 +42,29 @@ const CalendarMonthStatus = ({
     if (monthNumber === 1) {
       setMonthNumber(13);
       setYearNumber((prev) => prev - 1);
+      setCalendarData([])
     }
     setMonthNumber((prev) => prev - 1);
+    setCalendarData([])
   };
+
+
+  const checkCurrentStatus = () => {
+    return  clickedDay !== currentDay ||
+    monthNumber !== currentMonth ||
+    yearNumber !== currentYear
+      ? "Month"
+      : "Today"
+  }
+
+  const checkMonth = () => {
+    return monthNumber === currentMonth
+  }
 
   return (
     <div className={s.month_container}>
       <h2 className={s.month_title}>
-        {clickedDay !== currentDay ||
-        monthNumber !== currentMonth ||
-        yearNumber !== currentYear
-          ? "Month"
-          : "Today"}
+        {checkCurrentStatus()}
       </h2>
       <div className={s.month_status}>
         <button type="button" onClick={handleClickLeft}>
@@ -61,7 +75,7 @@ const CalendarMonthStatus = ({
         <p className={s.current_month}>
           {months[monthNumber - 1]}, {yearNumber}
         </p>
-        <button type="button" onClick={handleClickRight}>
+        <button disabled={checkMonth()} className={checkMonth() && s.disabled} type="button" onClick={handleClickRight}>
           <svg className={`${s.icon_arrow_right} ${s.icon_arrow}`}>
             <use href={sprite + "#icon-down-arrow"} />
           </svg>
