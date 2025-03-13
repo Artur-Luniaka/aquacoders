@@ -1,20 +1,19 @@
 import axios from "axios";
+import { logOut } from "./auth/operations/logOutThunk";
+import { store } from "./store";
+import { refreshAccessToken } from "./auth/operations/refreshAccessToken";
 
 const aqua = axios.create({
   baseURL: "https://aquacoders.onrender.com",
-  withCredentials: true,
 });
 
-export const refreshToken = async () => {
-  try {
-    const response = await aqua.post("/users/refresh");
-    const { accessToken } = response.data.data;
-    return accessToken;
-  } catch (error) {
-    console.error("Не вдалося оновити токен", error);
-    throw error;
+aqua.interceptors.request.use((config) => {
+  const token = store.getState().auth.token;
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
-};
+  return config;
+});
 
 let isRefreshing = false;
 let refreshPromise = null;
@@ -24,40 +23,38 @@ aqua.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response && error.response.status === 401) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
       if (!isRefreshing) {
         isRefreshing = true;
-        refreshPromise = refreshToken()
+        refreshPromise = store
+          .dispatch(refreshAccessToken())
+          .unwrap()
           .then((newAccessToken) => {
-            if (!newAccessToken) throw new Error("Оновлений токен відсутній");
-            aqua.defaults.headers["Authorization"] = `Bearer ${newAccessToken}`;
-            return newAccessToken;
+            if (!newAccessToken?.accessToken)
+              throw new Error("Access token undefined");
+
+            aqua.defaults.headers.Authorization = `Bearer ${newAccessToken?.accessToken}`;
+
+            return newAccessToken?.accessToken;
           })
           .catch((err) => {
-            console.error("Помилка оновлення токена:", err);
-            throw err;
+            console.error("Mistake refresh token", err);
+            store.dispatch(logOut());
+            return null;
           })
           .finally(() => {
             isRefreshing = false;
           });
       }
 
-      try {
-        const newAccessToken = await refreshPromise;
-        if (!newAccessToken) {
-          return Promise.reject(error);
-        }
+      const newAccessToken = await refreshPromise;
+      if (!newAccessToken) return Promise.reject(error);
 
-        originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
-        const retryResponse = await aqua(originalRequest);
-        if (retryResponse.status === 401) {
-          return Promise.reject(retryResponse);
-        }
-        return retryResponse;
-      } catch (refreshError) {
-        return Promise.reject(refreshError);
-      }
+      return aqua(originalRequest);
     }
+
     return Promise.reject(error);
   }
 );
