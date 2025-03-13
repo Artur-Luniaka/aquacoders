@@ -5,14 +5,14 @@ export const getMonthlyDate = createAsyncThunk(
   "water/getMonthlyDate",
   async (month, thunkAPI) => {
     try {
-      // const state = thunkAPI.getState();
-      // const token = state.auth.token;
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
 
       const response = await aqua.get("/water/monthly", {
         params: { month },
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       return response.data;
