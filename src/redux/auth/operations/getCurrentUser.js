@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import aqua, { refreshToken } from "../../aqua";
+import aqua from "../../aqua";
 
 export const getCurrentUser = createAsyncThunk(
   "auth/getCurrentUser",
@@ -8,7 +8,6 @@ export const getCurrentUser = createAsyncThunk(
     aqua.defaults.headers.Authorization = `Bearer ${token}`;
     try {
       const response = await aqua.get("/users/current");
-      refreshToken().then((data) => console.log(data));
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
