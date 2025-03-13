@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { aqua } from "../../aqua";
+import aqua from "../../aqua";
 
 export const signUp = createAsyncThunk(
   "auth/signUp",

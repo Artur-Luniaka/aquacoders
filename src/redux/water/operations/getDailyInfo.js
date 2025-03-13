@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { aqua } from "../../aqua.js";
+import aqua from "../../aqua.js";
 
 export const getDailyInfo = createAsyncThunk(
   "water/getDailyInfo",
