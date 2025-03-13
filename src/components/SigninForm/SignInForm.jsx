@@ -7,6 +7,7 @@ import { signIn } from "../../redux/auth/operations/signInThunk";
 import toast from "react-hot-toast";
 import s from "./SignInForm.module.css";
 import sprite from "../../assets/sprite.svg";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -32,14 +33,15 @@ const SignInForm = () => {
   };
 
   const onSubmit = async (data) => {
-    toast.promise(
-      dispatch(signIn(data)).unwrap(),
-      {
+    try {
+      await toast.promise(dispatch(signIn(data)).unwrap(), {
         loading: "Signing in...",
         success: "Successfully signed in!",
-        error: "Login failed. Please check your credentials.",
-      }
-    );
+        error: "Login failed. Please try one more time",
+      });
+    } catch (e) {
+      toast.error(e.message || "Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -103,9 +105,9 @@ const SignInForm = () => {
       </form>
       <p className={s.signup_text}>
         Don’t have an account?{" "}
-        <a href="/signup" className={s.signup_link}>
+        <Link to="/signup" className={s.signup_link}>
           Sign Up
-        </a>
+        </Link>
       </p>
     </div>
   );
