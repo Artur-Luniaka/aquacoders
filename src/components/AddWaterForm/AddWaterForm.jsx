@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast"; 
+// import { useDispatch } from "react-redux";
 import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./AddWaterForm.module.css";
 import Modal from "../Modal/Modal.jsx";
 
 const AddWaterForm = ({ onCloseModal }) => {
+  // const dispatch = useDispatch();
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { waterUsed: 50, recordingTime: "" },
   });
@@ -26,11 +29,15 @@ const AddWaterForm = ({ onCloseModal }) => {
     if (timePattern.test(inputTime)) {
       setTimeValue(inputTime);
       setValue("recordingTime", inputTime);
+    } else {
+      // Если формат некорректный, просто обновляем время в state, но не в форме
+      setTimeValue(inputTime);
     }
   };
 
   const handleWaterAmountChange = (event) => {
     let value = event.target.value;
+    
     if (value.length > 4) {
       value = value.slice(0, 4);
     }
@@ -41,13 +48,30 @@ const AddWaterForm = ({ onCloseModal }) => {
     }
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const validatedAmount = Math.min(5000, data.waterUsed);
     setValue("waterUsed", validatedAmount);
-   
-    onCloseModal();
-  };
 
+   
+    const fakeSaveOperation = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        
+        Math.random() > 0.2 ? resolve("Success") : reject(new Error("Failed"));
+      }, 1000);
+    });
+    
+    toast
+      .promise(fakeSaveOperation, {
+        loading: "Saving water data...",
+        success: <b>Water data saved successfully!</b>,
+        error: <b>Error: failed to save water data!</b>,
+      })
+      .finally(() => {
+        
+        onCloseModal();
+      });
+  };
+  
   const handleClickMinus = (event) => {
     event.preventDefault();
     setValue("waterUsed", Math.max(50, waterAmount - 50));
