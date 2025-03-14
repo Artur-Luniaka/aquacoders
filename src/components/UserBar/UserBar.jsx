@@ -18,11 +18,18 @@ const UserBar = () => {
 
   const userName = useSelector(selectUserName);
   const userEmail = useSelector(selectEmail);
+  const userURL = useSelector(selectAvatarUrl);
+
+  const userAvatar = () => {
+    if (userURL === "")
+      return "https://cdn-icons-png.flaticon.com/512/12225/12225935.png";
+    if (userURL !== "") return userURL;
+  };
+
   const renderedName = userName.length === 0 ? userEmail : userName;
 
   const shortenRenderedName =
     renderedName.length > 10 ? `${renderedName.slice(0, 10)}...` : renderedName;
-  const userURL = useSelector(selectAvatarUrl);
 
   useEffect(() => {
     const handleBodyClick = (e) => {
@@ -74,7 +81,11 @@ const UserBar = () => {
           )}
           <span>{shortenRenderedName}</span>
           <span className={s.user_avatar_container}>
-            <img className={s.user_avatar} src={userURL} alt={renderedName} />
+            <img
+              className={s.user_avatar}
+              src={userAvatar()}
+              alt={renderedName}
+            />
           </span>
           <span
             className={clsx(s.button_down, dropStatus && s.button_down_rotate)}
