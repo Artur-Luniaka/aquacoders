@@ -6,13 +6,22 @@ import sprite from "../../assets/sprite.svg";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
-import { selectAvatarUrl } from "../../redux/auth/selectors.js";
+import {
+  selectAvatarUrl,
+  selectEmail,
+  selectUserName,
+} from "../../redux/auth/selectors.js";
 
 const UserBar = () => {
   const [dropStatus, setDropStatus] = useState(false);
   const [showFullName, setShowFullName] = useState(false);
 
-  const userName = "Александрополиский Величавенко12345";
+  const userName = useSelector(selectUserName);
+  const userEmail = useSelector(selectEmail);
+  const renderedName = userName.length === 0 ? userEmail : userName;
+
+  const shortenRenderedName =
+    renderedName.length > 10 ? `${renderedName.slice(0, 10)}...` : renderedName;
   const userURL = useSelector(selectAvatarUrl);
 
   useEffect(() => {
@@ -31,13 +40,13 @@ const UserBar = () => {
   }, [dropStatus]);
 
   const handleMouseHoverEnter = () => {
-    if (userName.length > 10) {
+    if (renderedName.length > 10) {
       setShowFullName(true);
     }
   };
 
   const handleMouseHoverLeave = () => {
-    if (userName.length > 10) {
+    if (renderedName.length > 10) {
       setShowFullName(false);
     }
   };
@@ -50,15 +59,7 @@ const UserBar = () => {
         onMouseLeave={handleMouseHoverLeave}
       >
         Hello
-        <span>
-          ,{" "}
-          {userName.length > 10
-            ? `${userName.slice(0, 10)}...`
-            : userName.length === 0
-            ? "User"
-            : userName}
-          !
-        </span>
+        <span>, {shortenRenderedName}!</span>
       </h2>
       <div onClick={(e) => e.stopPropagation()}>
         <button
@@ -68,18 +69,12 @@ const UserBar = () => {
         >
           {showFullName && (
             <span className={`${s.full_name} ${s.full_name1}`}>
-              {userName.slice(0, 32)}
+              {renderedName.slice(0, 32)}
             </span>
           )}
-          <span>
-            {userName.length > 10
-              ? `${userName.slice(0, 10)}...`
-              : userName.length === 0
-              ? "User"
-              : userName}
-          </span>
+          <span>{shortenRenderedName}</span>
           <span className={s.user_avatar_container}>
-            <img className={s.user_avatar} src={userURL} alt={userName} />
+            <img className={s.user_avatar} src={userURL} alt={renderedName} />
           </span>
           <span
             className={clsx(s.button_down, dropStatus && s.button_down_rotate)}
