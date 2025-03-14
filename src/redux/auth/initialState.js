@@ -13,5 +13,5 @@ export const initialState = {
   refreshToken: null,
   sessionId: null,
   isLoggedIn: false,
-  lastUsers: null
+  lastUsers: null,
 };

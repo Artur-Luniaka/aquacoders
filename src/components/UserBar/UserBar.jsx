@@ -26,10 +26,10 @@ const UserBar = () => {
     if (userURL !== "") return userURL;
   };
 
-  const renderedName = userName.length === 0 ? userEmail : userName;
+  const renderedName = userName === "" ? userEmail : userName;
 
   const shortenRenderedName =
-    renderedName.length > 10 ? `${renderedName.slice(0, 10)}...` : renderedName;
+    renderedName !== "" ? `${userEmail?.slice(0, 10)}...` : renderedName;
 
   useEffect(() => {
     const handleBodyClick = (e) => {
