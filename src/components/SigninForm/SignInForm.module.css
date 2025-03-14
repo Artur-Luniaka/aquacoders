@@ -46,6 +46,10 @@
     flex-direction: column;
   }
 
+  .input.input_error {
+    border-color: var(--error-color);
+  }
+
   .input_error {
     border-color: var(--error-color);
     color: var(--error-color);

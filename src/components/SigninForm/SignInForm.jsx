@@ -60,7 +60,7 @@ const SignInForm = () => {
             type="email"
             id="email"
             placeholder="Enter your email"
-            className={errors.email ? `${s.input} ${s.inputError}` : s.input}
+            className={errors.email ? `${s.input} ${s.input_error}` : s.input}
             {...register("email")}
           />
           {errors.email && (
@@ -76,9 +76,7 @@ const SignInForm = () => {
               type={showPassword ? "text" : "password"}
               id="password"
               placeholder="Enter your password"
-              className={
-                errors.password ? `${s.input} ${s.inputError}` : s.input
-              }
+              className={errors.email ? `${s.input} ${s.input_error}` : s.input}
               {...register("password")}
             />
             <button
