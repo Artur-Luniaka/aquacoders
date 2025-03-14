@@ -7,9 +7,12 @@ import s from "./SettingsModal.module.css";
 import clsx from "clsx";
 import { selectAvatarUrl } from "../../redux/auth/selectors.js";
 import avatarPlaceholder from "../../assets/avatar.png";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../redux/auth/operations/editUserInfoThunk.js";
 
 const SettingsForm = () => {
   const avatarUrlFromStore = useSelector(selectAvatarUrl);
+  const dispatch = useDispatch();
 
   const { register, handleSubmit, watch } = useForm({
     defaultValues: {
@@ -52,7 +55,19 @@ const SettingsForm = () => {
   }, [weight, sportTime, gender]);
 
   const onSubmit = (data) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("weight", data.weight);
+    formData.append("sportTime", data.sportTime);
+    formData.append("gender", data.gender);
     console.log("Form Data:", data);
+
+    if (data.photo && data.photo.length > 0) {
+      formData.append("photo", data.photo[0]);
+    }
+
+    dispatch(updateUser(formData));
   };
 
   return (
