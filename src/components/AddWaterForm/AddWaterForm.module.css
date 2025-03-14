@@ -1,14 +1,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   width: 343px;
   padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   overflow: hidden;
-
   @media (min-width: 768px) {
     padding: 40px;
     width: 518px;
@@ -39,7 +37,7 @@
   letter-spacing: -0.01em;
   text-align: left;
   color: var(--color-darkblue);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   @media (min-width: 768px) {
     font-size: 18px;
     line-height: 1.334;
@@ -91,15 +89,12 @@
   height: 24px;
 }
 
-
-
 .water_display {
   border-radius: 30px;
   padding: 11px 20px;
   outline: none;
   background-color:var(--color-darkblue);
   border: none;
-  
   font-family: var(--poppins-bold);
   font-weight: 700;
   font-size: 14px;
@@ -154,9 +149,9 @@ input {
   width: 100%;
   min-width: 303px;
   box-sizing: border-box;
-  border: 1px solid var(--color-black);
+  border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
-  padding: 13px 0px 13px 16px;
+  padding: 13px 16px;
   margin-bottom: 24px;
   font-family: var(--poppins-reg);
   font-weight: 400;
@@ -167,7 +162,7 @@ input {
   transition: border 0.5s ease;
 
   @media (min-width: 768px) {
-    padding: 15px 0px 15px 15px;
+    padding: 15px;
     font-size: 16px;
     line-height: 1.5;
     min-width: 438px;
@@ -180,7 +175,7 @@ input {
 .input:focus {
   outline: none;
   outline-offset: 0;
-   border: 1px solid var(--color-lightgrey);
+   border: 1px solid rgba(47, 47, 47, 0.4);
 }
 
 

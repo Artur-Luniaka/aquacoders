@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "../../components/Modal/Modal.jsx";
@@ -11,6 +10,7 @@ import avatarPlaceholder from "../../assets/avatar.png";
 import { updateUser } from "../../redux/auth/operations/editUserInfoThunk.js";
 import { settingsSchema } from "../../utils/validationSchema.js";
 import sprite from "../../assets/sprite.svg";
+import { uploadAvatar } from "../../redux/auth/operations/editAvatar.js";
 
 const SettingsForm = () => {
   const avatarUrlFromStore = useSelector(selectAvatarUrl);
@@ -18,14 +18,12 @@ const SettingsForm = () => {
   const dispatch = useDispatch();
 
   const { register, handleSubmit, watch } = useForm({
-    resolver: yupResolver(settingsSchema),
     defaultValues: {
       name: "",
       email: "",
       weight: "",
       sportTime: "",
       gender: "",
-      photo: null,
     },
   });
 
@@ -59,21 +57,27 @@ const SettingsForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      await settingsSchema.validate(data, { abortEarly: false });
+      console.log("On Submit!", data);
+      settingsSchema.validate(data, { abortEarly: false });
       console.log("Validation passed:", data);
 
-      const formData = new FormData();
-      formData.append("name", data.name);
-      formData.append("email", data.email);
-      formData.append("weight", data.weight);
-      formData.append("sportTime", data.sportTime);
-      formData.append("gender", data.gender);
-
-      if (data.photo && data.photo.length > 0) {
-        formData.append("photo", data.photo[0]);
+      const photoData = new FormData();
+      if (data.photo && data.photo[0]) {
+        console.log("Avatar chousen:", data.photo[0]);
+        photoData.append("avatar", data.photo[0]);
+        await dispatch(uploadAvatar(photoData));
+      } else {
+        console.log("Avatar n chousen");
       }
 
-      dispatch(updateUser(formData));
+      const userData = {
+        name: data.name,
+        email: data.email,
+        weight: data.weight,
+        sportTime: data.sportTime,
+        gender: data.gender,
+      };
+      await dispatch(updateUser(userData));
     } catch (error) {
       console.log("Validation errors:", error.errors);
     }

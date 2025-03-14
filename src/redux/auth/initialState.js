@@ -12,7 +12,6 @@ export const initialState = {
   token: null,
   refreshToken: null,
   sessionId: null,
-  errorMessage: null,
-  isLoading: false,
   isLoggedIn: false,
+  lastUsers: null,
 };

@@ -71,3 +71,7 @@
   color: var(--color-darkblue);
   background-color: var(--hover-green);
 }
+
+.future_days {
+  opacity: 0.7;
+}

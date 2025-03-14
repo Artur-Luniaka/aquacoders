@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getMonthlyDate } from "../../redux/water/operations/getMonthlyDate.js";
 import { months } from "./month.js";
+import clsx from "clsx";
 
 const CalendarMonthStatus = ({
   currentMonth,
   currentYear,
   clickedDay,
   currentDay,
+  setCalendarData
 }) => {
   const [monthNumber, setMonthNumber] = useState(currentMonth);
   const [yearNumber, setYearNumber] = useState(currentYear);
@@ -30,6 +32,7 @@ const CalendarMonthStatus = ({
       setYearNumber((prev) => prev + 1);
     }
     setMonthNumber((prev) => prev + 1);
+    setCalendarData([])
   };
 
   const handleClickLeft = () => {
@@ -41,16 +44,26 @@ const CalendarMonthStatus = ({
       setYearNumber((prev) => prev - 1);
     }
     setMonthNumber((prev) => prev - 1);
+    setCalendarData([])
   };
+
+
+  const checkCurrentStatus = () => {
+    return  clickedDay !== currentDay ||
+    monthNumber !== currentMonth ||
+    yearNumber !== currentYear
+      ? "Month"
+      : "Today"
+  }
+
+  const checkMonth = () => {
+    return monthNumber === currentMonth && yearNumber === currentYear;
+  }
 
   return (
     <div className={s.month_container}>
       <h2 className={s.month_title}>
-        {clickedDay !== currentDay ||
-        monthNumber !== currentMonth ||
-        yearNumber !== currentYear
-          ? "Month"
-          : "Today"}
+        {checkCurrentStatus()}
       </h2>
       <div className={s.month_status}>
         <button type="button" onClick={handleClickLeft}>
@@ -61,7 +74,7 @@ const CalendarMonthStatus = ({
         <p className={s.current_month}>
           {months[monthNumber - 1]}, {yearNumber}
         </p>
-        <button type="button" onClick={handleClickRight}>
+        <button disabled={checkMonth()} className={clsx(checkMonth() && s.disabled)} type="button" onClick={handleClickRight}>
           <svg className={`${s.icon_arrow_right} ${s.icon_arrow}`}>
             <use href={sprite + "#icon-down-arrow"} />
           </svg>
