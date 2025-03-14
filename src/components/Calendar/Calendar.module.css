@@ -1,3 +1,10 @@
+.calendar_section {
+  min-height: 348px;
+  @media screen and (min-width: 768px) {
+    min-height: 361px;
+  }
+}
+
 .calendar_list {
   display: flex;
   align-items: center;
@@ -5,12 +12,12 @@
   flex-wrap: wrap;
   row-gap: 20px;
   column-gap: 18px;
-  min-height: 300px;
+  min-height: 242px;
 
   @media screen and (min-width: 768px) {
     row-gap: 15px;
     column-gap: 34px;
-    min-height: 305px;
+    height: 305px;
   }
   @media screen and (min-width: 1440px) {
     row-gap: 15px;
