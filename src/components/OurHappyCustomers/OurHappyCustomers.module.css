@@ -2,6 +2,7 @@
   position: absolute;
   display: flex;
   align-items: center;
+  overflow: hidden;
   bottom: 98px;
   left: 15px;
   background-color: var(--color-white);
@@ -21,24 +22,64 @@
   }
 }
 
+/* настроить под loader */
+.loader {
+  position: absolute;
+  top: -12px;
+  left: -3px;
+  @media (min-width: 768px) {
+    left: 10px;
+  }
+}
+
+.count_customers {
+  height: 50px;
+  min-width: 87px;
+  background-color: var(--color-lightgreen);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: -190px;
+  border-radius: 30px;
+  color: var(--color-darkblue);
+  font-family: var(--poppins-bold);
+  transition: right 350ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  @media (min-width: 768px) {
+    height: 67px;
+    min-width: 120px;
+  }
+}
+
+.count_customers.active {
+  right: 0px;
+}
+
 .avatars {
   display: flex;
   align-items: center;
 }
 
-.image {
+.images {
   display: flex;
   position: relative;
   width: 70px;
 }
 
-.image img {
+.images img {
   border-radius: 50%;
   object-fit: cover;
   position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-white);
+  @media (min-width: 768px) {
+    width: 44px;
+    height: 44px;
+  }
 }
 
-.images_girl {
+.image[alt="customer1"] {
   z-index: 3;
   left: 2;
   bottom: -14px;
@@ -50,7 +91,7 @@
   }
 }
 
-.images_boy {
+.image[alt="customer2"] {
   z-index: 2;
   left: 16px;
   bottom: -14px;
@@ -62,7 +103,7 @@
   }
 }
 
-.images_girl_ano {
+.image[alt="customer3"] {
   z-index: 1;
   left: 33px;
   bottom: -14px;
@@ -80,7 +121,7 @@
   font-size: 12px;
   line-height: 1.2;
   color: var(--color-darkblue);
-  margin-left: 15px;
+  margin-left: 20px;
 
   @media (min-width: 768px) {
     font-size: 15px;

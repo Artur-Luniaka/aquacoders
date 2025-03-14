@@ -15,4 +15,5 @@ export const initialState = {
   errorMessage: null,
   isLoading: false,
   isLoggedIn: false,
+  lastUsers: null
 };

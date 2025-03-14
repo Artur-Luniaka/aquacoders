@@ -5,3 +5,4 @@ export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectAvatarUrl = (state) => state.auth.user.avatarUrl;
 
 export const selectDailyNorm = (state) => state.auth.user.dailyNorm;
+export const selectLastUsers = (state) => state.auth.lastUsers
