@@ -5,6 +5,7 @@ import { signIn } from "./operations/signInThunk.js";
 import { getCurrentUser } from "./operations/getCurrentUser.js";
 import { logOut } from "./operations/logOutThunk.js";
 import { refreshAccessToken } from "./operations/refreshAccessToken.js";
+import { updateUser } from "./operations/editUserInfoThunk.js";
 
 const authSlice = createSlice({
   name: "auth",
@@ -33,11 +34,15 @@ const authSlice = createSlice({
         state.user = initialState;
         state.isLoggedIn = false;
       })
+
       .addCase(refreshAccessToken.fulfilled, (state, action) => {
         state.token = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
         state.sessionId = action.payload.sessionId;
         state.isLoggedIn = true;
+      })
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, ...payload };
       });
   },
 });

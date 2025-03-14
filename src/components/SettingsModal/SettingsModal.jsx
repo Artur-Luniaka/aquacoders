@@ -1,20 +1,24 @@
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Modal from "../../components/Modal/Modal.jsx";
 import SaveButton from "../../components/SaveButton/SaveButton.jsx";
 import s from "./SettingsModal.module.css";
 import clsx from "clsx";
 import { selectAvatarUrl } from "../../redux/auth/selectors.js";
 import avatarPlaceholder from "../../assets/avatar.png";
-import { useDispatch } from "react-redux";
 import { updateUser } from "../../redux/auth/operations/editUserInfoThunk.js";
+import { settingsSchema } from "../../utils/validationSchema.js";
+import sprite from "../../assets/sprite.svg";
 
 const SettingsForm = () => {
   const avatarUrlFromStore = useSelector(selectAvatarUrl);
+
   const dispatch = useDispatch();
 
   const { register, handleSubmit, watch } = useForm({
+    resolver: yupResolver(settingsSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -44,8 +48,7 @@ const SettingsForm = () => {
 
   useEffect(() => {
     const calculateWaterIntake = () => {
-      if (!weight && !sportTime) return "1.8";
-      if (!gender) return "1.8";
+      if (!weight || !sportTime || !gender) return "1.8";
       return gender === "woman"
         ? (weight * 0.03 + sportTime * 0.4).toFixed(1)
         : (weight * 0.04 + sportTime * 0.6).toFixed(1);
@@ -54,20 +57,26 @@ const SettingsForm = () => {
     setWaterIntake(calculateWaterIntake());
   }, [weight, sportTime, gender]);
 
-  const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("weight", data.weight);
-    formData.append("sportTime", data.sportTime);
-    formData.append("gender", data.gender);
-    console.log("Form Data:", data);
+  const onSubmit = async (data) => {
+    try {
+      await settingsSchema.validate(data, { abortEarly: false });
+      console.log("Validation passed:", data);
 
-    if (data.photo && data.photo.length > 0) {
-      formData.append("photo", data.photo[0]);
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("weight", data.weight);
+      formData.append("sportTime", data.sportTime);
+      formData.append("gender", data.gender);
+
+      if (data.photo && data.photo.length > 0) {
+        formData.append("photo", data.photo[0]);
+      }
+
+      dispatch(updateUser(formData));
+    } catch (error) {
+      console.log("Validation errors:", error.errors);
     }
-
-    dispatch(updateUser(formData));
   };
 
   return (
@@ -86,8 +95,7 @@ const SettingsForm = () => {
             <label htmlFor="file-upload">
               <span className={s.icon_box}>
                 <svg className={s.icon} width="18" height="18">
-                  {/* <use href={sprite + "#icon-upload-photo"}></use> */}
-                  <use href="/src/assets/sprite.svg#icon-upload-photo"></use>
+                  <use href={sprite + "#icon-upload-photo"}></use>
                 </svg>
                 <span className={s.upload_text}>Upload a photo</span>
               </span>
@@ -105,7 +113,7 @@ const SettingsForm = () => {
             <div className={s.box}>
               <div className={s.part_content}>
                 <div className={s.radio_gender}>
-                  <span className={s.radio_title}>Your gender identify</span>
+                  <span className={s.radio_title}>Your gender identity</span>
                   <div className={s.radio_group}>
                     <label htmlFor="weight-woman" className={s.radio_label}>
                       <input
@@ -199,6 +207,7 @@ const SettingsForm = () => {
                       className={s.input}
                     />
                   </div>
+                  {/* //required water */}
                   <div className={s.result_text}>
                     <label htmlFor="required-water" className={s.title_bold}>
                       The required amount of water in liters per day:
@@ -207,20 +216,8 @@ const SettingsForm = () => {
                       type="text"
                       id="required-water"
                       className={clsx(s.input, s.green, s.margin)}
-                      value={`${waterIntake()}L`}
+                      value={`${waterIntake}L`}
                       readOnly
-                    />
-                  </div>
-
-                  <div className={s.water_intake}>
-                    <label htmlFor="water-intake" className={s.title_bold}>
-                      Write down how much water you will drink:
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="1.8"
-                      id="water-intake"
-                      className={s.input}
                     />
                   </div>
                 </div>

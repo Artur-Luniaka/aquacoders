@@ -15,9 +15,6 @@ const slice = createSlice({
       .addCase(getDailyInfo.fulfilled, (state, { payload }) => {
         state.waterList = payload.data;
       });
-      .addCase(editUserInfoThunk.fulfilled, (state, { payload })) => { 
-  state.user = { ...state.user, ...payload };
-    }
   },
 });
 
