@@ -1,9 +1,10 @@
 import { Suspense } from "react";
+import Loader from "../Loader/Loader";
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Suspense fallback={null}>{children}</Suspense>
+      <Suspense fallback={<Loader />}>{children}</Suspense>
     </>
   );
 };
