@@ -39,6 +39,9 @@ const SettingsForm = () => {
     const file = event.target.files[0];
     if (file) {
       setImagePreview(URL.createObjectURL(file));
+      const formData = new FormData();
+      formData.append("avatar", file);
+      dispatch(uploadAvatar(file));
     }
   };
 
@@ -58,16 +61,24 @@ const SettingsForm = () => {
   const onSubmit = async (data) => {
     try {
       console.log("On Submit!", data);
-      settingsSchema.validate(data, { abortEarly: false });
+      await settingsSchema.validate(data, { abortEarly: false });
       console.log("Validation passed:", data);
 
-      const photoData = new FormData();
-      if (data.photo && data.photo[0]) {
-        console.log("Avatar chousen:", data.photo[0]);
-        photoData.append("avatar", data.photo[0]);
-        await dispatch(uploadAvatar(photoData));
-      } else {
-        console.log("Avatar n chousen");
+      let avatarUrl = "";
+
+      if (data.avatar && data.avatar.length > 0) {
+        const file = data.avatar[0];
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const response = await fetch("", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+        avatarUrl = result.url;
       }
 
       const userData = {
@@ -76,8 +87,18 @@ const SettingsForm = () => {
         weight: data.weight,
         sportTime: data.sportTime,
         gender: data.gender,
+        dailyNorm: parseFloat(waterIntake) * 1000,
+        avatarUrl,
       };
-      await dispatch(updateUser(userData));
+      console.log("🔍 userData перед відправкою:", userData);
+      try {
+        await settingsSchema.validate(userData, { abortEarly: false });
+        console.log("✅ Валідація пройдена:", userData);
+        dispatch(updateUser(userData));
+      } catch (error) {
+        console.error("❌ Помилки валідації:", error.errors);
+      }
+      dispatch(updateUser(userData));
     } catch (error) {
       console.log("Validation errors:", error.errors);
     }
