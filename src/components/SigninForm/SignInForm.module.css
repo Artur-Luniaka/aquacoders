@@ -106,6 +106,7 @@
     letter-spacing: -0.01em;
     color: var(--color-black);
     margin-bottom: 8px;
+    
 
   @media (min-width: 768px) {
     gap: 20px;
@@ -164,12 +165,14 @@
   width: 311px;
   height: 50px;
   background-color: #f0eff4;
+  margin-bottom: 16px;
 
   @media (min-width: 768px) {
     width: 436px;
     height: 56px;
     font-size: 16px;
     line-height: 150%;
+    margin-bottom: 20px;
   }
 }
 
