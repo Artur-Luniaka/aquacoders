@@ -3,10 +3,11 @@ import toast from "react-hot-toast";
 import Modal from "../Modal/Modal.jsx";
 import s from "./DeleteEntryModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { selectEntryId } from "../../redux/water/selectors.js";
 
 const DeleteEntryModal = ({ onCloseModal }) => {
   const dispatch = useDispatch();
-  const entryId = useSelector((state) => state.water.entryId);
+  const entryId = useSelector(selectEntryId);
 
   const handleDelete = async () => {
     try {
