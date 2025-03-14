@@ -43,7 +43,7 @@ const CalendarDayStatus = ({
     return clsx(s.number, currentDay === day && isActive && currentMonth === month && currentYear === year && s.current_active_day,
       currentDay === day && currentMonth === month && currentYear === year && !isActive && s.current_not_active_day,
       currentDay !== day && isActive && s.not_current_active_day,
-      currentDay !== day && currentMonth !== month && isActive && s.not_current_active_day,
+      currentMonth !== month && isActive && s.not_current_active_day,
       checkFutureDay() && s.future_days,
       stats < 100 && s.low_percent
     );

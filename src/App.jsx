@@ -9,6 +9,7 @@ const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
 const UserPage = lazy(() => import("./pages/UserPage/UserPage"));
 const ResetPassPage = lazy(() => import("./pages/ResetPassPage/ResetPassPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App = () => {
   return (
@@ -34,7 +35,7 @@ const App = () => {
               <PrivateRoute redirectTo="/signin" component={<UserPage />} />
             }
           />
-          <Route path="*" element={<HomePage />} />
+          <Route path="*" element={<NotFoundPage />} />
           <Route path="/reset-password" element={<ResetPassPage />} />
         </Routes>
       </Layout>

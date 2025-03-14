@@ -1,0 +1,36 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.svg {
+  width: 100px;
+  height: 100px;
+  opacity: 0.9;
+  @media (min-width: 768px) {
+    width: 150px;
+    height: 150px;
+  }
+  @media (min-width: 1440px) {
+    width: 190px;
+    height: 190px;
+  }
+}
+
+.title {
+  font-family: var(--gilroy-bold);
+  color: var(--color-darkblue);
+  font-size: 32px;
+  text-align: center;
+  margin-top: auto;
+  max-width: 296px;
+  @media (min-width: 768px) {
+    max-width: 417px;
+  }
+  @media (min-width: 1440px) {
+    max-width: 505px;
+  }
+}
