@@ -40,7 +40,7 @@ const Calendar = () => {
           day: parsedDay,
           month: parsedMonth,
           year: parsedYear,
-          isActive: parsedDay === currentDay,
+          isActive: false,
         };
       });
       setCalendarData(newMonthData);
