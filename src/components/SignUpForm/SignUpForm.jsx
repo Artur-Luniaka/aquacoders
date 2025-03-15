@@ -87,57 +87,32 @@ const SignUpForm = () => {
           >
             Password
           </label>
-          <input
-            {...register("password")}
-            id="password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter your password"
-            className={`${s.input} ${errors.password ? s.error_input : ""}`}
-          />{" "}
-          <button
-            className={s.icon_btn}
-            onClick={togglePasswordVisibility}
-            type="button"
-          >
-            <svg className={s.icon}>
-              <use
-                href={`${sprite}#${showPassword ? "icon-eye" : "icon-eye-off"}`}
-              />
-            </svg>
-          </button>
-          {errors.password && (
-            <p className={s.error_message}>{errors.password?.message}</p>
-          )}{" "}
-        </div>
-        <div className={s.input_group}>
-          <label
-            htmlFor="repeatPassword"
-            className={s.label}
-          >
-            Repeat password
-          </label>
-          <input
-            id="repeatPassword"
-            {...register("repeatPassword")}
-            type={showPassword ? "text" : "password"}
-            placeholder="Repeat password"
-            className={`${s.input} ${
-              errors.repeatPassword ? s.error_input : ""
-            }`}
-          />
-          <button
-            className={s.icon_btn}
-            onClick={togglePasswordVisibility}
-            type="button"
-          >
-            <svg className={s.icon}>
-              <use
-                href={`${sprite}#${showPassword ? "icon-eye" : "icon-eye-off"}`}
-              />
-            </svg>
-          </button>
-          {errors.password && (
-            <p className={s.error_message}>{errors.repeatPassword?.message}</p>
+          <div className={s.password_wrapper}>
+            <input
+              {...register("password")}
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              className={`${s.input} ${errors.password ? s.error_input : ""}`}
+            />
+            <button
+              className={s.icon_btn}
+              onClick={togglePasswordVisibility}
+              type="button"
+            >
+              <svg className={s.icon}>
+                <use
+                  href={`${sprite}#${
+                    showPassword ? "icon-eye" : "icon-eye-off"
+                  }`}
+                />
+              </svg>
+            </button>
+          </div>
+          {errors.password ? (
+            <span className={s.error_message}>{errors.password.message}</span>
+          ) : (
+            <span className={s.error_placeholder}></span>
           )}
         </div>
         <div className={s.input_group}>

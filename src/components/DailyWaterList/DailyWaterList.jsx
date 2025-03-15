@@ -15,6 +15,7 @@ const DailyWaterList = () => {
 
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
 
   const testDailyArr = [
     {
@@ -68,7 +69,10 @@ const DailyWaterList = () => {
     <section>
       <div className={s.day_top_info}>
         <h2 className={s.current_day_title}>Today</h2>
-        <button type="button" className={s.add_water_btn}>
+        <button
+          type="button"
+          className={s.add_water_btn}
+        >
           <span className={s.icon_plus_container}>
             <svg className={s.icon_plus}>
               <use href={sprite + "#icon-plus"} />
@@ -109,12 +113,17 @@ const DailyWaterList = () => {
             className={s.swiper}
           >
             {testDailyArr.map(({ _id, volume, date }) => (
-              <SwiperSlide className={s.water_list} key={_id}>
+              <SwiperSlide
+                className={s.water_list}
+                key={_id}
+              >
                 <DailyWaterItem
                   volume={volume}
                   date={date}
+                  entryId={_id}
                   onEdit={() => setEditModalOpen(true)}
-                  onDelete={() => setDeleteModalOpen(true)}
+                  onDelete={setDeleteModalOpen}
+                  setSelectedId={setSelectedId}
                 />
               </SwiperSlide>
             ))}
@@ -129,7 +138,10 @@ const DailyWaterList = () => {
         <EditWater onCloseModal={() => setEditModalOpen(false)} />
       )}
       {deleteModalOpen && (
-        <DeleteEntryModal onCloseModal={() => setDeleteModalOpen(false)} />
+        <DeleteEntryModal
+          entryId={selectedId}
+          onCloseModal={() => setDeleteModalOpen(false)}
+        />
       )}
     </section>
   );

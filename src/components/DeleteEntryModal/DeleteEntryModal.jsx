@@ -7,10 +7,11 @@ import { deleteWaterEntry } from "../../redux/water/operations/waterOperations.j
 
 const DeleteEntryModal = ({ onCloseModal, entryId }) => {
   const dispatch = useDispatch();
+  console.log(entryId);
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteWaterEntry(entryId)); //
+      dispatch(deleteWaterEntry(entryId));
       toast.success("Entry successfully deleted!");
       onCloseModal();
     } catch (error) {

@@ -1,17 +1,21 @@
 import s from "./DailyWaterItem.module.css";
 import sprite from "../../assets/sprite.svg";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { deleteWaterEntry } from "../../redux/water/operations/waterOperations.js";
 
-const DailyWaterItem = ({ volume, date, onEdit, onDelete, entryId }) => {
-  const dispatch = useDispatch();
-
+const DailyWaterItem = ({
+  volume,
+  date,
+  onEdit,
+  onDelete,
+  entryId,
+  setSelectedId,
+}) => {
   const handleDelete = async () => {
     try {
-      await dispatch(deleteWaterEntry(entryId));
-      toast.success("Entry successfully deleted!");
-      onDelete();
+      // toast.success("Entry successfully deleted!");
+      setSelectedId(entryId);
+
+      onDelete(true);
     } catch (error) {
       toast.error("Failed to delete entry. Try again!");
     }

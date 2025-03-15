@@ -56,8 +56,6 @@
 }
 
 .input_group {
-  position: relative;
-
   text-align: left;
   display: flex;
   flex-direction: column;
