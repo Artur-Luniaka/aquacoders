@@ -3,14 +3,17 @@ import axios from "axios";
 
 export const deleteWaterEntry = createAsyncThunk(
   "water/deleteWaterEntry",
-  async (entryId, thunkAPI) => {
-    const token = thunkAPI.getState().auth.token;
-    axios.defaults.headers.Authorization = `Bearer ${token}`;
+  async (entryId, { getState, thunkAPI }) => {
+    const token = getState().auth.token;
     try {
-      await axios.delete(`/api/water/${entryId}`);
-      return entryId;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
+      const res = await axios.delete(`/api/water/${entryId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return res.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
     }
   }
 );
