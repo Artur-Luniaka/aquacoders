@@ -56,9 +56,15 @@ const SignUpForm = () => {
   return (
     <div className={s.container}>
       <h2 className={s.title}>Sign Up</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={s.form}
+      >
         <div className={s.input_group}>
-          <label htmlFor="email" className={s.label}>
+          <label
+            htmlFor="email"
+            className={s.label}
+          >
             Email
           </label>
           <input
@@ -75,39 +81,70 @@ const SignUpForm = () => {
           )}
         </div>
         <div className={s.input_group}>
-          <label htmlFor="password" className={s.label}>
+          <label
+            htmlFor="password"
+            className={s.label}
+          >
             Password
           </label>
-          <div className={s.password_wrapper}>
-            <input
-              {...register("password")}
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              className={`${s.input} ${errors.password ? s.error_input : ""}`}
-            />
-            <button
-              className={s.icon_btn}
-              onClick={togglePasswordVisibility}
-              type="button"
-            >
-              <svg className={s.icon}>
-                <use
-                  href={`${sprite}#${
-                    showPassword ? "icon-eye" : "icon-eye-off"
-                  }`}
-                />
-              </svg>
-            </button>
-          </div>
-          {errors.password ? (
-            <span className={s.error_message}>{errors.password.message}</span>
-          ) : (
-            <span className={s.error_placeholder}></span>
+          <input
+            {...register("password")}
+            id="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter your password"
+            className={`${s.input} ${errors.password ? s.error_input : ""}`}
+          />{" "}
+          <button
+            className={s.icon_btn}
+            onClick={togglePasswordVisibility}
+            type="button"
+          >
+            <svg className={s.icon}>
+              <use
+                href={`${sprite}#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+              />
+            </svg>
+          </button>
+          {errors.password && (
+            <p className={s.error_message}>{errors.password?.message}</p>
+          )}{" "}
+        </div>
+        <div className={s.input_group}>
+          <label
+            htmlFor="repeatPassword"
+            className={s.label}
+          >
+            Repeat password
+          </label>
+          <input
+            id="repeatPassword"
+            {...register("repeatPassword")}
+            type={showPassword ? "text" : "password"}
+            placeholder="Repeat password"
+            className={`${s.input} ${
+              errors.repeatPassword ? s.error_input : ""
+            }`}
+          />
+          <button
+            className={s.icon_btn}
+            onClick={togglePasswordVisibility}
+            type="button"
+          >
+            <svg className={s.icon}>
+              <use
+                href={`${sprite}#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+              />
+            </svg>
+          </button>
+          {errors.password && (
+            <p className={s.error_message}>{errors.repeatPassword?.message}</p>
           )}
         </div>
         <div className={s.input_group}>
-          <label htmlFor="repeatPassword" className={s.label}>
+          <label
+            htmlFor="repeatPassword"
+            className={s.label}
+          >
             Repeat password
           </label>
           <div className={s.password_wrapper}>
@@ -135,13 +172,19 @@ const SignUpForm = () => {
             </button>
           </div>
         </div>
-        <button className={s.button} type="submit">
+        <button
+          className={s.button}
+          type="submit"
+        >
           Sign Up
         </button>
       </form>
       <p className={s.paragraph}>
         Already have an account?{" "}
-        <Link to="/signin" className={s.link}>
+        <Link
+          to="/signin"
+          className={s.link}
+        >
           Sign In
         </Link>
       </p>
