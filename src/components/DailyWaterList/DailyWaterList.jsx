@@ -18,14 +18,18 @@ const DailyWaterList = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState(null);
 
   const onOpenModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-    
-  
+
+  useEffect(() => {
+    console.log("Вибраний запис для редагування:", selectedRecord);
+  }, [selectedRecord]);
+
   const testDailyArr = [
     {
-      _id: "67a1f598a6ed72da1c331fd",
+      _id: "67d46c62d1abf818ab10a8db",
       volume: 250,
       date: "2025-03-05T10:00:00.000+00:00",
       userId: "67a1f598a6ed272da1c632df",
@@ -83,7 +87,7 @@ const DailyWaterList = () => {
           </span>
           Add water
         </button>
-      {isModalOpen && <AddWaterForm onCloseModal={closeModal} />}
+        {isModalOpen && <AddWaterForm onCloseModal={closeModal} />}
       </div>
 
       {/* Якщо масив пустий, показуємо повідомлення */}
@@ -121,7 +125,11 @@ const DailyWaterList = () => {
                 <DailyWaterItem
                   volume={volume}
                   date={date}
-                  onEdit={() => setEditModalOpen(true)}
+                  onEdit={() => {
+                    console.log("Редагується запис:", { _id, volume, date });
+                    setSelectedRecord({ _id, volume, date });
+                    setEditModalOpen(true);
+                  }}
                   onDelete={() => setDeleteModalOpen(true)}
                 />
               </SwiperSlide>
@@ -134,7 +142,10 @@ const DailyWaterList = () => {
         </div>
       )}
       {editModalOpen && (
-        <EditWater onCloseModal={() => setEditModalOpen(false)} />
+        <EditWater
+          onCloseModal={() => setEditModalOpen(false)}
+          record={selectedRecord}
+        />
       )}
       {deleteModalOpen && (
         <DeleteEntryModal onCloseModal={() => setDeleteModalOpen(false)} />

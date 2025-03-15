@@ -7,24 +7,30 @@ import s from "./EditWater.module.css";
 import Modal from "../Modal/Modal.jsx";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
+import { updateWaterRecord } from "../../redux/water/operations/updateWaterRecord.js";
 
-const EditWater = ({ onCloseModal }) => {
+const EditWater = ({ onCloseModal, record }) => {
   const { register, handleSubmit, setValue, watch } = useForm({
-    defaultValues: { amountOfWater: 50, time: "" },
+    defaultValues: {
+      amountOfWater: record?.volume || 50,
+      time: record?.date
+        ? new Date(record.date).toTimeString().slice(0, 5)
+        : "",
+    },
   });
 
   const dispatch = useDispatch();
 
   const amountOfWater = watch("amountOfWater");
 
-  const [timeValue, setTimeValue] = useState("");
+  const [timeValue, setTimeValue] = useState(record?.time || "");
 
   useEffect(() => {
     const now = new Date();
     const formattedTime = now.toTimeString().slice(0, 5);
     setTimeValue(formattedTime);
     setValue("time", formattedTime);
-  }, [setValue]);
+  }, [setValue, record]);
 
   const handleChangeTime = (event) => {
     let inputTime = event.target.value;
@@ -59,15 +65,39 @@ const EditWater = ({ onCloseModal }) => {
   };
 
   const onSubmit = async (data) => {
-    try {
-      const validatedAmount = Math.min(5000, data.amountOfWater);
-      setValue("amountOfWater", validatedAmount);
+    if (!record?._id) {
+      toast.error("Invalid record ID. Please try again.");
+      return;
+    }
 
-      await toast.promise(dispatch(editWater(data)).unwrap(), {
-        loading: "Processing...",
-        success: "Successfully saved edited data!",
-        error: "Failed to update water data. Try again!",
+    const validatedAmount = Math.min(5000, data.amountOfWater);
+
+    const formattedDate = new Date(record.date)
+      .toISOString()
+      .replace(/\.\d{3}Z$/, ".000+00:00");
+
+    try {
+      console.log("📩 Дані, які відправляємо на сервер:", {
+        id: record._id,
+        volume: validatedAmount,
+        date: formattedDate,
       });
+
+      await toast.promise(
+        dispatch(
+          updateWaterRecord({
+            id: record._id,
+            volume: validatedAmount,
+            date: formattedDate,
+          })
+        ).unwrap(),
+        {
+          loading: "Processing...",
+          success: "Successfully updated water record!",
+          error: "Failed to update water data. Try again!",
+        }
+      );
+
       onCloseModal();
     } catch (e) {
       toast.error(e.message || "Something went wrong. Please try again.");

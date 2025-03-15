@@ -60,7 +60,7 @@ const SignInForm = () => {
             type="email"
             id="email"
             placeholder="Enter your email"
-            className={errors.email ? `${s.input} ${s.inputError}` : s.input}
+            className={errors.email ? `${s.input} ${s.input_error}` : s.input}
             {...register("email")}
           />
           {errors.email && (
@@ -71,30 +71,24 @@ const SignInForm = () => {
           <label htmlFor="password" className={s.label}>
             Password
           </label>
-          <div className={s.password_wrapper}>
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              placeholder="Enter your password"
-              className={
-                errors.password ? `${s.input} ${s.inputError}` : s.input
-              }
-              {...register("password")}
-            />
-            <button
-              className={s.icon_btn}
-              onClick={togglePasswordVisibility}
-              type="button"
-            >
-              <svg className={s.icon}>
-                <use
-                  href={`${sprite}#${
-                    showPassword ? "icon-eye" : "icon-eye-off"
-                  }`}
-                />
-              </svg>
-            </button>
-          </div>
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            placeholder="Enter your password"
+            className={errors.email ? `${s.input} ${s.input_error}` : s.input}
+            {...register("password")}
+          />
+          <button
+            className={s.icon_btn}
+            onClick={togglePasswordVisibility}
+            type="button"
+          >
+            <svg className={s.icon}>
+              <use
+                href={`${sprite}#${showPassword ? "icon-eye" : "icon-eye-off"}`}
+              />
+            </svg>
+          </button>
           {errors.password && (
             <span className={s.error_text}>{errors.password.message}</span>
           )}
@@ -103,12 +97,15 @@ const SignInForm = () => {
           Sign In
         </button>
       </form>
-      <p className={s.signup_text}>
-        Don’t have an account?{" "}
+      <div className={s.signup_box}>
+        <p className={s.signup_text}>Don’t have an account?</p>
         <Link to="/signup" className={s.signup_link}>
           Sign Up
         </Link>
-      </p>
+      </div>
+      <Link to="/reset-password" className={s.signup_link}>
+        Reset Password
+      </Link>
     </div>
   );
 };
