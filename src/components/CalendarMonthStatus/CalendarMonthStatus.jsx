@@ -11,7 +11,8 @@ const CalendarMonthStatus = ({
   currentYear,
   clickedDay,
   currentDay,
-  setCalendarData
+  setCalendarData,
+  onToggleChart
 }) => {
   const [monthNumber, setMonthNumber] = useState(currentMonth);
   const [yearNumber, setYearNumber] = useState(currentYear);
@@ -79,7 +80,7 @@ const CalendarMonthStatus = ({
             <use href={sprite + "#icon-down-arrow"} />
           </svg>
         </button>
-        <button type="button">
+        <button type="button" onClick={onToggleChart}>
           <svg className={s.icon_diagram}>
             <use href={sprite + "#icon-diagram"} />
           </svg>
