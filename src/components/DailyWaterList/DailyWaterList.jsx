@@ -86,11 +86,7 @@ const DailyWaterList = () => {
     <section>
       <div className={s.day_top_info}>
         <h2 className={s.current_day_title}>{checkDay()}</h2>
-        <button
-          onClick={onOpenModal}
-          type="button"
-          className={s.add_water_btn}
-        >
+        <button onClick={onOpenModal} type="button" className={s.add_water_btn}>
           <span className={s.icon_plus_container}>
             <svg className={s.icon_plus}>
               <use href={sprite + "#icon-plus"} />
@@ -102,7 +98,7 @@ const DailyWaterList = () => {
       </div>
 
       {/* Якщо масив пустий, показуємо повідомлення */}
-      {waterList?.length === 0 ? (
+      {!waterList ? (
         <div className={s.empty_state}>
           <p className={s.empty_text}>
             No water records yet. Add your first entry!
