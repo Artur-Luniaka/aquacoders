@@ -14,7 +14,8 @@ const slice = createSlice({
         state.monthData = payload.data;
       })
       .addCase(getDailyInfo.fulfilled, (state, { payload }) => {
-        state.waterList = payload.data;
+        state.waterList = payload.data.data;
+        state.clickedDay = payload.day;
       })
       .addCase(updateWaterRecord.fulfilled, (state, { payload }) => {
         const index = state.waterList.findIndex(

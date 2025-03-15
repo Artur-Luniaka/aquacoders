@@ -14,8 +14,8 @@ export const getDailyInfo = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-
-      return response.data;
+      
+      return {day, data: response.data};
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }

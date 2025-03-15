@@ -69,18 +69,28 @@
   }
 }
 
+.empty_state {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  min-height: 86px;       
+  text-align: center;  
+  margin-top: 24px;
+  margin-bottom: 72px;    
+}
+
 .empty_text {
-  font-family: var(--poppins-reg);
-  font-size: 8px;
+  font-family: var(--poppins-bold);
+  font-size: 14px;
   color: var(--color-darkblue);
   line-height: 1.1;
   letter-spacing: -0.01em;
 
   @media screen and (min-width: 768px) {
-    font-size: 10px;
+    font-size: 16px;
   }
 
   @media screen and (min-width: 1440px) {
-    font-size: 14px;
+    font-size: 18px;
   }
 }
