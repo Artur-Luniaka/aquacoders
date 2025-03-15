@@ -71,14 +71,14 @@ const DailyWaterList = () => {
 
   const checkDay = () => {
     const checkDayInner =
-      Number(clickedDay.slice(8, 10)) === currentDay &&
-      Number(clickedDay.slice(5, 7)) === currentMonth &&
-      Number(clickedDay.slice(0, 4)) === currentYear
+      Number(clickedDay?.slice(8, 10)) === currentDay &&
+      Number(clickedDay?.slice(5, 7)) === currentMonth &&
+      Number(clickedDay?.slice(0, 4)) === currentYear
         ? "Today"
-        : `${Number(clickedDay.slice(8, 10))}, ${
-            months[Number(clickedDay.slice(5, 7)) - 1]
+        : `${Number(clickedDay?.slice(8, 10))}, ${
+            months[Number(clickedDay?.slice(5, 7)) - 1]
           }`;
-    return !Number(clickedDay.slice(8, 10)) ? "Today" : checkDayInner;
+    return !Number(clickedDay?.slice(8, 10)) ? "Today" : checkDayInner;
   };
 
   return (
@@ -97,7 +97,7 @@ const DailyWaterList = () => {
       </div>
 
       {/* Якщо масив пустий, показуємо повідомлення */}
-      {waterList.length === 0 ? (
+      {waterList?.length === 0 ? (
         <div className={s.empty_state}>
           <p className={s.empty_text}>
             No water records yet. Add your first entry!
@@ -126,7 +126,7 @@ const DailyWaterList = () => {
             }}
             className={s.swiper}
           >
-            {waterList.map(({ _id, volume, date }) => (
+            {waterList?.map(({ _id, volume, date }) => (
               <SwiperSlide className={s.water_list} key={_id}>
                 <DailyWaterItem
                   volume={volume}
