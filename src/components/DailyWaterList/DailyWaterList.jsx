@@ -10,7 +10,10 @@ import EditWater from "../EditWater/EditWater.jsx";
 import DeleteEntryModal from "../DeleteEntryModal/DeleteEntryModal.jsx";
 import AddWaterForm from "../AddWaterForm/AddWaterForm.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { selectClickedDay, selectWaterList } from "../../redux/water/selectors.js";
+import {
+  selectClickedDay,
+  selectWaterList,
+} from "../../redux/water/selectors.js";
 import { getDailyInfo } from "../../redux/water/operations/getDailyInfo.js";
 import { months } from "../CalendarMonthStatus/month.js";
 
@@ -21,19 +24,12 @@ const currentYear = new Date().getFullYear();
 const DailyWaterList = () => {
   const paginationRef = useRef(null);
   const swiperRef = useRef(null);
+
   const waterList = useSelector(selectWaterList);
   const clickedDay = useSelector(selectClickedDay);
 
-  // clickedDay.slice(8, 10)
-  // clickedDay.slice(5, 7)
-  // clickedDay.slice(0, 4)
-
-  console.log(clickedDay.slice(8, 10));
-  
-
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
 
@@ -43,10 +39,15 @@ const DailyWaterList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDailyInfo(`${currentYear}-${currentMonth.toString().padStart(2, "0")}-${currentDay.toString().padStart(2, "0")}`))
-  }, [dispatch])
+    dispatch(
+      getDailyInfo(
+        `${currentYear}-${currentMonth.toString().padStart(2, "0")}-${currentDay
+          .toString()
+          .padStart(2, "0")}`
+      )
+    );
+  }, [dispatch]);
 
-  // Додаємо обробник `wheel`, щоб Swiper працював із прокруткою миші
   useEffect(() => {
     const handleWheel = (event) => {
       if (swiperRef.current) {
@@ -68,10 +69,22 @@ const DailyWaterList = () => {
     };
   }, []);
 
+  const checkDay = () => {
+    const checkDayInner =
+      Number(clickedDay.slice(8, 10)) === currentDay &&
+      Number(clickedDay.slice(5, 7)) === currentMonth &&
+      Number(clickedDay.slice(0, 4)) === currentYear
+        ? "Today"
+        : `${Number(clickedDay.slice(8, 10))}, ${
+            months[Number(clickedDay.slice(5, 7)) - 1]
+          }`;
+    return !Number(clickedDay.slice(8, 10)) ? "Today" : checkDayInner;
+  };
+
   return (
     <section>
       <div className={s.day_top_info}>
-        <h2 className={s.current_day_title}>{Number (clickedDay.slice(8, 10)) === currentDay && Number(clickedDay.slice(5, 7)) === currentMonth && Number (clickedDay.slice(0, 4)) === currentYear ? "Today": `${clickedDay.String().padStart(2, "0")}
+        <h2 className={s.current_day_title}>{checkDay()}</h2>
         <button onClick={onOpenModal} type="button" className={s.add_water_btn}>
           <span className={s.icon_plus_container}>
             <svg className={s.icon_plus}>
