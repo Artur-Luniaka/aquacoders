@@ -27,7 +27,6 @@ const DailyWaterList = () => {
 
   const waterList = useSelector(selectWaterList);
   const clickedDay = useSelector(selectClickedDay);
-
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -98,7 +97,7 @@ const DailyWaterList = () => {
       </div>
 
       {/* Якщо масив пустий, показуємо повідомлення */}
-      {!waterList ? (
+      {waterList.length === 0 ? (
         <div className={s.empty_state}>
           <p className={s.empty_text}>
             No water records yet. Add your first entry!
