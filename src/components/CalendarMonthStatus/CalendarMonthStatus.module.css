@@ -75,3 +75,7 @@
     line-height: 150%;
   }
 }
+
+.disabled{
+  opacity: 0.7;
+}

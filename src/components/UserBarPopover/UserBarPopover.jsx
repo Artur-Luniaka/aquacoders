@@ -3,6 +3,7 @@ import s from "./UserBarPopover.module.css";
 import sprite from "../../assets/sprite.svg";
 import clsx from "clsx";
 import LogOutModal from "../LogOutModal/LogOutModal";
+import { Link } from "react-router-dom";
 
 const UserBarPopover = ({ dropStatus }) => {
   const [showLogOutModal, setShowLogOutModal] = useState(false);
@@ -23,6 +24,14 @@ const UserBarPopover = ({ dropStatus }) => {
             <use href={sprite + "#icon-settings"} />
           </svg>
           <span>Setting</span>
+        </button>
+        <button className={s.drop_button} type="button">
+          <svg className={s.drop_icon}>
+            <use href={sprite + "#icon-reload-alt"} />
+          </svg>
+          <span className={s.drop_span}>
+            <Link to="/reset-password">Set Password</Link>
+          </span>
         </button>
         <button
           className={`${s.drop_button} ${s.drop_button_opacity}`}

@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import  toast  from "react-hot-toast";
+// import { useDispatch } from "react-redux";
 import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./AddWaterForm.module.css";
 import Modal from "../Modal/Modal.jsx";
 
 const AddWaterForm = ({ onCloseModal }) => {
+  // const dispatch = useDispatch();
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { waterUsed: 50, recordingTime: "" },
   });
@@ -20,17 +24,21 @@ const AddWaterForm = ({ onCloseModal }) => {
     setValue("recordingTime", formattedTime);
   }, [setValue]);
 
+
   const handleChangeTime = (event) => {
     let inputTime = event.target.value;
     const timePattern = /^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/;
     if (timePattern.test(inputTime)) {
       setTimeValue(inputTime);
       setValue("recordingTime", inputTime);
+    } else {
+      setTimeValue(inputTime);
     }
   };
 
   const handleWaterAmountChange = (event) => {
     let value = event.target.value;
+
     if (value.length > 4) {
       value = value.slice(0, 4);
     }
@@ -42,10 +50,12 @@ const AddWaterForm = ({ onCloseModal }) => {
   };
 
   const onSubmit = (data) => {
-    const validatedAmount = Math.min(5000, data.waterUsed);
-    setValue("waterUsed", validatedAmount);
-
-    onCloseModal();
+    try {
+      toast.success("Water added successfully!"); 
+      onCloseModal();
+    } catch (error) {
+      toast.error("Failed to add water. Try again!"); 
+    }
   };
 
   const handleClickMinus = (event) => {

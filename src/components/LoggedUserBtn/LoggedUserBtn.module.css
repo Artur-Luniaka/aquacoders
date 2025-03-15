@@ -1,0 +1,31 @@
+.btn {
+  background-color: var(--color-lightgreen);
+  display: flex;
+  justify-content: center;
+  min-width: 116px;
+  max-width: 116px;
+  padding: 14px 19px;
+  border-radius: 30px;
+  transition: background-color 0.5s ease;
+  &:hover {
+    background-color: var(--hover-green);
+  }
+  @media (min-width: 768px) {
+    padding: 18px 40px;
+    min-width: 237px;
+    max-width: 237px;
+  }
+}
+
+.link {
+  font-family: var(--poppins-bold);
+  color: var(--color-darkblue);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  @media (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}

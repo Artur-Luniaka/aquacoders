@@ -1,92 +1,87 @@
 .signin_container {
-    width: 100%;
-    max-width: 320px; 
-    text-align: center;
-    margin: 192px auto;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  margin: 192px auto;
 
-    @media (min-width: 768px) {
-      max-width: 436px;
-      margin: 249px auto;
-    }
-  
-    @media (min-width: 1440px) {
-      margin: auto;
-      margin-top: 137px;
-    }
+  @media (min-width: 768px) {
+    max-width: 436px;
+    margin: 249px auto;
   }
 
-  .signin_title {
-    font-family: var(--poppins-bold);
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 100%;
-    letter-spacing: -0.01em;
-    text-align: left;
-    margin-bottom: 32px;
-    color: var(--color-darkblue);
+  @media (min-width: 1440px) {
+    margin: auto;
+    margin-top: 137px;
+  }
+}
 
-    @media (min-width: 768px) {
-      font-size: 36px;
-    }
-  }
+.signin_title {
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+  text-align: left;
+  margin-bottom: 32px;
+  color: var(--color-darkblue);
 
-  .signin_form {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px; 
+  @media (min-width: 768px) {
+    font-size: 36px;
+  }
+}
 
-    @media (min-width: 768px) {
-      gap: 0px;
-    }
-  }
+.signin_form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
 
-  .input_group {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
+  @media (min-width: 768px) {
+    gap: 0px;
   }
+}
 
-  .input_error {
-    border-color: var(--error-color);
-    color: var(--error-color);
-  }
+.input_group {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 
-  .password_wrapper {
-    position: relative;  
-    display: inline-block; 
-    width: max-content;     
-  }
-  
-  .password_wrapper input {
-    padding-right: 40px; 
-  }
-  
-  .icon_btn {
-    position: absolute;
-    right: 10px;           
-    top: 50%;              
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  .icon {
-    width: 18px;  
-    height: 18px;
-    stroke: #2f2f2f;
-    background: inherit;
-    fill: none;
-  }
-  
-  .error_text,
+.input.input_error {
+  border-color: var(--error-color);
+}
+
+.input_error {
+  border-color: var(--error-color);
+  color: var(--error-color);
+}
+
+.icon_btn {
+  position: absolute;
+  right: 10px;
+  top: 57%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  stroke: #2f2f2f;
+  background: inherit;
+  fill: none;
+}
+
+.error_text,
 .error_placeholder {
   font-family: var(--poppins-reg);
   display: block;
   font-size: 14px;
   margin-top: 4px;
-  min-height: 16px; 
+  min-height: 16px;
   line-height: 1.2;
 }
 
@@ -95,17 +90,17 @@
 }
 
 .error_placeholder {
-  visibility: hidden; 
+  visibility: hidden;
 }
 
-  .label {
-    font-family: var(--poppins-bold);
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 129%;
-    letter-spacing: -0.01em;
-    color: var(--color-black);
-    margin-bottom: 8px;
+.label {
+  font-family: var(--poppins-bold);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: var(--color-black);
+  margin-bottom: 8px;
 
   @media (min-width: 768px) {
     gap: 20px;
@@ -126,33 +121,33 @@
   }
 }
 
-  .signin_button {
-    font-family: var(--poppins-bold);
-    background-color: var(--color-lightgreen); 
-    border: none;
-    color: var(--color-black);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: -0.01em;
-    margin-top: 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    border-radius: 30px;
-    padding: 16px 131px;
-    width: 311px;
-    height: 50px;
+.signin_button {
+  font-family: var(--poppins-bold);
+  background-color: var(--color-lightgreen);
+  border: none;
+  color: var(--color-black);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  margin-top: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 30px;
+  padding: 16px 131px;
+  width: 311px;
+  height: 50px;
 
-    @media (min-width: 768px) {
-      width: 436px;
-      font-size: 16px;
-      padding: 18px 191px;
-      height: 60px;
-    }
+  @media (min-width: 768px) {
+    width: 436px;
+    font-size: 16px;
+    padding: 18px 191px;
+    height: 60px;
   }
-  
-  .signin_button:hover {
-    background-color: var(--hover-green);
+}
+
+.signin_button:hover {
+  background-color: var(--hover-green);
 }
 
 .input {
@@ -160,41 +155,50 @@
   outline: none;
   border: 1px solid rgba(47, 47, 47, 0.2);
   border-radius: 15px;
-  padding: 16px 16px 16px;
+  padding: 16px 30px 16px 16px;
   width: 311px;
   height: 50px;
   background-color: #f0eff4;
+  margin-bottom: 16px;
 
   @media (min-width: 768px) {
     width: 436px;
     height: 56px;
     font-size: 16px;
     line-height: 150%;
+    margin-bottom: 20px;
   }
 }
 
-  .signup_text {
-    font-family: var(--poppins-reg);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 129%;
-    letter-spacing: -0.01em;
-    color: rgba(47, 47, 47, 0.5);
-    text-decoration: none;
+.signup_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
 
-    @media (min-width: 768px) {
-      font-size: 16px;
-    }
+.signup_text {
+  font-family: var(--poppins-reg);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.5);
+  text-decoration: none;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
   }
-  
-  .signup_link {
-    font-family: var(--poppins-bold);
-    color: var(--color-black);
-    text-decoration: underline;
-    font-weight: 600;
-    margin-left: 4px;
-  }
-  
-  .signup_link:hover {
-    text-decoration: underline;
-  }
+}
+
+.signup_link {
+  font-family: var(--poppins-bold);
+  color: var(--color-black);
+  text-decoration: underline;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.signup_link:hover {
+  text-decoration: underline;
+}

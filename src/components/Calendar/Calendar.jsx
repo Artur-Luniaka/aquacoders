@@ -40,7 +40,7 @@ const Calendar = () => {
           day: parsedDay,
           month: parsedMonth,
           year: parsedYear,
-          isActive: parsedDay === currentDay,
+          isActive: false,
         };
       });
       setCalendarData(newMonthData);
@@ -48,12 +48,13 @@ const Calendar = () => {
   }, [monthData, dailyNorm]);
 
   return (
-    <>
+    <section className={s.calendar_section}>
       <CalendarMonthStatus
         currentMonth={currentMonth}
         currentYear={currentYear}
         clickedDay={clickedDay}
         currentDay={currentDay}
+        setCalendarData={setCalendarData}
       />
       {calendarData.length > 0 ? (
         <div className={s.calendar_list}>
@@ -72,7 +73,7 @@ const Calendar = () => {
       ) : (
         <div className={s.empty_calendar_list}>...Loading</div>
       )}
-    </>
+    </section>
   );
 };
 
