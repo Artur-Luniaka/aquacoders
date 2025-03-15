@@ -1,26 +1,18 @@
 .modal_settings {
+  display: flex;
+  flex-direction: column;
   min-width: 343px;
   padding: 40px 20px;
   margin-bottom: 40px;
   height: 90vh;
   color: var(--color-darkblue);
+  margin-bottom: 60px;
   @media screen and (min-width: 768px) {
     width: 648px;
     padding: 40px;
   }
   @media screen and (min-width: 1440px) {
     width: 920px;
-  }
-}
-
-.title_modal {
-  font: 20px/24px var(--poppins-bold);
-  line-height: -0.2px;
-  margin-bottom: 20px;
-  color: var(--color-darkblue);
-  @media screen and (min-width: 768px) {
-    font-size: 28px;
-    line-height: 32px;
   }
 }
 
@@ -33,59 +25,30 @@
   line-height: -1;
   width: 100%;
 }
-.avatar {
-  display: flex;
-  align-self: center;
-  width: 75px;
-  height: 75px;
-  background-color: var(--hover-green);
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
 
-.icon_box {
-  position: relative;
-  padding-left: 25px;
-}
-.icon {
-  position: absolute;
-  top: 3px;
-  left: 2px;
-  stroke-width: 0.5;
-  width: 15px;
-  height: 15px;
-  fill: none;
-  stroke: var(--color-darkblue);
-}
-
-.upload_text {
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--color-black);
-  @media screen and (min-width: 768px) {
-    font-size: 16px;
-    line-height: 24px;
-  }
-}
-
-.input_hide_upload {
-  display: none;
-}
-
-.upload_box {
+.content_box {
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
-
+}
+.title_modal {
+  font: 20px/24px var(--poppins-bold);
+  line-height: -0.2px;
+  margin-bottom: 20px;
+  color: var(--color-darkblue);
   @media screen and (min-width: 768px) {
+    font-size: 28px;
+    line-height: 32px;
   }
 }
+
 .box {
   width: 100%;
-  margin-bottom: 40px;
+
   @media screen and (min-width: 1440px) {
+    width: 90%;
     display: flex;
     justify-content: baseline;
+    margin-bottom: 40px;
     gap: 40px;
     ::last-child {
       padding-top: 72px;
@@ -96,6 +59,8 @@
 @media screen and (min-width: 1440px) {
   .part_content {
     width: 50%;
+    max-width: 50%;
+    box-sizing: border-box;
   }
   .part_content:last-child {
     padding-top: 68px;
@@ -170,6 +135,8 @@
   margin-bottom: 14px;
   color: #000;
   font: 14px/18px var(--poppins-reg);
+  width: 400px;
+  display: block;
 }
 .daily_box {
   margin-bottom: 24px;
@@ -253,4 +220,8 @@
 }
 .water_intake .input {
   margin-bottom: 0;
+}
+.bottom_submit {
+  display: block;
+  margin-bottom: 40px;
 }
