@@ -1,20 +1,16 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Modal from "../../components/Modal/Modal.jsx";
 import SaveButton from "../../components/SaveButton/SaveButton.jsx";
 import s from "./SettingsModal.module.css";
 import clsx from "clsx";
-import { selectAvatarUrl } from "../../redux/auth/selectors.js";
-import avatarPlaceholder from "../../assets/avatar.png";
 import { updateUser } from "../../redux/auth/operations/editUserInfoThunk.js";
 import { settingsSchema } from "../../utils/validationSchema.js";
-import sprite from "../../assets/sprite.svg";
-import { uploadAvatar } from "../../redux/auth/operations/editAvatar.js";
 
-const SettingsForm = () => {
-  const avatarUrlFromStore = useSelector(selectAvatarUrl);
+import SettingsAvatarModal from "../SettingsAvatarModal/SettingsAvatarModal.jsx";
 
+const SettingsModal = () => {
   const dispatch = useDispatch();
 
   const { register, handleSubmit, watch } = useForm({
@@ -24,33 +20,20 @@ const SettingsForm = () => {
       weight: "",
       sportTime: "",
       gender: "",
+      dailyNorm: "",
     },
+    mode: "onChange",
   });
 
   const weight = watch("weight") || 0;
   const sportTime = watch("sportTime") || 0;
   const gender = watch("gender");
-
-  const [imagePreview, setImagePreview] = useState(
-    avatarUrlFromStore || avatarPlaceholder
-  );
-
-  const handlePhotoChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setImagePreview(URL.createObjectURL(file));
-      const formData = new FormData();
-      formData.append("avatar", file);
-      dispatch(uploadAvatar(file));
-    }
-  };
-
-  const [waterIntake, setWaterIntake] = useState("1.8");
+  const [waterIntake, setWaterIntake] = useState(1.5);
 
   useEffect(() => {
     const calculateWaterIntake = () => {
-      if (!weight || !sportTime || !gender) return "1.8";
-      return gender === "woman"
+      if (!weight || !sportTime || !gender) return 1.5;
+      return gender === "female"
         ? (weight * 0.03 + sportTime * 0.4).toFixed(1)
         : (weight * 0.04 + sportTime * 0.6).toFixed(1);
     };
@@ -60,41 +43,18 @@ const SettingsForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      console.log("On Submit!", data);
-      await settingsSchema.validate(data, { abortEarly: false });
-      console.log("Validation passed:", data);
-
-      let avatarUrl = "";
-
-      if (data.avatar && data.avatar.length > 0) {
-        const file = data.avatar[0];
-
-        const formData = new FormData();
-        formData.append("file", file);
-
-        const response = await fetch("", {
-          method: "POST",
-          body: formData,
-        });
-
-        const result = await response.json();
-        avatarUrl = result.url;
-      }
-
       const userData = {
         name: data.name,
         email: data.email,
         weight: data.weight,
         sportTime: data.sportTime,
         gender: data.gender,
-        dailyNorm: parseFloat(waterIntake) * 1000,
-        avatarUrl,
+        dailyNorm: Number(parseFloat(waterIntake) * 1000),
       };
       console.log("🔍 userData перед відправкою:", userData);
       try {
         await settingsSchema.validate(userData, { abortEarly: false });
         console.log("✅ Валідація пройдена:", userData);
-        dispatch(updateUser(userData));
       } catch (error) {
         console.error("❌ Помилки валідації:", error.errors);
       }
@@ -108,32 +68,8 @@ const SettingsForm = () => {
     <Modal>
       <div className={s.modal_settings}>
         <h2 className={s.title_modal}>Setting</h2>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          method="post"
-          encType="multipart/form-data"
-          className={s.form}
-        >
-          <div className={s.upload_box}>
-            <img className={s.avatar} src={imagePreview} alt="Avatar" />
-
-            <label htmlFor="file-upload">
-              <span className={s.icon_box}>
-                <svg className={s.icon} width="18" height="18">
-                  <use href={sprite + "#icon-upload-photo"}></use>
-                </svg>
-                <span className={s.upload_text}>Upload a photo</span>
-              </span>
-            </label>
-            <input
-              type="file"
-              id="file-upload"
-              accept="image/*"
-              className={s.input_hide_upload}
-              {...register("photo")}
-              onChange={handlePhotoChange}
-            />
-          </div>
+        {/* <SettingsAvatarModal/> */}
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className={s.content_box}>
             <div className={s.box}>
               <div className={s.part_content}>
@@ -143,7 +79,7 @@ const SettingsForm = () => {
                     <label htmlFor="weight-woman" className={s.radio_label}>
                       <input
                         type="radio"
-                        value="woman"
+                        value="female"
                         id="weight-woman"
                         {...register("gender")}
                         className={s.radio_input}
@@ -153,7 +89,7 @@ const SettingsForm = () => {
                     <label htmlFor="weight-man" className={s.radio_label}>
                       <input
                         type="radio"
-                        value="man"
+                        value="male"
                         id="weight-man"
                         {...register("gender")}
                         className={s.radio_input}
@@ -241,7 +177,7 @@ const SettingsForm = () => {
                       type="text"
                       id="required-water"
                       className={clsx(s.input, s.green, s.margin)}
-                      value={`${waterIntake}L`}
+                      value={`${waterIntake}`}
                       readOnly
                     />
                   </div>
@@ -258,4 +194,4 @@ const SettingsForm = () => {
   );
 };
 
-export default SettingsForm;
+export default SettingsModal;

@@ -15,21 +15,10 @@ export const settingsSchema = Yup.object().shape({
     .max(24, "Workout time cannot be more than 24")
     .required("Specify the time for sports activities"),
   gender: Yup.string()
-    .oneOf(["man", "woman"], "Choose gender")
+    .oneOf(["male", "female", "none"], "Choose gender")
     .required("Gender is required"),
   dailyNorm: Yup.number()
     .min(500, "Daily norm cannot be less than 500ml")
     .max(15000, "Daily norm cannot be more than 15000ml")
     .required("Daily norm is required"),
-  avatar: Yup.mixed()
-    .test("fileSize", "File is too large", (value) => {
-      return !value || (value.length > 0 && value[0].size <= 2 * 1024 * 1024);
-    })
-    .test("fileType", "Unsupported file format", (value) => {
-      return (
-        !value ||
-        (value.length > 0 &&
-          ["image/jpeg", "image/png", "image/jpg"].includes(value[0].type))
-      );
-    }),
 });

@@ -12,8 +12,7 @@ export const updateUser = createAsyncThunk(
         gender: userData.gender || "none",
         weight: Number(userData.weight) || 0,
         dailySportTime: Number(userData.sportTime) || 0,
-        dailyNorm: Number(userData.dailyNorm) || 2000, // додано dailyNorm, бо API його очікує
-        avatarUrl: userData.avatarUrl || "", // якщо фото вже є на сервері
+        dailyNorm: Number(userData.dailyNorm) || 1500,
       };
 
       console.log("📤 Sending user data:", JSON.stringify(cleanData));
