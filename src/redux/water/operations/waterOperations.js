@@ -3,21 +3,12 @@ import aqua from "../../aqua.js";
 
 export const deleteWaterEntry = createAsyncThunk(
   "water/deleteWaterEntry",
-  async (entryId, thunkAPI) => {
+  async (entryId, { rejectWithValue }) => {
     try {
-      const state = thunkAPI.getState();
-      const token = state.auth.token;
-
-      const response = await aqua.delete(`/api/water/${entryId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(response);
-
+      const response = await aqua.delete(`/water/${entryId}`);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.response?.data || "error");
+      return rejectWithValue(e.response?.data || "error");
     }
   }
 );
