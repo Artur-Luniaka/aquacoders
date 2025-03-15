@@ -1,29 +1,27 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Modal from "../../components/Modal/Modal.jsx";
-import SaveButton from "../../components/SaveButton/SaveButton.jsx";
 import s from "./SettingsAvatarModal.module.css";
 import { selectAvatarUrl } from "../../redux/auth/selectors.js";
 import avatarPlaceholder from "../../assets/avatar.png";
 import sprite from "../../assets/sprite.svg";
 import { uploadAvatar } from "../../redux/auth/operations/editAvatar.js";
 import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 
-const validationSchema = Yup.object({
-  avatar: Yup.mixed()
-    .test("fileSize", "File is too large", (value) => {
-      return !value || (value.length > 0 && value[0].size <= 2 * 1024 * 1024);
-    })
-    .test("fileType", "Unsupported file format", (value) => {
-      return (
-        !value ||
-        (value.length > 0 &&
-          ["image/jpeg", "image/png", "image/jpg"].includes(value[0].type))
-      );
-    }),
-});
+// const validationSchema = Yup.object({
+//   avatar: Yup.mixed()
+//     .test("fileSize", "File is too large", (value) => {
+//       return !value || (value.length > 0 && value[0].size <= 2 * 1024 * 1024);
+//     })
+//     .test("fileType", "Unsupported file format", (value) => {
+//       return (
+//         !value ||
+//         (value.length > 0 &&
+//           ["image/jpeg", "image/png", "image/jpg"].includes(value[0].type))
+//       );
+//     }),
+// });
 
 const SettingsAvatarModal = () => {
   const avatarUrlFromStore = useSelector(selectAvatarUrl);
@@ -33,7 +31,7 @@ const SettingsAvatarModal = () => {
   );
 
   const { register, setValue } = useForm({
-    resolver: yupResolver(validationSchema),
+    // resolver: yupResolver(validationSchema),
   });
 
   const handlePhotoChange = (event) => {

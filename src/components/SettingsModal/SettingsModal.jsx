@@ -68,7 +68,7 @@ const SettingsModal = () => {
     <Modal>
       <div className={s.modal_settings}>
         <h2 className={s.title_modal}>Setting</h2>
-        {/* <SettingsAvatarModal/> */}
+        <SettingsAvatarModal />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={s.content_box}>
             <div className={s.box}>
@@ -184,7 +184,7 @@ const SettingsModal = () => {
                 </div>
               </div>
             </div>
-            <div style={{ marginBottom: "40px" }}>
+            <div className={s.bottom_submit} style={{ marginBottom: "40px" }}>
               <SaveButton />
             </div>
           </div>
