@@ -2,14 +2,15 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import  toast  from "react-hot-toast";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addWaterEntry } from "../../redux/water/operations/postAddWater.js";
 import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./AddWaterForm.module.css";
 import Modal from "../Modal/Modal.jsx";
 
 const AddWaterForm = ({ onCloseModal }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { waterUsed: 50, recordingTime: "" },
   });
@@ -49,8 +50,9 @@ const AddWaterForm = ({ onCloseModal }) => {
     }
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     try {
+       await dispatch(addWaterEntry(data)).unwrap();
       toast.success("Water added successfully!"); 
       onCloseModal();
     } catch (error) {
