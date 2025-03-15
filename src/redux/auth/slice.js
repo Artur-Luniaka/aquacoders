@@ -31,6 +31,8 @@ const authSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state) => {
         state.token = null;
+        state.sessionId = null;
+        state.refreshToken = null;
         state.user = initialState;
         state.isLoggedIn = false;
       })
@@ -40,9 +42,9 @@ const authSlice = createSlice({
         state.sessionId = action.payload.sessionId;
         state.isLoggedIn = true;
       })
-      .addCase(getLastUsers.fulfilled, (state, {payload}) => {
-        state.lastUsers = payload.data
-      })
+      .addCase(getLastUsers.fulfilled, (state, { payload }) => {
+        state.lastUsers = payload.data;
+      });
   },
 });
 

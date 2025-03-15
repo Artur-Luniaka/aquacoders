@@ -11,6 +11,8 @@ const UserPage = lazy(() => import("./pages/UserPage/UserPage"));
 const ResetPassPage = lazy(() => import("./pages/ResetPassPage/ResetPassPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
+import "./i18n.js"; //моє
+
 const App = () => {
   return (
     <>

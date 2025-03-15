@@ -1,12 +1,12 @@
 .drop_menu {
   position: absolute;
-  bottom: -76px;
-  right: 167px;
+  bottom: -102px;
+  right: 121px;
   z-index: 900;
   display: flex;
   flex-direction: column;
   padding: 14px 40px 14px 20px;
-  width: 137px;
+  width: 180px;
   gap: 8px;
   background-color: var(--color-white);
   border-radius: 15px;
@@ -17,10 +17,10 @@
   transition: opacity 250ms cubic-bezier(0.215, 0.61, 0.355, 1),
     visibility 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
   @media screen and (min-width: 768px) {
-    bottom: -90px;
+    bottom: -116px;
     right: 0;
     padding: 14px 57px 14px 20px;
-    width: 157px;
+    width: 204px;
   }
 }
 
@@ -60,4 +60,8 @@
   height: 16px;
   fill: none;
   stroke: var(--color-darkblue);
+}
+
+.drop_span {
+  max-width: 60px;
 }
