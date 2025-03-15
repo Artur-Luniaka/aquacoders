@@ -1,6 +1,6 @@
 export const initialState = {
   monthData: [],
-  todayWaterList: [],
+  clickedDay: '',
   waterList: [],
   isLoading: false,
 };
