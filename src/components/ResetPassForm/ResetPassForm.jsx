@@ -7,8 +7,9 @@ import s from "./ResetPassForm.module.css";
 import { useEffect, useState } from "react";
 import sprite from "../../assets/sprite.svg";
 import { selectIsLoggedIn } from "../../redux/auth/selectors.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import aqua from "../../redux/aqua.js";
+import { logOut } from "../../redux/auth/operations/logOutThunk.js";
 
 const validationSchema = Yup.object({
   password: Yup.string()
@@ -24,6 +25,7 @@ const ResetPassForm = ({ token }) => {
   const [showPassword, setShowPassword] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -31,6 +33,8 @@ const ResetPassForm = ({ token }) => {
     formState: { errors, isSubmitSuccessful },
   } = useForm({
     resolver: yupResolver(validationSchema),
+    mode: "onChange",
+    defaultValues: { password: "", repeatPassword: "" },
   });
 
   const togglePasswordVisibility = () => {
@@ -46,7 +50,10 @@ const ResetPassForm = ({ token }) => {
           success: "Password was successfully reset!",
         }
       );
-      await aqua.post("/users/logout");
+      await toast.promise(dispatch(logOut()).unwrap(), {
+        loading: "Logout...",
+        success: "Successfully logged out!",
+      });
       navigate("/signin");
     } catch (error) {
       toast.error(
@@ -125,7 +132,7 @@ const ResetPassForm = ({ token }) => {
               </svg>
             </button>
           </div>
-          {errors.password ? (
+          {errors.repeatPassword ? (
             <span className={s.error_message}>
               {errors.repeatPassword.message}
             </span>
