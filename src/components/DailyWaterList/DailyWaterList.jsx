@@ -86,9 +86,6 @@ const DailyWaterList = () => {
     <section>
       <div className={s.day_top_info}>
         <h2 className={s.current_day_title}>Today</h2>
-        <button
-          type="button"
-          className={s.add_water_btn}
         <h2 className={s.current_day_title}>{checkDay()}</h2>
         <button onClick={onOpenModal} type="button" className={s.add_water_btn}>
           <span className={s.icon_plus_container}>
