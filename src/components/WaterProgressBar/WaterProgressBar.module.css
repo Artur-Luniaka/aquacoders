@@ -31,35 +31,55 @@
   font-weight: 700;
   font-size: 14px; 
   line-height: 1;
+  margin-bottom: 5px;
 
   @media (min-width: 768px) {
-  font-size: 15px;
-  line-height: 1.49333;
+    font-size: 15px;
+    line-height: 1.49333;
   }
 }
 
 .slider {
-  max-width:255px;
-  height:6px;
+  max-width: 255px;
+  height: 6px;
   border-radius: 9px;
   border-color: var(--color-lightgrey);
   border-style: none;
   border: solid ;
   color: var(--color-lightgrey);
   background-color: var(--color-lightgrey);
+  position: relative;
 }
 
-.rail{
-  transform: translate(-1px,-5px);
-  width: 12px;
-  height: 12px;
-  border-radius: 100%;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-lightgreen);
+.progress {
+  left: -2px;
+  top: -3px;
+  max-width: 255px;
+  height: 6px;
+  background-color: var(--color-lightgreen);
+  border-radius: 9px;
+  position: relative;
+  transition: width 0.3s ease;
+  @media (min-width: 768px) {
+    top: -3px;
+  }
+}
+
+.thumb {
+  width: 14px;
+  height: 14px;
+  background-color: white;
+  border: 2px solid var(--color-lightgreen);
+  border-radius: 50%;
+  position: absolute;
+  top: -7px;
+  left: -px;
+  transform: translateX(-50%);
+  transition: left 0.3s ease;
 }
 
 .percent_bar {
-  color:rgba(47, 47, 47, 0.6);
+  color: rgba(47, 47, 47, 0.6);
   display: flex;
   pointer-events: none;
   width: 174px;
@@ -67,25 +87,42 @@
   align-items: center;
 
   @media (min-width: 768px) {
-   width: 255px;
-   font-size: 12px;
-   line-height: 1.86667;
+    width: 255px;
+    font-size: 12px;
+    line-height: 1.86667;
   }
-
 }
-.percent_bar_item{
+
+.percent_bar_item {
   font-family: var(--poppins-reg);
-  color:rgba(47, 47, 47, 0.6);
+  color: rgba(47, 47, 47, 0.6);
   display: flex;
   font-weight: 400;
   pointer-events: none;
   font-size: 10px;
   align-items: center;
   line-height: 1;
-  
+
   @media (min-width: 768px) {
     font-size: 12px;
     line-height: 1.86667;
-   }
+  }
 }
 
+.percent_value {
+  font-family: var(--poppins-reg);
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 1;
+  position: absolute;
+  top: -9px;
+  font-size: 8px;
+  color: var(--color-lightgreen);
+  transform: translateX(-50%);
+
+  @media (min-width: 768px) {
+    font-size: 10px;
+    line-height: 1.8;
+    top: -16px;
+  }
+}
