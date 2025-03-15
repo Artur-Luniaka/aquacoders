@@ -1,71 +1,85 @@
 import { useForm } from "react-hook-form";
-// import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Modal from "../../components/Modal/Modal.jsx";
 import SaveButton from "../../components/SaveButton/SaveButton.jsx";
 import s from "./SettingsModal.module.css";
 import clsx from "clsx";
-import { selectAvatarUrl } from "../../redux/auth/selectors.js";
-import avatarPlaceholder from "../../assets/avatar.png";
+import { updateUser } from "../../redux/auth/operations/editUserInfoThunk.js";
+import { settingsSchema } from "../../utils/validationSchema.js";
 
-const SettingsForm = () => {
-  const avatarUrl = useSelector(selectAvatarUrl);
-  const avatarSrc = avatarUrl || avatarPlaceholder;
+import SettingsAvatarModal from "../SettingsAvatarModal/SettingsAvatarModal.jsx";
 
-  const { register, handleSubmit } = useForm({
+const SettingsModal = () => {
+  const dispatch = useDispatch();
+
+  const { register, handleSubmit, watch } = useForm({
     defaultValues: {
       name: "",
       email: "",
       weight: "",
       sportTime: "",
       gender: "",
+      dailyNorm: "",
     },
+    mode: "onChange",
   });
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const weight = watch("weight") || 0;
+  const sportTime = watch("sportTime") || 0;
+  const gender = watch("gender");
+  const [waterIntake, setWaterIntake] = useState(1.5);
+
+  useEffect(() => {
+    const calculateWaterIntake = () => {
+      if (!weight || !sportTime || !gender) return 1.5;
+      return gender === "female"
+        ? (weight * 0.03 + sportTime * 0.4).toFixed(1)
+        : (weight * 0.04 + sportTime * 0.6).toFixed(1);
+    };
+
+    setWaterIntake(calculateWaterIntake());
+  }, [weight, sportTime, gender]);
+
+  const onSubmit = async (data) => {
+    try {
+      const userData = {
+        name: data.name,
+        email: data.email,
+        weight: data.weight,
+        sportTime: data.sportTime,
+        gender: data.gender,
+        dailyNorm: Number(parseFloat(waterIntake) * 1000),
+      };
+      console.log("🔍 userData перед відправкою:", userData);
+      try {
+        await settingsSchema.validate(userData, { abortEarly: false });
+        console.log("✅ Валідація пройдена:", userData);
+      } catch (error) {
+        console.error("❌ Помилки валідації:", error.errors);
+      }
+      dispatch(updateUser(userData));
+    } catch (error) {
+      console.log("Validation errors:", error.errors);
+    }
   };
 
   return (
     <Modal>
       <div className={s.modal_settings}>
         <h2 className={s.title_modal}>Setting</h2>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          method="post"
-          encType="multipart/form-data"
-          className={s.form}
-        >
-          <div className={s.upload_box}>
-            <img className={s.avatar} src={avatarSrc} alt="Avatar" />
-
-            <label htmlFor="file-upload" className={s.uploadLabel}>
-              <span className={s.icon_box}>
-                <svg className={s.icon} width="18" height="18">
-                  {/* <use href={sprite + "#icon-upload-photo"}></use> */}
-                  <use href="/src/assets/sprite.svg#icon-upload-photo"></use>
-                </svg>
-                <span className={s.upload_text}>Upload a photo</span>
-              </span>
-            </label>
-            <input
-              type="file"
-              id="file-upload"
-              name="photo"
-              accept="image/*"
-              className={s.input_hide_upload}
-            />
-          </div>
+        <SettingsAvatarModal />
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className={s.content_box}>
             <div className={s.box}>
               <div className={s.part_content}>
                 <div className={s.radio_gender}>
-                  <span className={s.radio_title}>Your gender identify</span>
+                  <span className={s.radio_title}>Your gender identity</span>
                   <div className={s.radio_group}>
                     <label htmlFor="weight-woman" className={s.radio_label}>
                       <input
                         type="radio"
-                        value="woman"
+                        value="female"
                         id="weight-woman"
                         {...register("gender")}
                         className={s.radio_input}
@@ -75,7 +89,7 @@ const SettingsForm = () => {
                     <label htmlFor="weight-man" className={s.radio_label}>
                       <input
                         type="radio"
-                        value="man"
+                        value="male"
                         id="weight-man"
                         {...register("gender")}
                         className={s.radio_input}
@@ -154,25 +168,23 @@ const SettingsForm = () => {
                       className={s.input}
                     />
                   </div>
+                  {/* //required water */}
                   <div className={s.result_text}>
-                    The required amount of water in liters per day:
-                    <span className={clsx(s.green, s.margin)}> 1.8L</span>
-                  </div>
-                  <div className={s.water_intake}>
-                    <label htmlFor="water-intake" className={s.title_bold}>
-                      Write down how much water you will drink:
+                    <label htmlFor="required-water" className={s.title_bold}>
+                      The required amount of water in liters per day:
                     </label>
                     <input
                       type="text"
-                      placeholder="1.8"
-                      id="water-intake"
-                      className={s.input}
+                      id="required-water"
+                      className={clsx(s.input, s.green, s.margin)}
+                      value={`${waterIntake}`}
+                      readOnly
                     />
                   </div>
                 </div>
               </div>
             </div>
-            <div style={{ marginBottom: "40px" }}>
+            <div className={s.bottom_submit} style={{ marginBottom: "40px" }}>
               <SaveButton />
             </div>
           </div>
@@ -182,4 +194,4 @@ const SettingsForm = () => {
   );
 };
 
-export default SettingsForm;
+export default SettingsModal;

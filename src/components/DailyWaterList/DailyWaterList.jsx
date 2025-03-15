@@ -9,47 +9,45 @@ import "swiper/css/pagination";
 import EditWater from "../EditWater/EditWater.jsx";
 import DeleteEntryModal from "../DeleteEntryModal/DeleteEntryModal.jsx";
 import AddWaterForm from "../AddWaterForm/AddWaterForm.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectClickedDay,
+  selectWaterList,
+} from "../../redux/water/selectors.js";
+import { getDailyInfo } from "../../redux/water/operations/getDailyInfo.js";
+import { months } from "../CalendarMonthStatus/month.js";
+
+const currentDay = new Date().getDate();
+const currentMonth = new Date().getMonth() + 1;
+const currentYear = new Date().getFullYear();
 
 const DailyWaterList = () => {
   const paginationRef = useRef(null);
   const swiperRef = useRef(null);
 
+  const waterList = useSelector(selectWaterList);
+  const clickedDay = useSelector(selectClickedDay);
+
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState(null);
 
   const onOpenModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-    
-  
-  const testDailyArr = [
-    {
-      _id: "67a1f598a6ed72da1c331fd",
-      volume: 250,
-      date: "2025-03-05T10:00:00.000+00:00",
-      userId: "67a1f598a6ed272da1c632df",
-    },
-    {
-      _id: "67a1f98a6ed242da1c633fd",
-      volume: 250,
-      date: "2025-03-05T10:00:00.000+00:00",
-      userId: "67a1f598a6ed272da1c632df",
-    },
-    {
-      _id: "67a1f598a6ed172da1c633d",
-      volume: 250,
-      date: "2025-03-05T10:00:00.000+00:00",
-      userId: "67a1f598a6ed272da1c632df",
-    },
-    {
-      _id: "67a1f598a6ed972da1c633f",
-      volume: 250,
-      date: "2025-03-05T10:00:00.000+00:00",
-      userId: "67a1f598a6ed272da1c632df",
-    },
-  ];
-  // Додаємо обробник `wheel`, щоб Swiper працював із прокруткою миші
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      getDailyInfo(
+        `${currentYear}-${currentMonth.toString().padStart(2, "0")}-${currentDay
+          .toString()
+          .padStart(2, "0")}`
+      )
+    );
+  }, [dispatch]);
+
   useEffect(() => {
     const handleWheel = (event) => {
       if (swiperRef.current) {
@@ -71,10 +69,22 @@ const DailyWaterList = () => {
     };
   }, []);
 
+  const checkDay = () => {
+    const checkDayInner =
+      Number(clickedDay?.slice(8, 10)) === currentDay &&
+      Number(clickedDay?.slice(5, 7)) === currentMonth &&
+      Number(clickedDay?.slice(0, 4)) === currentYear
+        ? "Today"
+        : `${Number(clickedDay?.slice(8, 10))}, ${
+            months[Number(clickedDay?.slice(5, 7)) - 1]
+          }`;
+    return !Number(clickedDay?.slice(8, 10)) ? "Today" : checkDayInner;
+  };
+
   return (
     <section>
       <div className={s.day_top_info}>
-        <h2 className={s.current_day_title}>Today</h2>
+        <h2 className={s.current_day_title}>{checkDay()}</h2>
         <button onClick={onOpenModal} type="button" className={s.add_water_btn}>
           <span className={s.icon_plus_container}>
             <svg className={s.icon_plus}>
@@ -83,11 +93,11 @@ const DailyWaterList = () => {
           </span>
           Add water
         </button>
-      {isModalOpen && <AddWaterForm onCloseModal={closeModal} />}
+        {isModalOpen && <AddWaterForm onCloseModal={closeModal} />}
       </div>
 
       {/* Якщо масив пустий, показуємо повідомлення */}
-      {testDailyArr.length === 0 ? (
+      {waterList?.length === 0 ? (
         <div className={s.empty_state}>
           <p className={s.empty_text}>
             No water records yet. Add your first entry!
@@ -116,12 +126,16 @@ const DailyWaterList = () => {
             }}
             className={s.swiper}
           >
-            {testDailyArr.map(({ _id, volume, date }) => (
+            {waterList?.map(({ _id, volume, date }) => (
               <SwiperSlide className={s.water_list} key={_id}>
                 <DailyWaterItem
                   volume={volume}
                   date={date}
-                  onEdit={() => setEditModalOpen(true)}
+                  onEdit={() => {
+                    console.log("Редагується запис:", { _id, volume, date });
+                    setSelectedRecord({ _id, volume, date });
+                    setEditModalOpen(true);
+                  }}
                   onDelete={() => setDeleteModalOpen(true)}
                 />
               </SwiperSlide>
@@ -134,7 +148,10 @@ const DailyWaterList = () => {
         </div>
       )}
       {editModalOpen && (
-        <EditWater onCloseModal={() => setEditModalOpen(false)} />
+        <EditWater
+          onCloseModal={() => setEditModalOpen(false)}
+          record={selectedRecord}
+        />
       )}
       {deleteModalOpen && (
         <DeleteEntryModal onCloseModal={() => setDeleteModalOpen(false)} />
