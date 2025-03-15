@@ -34,3 +34,25 @@
     min-height: 305px;
   }
 }
+
+
+
+
+.chart_wrapper {
+width: 303px;
+max-width: 303px;
+  min-height: 242px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    width: 640px;
+    max-width: 640px;
+    height: 305px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 605px;
+    max-width: 605px;
+  }
+}
