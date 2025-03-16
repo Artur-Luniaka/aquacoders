@@ -6,6 +6,7 @@ import { uploadAvatar } from "../../redux/auth/operations/editAvatar.js";
 import avatarPlaceholder from "../../assets/avatar.png";
 import sprite from "../../assets/sprite.svg";
 import s from "./SettingsAvatarModal.module.css";
+import toast from "react-hot-toast";
 
 const SettingsAvatarModal = () => {
   const avatarUrlFromStore = useSelector(selectAvatarUrl);
@@ -18,17 +19,20 @@ const SettingsAvatarModal = () => {
 
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
-    if (!file || !file.type.startsWith("image/")) return;
-  
+    if (!file || !file.type.startsWith("image/")) {
+      toast.error("Something went wrong!");
+      return;
+    }
+
     const imageUrl = URL.createObjectURL(file);
     setImagePreview(imageUrl);
-  
+
     const formData = new FormData();
     formData.append("avatar", file);
     dispatch(uploadAvatar(formData));
-  
+    toast.success("Avatar added successfully!");
     setValue("avatar", file);
-  
+
     return () => URL.revokeObjectURL(imageUrl);
   };
 
