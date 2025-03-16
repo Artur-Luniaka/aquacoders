@@ -11,11 +11,6 @@ import { getLastUsers } from "./operations/getLastUsers.js";
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    resignToken: (state, action) => {
-      state.token = action.payload;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(signUp.fulfilled, (state, action) => {
@@ -54,4 +49,3 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { resignToken } = authSlice.actions;

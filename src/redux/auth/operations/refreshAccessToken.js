@@ -12,10 +12,8 @@ export const refreshAccessToken = createAsyncThunk(
       });
       const refreshData = response.data.data;
       return refreshData;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response?.data || "Ошибка обновления токена"
-      );
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.response?.data || "Refresh error");
     }
   }
 );

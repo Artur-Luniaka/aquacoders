@@ -8,7 +8,7 @@ export const signIn = createAsyncThunk(
       const response = await aqua.post("/users/signin", userData);
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue(e.response?.data);
     }
   }
 );

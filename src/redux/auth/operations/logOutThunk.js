@@ -6,6 +6,6 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     const response = await aqua.post("/users/logout");
     return response.data;
   } catch (e) {
-    return thunkAPI.rejectWithValue(e);
+    return thunkAPI.rejectWithValue(e.response?.data);
   }
 });
