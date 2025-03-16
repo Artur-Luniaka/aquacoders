@@ -19,11 +19,14 @@ const SettingsAvatarModal = () => {
 
   const handlePhotoChange = async (event) => {
     const file = event.target.files[0];
-    if (!file || !file.type.startsWith("image/")) return;
-  
+    if (!file || !file.type.startsWith("image/")) {
+      toast.error("Something went wrong!");
+      return;
+    }
+
     const imageUrl = URL.createObjectURL(file);
     setImagePreview(imageUrl);
-  
+
     const formData = new FormData();
     formData.append("avatar", file);
   
