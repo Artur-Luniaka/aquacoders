@@ -1,26 +1,21 @@
 import toast from "react-hot-toast";
 import Modal from "../Modal/Modal.jsx";
 import s from "./DeleteEntryModal.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { selectWaterList } from "../../redux/water/selectors.js";
+import { useDispatch } from "react-redux";
+
 import { deleteWaterEntry } from "../../redux/water/operations/waterOperations.js";
 
-const DeleteEntryModal = ({ onCloseModal }) => {
+const DeleteEntryModal = ({ onCloseModal, entryId }) => {
   const dispatch = useDispatch();
-  const waterList = useSelector(selectWaterList);
-
-  const id = waterList?.map((item) => item._id);
-
   const handleDelete = async () => {
     try {
-      await toast.promise(dispatch(deleteWaterEntry(id)).unwrap(), {
+      await toast.promise(dispatch(deleteWaterEntry(entryId)).unwrap(), {
         loading: "Processing...",
         success: "Successfully deleted entry!",
-        error: "Failed to delete entry. Try again!",
       });
       onCloseModal();
     } catch (e) {
-      toast.error(e.message || "Something went wrong. Please try again.");
+      toast.error(e.data.message || "Something went wrong. Please try again.");
     }
   };
 

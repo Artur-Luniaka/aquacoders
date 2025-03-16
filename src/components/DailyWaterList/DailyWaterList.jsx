@@ -135,7 +135,9 @@ const DailyWaterList = () => {
                     setSelectedRecord({ _id, volume, date });
                     setEditModalOpen(true);
                   }}
-                  onDelete={() => setDeleteModalOpen(true)}
+                  onDelete={() => {
+                    setSelectedId(_id); setDeleteModalOpen(true);
+                  }}
                   setSelectedId={setSelectedId}
                 />
               </SwiperSlide>
