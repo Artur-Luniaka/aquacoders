@@ -1,27 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import s from "./SettingsAvatarModal.module.css";
 import { selectAvatarUrl } from "../../redux/auth/selectors.js";
+import { uploadAvatar } from "../../redux/auth/operations/editAvatar.js";
 import avatarPlaceholder from "../../assets/avatar.png";
 import sprite from "../../assets/sprite.svg";
-import { uploadAvatar } from "../../redux/auth/operations/editAvatar.js";
-import * as Yup from "yup";
-// import { yupResolver } from "@hookform/resolvers/yup";
-
-// const validationSchema = Yup.object({
-//   avatar: Yup.mixed()
-//     .test("fileSize", "File is too large", (value) => {
-//       return !value || (value.length > 0 && value[0].size <= 2 * 1024 * 1024);
-//     })
-//     .test("fileType", "Unsupported file format", (value) => {
-//       return (
-//         !value ||
-//         (value.length > 0 &&
-//           ["image/jpeg", "image/png", "image/jpg"].includes(value[0].type))
-//       );
-//     }),
-// });
+import s from "./SettingsAvatarModal.module.css";
 
 const SettingsAvatarModal = () => {
   const avatarUrlFromStore = useSelector(selectAvatarUrl);
@@ -30,31 +14,32 @@ const SettingsAvatarModal = () => {
     avatarUrlFromStore || avatarPlaceholder
   );
 
-  const { register, setValue } = useForm({
-    // resolver: yupResolver(validationSchema),
-  });
+  const { register, setValue } = useForm();
 
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
-    if (file) {
-      setImagePreview(URL.createObjectURL(file));
-      const formData = new FormData();
-      formData.append("avatar", file);
-      dispatch(uploadAvatar(formData));
-
-      setValue("avatar", file);
-    }
+    if (!file || !file.type.startsWith("image/")) return;
+  
+    const imageUrl = URL.createObjectURL(file);
+    setImagePreview(imageUrl);
+  
+    const formData = new FormData();
+    formData.append("avatar", file);
+    dispatch(uploadAvatar(formData));
+  
+    setValue("avatar", file);
+  
+    return () => URL.revokeObjectURL(imageUrl);
   };
 
   return (
     <form method="post" encType="multipart/form-data" className={s.form}>
       <div className={s.upload_box}>
         <img className={s.avatar} src={imagePreview} alt="Avatar" />
-
-        <label htmlFor="file-upload">
+        <label htmlFor="file-upload" className={s.label}>
           <span className={s.icon_box}>
             <svg className={s.icon} width="18" height="18">
-              <use href={sprite + "#icon-upload-photo"}></use>
+              <use href={`${sprite}#icon-upload-photo`}></use>
             </svg>
             <span className={s.upload_text}>Upload a photo</span>
           </span>
@@ -64,11 +49,12 @@ const SettingsAvatarModal = () => {
           id="file-upload"
           accept="image/*"
           className={s.input_hide_upload}
-          {...register("photo")}
+          {...register("avatar")}
           onChange={handlePhotoChange}
         />
       </div>
     </form>
   );
 };
+
 export default SettingsAvatarModal;

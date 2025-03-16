@@ -7,3 +7,5 @@ export const selectDailyNorm = (state) => state.auth.user.dailyNorm;
 export const selectLastUsers = (state) => state.auth.lastUsers;
 export const selectUserName = (state) => state.auth.user.name;
 export const selectEmail = (state) => state.auth.user.email;
+
+export const selectUser = (state) => state.auth.user;
