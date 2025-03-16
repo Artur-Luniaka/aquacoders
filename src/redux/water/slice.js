@@ -23,7 +23,7 @@ const slice = createSlice({
       })
       .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
 
-        console.log("🚀 Water entry added to Redux state:", payload);
+        // console.log("🚀 Water entry added to Redux state:", payload);
         state.waterList.push(payload);
              
       })

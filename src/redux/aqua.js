@@ -9,9 +9,7 @@ const aqua = axios.create({
 
 aqua.interceptors.request.use((config) => {
   const token = store.getState().auth.token;
-  console.log("🛠️ Токен перед відправкою в axios:", token);
-   
-  
+      
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }

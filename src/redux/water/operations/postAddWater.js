@@ -13,8 +13,6 @@ export const addWaterEntry = createAsyncThunk(
  console.error("Error response:", e.response);
  console.error("Error message:", e.message); 
       
-
-
       return thunkAPI.rejectWithValue(
         e.response?.data?.message || "Something went wrong",
        ); 
