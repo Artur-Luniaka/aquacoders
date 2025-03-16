@@ -8,9 +8,16 @@ export const addWaterEntry = createAsyncThunk(
       const response = await aqua.post("/water", waterData); 
       return response.data;
     } catch (e) {
+      console.error("❌ Axios Error:", e); 
+      
+ console.error("Error response:", e.response);
+ console.error("Error message:", e.message); 
+      
+
+
       return thunkAPI.rejectWithValue(
-        e.response?.data || "Something went wrong"
-      );
+        e.response?.data?.message || "Something went wrong",
+       ); 
     }
   }
 );

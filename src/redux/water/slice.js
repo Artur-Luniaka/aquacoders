@@ -19,7 +19,9 @@ const slice = createSlice({
         state.clickedDay = payload.day;
       })
       .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
-        state.waterList.push(payload.data);
+
+         console.log("🚀 Water entry added to Redux state:", payload);
+        state.waterList.push(payload);
              
       })
       .addCase(updateWaterRecord.fulfilled, (state, { payload }) => {
