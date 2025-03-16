@@ -12,6 +12,7 @@ const AddWaterForm = ({ onCloseModal }) => {
   const dispatch = useDispatch();
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { volume: 50, date: "" },
+    mode: "onChange",
   });
 
   const waterAmount = watch("volume");
@@ -65,12 +66,11 @@ const AddWaterForm = ({ onCloseModal }) => {
       await toast.promise(dispatch(addWaterEntry(requestData)).unwrap(), {
         loading: "Adding water entry...",
         success: <b>Water added successfully!</b>,
-        error: <b>Failed to add water. Try again!</b>,
       });
 
       onCloseModal();
     } catch (e) {
-      toast.error(e.message || "Something went wrong. Please try again.");
+      toast.error(e.data.message || "Something went wrong. Please try again.");
     }
   };
 
