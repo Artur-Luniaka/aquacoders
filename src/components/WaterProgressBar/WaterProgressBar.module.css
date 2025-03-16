@@ -40,7 +40,7 @@
 }
 
 .slider {
-  max-width: 255px;
+  min-width: 174px;
   height: 6px;
   border-radius: 9px;
   border-color: var(--color-lightgrey);
@@ -49,33 +49,34 @@
   color: var(--color-lightgrey);
   background-color: var(--color-lightgrey);
   position: relative;
+  @media (min-width: 768px) {
+    min-width: 255px;
+    height: 8px;
+  }
 }
 
 .progress {
-  left: -2px;
-  top: -3px;
-  max-width: 255px;
   height: 6px;
   background-color: var(--color-lightgreen);
   border-radius: 9px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   transition: width 0.3s ease;
+  margin-top: -2px;
+  margin-left: -2px;
   @media (min-width: 768px) {
-    top: -3px;
+    height: 8px;
   }
 }
 
 .thumb {
-  width: 14px;
-  height: 14px;
+  min-width: 14px;
+  min-height: 14px;
   background-color: white;
   border: 2px solid var(--color-lightgreen);
   border-radius: 50%;
-  position: absolute;
-  top: -7px;
-  left: -px;
-  transform: translateX(-50%);
-  transition: left 0.3s ease;
 }
 
 .percent_bar {
