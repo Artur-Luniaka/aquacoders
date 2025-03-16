@@ -73,7 +73,6 @@ const Calendar = () => {
         stats: item.stats / 1000,
       }));
   };
-  console.log(transformData(monthData));
 
   return (
     <section className={s.calendar_section}>

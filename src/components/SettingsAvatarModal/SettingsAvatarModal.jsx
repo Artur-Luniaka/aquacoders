@@ -6,6 +6,7 @@ import { uploadAvatar } from "../../redux/auth/operations/editAvatar.js";
 import avatarPlaceholder from "../../assets/avatar.png";
 import sprite from "../../assets/sprite.svg";
 import s from "./SettingsAvatarModal.module.css";
+import toast from "react-hot-toast";
 
 const SettingsAvatarModal = () => {
   const avatarUrlFromStore = useSelector(selectAvatarUrl);
@@ -16,7 +17,7 @@ const SettingsAvatarModal = () => {
 
   const { register, setValue } = useForm();
 
-  const handlePhotoChange = (event) => {
+  const handlePhotoChange = async (event) => {
     const file = event.target.files[0];
     if (!file || !file.type.startsWith("image/")) return;
   
@@ -25,11 +26,19 @@ const SettingsAvatarModal = () => {
   
     const formData = new FormData();
     formData.append("avatar", file);
-    dispatch(uploadAvatar(formData));
+  
+    try {
+      await dispatch(uploadAvatar(formData)).unwrap();
+      toast.success("Avatar uploaded successfully! 🎉");
+    } catch (error) {
+      toast.error(error?.message || "Failed to upload avatar 😢");
+    }
   
     setValue("avatar", file);
   
-    return () => URL.revokeObjectURL(imageUrl);
+    return () => {
+      URL.revokeObjectURL(imageUrl);
+    };
   };
 
   return (
