@@ -25,7 +25,9 @@ const DailyWaterItem = ({
       </svg>
       <div className={s.item_info_block}>
         <p className={s.value}>
-          {volume < 1000 ? `${volume}ml` : `${Math.ceil(volume / 1000)}L`}
+          {volume < 1000
+            ? `${volume}ml`
+            : `${(Number(volume) / 1000).toFixed(2)}L`}
         </p>
         <p className={s.time}>
           {Number(date?.slice(11, 13)) <= 12
