@@ -13,21 +13,15 @@ import { selectUser } from "../../redux/auth/selectors.js";
 import toast from "react-hot-toast";
 
 const SettingsModal = ({ onClose }) => {
+
   const [nameError, setNameError] = useState({ error1: false, error2: false });
   const [emailError, setEmailError] = useState(false);
-  const [weightError, setWeightError] = useState({
-    error1: false,
-    error2: false,
-  });
-  const [sportTimeError, setSportTimeError] = useState({
-    error1: false,
-    error2: false,
-  });
+  const [weightError, setWeightError] = useState({error1: false,error2: false});
+  const [sportTimeError, setSportTimeError] = useState({error1: false,error2: false});
   const [genderError, setGenderError] = useState(false);
-  const [dailyNormError, setDailyNormError] = useState({
-    error1: false,
-    error2: false,
-  });
+  const [dailyNormError, setDailyNormError] = useState({error1: false,error2: false});
+
+  const [waterIntake, setWaterIntake] = useState(1.5);
 
   const {
     name,
@@ -56,8 +50,6 @@ const SettingsModal = ({ onClose }) => {
   const sportTime = watch("dailySportTime") || 0;
   const gender = watch("gender");
 
-  const [waterIntake, setWaterIntake] = useState(1.5);
-
   useEffect(() => {
     const calculateWaterIntake = () => {
       if (!Number(weight) || !Number(sportTime) || !gender) return 1.5;
@@ -65,7 +57,6 @@ const SettingsModal = ({ onClose }) => {
         ? (weight * 0.03 + sportTime * 0.4).toFixed(1)
         : (weight * 0.04 + sportTime * 0.6).toFixed(1);
     };
-
     setWaterIntake(calculateWaterIntake());
   }, [weight, sportTime, gender]);
 
@@ -86,11 +77,6 @@ const SettingsModal = ({ onClose }) => {
       dailyNorm: Number(parseFloat(waterIntake) * 1000),
     };
 
-    if (userData.name && userData.name.length <= 2) {
-      setNameError({ error1: true, error2: false });
-      return;
-    }
-
     const filteredUserData = {};
     if (data.name !== name) filteredUserData.name = data.name;
     if (data.email !== email) filteredUserData.email = data.email;
@@ -100,17 +86,28 @@ const SettingsModal = ({ onClose }) => {
       filteredUserData.dailySportTime = data.dailySportTime;
     if (dailyNorm !== Number(parseFloat(waterIntake) * 1000))
       filteredUserData.dailyNorm = Number(parseFloat(waterIntake) * 1000);
+    
+    if (Object.keys(filteredUserData).length === 0) {
+      toast.error("Please change the data!");
+      return;
+    }
 
     try {
+
       await settingsSchema.validate(userData, { abortEarly: false });
       dispatch(updateUser(filteredUserData));
-      toast.success("Successfully updated");
+      onClose(false)
+      toast.success("Successfully updated!");
+
     } catch (error) {
-      console.log(error.errors);
 
       error.errors.forEach((item) => {
         if (item === "Choose gender") {
           setGenderError(true);
+          return;
+        }
+        if (item === "Min 2 characters") {
+          setNameError({ error1: true, error2: false });
           return;
         }
         if (item === "Max 12 characters") {
