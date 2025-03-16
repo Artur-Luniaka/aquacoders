@@ -21,15 +21,12 @@ const slice = createSlice({
         state.clickedDay = payload.day;
       })
       .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
-        state.waterList.unshift(payload);
+        state.waterList.unshift({ ...payload, payload });
       })
       .addCase(updateWaterRecord.fulfilled, (state, { payload }) => {
-        const index = state.waterList.findIndex(
-          (item) => item._id === payload._id
+        state.waterList = state.waterList.map((item) =>
+          item._id === payload._id ? { ...item, ...payload } : item
         );
-        if (index !== -1) {
-          state.waterList[index] = payload;
-        }
       })
       .addCase(deleteWaterEntry.fulfilled, (state, { payload }) => {
         state.waterList = state.waterList.filter(

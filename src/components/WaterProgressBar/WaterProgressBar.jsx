@@ -8,7 +8,7 @@ const WaterProgressBar = () => {
   const waterList = useSelector(selectWaterList);
   const dailyNorm = useSelector(selectDailyNorm);
   const [value, setValue] = useState(0);
-  
+
   useEffect(() => {
     const totalVolume = waterList?.reduce((sum, { volume }) => sum + volume, 0);
     setValue(totalVolume);

@@ -1,6 +1,5 @@
 import s from "./DailyWaterItem.module.css";
 import sprite from "../../assets/sprite.svg";
-import toast from "react-hot-toast";
 
 const DailyWaterItem = ({
   volume,
@@ -14,9 +13,7 @@ const DailyWaterItem = ({
     try {
       setSelectedId(entryId);
       onDelete(true);
-      toast.success("Entry successfully deleted!");
     } catch (e) {
-      toast.error("Failed to delete entry. Try again!");
       e;
     }
   };

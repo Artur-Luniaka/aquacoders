@@ -97,7 +97,7 @@ const DailyWaterList = () => {
       </div>
 
       {/* Якщо масив пустий, показуємо повідомлення */}
-      {waterList.length === 0 ? (
+      {waterList?.length === 0 ? (
         <div className={s.empty_state}>
           <p className={s.empty_text}>
             No water records yet. Add your first entry!
@@ -126,10 +126,9 @@ const DailyWaterList = () => {
             }}
             className={s.swiper}
           >
-            {waterList?.map(({ _id, volume, date }) => (
-              <SwiperSlide className={s.water_list}>
+            {waterList?.map(({ _id, volume, date }, index) => (
+              <SwiperSlide className={s.water_list} key={`${_id}-${index}`}>
                 <DailyWaterItem
-                  key={_id}
                   volume={volume}
                   date={date}
                   onEdit={() => {
