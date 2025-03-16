@@ -1,7 +1,26 @@
 import s from "./DailyWaterItem.module.css";
 import sprite from "../../assets/sprite.svg";
+import toast from "react-hot-toast";
 
-const DailyWaterItem = ({ volume, date, onEdit, onDelete }) => {
+const DailyWaterItem = ({
+  volume,
+  date,
+  onEdit,
+  onDelete,
+  entryId,
+  setSelectedId,
+}) => {
+  const handleDelete = async () => {
+    try {
+      setSelectedId(entryId);
+      onDelete(true);
+      toast.success("Entry successfully deleted!");
+    } catch (e) {
+      toast.error("Failed to delete entry. Try again!");
+      e;
+    }
+  };
+
   return (
     <div className={s.water_item_container}>
       <svg className={s.icon_cup}>
@@ -12,9 +31,9 @@ const DailyWaterItem = ({ volume, date, onEdit, onDelete }) => {
           {volume < 1000 ? `${volume}ml` : `${Math.ceil(volume / 1000)}L`}
         </p>
         <p className={s.time}>
-          {Number(date.slice(11, 13)) <= 12
-            ? `${date.slice(11, 16)} AM`
-            : `${date.slice(11, 16)} PM`}
+          {Number(date?.slice(11, 13)) <= 12
+            ? `${date?.slice(11, 16)} AM`
+            : `${date?.slice(11, 16)} PM`}
         </p>
       </div>
       <div className={s.edit_btns_container}>
@@ -23,7 +42,7 @@ const DailyWaterItem = ({ volume, date, onEdit, onDelete }) => {
             <use href={sprite + "#icon-editing"} />
           </svg>
         </button>
-        <button type="button" className={s.edit_btn} onClick={onDelete}>
+        <button type="button" className={s.edit_btn} onClick={handleDelete}>
           <svg className={s.icon_trash}>
             <use href={sprite + "#icon-trash"} />
           </svg>

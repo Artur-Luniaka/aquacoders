@@ -1,36 +1,35 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import  toast  from "react-hot-toast";
-// import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { addWaterEntry } from "../../redux/water/operations/postAddWater.js";
 import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./AddWaterForm.module.css";
 import Modal from "../Modal/Modal.jsx";
 
 const AddWaterForm = ({ onCloseModal }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { register, handleSubmit, setValue, watch } = useForm({
-    defaultValues: { waterUsed: 50, recordingTime: "" },
+    defaultValues: { volume: 50, date: "" },
   });
 
-  const waterAmount = watch("waterUsed");
+  const waterAmount = watch("volume");
   const [timeValue, setTimeValue] = useState("");
 
   useEffect(() => {
     const now = new Date();
     const formattedTime = now.toTimeString().slice(0, 5);
     setTimeValue(formattedTime);
-    setValue("recordingTime", formattedTime);
+    setValue("date", formattedTime);
   }, [setValue]);
-
 
   const handleChangeTime = (event) => {
     let inputTime = event.target.value;
     const timePattern = /^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/;
     if (timePattern.test(inputTime)) {
       setTimeValue(inputTime);
-      setValue("recordingTime", inputTime);
+      setValue("date", inputTime);
     } else {
       setTimeValue(inputTime);
     }
@@ -43,29 +42,46 @@ const AddWaterForm = ({ onCloseModal }) => {
       value = value.slice(0, 4);
     }
     if (/^\d+$/.test(value) && Number(value) <= 5000) {
-      setValue("waterUsed", Number(value));
+      setValue("volume", Number(value));
     } else if (value === "") {
-      setValue("waterUsed", 0);
+      setValue("volume", 0);
     }
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     try {
-      toast.success("Water added successfully!"); 
+      const now = new Date();
+      const [hours, minutes] = data.date.split(":");
+      const recordingDateTime = new Date(
+        `${now.toISOString().slice(0, 10)}T${hours}:${minutes}:00.000Z`
+      );
+      const formattedDate = recordingDateTime.toISOString();
+
+      const requestData = {
+        volume: data.volume,
+        date: formattedDate,
+      };
+
+      await toast.promise(dispatch(addWaterEntry(requestData)).unwrap(), {
+        loading: "Adding water entry...",
+        success: <b>Water added successfully!</b>,
+        error: <b>Failed to add water. Try again!</b>,
+      });
+
       onCloseModal();
-    } catch (error) {
-      toast.error("Failed to add water. Try again!"); 
+    } catch (e) {
+      toast.error(e.message || "Something went wrong. Please try again.");
     }
   };
 
   const handleClickMinus = (event) => {
     event.preventDefault();
-    setValue("waterUsed", Math.max(50, waterAmount - 50));
+    setValue("volume", Math.max(50, waterAmount - 50));
   };
 
   const handleClickPlus = (event) => {
     event.preventDefault();
-    setValue("waterUsed", Math.min(5000, waterAmount + 50));
+    setValue("volume", Math.min(5000, waterAmount + 50));
   };
 
   return (
@@ -106,7 +122,7 @@ const AddWaterForm = ({ onCloseModal }) => {
           </label>
           <input
             id="time"
-            name="recordingTime"
+            name="date"
             className={s.input}
             value={timeValue}
             placeholder="--:--"
@@ -120,9 +136,9 @@ const AddWaterForm = ({ onCloseModal }) => {
           </label>
           <input
             id="yourInput"
-            name="yourInput"
+            name="volume"
             className={s.input}
-            {...register("waterUsed")}
+            {...register("volume")}
             onChange={handleWaterAmountChange}
             value={waterAmount}
             maxLength={4}

@@ -4,6 +4,7 @@ import Modal from "../Modal/Modal.jsx";
 import s from "./DeleteEntryModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEntryId } from "../../redux/water/selectors.js";
+import { deleteWaterEntry } from "../../redux/water/operations/waterOperations.js";
 
 const DeleteEntryModal = ({ onCloseModal }) => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const DeleteEntryModal = ({ onCloseModal }) => {
 
   const handleDelete = async () => {
     try {
-      await toast.promise(dispatch(deleteWater({ id: entryId })).unwrap(), {
+      await toast.promise(dispatch(deleteWaterEntry(entryId)).unwrap(), {
         loading: "Processing...",
         success: "Successfully deleted entry!",
         error: "Failed to delete entry. Try again!",
@@ -31,10 +32,16 @@ const DeleteEntryModal = ({ onCloseModal }) => {
         <h2 className={s.title}>Delete entry</h2>
         <p className={s.text}>Are you sure you want to delete the entry?</p>
         <div className={s.buttons_container}>
-          <button className={s.delete} onClick={handleDelete}>
+          <button
+            className={s.delete}
+            onClick={handleDelete}
+          >
             Delete
           </button>
-          <button className={s.cancel} onClick={handleCancel}>
+          <button
+            className={s.cancel}
+            onClick={handleCancel}
+          >
             Cancel
           </button>
         </div>
