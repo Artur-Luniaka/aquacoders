@@ -95,10 +95,9 @@ const SettingsModal = ({ onClose }) => {
     try {
 
       await settingsSchema.validate(userData, { abortEarly: false });
-      dispatch(updateUser(filteredUserData));
-      onClose(false)
+      await dispatch(updateUser(filteredUserData)).unwrap();
       toast.success("Successfully updated!");
-
+      onClose(false)
     } catch (error) {
 
       error.errors.forEach((item) => {

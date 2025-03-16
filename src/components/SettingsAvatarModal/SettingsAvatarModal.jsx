@@ -17,7 +17,7 @@ const SettingsAvatarModal = () => {
 
   const { register, setValue } = useForm();
 
-  const handlePhotoChange = (event) => {
+  const handlePhotoChange = async (event) => {
     const file = event.target.files[0];
     if (!file || !file.type.startsWith("image/")) {
       toast.error("Something went wrong!");
@@ -29,11 +29,19 @@ const SettingsAvatarModal = () => {
 
     const formData = new FormData();
     formData.append("avatar", file);
-    dispatch(uploadAvatar(formData));
-    toast.success("Avatar added successfully!");
+  
+    try {
+      await dispatch(uploadAvatar(formData)).unwrap();
+      toast.success("Avatar uploaded successfully! 🎉");
+    } catch (error) {
+      toast.error(error?.message || "Failed to upload avatar 😢");
+    }
+  
     setValue("avatar", file);
-
-    return () => URL.revokeObjectURL(imageUrl);
+  
+    return () => {
+      URL.revokeObjectURL(imageUrl);
+    };
   };
 
   return (
