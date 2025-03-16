@@ -1,7 +1,24 @@
 import s from "./DailyWaterItem.module.css";
 import sprite from "../../assets/sprite.svg";
 
-const DailyWaterItem = ({ volume, date, onEdit, onDelete }) => {
+const DailyWaterItem = ({
+  volume,
+  date,
+  onEdit,
+  onDelete,
+  entryId,
+  setSelectedId,
+}) => {
+  const handleDelete = async () => {
+    try {
+      setSelectedId(entryId);
+      onDelete(true);
+      toast.success("Entry successfully deleted!");
+    } catch (error) {
+      toast.error("Failed to delete entry. Try again!");
+    }
+  };
+
   return (
     <div className={s.water_item_container}>
       <svg className={s.icon_cup}>
@@ -18,12 +35,20 @@ const DailyWaterItem = ({ volume, date, onEdit, onDelete }) => {
         </p>
       </div>
       <div className={s.edit_btns_container}>
-        <button type="button" className={s.edit_btn} onClick={onEdit}>
+        <button
+          type="button"
+          className={s.edit_btn}
+          onClick={onEdit}
+        >
           <svg className={s.icon_editing}>
             <use href={sprite + "#icon-editing"} />
           </svg>
         </button>
-        <button type="button" className={s.edit_btn} onClick={onDelete}>
+        <button
+          type="button"
+          className={s.edit_btn}
+          onClick={handleDelete}
+        >
           <svg className={s.icon_trash}>
             <use href={sprite + "#icon-trash"} />
           </svg>

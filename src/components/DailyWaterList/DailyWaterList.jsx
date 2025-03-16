@@ -27,11 +27,11 @@ const DailyWaterList = () => {
 
   const waterList = useSelector(selectWaterList);
   const clickedDay = useSelector(selectClickedDay);
-
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
+  const [selectedId, setSelectedId] = useState("");
 
   const onOpenModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -97,7 +97,7 @@ const DailyWaterList = () => {
       </div>
 
       {/* Якщо масив пустий, показуємо повідомлення */}
-      {waterList?.length === 0 ? (
+      {waterList.length === 0 ? (
         <div className={s.empty_state}>
           <p className={s.empty_text}>
             No water records yet. Add your first entry!
@@ -137,6 +137,7 @@ const DailyWaterList = () => {
                     setEditModalOpen(true);
                   }}
                   onDelete={() => setDeleteModalOpen(true)}
+                  setSelectedId={setSelectedId}
                 />
               </SwiperSlide>
             ))}
@@ -154,7 +155,10 @@ const DailyWaterList = () => {
         />
       )}
       {deleteModalOpen && (
-        <DeleteEntryModal onCloseModal={() => setDeleteModalOpen(false)} />
+        <DeleteEntryModal
+          entryId={selectedId}
+          onCloseModal={() => setDeleteModalOpen(false)}
+        />
       )}
     </section>
   );

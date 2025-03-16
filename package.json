@@ -23,6 +23,7 @@
     "react-loader-spinner": "^6.1.6",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.3.0",
+    "recharts": "^2.15.1",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
     "swiper": "^11.2.5",
