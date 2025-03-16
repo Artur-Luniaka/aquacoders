@@ -11,7 +11,7 @@ export const getMonthlyDate = createAsyncThunk(
 
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue(e.response?.data);
     }
   }
 );

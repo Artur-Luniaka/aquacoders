@@ -1,9 +1,12 @@
 import { lazy } from "react";
 import "./App.css";
+import "./redux/aqua.js";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+
+
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));

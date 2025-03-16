@@ -23,7 +23,7 @@ const UserPage = () => {
       <GreenBlock>
         <Logo />
         <DailyNorma />
-        <WaterProgressBar/>
+        <WaterProgressBar />
         <AddWaterBtn />
       </GreenBlock>
       <UserGreyBlock>

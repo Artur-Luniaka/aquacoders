@@ -8,7 +8,7 @@ export const getLastUsers = createAsyncThunk(
       const response = await aqua.get("/users/counter");
       return response.data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e);
+      return thunkAPI.rejectWithValue(e.response?.data);
     }
   }
 );

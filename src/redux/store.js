@@ -18,7 +18,7 @@ import commonReducer from "./common/slice.js";
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["token", "isLoggedIn", "refreshToken", "sessionId"],
+  whitelist: ["token", "isLoggedIn", "refreshToken", "sessionId", "user"],
 };
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
