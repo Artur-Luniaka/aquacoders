@@ -12,11 +12,9 @@ export const updateWaterRecord = createAsyncThunk(
         volume: Number(volume),
         date: formattedDate,
       });
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message || "Помилка оновлення"
-      );
+      return response.data.data;
+    } catch (e) {
+      return rejectWithValue(e.data?.message || "Update Error");
     }
   }
 );

@@ -30,7 +30,7 @@ const slice = createSlice({
       })
       .addCase(deleteWaterEntry.fulfilled, (state, { payload }) => {
         state.waterList = state.waterList.filter(
-          (item) => item._id !== payload._id
+          (item) => item._id !== payload
         );
       });
   },
