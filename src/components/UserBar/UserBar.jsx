@@ -14,7 +14,6 @@ import {
 
 const UserBar = () => {
   const [dropStatus, setDropStatus] = useState(false);
-  const [showFullName, setShowFullName] = useState(false);
 
   const userName = useSelector(selectUserName);
   const userEmail = useSelector(selectEmail);
@@ -25,11 +24,6 @@ const UserBar = () => {
       return "https://cdn-icons-png.flaticon.com/512/12225/12225935.png";
     if (userURL !== "") return userURL;
   };
-
-  const renderedName = userName === "" ? userEmail : userName;
-
-  const shortenRenderedName =
-    renderedName !== "" ? `${userEmail?.slice(0, 10)}...` : renderedName;
 
   useEffect(() => {
     const handleBodyClick = (e) => {
@@ -46,27 +40,11 @@ const UserBar = () => {
     };
   }, [dropStatus]);
 
-  const handleMouseHoverEnter = () => {
-    if (renderedName.length > 10) {
-      setShowFullName(true);
-    }
-  };
-
-  const handleMouseHoverLeave = () => {
-    if (renderedName.length > 10) {
-      setShowFullName(false);
-    }
-  };
-
   return (
     <section className={s.drop_down_container}>
-      <h2
-        className={s.current_name}
-        onMouseEnter={handleMouseHoverEnter}
-        onMouseLeave={handleMouseHoverLeave}
-      >
+      <h2 className={s.current_name}>
         Hello
-        <span>, {shortenRenderedName}!</span>
+        <span>, {userName ? userName : userEmail}!</span>
       </h2>
       <div onClick={(e) => e.stopPropagation()}>
         <button
@@ -74,17 +52,12 @@ const UserBar = () => {
           className={s.menu_container}
           onClick={() => setDropStatus((prev) => !prev)}
         >
-          {showFullName && (
-            <span className={`${s.full_name} ${s.full_name1}`}>
-              {renderedName.slice(0, 32)}
-            </span>
-          )}
-          <span>{shortenRenderedName}</span>
+          <span>{userName ? userName : userEmail}</span>
           <span className={s.user_avatar_container}>
             <img
               className={s.user_avatar}
               src={userAvatar()}
-              alt={renderedName}
+              alt={userName ? userName : userEmail}
             />
           </span>
           <span

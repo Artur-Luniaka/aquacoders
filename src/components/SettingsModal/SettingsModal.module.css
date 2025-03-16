@@ -135,8 +135,10 @@
   margin-bottom: 14px;
   color: #000;
   font: 14px/18px var(--poppins-reg);
-  min-width: 400px;
   display: block;
+  @media screen and (min-width: 1440px) {
+    min-width: 400px;
+  }
 }
 .daily_box {
   margin-bottom: 24px;

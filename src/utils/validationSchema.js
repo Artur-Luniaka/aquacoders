@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 export const settingsSchema = Yup.object().shape({
   name: Yup.string()
-    .max(12, "Max 12 characters"),
+    .max(12, "Max 12 characters").min(2, "Min 2 characters"),
   email: Yup.string().email("Incorrect email"),
   weight: Yup.number()
     .min(0, "Weight cannot be negative")
