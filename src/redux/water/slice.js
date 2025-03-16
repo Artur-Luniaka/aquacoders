@@ -20,8 +20,8 @@ const slice = createSlice({
         state.waterList = payload.data;
         state.clickedDay = payload.day;
       })
-      .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
-        state.waterList.unshift({ ...payload, payload });
+      .addCase(addWaterEntry.fulfilled, (state, action) => {
+        state.waterList.push({ ...action.payload.data });
       })
       .addCase(updateWaterRecord.fulfilled, (state, { payload }) => {
         state.waterList = state.waterList.map((item) =>
