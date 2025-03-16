@@ -6,14 +6,18 @@ import { getMonthlyDate } from "../../redux/water/operations/getMonthlyDate.js";
 import { months } from "./month.js";
 import clsx from "clsx";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const CalendarMonthStatus = ({
   currentMonth,
   currentYear,
   clickedDay,
   currentDay,
   setCalendarData,
-  onToggleChart
+  onToggleChart,
 }) => {
+  const { t } = useTranslation(); //моє
+
   const [monthNumber, setMonthNumber] = useState(currentMonth);
   const [yearNumber, setYearNumber] = useState(currentYear);
   const dispatch = useDispatch();
@@ -33,7 +37,7 @@ const CalendarMonthStatus = ({
       setYearNumber((prev) => prev + 1);
     }
     setMonthNumber((prev) => prev + 1);
-    setCalendarData([])
+    setCalendarData([]);
   };
 
   const handleClickLeft = () => {
@@ -45,27 +49,26 @@ const CalendarMonthStatus = ({
       setYearNumber((prev) => prev - 1);
     }
     setMonthNumber((prev) => prev - 1);
-    setCalendarData([])
+    setCalendarData([]);
   };
 
-
   const checkCurrentStatus = () => {
-    return  clickedDay !== currentDay ||
-    monthNumber !== currentMonth ||
-    yearNumber !== currentYear
-      ? "Month"
-      : "Today"
-  }
+    return clickedDay !== currentDay ||
+      monthNumber !== currentMonth ||
+      yearNumber !== currentYear ? (
+      <p>{t("home_month")}</p>
+    ) : (
+      <p>{t("home_today")}</p>
+    );
+  };
 
   const checkMonth = () => {
     return monthNumber === currentMonth && yearNumber === currentYear;
-  }
+  };
 
   return (
     <div className={s.month_container}>
-      <h2 className={s.month_title}>
-        {checkCurrentStatus()}
-      </h2>
+      <h2 className={s.month_title}>{checkCurrentStatus()}</h2>
       <div className={s.month_status}>
         <button type="button" onClick={handleClickLeft}>
           <svg className={`${s.icon_arrow_left} ${s.icon_arrow}`}>
@@ -75,7 +78,12 @@ const CalendarMonthStatus = ({
         <p className={s.current_month}>
           {months[monthNumber - 1]}, {yearNumber}
         </p>
-        <button disabled={checkMonth()} className={clsx(checkMonth() && s.disabled)} type="button" onClick={handleClickRight}>
+        <button
+          disabled={checkMonth()}
+          className={clsx(checkMonth() && s.disabled)}
+          type="button"
+          onClick={handleClickRight}
+        >
           <svg className={`${s.icon_arrow_right} ${s.icon_arrow}`}>
             <use href={sprite + "#icon-down-arrow"} />
           </svg>

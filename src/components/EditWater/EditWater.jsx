@@ -9,7 +9,11 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { updateWaterRecord } from "../../redux/water/operations/updateWaterRecord.js";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const EditWater = ({ onCloseModal, record }) => {
+  const { t } = useTranslation(); //моє
+
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: {
       amountOfWater: record?.volume || 50,
@@ -92,9 +96,9 @@ const EditWater = ({ onCloseModal, record }) => {
           })
         ).unwrap(),
         {
-          loading: "Processing...",
-          success: "Successfully updated water record!",
-          error: "Failed to update water data. Try again!",
+          loading: <p>{t("others_proc")}</p>,
+          success: <p>{t("others_suc_up")}</p>,
+          error: <p>{t("others_fail_up")}</p>,
         }
       );
 
@@ -117,10 +121,10 @@ const EditWater = ({ onCloseModal, record }) => {
   return (
     <Modal onCloseModal={onCloseModal}>
       <div className={s.container}>
-        <h3 className={s.title}>Edit the entered amount of water</h3>
+        <h3 className={s.title}>{t("edit_title")}</h3>
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-          <p className={s.text}>Correct entered data:</p>
-          <p className={s.label}>Amount of water:</p>
+          <p className={s.text}>{t("edit_cor")}</p>
+          <p className={s.label}>{t("edit_amount")}</p>
           <div className={s.water_and_buttons}>
             <button
               type="button"
@@ -147,7 +151,7 @@ const EditWater = ({ onCloseModal, record }) => {
           </div>
 
           <label className={s.label} htmlFor="time">
-            Recording time:
+            {t("edit_rec")}
           </label>
 
           <input
@@ -162,7 +166,7 @@ const EditWater = ({ onCloseModal, record }) => {
           />
 
           <label className={s.amount} htmlFor="yourInput">
-            Enter the value of the water used:
+            {t("edit_enter")}
           </label>
           <input
             id="yourInput"

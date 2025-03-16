@@ -4,11 +4,15 @@ import { selectWaterList } from "../../redux/water/selectors";
 import s from "./WaterProgressBar.module.css";
 import { useSelector } from "react-redux";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const WaterProgressBar = () => {
+  const { t } = useTranslation(); //моє
+
   const waterList = useSelector(selectWaterList);
   const dailyNorm = useSelector(selectDailyNorm);
   const [value, setValue] = useState(0);
-  
+
   useEffect(() => {
     const totalVolume = waterList?.reduce((sum, { volume }) => sum + volume, 0);
     setValue(totalVolume);
@@ -21,7 +25,7 @@ const WaterProgressBar = () => {
 
   return (
     <div className={s.container}>
-      <p className={s.title}>Today</p>
+      <p className={s.title}>{t("home_today")}</p>
       <div className={s.slider}>
         <div
           className={s.progress}

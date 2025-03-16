@@ -17,11 +17,15 @@ import {
 import { getDailyInfo } from "../../redux/water/operations/getDailyInfo.js";
 import { months } from "../CalendarMonthStatus/month.js";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const currentDay = new Date().getDate();
 const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
 
 const DailyWaterList = () => {
+  const { t } = useTranslation(); //моє
+
   const paginationRef = useRef(null);
   const swiperRef = useRef(null);
 
@@ -78,7 +82,11 @@ const DailyWaterList = () => {
         : `${Number(clickedDay?.slice(8, 10))}, ${
             months[Number(clickedDay?.slice(5, 7)) - 1]
           }`;
-    return !Number(clickedDay?.slice(8, 10)) ? "Today" : checkDayInner;
+    return !Number(clickedDay?.slice(8, 10)) ? (
+      <p>{t("home_today")}</p>
+    ) : (
+      checkDayInner
+    );
   };
 
   return (
@@ -91,7 +99,7 @@ const DailyWaterList = () => {
               <use href={sprite + "#icon-plus"} />
             </svg>
           </span>
-          Add water
+          {t("add_title")}
         </button>
         {isModalOpen && <AddWaterForm onCloseModal={closeModal} />}
       </div>
@@ -99,9 +107,7 @@ const DailyWaterList = () => {
       {/* Якщо масив пустий, показуємо повідомлення */}
       {waterList.length === 0 ? (
         <div className={s.empty_state}>
-          <p className={s.empty_text}>
-            No water records yet. Add your first entry!
-          </p>
+          <p className={s.empty_text}>{t("add_no")}</p>
         </div>
       ) : (
         <div className={s.swiper_container}>

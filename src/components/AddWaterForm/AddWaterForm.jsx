@@ -8,7 +8,11 @@ import icons from "../../assets/sprite.svg";
 import s from "./AddWaterForm.module.css";
 import Modal from "../Modal/Modal.jsx";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const AddWaterForm = ({ onCloseModal }) => {
+  const { t } = useTranslation(); //моє
+
   const dispatch = useDispatch();
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { volume: 50, date: "" },
@@ -63,14 +67,14 @@ const AddWaterForm = ({ onCloseModal }) => {
       };
 
       await toast.promise(dispatch(addWaterEntry(requestData)).unwrap(), {
-        loading: "Adding water entry...",
-        success: <b>Water added successfully!</b>,
-        error: <b>Failed to add water. Try again!</b>,
+        loading: <p>{t("others_add")}</p>,
+        success: <b>{t("add_wat")}</b>,
+        error: <b>{t("add_fail")}</b>,
       });
 
       onCloseModal();
     } catch (e) {
-      toast.error(e.message || "Something went wrong. Please try again.");
+      toast.error(e.message || <p>{t("others_add")}</p>);
     }
   };
 
@@ -87,10 +91,10 @@ const AddWaterForm = ({ onCloseModal }) => {
   return (
     <Modal onCloseModal={onCloseModal}>
       <div className={s.container}>
-        <h3 className={s.title}>Add water</h3>
+        <h3 className={s.title}>{t("add_title")}</h3>
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-          <p className={s.text}>Choose a value:</p>
-          <p className={s.label}>Amount of water:</p>
+          <p className={s.text}>{t("add_choose")}</p>
+          <p className={s.label}>{t("add_amount")}</p>
           <div className={s.water_controls}>
             <button
               type="button"
@@ -118,7 +122,7 @@ const AddWaterForm = ({ onCloseModal }) => {
           </div>
 
           <label className={s.label} htmlFor="time">
-            Recording time:
+            {t("add_rec")}
           </label>
           <input
             id="time"
@@ -132,7 +136,7 @@ const AddWaterForm = ({ onCloseModal }) => {
           />
 
           <label className={s.amount} htmlFor="yourInput">
-            Enter the value of the water used:
+            {t("add_enter")}
           </label>
           <input
             id="yourInput"

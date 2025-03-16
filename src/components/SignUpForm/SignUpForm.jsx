@@ -9,6 +9,8 @@ import sprite from "../../assets/sprite.svg";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../redux/auth/operations/signUpThunk";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
@@ -19,6 +21,8 @@ const validationSchema = Yup.object({
 });
 
 const SignUpForm = () => {
+  const { t } = useTranslation(); //моє
+
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,17 +59,17 @@ const SignUpForm = () => {
 
   return (
     <div className={s.container}>
-      <h2 className={s.title}>Sign Up</h2>
+      <h2 className={s.title}>{t("up_title")}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <div className={s.input_group}>
           <label htmlFor="email" className={s.label}>
-            Email
+            {t("up_email")}
           </label>
           <input
             {...register("email")}
             id="email"
             type="email"
-            placeholder="Enter your email"
+            placeholder={t("in_email_enter")}
             className={`${s.input} ${errors.email ? s.error_input : ""}`}
           />
           {errors.email ? (
@@ -76,14 +80,14 @@ const SignUpForm = () => {
         </div>
         <div className={s.input_group}>
           <label htmlFor="password" className={s.label}>
-            Password
+            {t("up_pass")}
           </label>
           <div className={s.password_wrapper}>
             <input
               {...register("password")}
               id="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
+              placeholder={t("in_pass_enter")}
               className={`${s.input} ${errors.password ? s.error_input : ""}`}
             />
             <button
@@ -108,14 +112,14 @@ const SignUpForm = () => {
         </div>
         <div className={s.input_group}>
           <label htmlFor="repeatPassword" className={s.label}>
-            Repeat password
+            {t("reset_rep")}
           </label>
           <div className={s.password_wrapper}>
             <input
               id="repeatPassword"
               {...register("repeatPassword")}
               type={showPassword ? "text" : "password"}
-              placeholder="Repeat password"
+              placeholder={t("up_repeat")}
               className={`${s.input} ${
                 errors.repeatPassword ? s.error_input : ""
               }`}
@@ -136,13 +140,13 @@ const SignUpForm = () => {
           </div>
         </div>
         <button className={s.button} type="submit">
-          Sign Up
+          {t("up_title")}
         </button>
       </form>
       <p className={s.paragraph}>
-        Already have an account?{" "}
+        {t("up_already")}{" "}
         <Link to="/signin" className={s.link}>
-          Sign In
+          {t("in_title")}
         </Link>
       </p>
     </div>

@@ -50,13 +50,13 @@ const ResetPassForm = ({ token }) => {
       await toast.promise(
         aqua.post("/users/reset-password", { password, token }),
         {
-          loading: "Reset password...",
-          success: "Password was successfully reset!",
+          loading: <p>{t("others_res")}</p>,
+          success: <p>{t("others_pas")}</p>,
         }
       );
       await toast.promise(dispatch(logOut()).unwrap(), {
-        loading: "Logout...",
-        success: "Successfully logged out!",
+        loading: <p>{t("others_logo")}</p>,
+        success: <p>{t("others_succ")}</p>,
       });
       navigate("/signin");
     } catch (error) {

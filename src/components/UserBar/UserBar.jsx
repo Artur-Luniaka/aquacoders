@@ -12,7 +12,11 @@ import {
   selectUserName,
 } from "../../redux/auth/selectors.js";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const UserBar = () => {
+  const { t } = useTranslation(); //моє
+
   const [dropStatus, setDropStatus] = useState(false);
   const [showFullName, setShowFullName] = useState(false);
 
@@ -65,7 +69,7 @@ const UserBar = () => {
         onMouseEnter={handleMouseHoverEnter}
         onMouseLeave={handleMouseHoverLeave}
       >
-        Hello
+        {t("home_hello")}
         <span>, {shortenRenderedName}!</span>
       </h2>
       <div onClick={(e) => e.stopPropagation()}>

@@ -10,7 +10,11 @@ import { settingsSchema } from "../../utils/validationSchema.js";
 
 import SettingsAvatarModal from "../SettingsAvatarModal/SettingsAvatarModal.jsx";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const SettingsModal = () => {
+  const { t } = useTranslation(); //моє
+
   const dispatch = useDispatch();
 
   const { register, handleSubmit, watch } = useForm({
@@ -74,7 +78,7 @@ const SettingsModal = () => {
             <div className={s.box}>
               <div className={s.part_content}>
                 <div className={s.radio_gender}>
-                  <span className={s.radio_title}>Your gender identity</span>
+                  <span className={s.radio_title}>{t("sett_your")}</span>
                   <div className={s.radio_group}>
                     <label htmlFor="weight-woman" className={s.radio_label}>
                       <input
@@ -84,7 +88,7 @@ const SettingsModal = () => {
                         {...register("gender")}
                         className={s.radio_input}
                       />
-                      <span className={s.custom_radio}></span> Woman
+                      <span className={s.custom_radio}></span> {t("sett_woman")}
                     </label>
                     <label htmlFor="weight-man" className={s.radio_label}>
                       <input
@@ -94,53 +98,51 @@ const SettingsModal = () => {
                         {...register("gender")}
                         className={s.radio_input}
                       />
-                      <span className={s.custom_radio}></span> Man
+                      <span className={s.custom_radio}></span> {t("sett_man")}
                     </label>
                   </div>
                 </div>
                 <div className={s.input_box}>
                   <label htmlFor="name" className={s.radio_title}>
-                    Your name
+                    {t("sett_your_n")}
                   </label>
                   <input
                     type="text"
-                    placeholder="Your name"
+                    placeholder={t("sett_nadia")}
                     id="name"
                     {...register("name")}
                     className={s.input}
                   />
                   <label htmlFor="email" className={s.radio_title}>
-                    Email
+                    {t("sett_email")}
                   </label>
                   <input
                     type="email"
-                    placeholder="Email"
+                    placeholder={t("sett_com")}
                     id="email"
                     {...register("email")}
                     className={s.input}
                   />
                 </div>
                 <div className={s.daily_box}>
-                  <div className={s.radio_title}>My daily norma</div>
+                  <div className={s.radio_title}>{t("sett_my")}</div>
                   <div className={s.formulas_box}>
                     <div className={s.box_formula}>
-                      <p className={s.title_formula}>For woman:</p>
+                      <p className={s.title_formula}>{t("sett_for_woman")}</p>
                       <div className={s.formula}>V=(M*0,03) + (T*0,4)</div>
                     </div>
                     <div className={s.box_formula}>
-                      <p className={s.title_formula}>For man:</p>
+                      <p className={s.title_formula}>{t("sett_for_man")}</p>
                       <div className={s.formula}>V=(M*0,04) + (T*0,6)</div>
                     </div>
                   </div>
                   <p className={s.description_formula}>
-                    <span className={s.green}>* </span>V is the volume of the
-                    water norm in liters per day, M is your body weight, T is
-                    the time of active sports, or another type of activity
-                    commensurate in terms of loads (in the absence of these, you
-                    must set 0)
+                    <span className={s.green}>* </span>
+                    {t("sett_v")}
                   </p>
                   <span className={s.active_time}>
-                    <span className={s.green}>! </span>Active time in hours
+                    <span className={s.green}>! </span>
+                    {t("sett_act")}
                   </span>
                 </div>
               </div>
@@ -148,7 +150,7 @@ const SettingsModal = () => {
                 <div className={s.user_data}>
                   <div className={s.input_box}>
                     <label htmlFor="user-weight" className={s.user_description}>
-                      Your weight in kilograms
+                      {t("sett_kilo")}
                     </label>
                     <input
                       type="number"
@@ -158,7 +160,7 @@ const SettingsModal = () => {
                       className={s.input}
                     />
                     <label htmlFor="time-sport" className={s.user_description}>
-                      The time of active participation in sports
+                      {t("sett_time")}
                     </label>
                     <input
                       type="number"
@@ -171,7 +173,7 @@ const SettingsModal = () => {
                   {/* //required water */}
                   <div className={s.result_text}>
                     <label htmlFor="required-water" className={s.title_bold}>
-                      The required amount of water in liters per day:
+                      {t("sett_req")}
                     </label>
                     <input
                       type="text"

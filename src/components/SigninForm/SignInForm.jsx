@@ -9,6 +9,8 @@ import s from "./SignInForm.module.css";
 import sprite from "../../assets/sprite.svg";
 import { Link } from "react-router-dom";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email format")
@@ -17,6 +19,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignInForm = () => {
+  const { t } = useTranslation(); //моє
+
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
@@ -46,7 +50,7 @@ const SignInForm = () => {
 
   return (
     <div className={s.signin_container}>
-      <h2 className={s.signin_title}>Sign In</h2>
+      <h2 className={s.signin_title}>{t("in_title")}</h2>
       <form
         className={s.signin_form}
         noValidate
@@ -54,12 +58,12 @@ const SignInForm = () => {
       >
         <div className={s.input_group}>
           <label htmlFor="email" className={s.label}>
-            Email
+            {t("in_email")}
           </label>
           <input
             type="email"
             id="email"
-            placeholder="Enter your email"
+            placeholder={t("in_email_enter")}
             className={errors.email ? `${s.input} ${s.input_error}` : s.input}
             {...register("email")}
           />
@@ -69,12 +73,12 @@ const SignInForm = () => {
         </div>
         <div className={s.input_group}>
           <label htmlFor="password" className={s.label}>
-            Password
+            {t("in_pass")}
           </label>
           <input
             type={showPassword ? "text" : "password"}
             id="password"
-            placeholder="Enter your password"
+            placeholder={t("in_pass_enter")}
             className={errors.email ? `${s.input} ${s.input_error}` : s.input}
             {...register("password")}
           />
@@ -94,17 +98,17 @@ const SignInForm = () => {
           )}
         </div>
         <button type="submit" className={s.signin_button}>
-          Sign In
+          {t("in_title")}
         </button>
       </form>
       <div className={s.signup_box}>
-        <p className={s.signup_text}>Don’t have an account?</p>
+        <p className={s.signup_text}>{t("reset_don")}</p>
         <Link to="/signup" className={s.signup_link}>
-          Sign Up
+          {t("up_title")}
         </Link>
       </div>
       <Link to="/reset-password" className={s.signup_link}>
-        Reset Password
+        {t("reset_title")}
       </Link>
     </div>
   );

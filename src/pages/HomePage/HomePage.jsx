@@ -13,7 +13,7 @@ const HomePage = () => {
     <>
       <GreyBlock>
         <Logo />
-
+        <LanguageSwitcher />
         <WelcomeSection />
       </GreyBlock>
       <ImgBlock>

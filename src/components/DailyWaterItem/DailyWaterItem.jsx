@@ -2,6 +2,8 @@ import s from "./DailyWaterItem.module.css";
 import sprite from "../../assets/sprite.svg";
 import toast from "react-hot-toast";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const DailyWaterItem = ({
   volume,
   date,
@@ -10,13 +12,15 @@ const DailyWaterItem = ({
   entryId,
   setSelectedId,
 }) => {
+  const { t } = useTranslation(); //моє
+
   const handleDelete = async () => {
     try {
       setSelectedId(entryId);
       onDelete(true);
-      toast.success("Entry successfully deleted!");
+      toast.success(<p>{t("others_ent")}</p>);
     } catch (e) {
-      toast.error("Failed to delete entry. Try again!");
+      toast.error(<p>{t("others_fail")}</p>);
       e;
     }
   };

@@ -7,6 +7,9 @@ import avatarPlaceholder from "../../assets/avatar.png";
 import sprite from "../../assets/sprite.svg";
 import { uploadAvatar } from "../../redux/auth/operations/editAvatar.js";
 import * as Yup from "yup";
+
+import { useTranslation } from "react-i18next"; //моє
+
 // import { yupResolver } from "@hookform/resolvers/yup";
 
 // const validationSchema = Yup.object({
@@ -24,6 +27,8 @@ import * as Yup from "yup";
 // });
 
 const SettingsAvatarModal = () => {
+  const { t } = useTranslation(); //моє
+
   const avatarUrlFromStore = useSelector(selectAvatarUrl);
   const dispatch = useDispatch();
   const [imagePreview, setImagePreview] = useState(
@@ -56,7 +61,7 @@ const SettingsAvatarModal = () => {
             <svg className={s.icon} width="18" height="18">
               <use href={sprite + "#icon-upload-photo"}></use>
             </svg>
-            <span className={s.upload_text}>Upload a photo</span>
+            <span className={s.upload_text}>{t("sett_upload")}</span>
           </span>
         </label>
         <input

@@ -45,8 +45,8 @@ const SendEmailReset = () => {
   const onSubmit = async (data) => {
     try {
       await toast.promise(aqua.post("/users/send-reset-email", data), {
-        loading: "Sending email...",
-        success: "Successfully sent reset email!",
+        loading: <p>{t("others_sen")}</p>,
+        success: <p>{t("others_suc_sen")}</p>,
       });
 
       navigate("/");
@@ -78,7 +78,7 @@ const SendEmailReset = () => {
             id="email"
             type="text"
             disabled={email}
-            placeholder={t("reset_ent")}
+            placeholder={t("reset_enter")}
             className={`${s.input} ${errors.email ? s.error_input : ""}`}
           />
           {errors.email ? (
@@ -93,7 +93,7 @@ const SendEmailReset = () => {
       </form>
       {!isLoggedIn && (
         <p className={s.paragraph}>
-          {t("reset_dont")}{" "}
+          {t("reset_don")}{" "}
           <Link to="/signup" className={s.link}>
             {t("reset_up")}
           </Link>
