@@ -3,13 +3,9 @@ import aqua from "../../aqua";
 
 export const uploadAvatar = createAsyncThunk(
   "auth/uploadAvatar",
-  async (photo, thunkAPI) => {
+  async (photo, thunkAPI) => {   
     try {
-      const formData = new FormData();
-      formData.append("avatar", photo);
-
-      const response = await aqua.patch("/users/avatar", formData);
-
+      const response = await aqua.patch("/users/avatar", photo);
       return response.data;
     } catch (error) {
       console.error(

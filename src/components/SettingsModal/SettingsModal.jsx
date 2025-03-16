@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../components/Modal/Modal.jsx";
 import SaveButton from "../../components/SaveButton/SaveButton.jsx";
 import s from "./SettingsModal.module.css";
@@ -9,30 +9,58 @@ import { updateUser } from "../../redux/auth/operations/editUserInfoThunk.js";
 import { settingsSchema } from "../../utils/validationSchema.js";
 
 import SettingsAvatarModal from "../SettingsAvatarModal/SettingsAvatarModal.jsx";
+import { selectUser } from "../../redux/auth/selectors.js";
+import toast from "react-hot-toast";
 
-const SettingsModal = () => {
+const SettingsModal = ({ onClose }) => {
+  const [nameError, setNameError] = useState({ error1: false, error2: false });
+  const [emailError, setEmailError] = useState(false);
+  const [weightError, setWeightError] = useState({
+    error1: false,
+    error2: false,
+  });
+  const [sportTimeError, setSportTimeError] = useState({
+    error1: false,
+    error2: false,
+  });
+  const [genderError, setGenderError] = useState(false);
+  const [dailyNormError, setDailyNormError] = useState({
+    error1: false,
+    error2: false,
+  });
+
+  const {
+    name,
+    email,
+    gender: genderSelector,
+    weight: weightSelector,
+    dailySportTime,
+    dailyNorm,
+  } = useSelector(selectUser);
+
   const dispatch = useDispatch();
 
   const { register, handleSubmit, watch } = useForm({
     defaultValues: {
-      name: "",
-      email: "",
-      weight: "",
-      sportTime: "",
-      gender: "",
-      dailyNorm: "",
+      name: name,
+      email: email,
+      weight: weightSelector,
+      dailySportTime: dailySportTime,
+      gender: genderSelector,
+      dailyNorm: dailyNorm,
     },
     mode: "onChange",
   });
 
   const weight = watch("weight") || 0;
-  const sportTime = watch("sportTime") || 0;
+  const sportTime = watch("dailySportTime") || 0;
   const gender = watch("gender");
+
   const [waterIntake, setWaterIntake] = useState(1.5);
 
   useEffect(() => {
     const calculateWaterIntake = () => {
-      if (!weight || !sportTime || !gender) return 1.5;
+      if (!Number(weight) || !Number(sportTime) || !gender) return 1.5;
       return gender === "female"
         ? (weight * 0.03 + sportTime * 0.4).toFixed(1)
         : (weight * 0.04 + sportTime * 0.6).toFixed(1);
@@ -42,30 +70,87 @@ const SettingsModal = () => {
   }, [weight, sportTime, gender]);
 
   const onSubmit = async (data) => {
+    setNameError({ error1: false, error2: false });
+    setEmailError(false);
+    setWeightError({ error1: false, error2: false });
+    setSportTimeError({ error1: false, error2: false });
+    setGenderError(false);
+    setDailyNormError({ error1: false, error2: false });
+
+    const userData = {
+      name: data.name,
+      email: data.email,
+      weight: data.weight,
+      dailySportTime: data.dailySportTime,
+      gender: data.gender,
+      dailyNorm: Number(parseFloat(waterIntake) * 1000),
+    };
+
+    if (userData.name && userData.name.length <= 2) {
+      setNameError({ error1: true, error2: false });
+      return;
+    }
+
+    const filteredUserData = {};
+    if (data.name !== name) filteredUserData.name = data.name;
+    if (data.email !== email) filteredUserData.email = data.email;
+    if (data.gender !== genderSelector) filteredUserData.gender = data.gender;
+    if (data.weight !== weightSelector) filteredUserData.weight = data.weight;
+    if (data.dailySportTime !== dailySportTime)
+      filteredUserData.dailySportTime = data.dailySportTime;
+    if (dailyNorm !== Number(parseFloat(waterIntake) * 1000))
+      filteredUserData.dailyNorm = Number(parseFloat(waterIntake) * 1000);
+
     try {
-      const userData = {
-        name: data.name,
-        email: data.email,
-        weight: data.weight,
-        sportTime: data.sportTime,
-        gender: data.gender,
-        dailyNorm: Number(parseFloat(waterIntake) * 1000),
-      };
-      console.log("🔍 userData перед відправкою:", userData);
-      try {
-        await settingsSchema.validate(userData, { abortEarly: false });
-        console.log("✅ Валідація пройдена:", userData);
-      } catch (error) {
-        console.error("❌ Помилки валідації:", error.errors);
-      }
-      dispatch(updateUser(userData));
+      await settingsSchema.validate(userData, { abortEarly: false });
+      dispatch(updateUser(filteredUserData));
+      toast.success("Successfully updated");
     } catch (error) {
-      console.log("Validation errors:", error.errors);
+      console.log(error.errors);
+
+      error.errors.forEach((item) => {
+        if (item === "Choose gender") {
+          setGenderError(true);
+          return;
+        }
+        if (item === "Max 12 characters") {
+          setNameError({ error1: false, error2: true });
+          return;
+        }
+        if (item === "Incorrect email") {
+          setEmailError(true);
+          return;
+        }
+        if (item === "Weight cannot be negative") {
+          setWeightError({ error1: true, error2: false });
+          return;
+        }
+        if (item === "Weight cannot exceed 250 kg") {
+          setWeightError({ error1: false, error2: true });
+          return;
+        }
+        if (item === "Workout time cannot be less than 0") {
+          setSportTimeError({ error1: true, error2: false });
+          return;
+        }
+        if (item === "Workout time cannot be more than 24") {
+          setSportTimeError({ error1: false, error2: true });
+          return;
+        }
+        if (item === "Daily norm cannot be less than 500ml") {
+          setDailyNormError({ error1: true, error2: false });
+          return;
+        }
+        if (item === "Daily norm cannot be more than 15000ml") {
+          setDailyNormError({ error1: false, error2: true });
+          return;
+        }
+      });
     }
   };
 
   return (
-    <Modal>
+    <Modal onCloseModal={onClose}>
       <div className={s.modal_settings}>
         <h2 className={s.title_modal}>Setting</h2>
         <SettingsAvatarModal />
@@ -98,6 +183,9 @@ const SettingsModal = () => {
                     </label>
                   </div>
                 </div>
+                {genderError && (
+                  <span className={s.errors}>Gender is required</span>
+                )}
                 <div className={s.input_box}>
                   <label htmlFor="name" className={s.radio_title}>
                     Your name
@@ -109,6 +197,12 @@ const SettingsModal = () => {
                     {...register("name")}
                     className={s.input}
                   />
+                  {nameError.error1 && (
+                    <span className={s.errors}>Min 2 characters</span>
+                  )}
+                  {nameError.error2 && (
+                    <span className={s.errors}>Max 12 characters</span>
+                  )}
                   <label htmlFor="email" className={s.radio_title}>
                     Email
                   </label>
@@ -119,6 +213,9 @@ const SettingsModal = () => {
                     {...register("email")}
                     className={s.input}
                   />
+                  {emailError && (
+                    <span className={s.errors}>Incorrect email</span>
+                  )}
                 </div>
                 <div className={s.daily_box}>
                   <div className={s.radio_title}>My daily norma</div>
@@ -157,6 +254,16 @@ const SettingsModal = () => {
                       {...register("weight")}
                       className={s.input}
                     />
+                    {weightError.error1 && (
+                      <span className={s.errors}>
+                        Weight cannot be negative
+                      </span>
+                    )}
+                    {weightError.error2 && (
+                      <span className={s.errors}>
+                        Weight cannot exceed 250 kg
+                      </span>
+                    )}
                     <label htmlFor="time-sport" className={s.user_description}>
                       The time of active participation in sports
                     </label>
@@ -164,9 +271,19 @@ const SettingsModal = () => {
                       type="number"
                       placeholder="0"
                       id="time-sport"
-                      {...register("sportTime")}
+                      {...register("dailySportTime")}
                       className={s.input}
                     />
+                    {sportTimeError.error1 && (
+                      <span className={s.errors}>
+                        Workout time cannot be less than 0
+                      </span>
+                    )}
+                    {sportTimeError.error2 && (
+                      <span className={s.errors}>
+                        Workout time cannot be more than 24
+                      </span>
+                    )}
                   </div>
                   {/* //required water */}
                   <div className={s.result_text}>
@@ -180,6 +297,16 @@ const SettingsModal = () => {
                       value={`${waterIntake}`}
                       readOnly
                     />
+                    {dailyNormError.error1 && (
+                      <span className={s.errors}>
+                        Daily norm cannot be less than 500ml
+                      </span>
+                    )}
+                    {dailyNormError.error2 && (
+                      <span className={s.errors}>
+                        Daily norm cannot be more than 15000ml
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
