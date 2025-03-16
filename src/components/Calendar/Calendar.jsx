@@ -16,6 +16,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import Loader from "../Loader/Loader.jsx";
 
 const currentDay = new Date().getDate();
 const currentMonth = new Date().getMonth() + 1;
@@ -101,7 +102,7 @@ const Calendar = () => {
               ))}
             </div>
           ) : (
-            <div className={s.empty_calendar_list}>...Loading</div>
+            <div className={s.empty_calendar_list}><Loader/></div>
           )}
         </>
       ) : (
@@ -118,8 +119,8 @@ const Calendar = () => {
                 tick={{ fill: "#333", fontSize: 12 }}
                 axisLine={{ stroke: "#555" }}
                 tickFormatter={(value) => `${value}L`}
-                domain={[0, 2.5]}
-                ticks={[0, 0.5, 1, 1.5, 2, 2.5]}
+                domain={[0, dailyNorm]}
+                ticks={[0, 0.5, 1, 1.5, 2, dailyNorm]}
               />
               <Tooltip />
               <Area

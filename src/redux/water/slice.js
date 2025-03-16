@@ -17,7 +17,7 @@ const slice = createSlice({
       })
 
       .addCase(getDailyInfo.fulfilled, (state, { payload }) => {
-        state.waterList = payload.data;
+        state.waterList = payload.info.data;
         state.clickedDay = payload.day;
       })
       .addCase(addWaterEntry.fulfilled, (state, action) => {
