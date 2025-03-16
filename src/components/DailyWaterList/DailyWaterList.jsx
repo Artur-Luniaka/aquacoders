@@ -127,12 +127,12 @@ const DailyWaterList = () => {
             className={s.swiper}
           >
             {waterList?.map(({ _id, volume, date }) => (
-              <SwiperSlide className={s.water_list} key={_id}>
+              <SwiperSlide className={s.water_list}>
                 <DailyWaterItem
+                  key={_id}
                   volume={volume}
                   date={date}
                   onEdit={() => {
-                    console.log("Редагується запис:", { _id, volume, date });
                     setSelectedRecord({ _id, volume, date });
                     setEditModalOpen(true);
                   }}

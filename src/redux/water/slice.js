@@ -16,16 +16,12 @@ const slice = createSlice({
         state.monthData = payload.data;
       })
 
-      .addCase(getDailyInfo.fulfilled, (state, { payload }) => {      
-
+      .addCase(getDailyInfo.fulfilled, (state, { payload }) => {
         state.waterList = payload.data;
         state.clickedDay = payload.day;
       })
       .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
-
-        // console.log("🚀 Water entry added to Redux state:", payload);
-        state.waterList.push(payload);
-             
+        state.waterList.unshift(payload);
       })
       .addCase(updateWaterRecord.fulfilled, (state, { payload }) => {
         const index = state.waterList.findIndex(
