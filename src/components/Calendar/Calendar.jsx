@@ -7,9 +7,10 @@ import { getMonthlyDate } from "../../redux/water/operations/getMonthlyDate.js";
 import { selectMonthData } from "../../redux/water/selectors.js";
 import { selectDailyNorm } from "../../redux/auth/selectors.js";
 import {
+  Area,
   CartesianGrid,
+  ComposedChart,
   Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -69,9 +70,10 @@ const Calendar = () => {
       })
       .map((item) => ({
         name: new Date(item.date).getDate(),
-        stats: Math.ceil(item.stats / 1000),
+        stats: item.stats / 1000,
       }));
   };
+  console.log(transformData(monthData));
 
   return (
     <section className={s.calendar_section}>
@@ -106,7 +108,7 @@ const Calendar = () => {
       ) : (
         <div className={s.chart_wrapper}>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={transformData(monthData)}>
+            <ComposedChart data={transformData(monthData)}>
               <CartesianGrid stroke="#e0e0e0" strokeDasharray="5 5" />
               <XAxis
                 dataKey="name"
@@ -120,15 +122,22 @@ const Calendar = () => {
                 domain={[0, 2.5]}
                 ticks={[0, 0.5, 1, 1.5, 2, 2.5]}
               />
-              <Tooltip formatter={(value) => `${value}L`} />
+              <Tooltip />
+              <Area
+                type="monotone"
+                dataKey="stats"
+                stroke="none"
+                fill="#87D28D"
+                fillOpacity={0.3}
+              />
               <Line
                 type="monotone"
                 dataKey="stats"
                 stroke="#87D28D"
                 strokeWidth={2}
-                dot={{ r: 7, fill: "white" }}
+                dot={{ r: 5, fill: "white" }}
               />
-            </LineChart>
+            </ComposedChart>
           </ResponsiveContainer>
         </div>
       )}
