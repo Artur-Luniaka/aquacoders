@@ -9,7 +9,7 @@ const aqua = axios.create({
 
 aqua.interceptors.request.use((config) => {
   const token = store.getState().auth.token;
-      
+
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
@@ -40,8 +40,8 @@ aqua.interceptors.response.use(
 
             return newAccessToken?.accessToken;
           })
-          .catch((err) => {
-            console.error("Mistake refresh token", err);
+          .catch((e) => {
+            e;
             store.dispatch(logOut());
             return null;
           })
@@ -50,7 +50,13 @@ aqua.interceptors.response.use(
           });
       }
 
-      const newAccessToken = await refreshPromise;
+      const newAccessToken = await Promise.race([
+        refreshPromise,
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Timeout refresh token!")), 5000)
+        ),
+      ]).catch(() => null);
+
       if (!newAccessToken) return Promise.reject(error);
 
       return aqua(originalRequest);

@@ -5,10 +5,10 @@ export const deleteWaterEntry = createAsyncThunk(
   "water/deleteWaterEntry",
   async (entryId, { rejectWithValue }) => {
     try {
-      const response = await aqua.delete(`/water/${entryId}`);
-      return response.data;
+      await aqua.delete(`/water/${entryId}`);
+      return entryId;
     } catch (e) {
-      return rejectWithValue(e.response?.data || "error");
+      return rejectWithValue(e || "Delete error");
     }
   }
 );

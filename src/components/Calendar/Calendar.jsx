@@ -1,5 +1,5 @@
 import s from "./Calendar.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CalendarDayStatus from "../CalendarDayStatus/CalendarDayStatus.jsx";
 import CalendarMonthStatus from "../CalendarMonthStatus/CalendarMonthStatus.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,14 +7,16 @@ import { getMonthlyDate } from "../../redux/water/operations/getMonthlyDate.js";
 import { selectMonthData } from "../../redux/water/selectors.js";
 import { selectDailyNorm } from "../../redux/auth/selectors.js";
 import {
+  Area,
   CartesianGrid,
+  ComposedChart,
   Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
+import Loader from "../Loader/Loader.jsx";
 
 import { useTranslation } from "react-i18next"; //моє
 
@@ -31,8 +33,20 @@ const Calendar = () => {
 
   const monthData = useSelector(selectMonthData);
   const dailyNorm = useSelector(selectDailyNorm);
-
+  const dailyNormRef = useRef({
+    data1: null,
+    data2: null,
+    data3: null,
+    data4: null,
+  });
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dailyNormRef.current.data1 = Number(dailyNorm / 1000).toFixed(2);
+    dailyNormRef.current.data2 = Number(dailyNorm / 1000 / 2).toFixed(2);
+    dailyNormRef.current.data3 = Number(dailyNorm / 1000 / 4).toFixed(2);
+    dailyNormRef.current.data4 = Number(dailyNorm / 1000 / 1.4).toFixed(2);
+  }, [dailyNorm]);
 
   useEffect(() => {
     dispatch(
@@ -73,7 +87,7 @@ const Calendar = () => {
       })
       .map((item) => ({
         name: new Date(item.date).getDate(),
-        stats: Math.ceil(item.stats / 1000),
+        stats: item.stats / 1000,
       }));
   };
 
@@ -104,13 +118,19 @@ const Calendar = () => {
               ))}
             </div>
           ) : (
+<<<<<<< HEAD
             <div className={s.empty_calendar_list}>{t("others_loading")}</div>
+=======
+            <div className={s.empty_calendar_list}>
+              <Loader />
+            </div>
+>>>>>>> main
           )}
         </>
       ) : (
         <div className={s.chart_wrapper}>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={transformData(monthData)}>
+            <ComposedChart data={transformData(monthData)}>
               <CartesianGrid stroke="#e0e0e0" strokeDasharray="5 5" />
               <XAxis
                 dataKey="name"
@@ -121,18 +141,31 @@ const Calendar = () => {
                 tick={{ fill: "#333", fontSize: 12 }}
                 axisLine={{ stroke: "#555" }}
                 tickFormatter={(value) => `${value}L`}
-                domain={[0, 2.5]}
-                ticks={[0, 0.5, 1, 1.5, 2, 2.5]}
+                domain={[0, dailyNormRef.current.data1]}
+                ticks={[
+                  0,
+                  dailyNormRef.current.data3,
+                  dailyNormRef.current.data2,
+                  dailyNormRef.current.data4,
+                  dailyNormRef.current.data1,
+                ]}
               />
-              <Tooltip formatter={(value) => `${value}L`} />
+              <Tooltip />
+              <Area
+                type="monotone"
+                dataKey="stats"
+                stroke="none"
+                fill="#87D28D"
+                fillOpacity={0.4}
+              />
               <Line
                 type="monotone"
                 dataKey="stats"
                 stroke="#87D28D"
                 strokeWidth={2}
-                dot={{ r: 7, fill: "white" }}
+                dot={{ r: 5, fill: "white" }}
               />
-            </LineChart>
+            </ComposedChart>
           </ResponsiveContainer>
         </div>
       )}

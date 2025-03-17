@@ -2,18 +2,10 @@
   background-color: var(--color-lightgreen);
   display: flex;
   justify-content: center;
-  min-width: 116px;
-  max-width: 116px;
-  padding: 14px 19px;
   border-radius: 30px;
   transition: background-color 0.5s ease;
   &:hover {
     background-color: var(--hover-green);
-  }
-  @media (min-width: 768px) {
-    padding: 18px 40px;
-    min-width: 237px;
-    max-width: 237px;
   }
 }
 
@@ -24,8 +16,15 @@
   font-size: 14px;
   line-height: 1.28571;
   letter-spacing: -0.01em;
+  min-width: 311px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media (min-width: 768px) {
     font-size: 16px;
     line-height: 1.5;
+    min-width: 436px;
+    height: 60px;
   }
 }

@@ -22,11 +22,12 @@
   }
 }
 
-/* настроить под loader */
 .loader {
-  position: absolute;
-  top: -12px;
-  left: -3px;
+  max-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.3);
   @media (min-width: 768px) {
     left: 10px;
   }

@@ -41,10 +41,9 @@ const SignInForm = () => {
       await toast.promise(dispatch(signIn(data)).unwrap(), {
         loading: "Signing in...",
         success: "Successfully signed in!",
-        error: "Login failed. Please try one more time",
       });
     } catch (e) {
-      toast.error(e.message || "Something went wrong. Please try again.");
+      toast.error(e.data.message || "Something went wrong. Please try again.");
     }
   };
 

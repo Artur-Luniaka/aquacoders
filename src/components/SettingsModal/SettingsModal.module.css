@@ -1,18 +1,18 @@
 .modal_settings {
   display: flex;
   flex-direction: column;
-  min-width: 343px;
+  max-width: 343px;
   padding: 40px 20px;
   margin-bottom: 40px;
   height: 90vh;
   color: var(--color-darkblue);
   margin-bottom: 60px;
   @media screen and (min-width: 768px) {
-    width: 648px;
+    max-width: 648px;
     padding: 40px;
   }
   @media screen and (min-width: 1440px) {
-    width: 920px;
+    max-width: 920px;
   }
 }
 
@@ -58,9 +58,9 @@
 
 @media screen and (min-width: 1440px) {
   .part_content {
-    width: 50%;
+    /* width: 50%;
     max-width: 50%;
-    box-sizing: border-box;
+    box-sizing: border-box; */
   }
   .part_content:last-child {
     padding-top: 68px;
@@ -135,8 +135,10 @@
   margin-bottom: 14px;
   color: #000;
   font: 14px/18px var(--poppins-reg);
-  width: 400px;
   display: block;
+  @media screen and (min-width: 1440px) {
+    min-width: 400px;
+  }
 }
 .daily_box {
   margin-bottom: 24px;
@@ -224,4 +226,13 @@
 .bottom_submit {
   display: block;
   margin-bottom: 40px;
+}
+
+.errors {
+  color: var(--error-color);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  font-family: var(--poppins-reg);
 }

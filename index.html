@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="canonical" href="https://aquacoders.vercel.app/" />
+    <meta
+      name="description"
+      content="Aquacoders is a smart water intake tracker that helps you stay hydrated and maintain a healthy lifestyle. Easily log your daily water intake, set hydration goals, and get reminders to drink more water. Stay on track with a simple and intuitive interface."
+    />
+    <meta
+      property="og:title"
+      content="Aquacoders — Smart Water Intake Tracker"
+    />
+    <meta
+      property="og:description"
+      content="Track your daily water intake, set hydration goals, and get reminders with Aquacoders. Stay hydrated and improve your health effortlessly."
+    />
+    <meta property="og:url" content="https://aquacoders.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://aquacoders.vercel.app/src/assets/favicon.svg"
+    />
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./src/assets/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,5 +28,26 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Aquacoders",
+        "url": "https://aquacoders.vercel.app/",
+        "description": "Aquacoders is a smart water intake tracker that helps you stay hydrated and maintain a healthy lifestyle.",
+        "image": "https://aquacoders.vercel.app/src/assets/favicon.svg",
+        "operatingSystem": "Web",
+        "applicationCategory": "HealthApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Aquacoders"
+        }
+      }
+    </script>
   </body>
 </html>

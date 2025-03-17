@@ -71,12 +71,11 @@
 
 .empty_state {
   display: flex;
-  justify-content: center; 
-  align-items: center;     
-  min-height: 86px;       
-  text-align: center;  
-  margin-top: 24px;
-  margin-bottom: 72px;    
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 120px;
 }
 
 .empty_text {

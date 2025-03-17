@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SaveButton from "../SaveButton/SaveButton.jsx";
@@ -81,12 +80,6 @@ const EditWater = ({ onCloseModal, record }) => {
       .replace(/\.\d{3}Z$/, ".000+00:00");
 
     try {
-      console.log("📩 Дані, які відправляємо на сервер:", {
-        id: record._id,
-        volume: validatedAmount,
-        date: formattedDate,
-      });
-
       await toast.promise(
         dispatch(
           updateWaterRecord({

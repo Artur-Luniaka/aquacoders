@@ -17,23 +17,22 @@ const slice = createSlice({
       })
 
       .addCase(getDailyInfo.fulfilled, (state, { payload }) => {
-        state.waterList = payload.data;
+        state.waterList = payload.info.data.toSorted(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
         state.clickedDay = payload.day;
       })
-      .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
-        state.waterList.unshift(payload);
+      .addCase(addWaterEntry.fulfilled, (state, action) => {
+        state.waterList.push({ ...action.payload.data });
       })
       .addCase(updateWaterRecord.fulfilled, (state, { payload }) => {
-        const index = state.waterList.findIndex(
-          (item) => item._id === payload._id
+        state.waterList = state.waterList.map((item) =>
+          item._id === payload._id ? { ...item, ...payload } : item
         );
-        if (index !== -1) {
-          state.waterList[index] = payload;
-        }
       })
       .addCase(deleteWaterEntry.fulfilled, (state, { payload }) => {
         state.waterList = state.waterList.filter(
-          (item) => item._id !== payload._id
+          (item) => item._id !== payload
         );
       });
   },

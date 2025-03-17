@@ -49,11 +49,10 @@ const SignUpForm = () => {
       await toast.promise(dispatch(signUp({ email, password })).unwrap(), {
         loading: "Signing up...",
         success: "Account created successfully!",
-        error: (error) => error.message || "Registration failed. Try again.",
       });
       navigate("/signin");
-    } catch (error) {
-      toast.error(error.message || "Something went wrong. Please try again.");
+    } catch (e) {
+      toast.error(e.data.message || "Something went wrong. Please try again.");
     }
   };
 

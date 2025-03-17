@@ -1,6 +1,5 @@
 import s from "./DailyWaterItem.module.css";
 import sprite from "../../assets/sprite.svg";
-import toast from "react-hot-toast";
 
 import { useTranslation } from "react-i18next"; //моє
 
@@ -18,9 +17,13 @@ const DailyWaterItem = ({
     try {
       setSelectedId(entryId);
       onDelete(true);
+<<<<<<< HEAD
       toast.success(<p>{t("others_ent")}</p>);
     } catch (e) {
       toast.error(<p>{t("others_fail")}</p>);
+=======
+    } catch (e) {
+>>>>>>> main
       e;
     }
   };
@@ -32,7 +35,9 @@ const DailyWaterItem = ({
       </svg>
       <div className={s.item_info_block}>
         <p className={s.value}>
-          {volume < 1000 ? `${volume}ml` : `${Math.ceil(volume / 1000)}L`}
+          {volume < 1000
+            ? `${volume}ml`
+            : `${(Number(volume) / 1000).toFixed(2)}L`}
         </p>
         <p className={s.time}>
           {Number(date?.slice(11, 13)) <= 12

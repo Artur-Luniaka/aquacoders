@@ -53,15 +53,20 @@ const DailyWaterList = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    swiperRef.current?.swiper?.update();
+  }, [waterList]);
+
+  useEffect(() => {
+    const swiperEl = swiperRef.current?.el;
     const handleWheel = (event) => {
       if (swiperRef.current) {
         event.preventDefault();
-        const swiper = swiperRef.current.swiper;
-        swiper.slideTo(swiper.activeIndex + (event.deltaY > 0 ? 1 : -1));
+        swiperRef.current.swiper.slideTo(
+          swiperRef.current.swiper.activeIndex + (event.deltaY > 0 ? 1 : -1)
+        );
       }
     };
 
-    const swiperEl = swiperRef.current?.el;
     if (swiperEl) {
       swiperEl.addEventListener("wheel", handleWheel, { passive: false });
     }
@@ -71,7 +76,7 @@ const DailyWaterList = () => {
         swiperEl.removeEventListener("wheel", handleWheel);
       }
     };
-  }, []);
+  }, [waterList]);
 
   const checkDay = () => {
     const checkDayInner =
@@ -105,7 +110,7 @@ const DailyWaterList = () => {
       </div>
 
       {/* Якщо масив пустий, показуємо повідомлення */}
-      {waterList.length === 0 ? (
+      {waterList?.length === 0 ? (
         <div className={s.empty_state}>
           <p className={s.empty_text}>{t("add_no")}</p>
         </div>
@@ -122,7 +127,11 @@ const DailyWaterList = () => {
               clickable: true,
             }}
             onBeforeInit={(swiper) => {
-              swiper.params.pagination.el = paginationRef.current;
+              if (paginationRef.current) {
+                swiper.params.pagination.el = paginationRef.current;
+                swiper.pagination.init();
+                swiper.pagination.update();
+              }
             }}
             modules={[Mousewheel, Keyboard, Pagination]}
             breakpoints={{
@@ -132,17 +141,19 @@ const DailyWaterList = () => {
             }}
             className={s.swiper}
           >
-            {waterList?.map(({ _id, volume, date }) => (
-              <SwiperSlide className={s.water_list}>
+            {waterList?.toReversed().map(({ _id, volume, date }, index) => (
+              <SwiperSlide className={s.water_list} key={`${_id}-${index}`}>
                 <DailyWaterItem
-                  key={_id}
                   volume={volume}
                   date={date}
                   onEdit={() => {
                     setSelectedRecord({ _id, volume, date });
                     setEditModalOpen(true);
                   }}
-                  onDelete={() => setDeleteModalOpen(true)}
+                  onDelete={() => {
+                    setSelectedId(_id);
+                    setDeleteModalOpen(true);
+                  }}
                   setSelectedId={setSelectedId}
                 />
               </SwiperSlide>
