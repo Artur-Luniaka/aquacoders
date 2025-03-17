@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 500); // Имитируем задержку
+    const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
