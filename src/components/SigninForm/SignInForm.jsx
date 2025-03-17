@@ -16,9 +16,9 @@ const SignInForm = () => {
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
+      .email(<p>{t("in_val_inv")}</p>)
+      .required(<p>{t("in_val_em")}</p>),
+    password: Yup.string().required(<p>{t("in_val_pas")}</p>),
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -39,8 +39,8 @@ const SignInForm = () => {
   const onSubmit = async (data) => {
     try {
       await toast.promise(dispatch(signIn(data)).unwrap(), {
-        loading: "Signing in...",
-        success: "Successfully signed in!",
+        loading: <p>{t("in_sig_in")}</p>,
+        success: <p>{t("in_suc_sig")}</p>,
       });
     } catch (e) {
       toast.error(e.data.message || "Something went wrong. Please try again.");

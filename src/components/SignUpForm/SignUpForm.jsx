@@ -15,12 +15,14 @@ const SignUpForm = () => {
   const { t } = useTranslation(); //моє
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string()
+      .email(<p>{t("in_val_inv")}</p>)
+      .required(<p>{t("in_val_em")}</p>),
     password: Yup.string()
-      .min(5, "Password must be at least 5 characters")
-      .max(50, "Password must be maximum 50 characters")
-      .required("Password is required"),
-    repeatPassword: Yup.string().required("Repeat Password is required"),
+      .min(5, <p>{t("up_val_l")}</p>)
+      .max(50, <p>{t("up_val_max")}</p>)
+      .required(<p>{t("in_val_pas")}</p>),
+    repeatPassword: Yup.string().required(<p>{t("up_val_rep")}</p>),
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -47,8 +49,8 @@ const SignUpForm = () => {
 
     try {
       await toast.promise(dispatch(signUp({ email, password })).unwrap(), {
-        loading: "Signing up...",
-        success: "Account created successfully!",
+        loading: <p>{t("up_s_up")}</p>,
+        success: <p>{t("up_ac_cr")}</p>,
       });
       navigate("/signin");
     } catch (e) {

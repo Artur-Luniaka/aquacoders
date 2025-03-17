@@ -5,6 +5,9 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        not_f:
+          "Ooopppsss...It looks like you have navigated to a non-existent route",
+
         others_loading: "...Loading",
         others_set: "Set Password",
         others_add: "Adding water entry...",
@@ -52,6 +55,12 @@ i18n.use(initReactI18next).init({
         in_habit: "Habit drive",
         in_view: "View statistics",
         in_personal: "Personal rate setting",
+        in_sig_in: "Signing in...",
+        in_suc_sig: "Successfully signed in!",
+
+        in_val_inv: "Invalid email format",
+        in_val_em: "Email is required",
+        in_val_pas: "Password is required",
 
         up_title: "Sign Up",
         up_email: "Email",
@@ -66,6 +75,12 @@ i18n.use(initReactI18next).init({
         up_habit: "Habit drive",
         up_view: "View statistics",
         up_personal: "Personal rate setting",
+
+        up_val_l: "Password must be at least 5 characters",
+        up_val_max: "Password must be maximum 50 characters",
+        up_val_rep: "Repeat Password is required",
+        up_s_up: "Signing up...",
+        up_ac_cr: "Account created successfully!",
 
         home_l: "L",
         home_my: "My daily norma",
@@ -113,6 +128,17 @@ i18n.use(initReactI18next).init({
         sett_req: "The required amount of water in liters per day:",
         sett_l: "L",
         sett_write: "Write down how much water you will drink:",
+
+        sett_gen: "Gender is required",
+        sett_min: "Min 2 characters",
+        sett_max: "Max 12 characters",
+        sett_inc: "Incorrect email",
+        sett_w_neg: "Weight cannot be negative",
+        sett_w_kg: "Weight cannot exceed 250 kg",
+        sett_w_less: "Workout time cannot be less than 0",
+        sett_w_more: "Workout time cannot be more than 24",
+        sett_d_less: "Daily norm cannot be less than 500ml",
+        sett_d_more: "Daily norm cannot be more than 15000ml",
 
         edit_title: "Edit the entered amount of water",
         edit_cor: "Correct entered data:",
@@ -164,6 +190,8 @@ i18n.use(initReactI18next).init({
     },
     ua: {
       translation: {
+        not_f: "Ууупппссс... Схоже, ви перейшли до неіснуючого маршруту",
+
         others_loading: "...Завантаження",
         others_set: "Установити пароль",
         others_add: "Запис про воду додається...",
@@ -211,6 +239,12 @@ i18n.use(initReactI18next).init({
         in_habit: "Вироблення звички",
         in_view: "Переглянути статистику",
         in_personal: "Налаштування персональної ставки",
+        in_sig_in: "Вхід...",
+        in_suc_sig: "Успішно ввійшли!",
+
+        in_val_inv: "Недійсний формат електронної пошти",
+        in_val_em: "Потрібна електронна адреса",
+        in_val_pas: "Потрібен пароль",
 
         up_title: "Зареєструватися",
         up_email: "Електронна адреса",
@@ -225,6 +259,12 @@ i18n.use(initReactI18next).init({
         up_habit: "Вироблення звички",
         up_view: "Переглянути статистику",
         up_personal: "Налаштування персональної ставки",
+
+        up_val_l: "Пароль має бути щонайменше 5 символів",
+        up_val_max: "Пароль має бути максимум 50 символів",
+        up_val_rep: "Потрібно повторити пароль",
+        up_s_up: "Реєстрація...",
+        up_ac_cr: "Акаунт створено успішно!",
 
         home_l: "Л",
         home_my: "Моя денна норма",
@@ -272,6 +312,17 @@ i18n.use(initReactI18next).init({
         sett_req: "Необхідна кількість води в літрах на день:",
         sett_l: "Л",
         sett_write: "Запишіть, скільки води ви будете пити:",
+
+        sett_gen: "Стать обов'язкова",
+        sett_min: "Мінімум 2 символи",
+        sett_max: "Максимум 12 символів",
+        sett_inc: "Неправильна електронна адреса",
+        sett_w_neg: "Вага не може бути від'ємною",
+        sett_w_kg: "Вага не може перевищувати 250 кг",
+        sett_w_less: "Час тренування не може бути меншим за 0",
+        sett_w_more: "Час тренування не може перевищувати 24",
+        sett_d_less: "Денна норма не може бути менше 500 мл",
+        sett_d_more: "Денна норма не може перевищувати 15000 мл",
 
         edit_title: "Редагувати введену кількість води",
         edit_cor: "Правильно введені дані:",

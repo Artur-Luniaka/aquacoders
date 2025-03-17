@@ -1,3 +1,27 @@
+.wrapper_btn {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-right: 5px;
+}
+
 .btn_lan {
-  width: 20px;
+  width: 25px;
+  height: 18px;
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+  outline: none;
+  background-color: transparent;
+  opacity: 0.6;
+  @media (min-width: 768px) {
+    width: 30px;
+    height: 20px;
+  }
+}
+
+.active {
+  opacity: 1;
+  background-color: rgba(0, 255, 204, 0.3);
+  box-shadow: 0 0 5px rgba(0, 255, 204, 0.8);
 }

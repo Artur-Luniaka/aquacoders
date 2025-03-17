@@ -3,13 +3,18 @@ import { selectDailyNorm } from "../../redux/auth/selectors";
 import { selectClickedDay, selectWaterList } from "../../redux/water/selectors";
 import s from "./WaterProgressBar.module.css";
 import { useSelector } from "react-redux";
-import { months } from "../CalendarMonthStatus/month.js";
+
+import { months, monthsUa } from "../CalendarMonthStatus/month.js";
+import { useTranslation } from "react-i18next";
 
 const currentDay = new Date().getDate();
 const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
 
 const WaterProgressBar = () => {
+  const { t, i18n } = useTranslation();
+  const en = i18n.language === "en";
+
   const waterList = useSelector(selectWaterList);
   const dailyNorm = useSelector(selectDailyNorm);
   const clickedDay = useSelector(selectClickedDay);
@@ -30,11 +35,13 @@ const WaterProgressBar = () => {
       Number(clickedDay?.slice(8, 10)) === currentDay &&
       Number(clickedDay?.slice(5, 7)) === currentMonth &&
       Number(clickedDay?.slice(0, 4)) === currentYear
-        ? "Today"
+        ? t("home_today")
         : `${Number(clickedDay?.slice(8, 10))}, ${
-            months[Number(clickedDay?.slice(5, 7)) - 1]
+            en
+              ? months[Number(clickedDay?.slice(5, 7)) - 1]
+              : monthsUa[Number(clickedDay?.slice(5, 7)) - 1]
           }`;
-    return !Number(clickedDay?.slice(8, 10)) ? "Today" : checkDayInner;
+    return !Number(clickedDay?.slice(8, 10)) ? t("home_today") : checkDayInner;
   };
 
   return (

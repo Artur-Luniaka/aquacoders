@@ -15,7 +15,7 @@ import {
   selectWaterList,
 } from "../../redux/water/selectors.js";
 import { getDailyInfo } from "../../redux/water/operations/getDailyInfo.js";
-import { months } from "../CalendarMonthStatus/month.js";
+import { months, monthsUa } from "../CalendarMonthStatus/month.js";
 
 import { useTranslation } from "react-i18next"; //моє
 
@@ -24,7 +24,8 @@ const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
 
 const DailyWaterList = () => {
-  const { t } = useTranslation(); //моє
+  const { t, i18n } = useTranslation();
+  const en = i18n.language === "en";
 
   const paginationRef = useRef(null);
   const swiperRef = useRef(null);
@@ -83,15 +84,13 @@ const DailyWaterList = () => {
       Number(clickedDay?.slice(8, 10)) === currentDay &&
       Number(clickedDay?.slice(5, 7)) === currentMonth &&
       Number(clickedDay?.slice(0, 4)) === currentYear
-        ? "Today"
+        ? t("home_today")
         : `${Number(clickedDay?.slice(8, 10))}, ${
-            months[Number(clickedDay?.slice(5, 7)) - 1]
+            en
+              ? months[Number(clickedDay?.slice(5, 7)) - 1]
+              : monthsUa[Number(clickedDay?.slice(5, 7)) - 1]
           }`;
-    return !Number(clickedDay?.slice(8, 10)) ? (
-      <p>{t("home_today")}</p>
-    ) : (
-      checkDayInner
-    );
+    return !Number(clickedDay?.slice(8, 10)) ? t("home_today") : checkDayInner;
   };
 
   return (

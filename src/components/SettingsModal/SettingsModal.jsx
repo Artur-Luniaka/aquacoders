@@ -188,7 +188,7 @@ const SettingsModal = ({ onClose }) => {
                   </div>
                 </div>
                 {genderError && (
-                  <span className={s.errors}>Gender is required</span>
+                  <span className={s.errors}>{t("sett_gen")}</span>
                 )}
                 <div className={s.input_box}>
                   <label htmlFor="name" className={s.radio_title}>
@@ -202,10 +202,10 @@ const SettingsModal = ({ onClose }) => {
                     className={s.input}
                   />
                   {nameError.error1 && (
-                    <span className={s.errors}>Min 2 characters</span>
+                    <span className={s.errors}>{t("sett_min")}</span>
                   )}
                   {nameError.error2 && (
-                    <span className={s.errors}>Max 12 characters</span>
+                    <span className={s.errors}>{t("sett_max")}</span>
                   )}
                   <label htmlFor="email" className={s.radio_title}>
                     {t("sett_email")}
@@ -218,7 +218,7 @@ const SettingsModal = ({ onClose }) => {
                     className={s.input}
                   />
                   {emailError && (
-                    <span className={s.errors}>Incorrect email</span>
+                    <span className={s.errors}>{t("sett_inc")}</span>
                   )}
                 </div>
                 <div className={s.daily_box}>
@@ -257,14 +257,10 @@ const SettingsModal = ({ onClose }) => {
                       className={s.input}
                     />
                     {weightError.error1 && (
-                      <span className={s.errors}>
-                        Weight cannot be negative
-                      </span>
+                      <span className={s.errors}>{t("sett_w_neg")}</span>
                     )}
                     {weightError.error2 && (
-                      <span className={s.errors}>
-                        Weight cannot exceed 250 kg
-                      </span>
+                      <span className={s.errors}>{t("sett_w_kg")}</span>
                     )}
                     <label htmlFor="time-sport" className={s.user_description}>
                       {t("sett_time")}
@@ -277,14 +273,10 @@ const SettingsModal = ({ onClose }) => {
                       className={s.input}
                     />
                     {sportTimeError.error1 && (
-                      <span className={s.errors}>
-                        Workout time cannot be less than 0
-                      </span>
+                      <span className={s.errors}>{t("sett_w_less")}</span>
                     )}
                     {sportTimeError.error2 && (
-                      <span className={s.errors}>
-                        Workout time cannot be more than 24
-                      </span>
+                      <span className={s.errors}>{t("sett_w_more")}</span>
                     )}
                   </div>
                   {/* //required water */}
@@ -300,14 +292,10 @@ const SettingsModal = ({ onClose }) => {
                       readOnly
                     />
                     {dailyNormError.error1 && (
-                      <span className={s.errors}>
-                        Daily norm cannot be less than 500ml
-                      </span>
+                      <span className={s.errors}>{t("sett_d_less")}</span>
                     )}
                     {dailyNormError.error2 && (
-                      <span className={s.errors}>
-                        Daily norm cannot be more than 15000ml
-                      </span>
+                      <span className={s.errors}>{t("sett_d_more")}</span>
                     )}
                   </div>
                 </div>
