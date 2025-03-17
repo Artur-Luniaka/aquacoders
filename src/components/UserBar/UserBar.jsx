@@ -41,8 +41,12 @@ const UserBar = () => {
   }, [dropStatus]);
 
   const checkName = () => {
-    return userName ? userName : userEmail?.length > 12 ? `${userEmail?.slice(0, 12)}...` : userEmail
-  }
+    return userName
+      ? userName
+      : userEmail?.length > 12
+      ? `${userEmail?.slice(0, 12)}...`
+      : userEmail;
+  };
 
   return (
     <section className={s.drop_down_container}>
@@ -72,7 +76,7 @@ const UserBar = () => {
             </svg>
           </span>
         </button>
-        <UserBarPopover dropStatus={dropStatus} />
+        <UserBarPopover dropStatus={dropStatus} setDropStatus={setDropStatus} />
       </div>
     </section>
   );
