@@ -7,15 +7,11 @@ import { logOut } from "./operations/logOutThunk.js";
 import { refreshAccessToken } from "./operations/refreshAccessToken.js";
 import { updateUser } from "./operations/editUserInfoThunk.js";
 import { getLastUsers } from "./operations/getLastUsers.js";
+import { uploadAvatar } from "./operations/editAvatar.js";
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    setName: (state, { payload }) => {
-      state.user.name = payload;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(signUp.fulfilled, (state, action) => {
@@ -45,7 +41,10 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(updateUser.fulfilled, (state, { payload }) => {
-        state.user = { ...state.user, ...payload };
+        state.user = { ...state.user, ...payload.data };
+      })
+      .addCase(uploadAvatar.fulfilled, (state, { payload }) => {
+        state.user = { ...state.user, ...payload.data };
       })
       .addCase(getLastUsers.fulfilled, (state, { payload }) => {
         state.lastUsers = payload.data;
@@ -53,5 +52,4 @@ const authSlice = createSlice({
   },
 });
 
-export const {setName} = authSlice.actions;
 export const authReducer = authSlice.reducer;
