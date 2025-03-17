@@ -29,16 +29,18 @@ const SettingsAvatarModal = () => {
 
     const formData = new FormData();
     formData.append("avatar", file);
-  
+
     try {
-      await dispatch(uploadAvatar(formData)).unwrap();
-      toast.success("Avatar uploaded successfully! 🎉");
+      await toast.promise(dispatch(uploadAvatar(formData)).unwrap(), {
+        loading: "Updating avatar...",
+        success: "Avatar uploaded successfully!",
+      });
     } catch (error) {
-      toast.error(error?.message || "Failed to upload avatar 😢");
+      toast.error(error?.message || "Failed to upload avatar");
     }
-  
+
     setValue("avatar", file);
-  
+
     return () => {
       URL.revokeObjectURL(imageUrl);
     };

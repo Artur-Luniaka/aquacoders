@@ -23,12 +23,11 @@ const EditWater = ({ onCloseModal, record }) => {
 
   const amountOfWater = watch("amountOfWater");
 
-  const [timeValue, setTimeValue] = useState(record?.time || "");
+  const [timeValue, setTimeValue] = useState(record.date.slice(11, 16) || "");
 
   useEffect(() => {
     const now = new Date();
     const formattedTime = now.toTimeString().slice(0, 5);
-    setTimeValue(formattedTime);
     setValue("time", formattedTime);
   }, [setValue, record]);
 

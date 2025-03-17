@@ -3,7 +3,7 @@ import aqua from "../../aqua";
 
 export const uploadAvatar = createAsyncThunk(
   "auth/uploadAvatar",
-  async (photo, thunkAPI) => {   
+  async (photo, thunkAPI) => {
     try {
       const response = await aqua.patch("/users/avatar", photo);
       return response.data;

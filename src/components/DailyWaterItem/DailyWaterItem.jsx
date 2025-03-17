@@ -31,8 +31,8 @@ const DailyWaterItem = ({
         </p>
         <p className={s.time}>
           {Number(date?.slice(11, 13)) <= 12
-            ? `${date?.slice(11, 16)} AM`
-            : `${date?.slice(11, 16)} PM`}
+            ? `${date?.slice(11, 16)}`
+            : `${date?.slice(11, 16)}`}
         </p>
       </div>
       <div className={s.edit_btns_container}>

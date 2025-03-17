@@ -11,7 +11,6 @@ import { settingsSchema } from "../../utils/validationSchema.js";
 import SettingsAvatarModal from "../SettingsAvatarModal/SettingsAvatarModal.jsx";
 import { selectUser } from "../../redux/auth/selectors.js";
 import toast from "react-hot-toast";
-import { setName } from "../../redux/auth/slice.js";
 
 const SettingsModal = ({ onClose }) => {
   const [nameError, setNameError] = useState({ error1: false, error2: false });
@@ -101,14 +100,15 @@ const SettingsModal = ({ onClose }) => {
       return;
     }
 
-    if (data.name !== name) {
-      dispatch(setName(data.name));
-    }
-
     try {
       await settingsSchema.validate(userData, { abortEarly: false });
-      await dispatch(updateUser(filteredUserData)).unwrap();
-      toast.success("Successfully updated!");
+      await toast.promise(dispatch(updateUser(filteredUserData)).unwrap(), {
+        loading: "Updating...",
+        success: "Updated profile successfully!",
+      });
+      // dispatch(setUser(data.data));
+      console.log(data);
+
       onClose(false);
     } catch (error) {
       error.errors.forEach((item) => {
