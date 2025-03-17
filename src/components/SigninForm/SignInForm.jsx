@@ -11,15 +11,15 @@ import { Link } from "react-router-dom";
 
 import { useTranslation } from "react-i18next"; //моє
 
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string().required("Password is required"),
-});
-
 const SignInForm = () => {
   const { t } = useTranslation(); //моє
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
 
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();

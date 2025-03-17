@@ -151,7 +151,7 @@ const DailyWaterList = () => {
                     setEditModalOpen(true);
                   }}
                   onDelete={() => {
-                    setSelectedId(_id);
+                    setSelectedId({ _id, volume, date });
                     setDeleteModalOpen(true);
                   }}
                   setSelectedId={setSelectedId}

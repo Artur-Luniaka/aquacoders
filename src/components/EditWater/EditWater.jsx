@@ -7,6 +7,7 @@ import Modal from "../Modal/Modal.jsx";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { updateWaterRecord } from "../../redux/water/operations/updateWaterRecord.js";
+import { changeMonthlyStats } from "../../redux/water/slice.js";
 
 import { useTranslation } from "react-i18next"; //моє
 
@@ -74,10 +75,20 @@ const EditWater = ({ onCloseModal, record }) => {
     }
 
     const validatedAmount = Math.min(5000, data.amountOfWater);
-
     const formattedDate = new Date(record.date)
       .toISOString()
       .replace(/\.\d{3}Z$/, ".000+00:00");
+
+    const updateTime = (isoString, timeString) => {
+      const [hours, minutes] = timeString.split(":").map(Number);
+      const date = new Date(isoString);
+      date.setUTCHours(hours, minutes, 0, 0);
+      return date.toISOString();
+    };
+
+    const extractDate = (isoString) => {
+      return isoString.split("T")[0];
+    };
 
     try {
       await toast.promise(
@@ -85,16 +96,20 @@ const EditWater = ({ onCloseModal, record }) => {
           updateWaterRecord({
             id: record._id,
             volume: validatedAmount,
-            date: formattedDate,
+            date: updateTime(formattedDate, timeValue),
           })
         ).unwrap(),
         {
           loading: <p>{t("others_proc")}</p>,
           success: <p>{t("others_suc_up")}</p>,
-          error: <p>{t("others_fail_up")}</p>,
         }
       );
-
+      dispatch(
+        changeMonthlyStats({
+          date: extractDate(updateTime(formattedDate, timeValue)),
+          stats: validatedAmount - record.volume,
+        })
+      );
       onCloseModal();
     } catch (e) {
       toast.error(e.message || "Something went wrong. Please try again.");

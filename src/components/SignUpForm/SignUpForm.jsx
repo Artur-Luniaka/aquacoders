@@ -11,17 +11,17 @@ import { signUp } from "../../redux/auth/operations/signUpThunk";
 
 import { useTranslation } from "react-i18next"; //моє
 
-const validationSchema = Yup.object({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .min(5, "Password must be at least 5 characters")
-    .max(50, "Password must be maximum 50 characters")
-    .required("Password is required"),
-  repeatPassword: Yup.string().required("Repeat Password is required"),
-});
-
 const SignUpForm = () => {
   const { t } = useTranslation(); //моє
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string()
+      .min(5, "Password must be at least 5 characters")
+      .max(50, "Password must be maximum 50 characters")
+      .required("Password is required"),
+    repeatPassword: Yup.string().required("Repeat Password is required"),
+  });
 
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();

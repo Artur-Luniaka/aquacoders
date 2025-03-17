@@ -38,11 +38,9 @@ const OurHappyCustomers = () => {
               />
             ))
           ) : (
-<<<<<<< HEAD
-            <span className={s.loader}>{t("others_loading")}</span>
-=======
-            <span className={s.loader}><Loader/></span>
->>>>>>> main
+            <span className={s.loader}>
+              <Loader />
+            </span>
           )}
         </div>
         <p className={s.paragraph}>
@@ -52,7 +50,13 @@ const OurHappyCustomers = () => {
         </p>
       </div>
       <div className={clsx(s.count_customers, activeBlock && s.active)}>
-        {lastUsers?.usersCounter ? lastUsers?.usersCounter : <span className={s.loader}><Loader/></span>}
+        {lastUsers?.usersCounter ? (
+          lastUsers?.usersCounter
+        ) : (
+          <span className={s.loader}>
+            <Loader />
+          </span>
+        )}
       </div>
     </div>
   );

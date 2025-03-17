@@ -18,15 +18,11 @@ import {
 } from "recharts";
 import Loader from "../Loader/Loader.jsx";
 
-import { useTranslation } from "react-i18next"; //моє
-
 const currentDay = new Date().getDate();
 const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
 
 const Calendar = () => {
-  const { t } = useTranslation(); //моє
-
   const [clickedDay, setClickedDay] = useState(currentDay);
   const [chart, setChart] = useState(false);
   const [calendarData, setCalendarData] = useState([]);
@@ -118,13 +114,9 @@ const Calendar = () => {
               ))}
             </div>
           ) : (
-<<<<<<< HEAD
-            <div className={s.empty_calendar_list}>{t("others_loading")}</div>
-=======
             <div className={s.empty_calendar_list}>
               <Loader />
             </div>
->>>>>>> main
           )}
         </>
       ) : (

@@ -45,24 +45,18 @@ const UserBar = () => {
   }, [dropStatus]);
 
   const checkName = () => {
-    return userName ? userName : userEmail?.length > 12 ? `${userEmail?.slice(0, 12)}...` : userEmail
-  }
+    return userName
+      ? userName
+      : userEmail?.length > 12
+      ? `${userEmail?.slice(0, 12)}...`
+      : userEmail;
+  };
 
   return (
     <section className={s.drop_down_container}>
-<<<<<<< HEAD
-      <h2
-        className={s.current_name}
-        onMouseEnter={handleMouseHoverEnter}
-        onMouseLeave={handleMouseHoverLeave}
-      >
-        {t("home_hello")}
-        <span>, {shortenRenderedName}!</span>
-=======
       <h2 className={s.current_name}>
-        Hello
+        {t("home_hello")}
         <span>, {checkName() ? checkName() : "User"}!</span>
->>>>>>> main
       </h2>
       <div onClick={(e) => e.stopPropagation()}>
         <button

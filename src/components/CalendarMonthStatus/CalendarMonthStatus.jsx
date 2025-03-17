@@ -3,7 +3,7 @@ import sprite from "../../assets/sprite.svg";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getMonthlyDate } from "../../redux/water/operations/getMonthlyDate.js";
-import { months } from "./month.js";
+import { months, monthsUa } from "./month.js";
 import clsx from "clsx";
 
 import { useTranslation } from "react-i18next"; //моє
@@ -16,7 +16,8 @@ const CalendarMonthStatus = ({
   setCalendarData,
   onToggleChart,
 }) => {
-  const { t } = useTranslation(); //моє
+  const { t, i18n } = useTranslation(); //моє
+  const en = i18n.language === "en";
 
   const [monthNumber, setMonthNumber] = useState(currentMonth);
   const [yearNumber, setYearNumber] = useState(currentYear);
@@ -76,7 +77,8 @@ const CalendarMonthStatus = ({
           </svg>
         </button>
         <p className={s.current_month}>
-          {months[monthNumber - 1]}, {yearNumber}
+          {en ? months[monthNumber - 1] : monthsUa[monthNumber - 1]},{" "}
+          {yearNumber}
         </p>
         <button
           disabled={checkMonth()}

@@ -11,15 +11,24 @@ import { settingsSchema } from "../../utils/validationSchema.js";
 import SettingsAvatarModal from "../SettingsAvatarModal/SettingsAvatarModal.jsx";
 import { selectUser } from "../../redux/auth/selectors.js";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next"; //моє
 
 const SettingsModal = ({ onClose }) => {
-
   const [nameError, setNameError] = useState({ error1: false, error2: false });
   const [emailError, setEmailError] = useState(false);
-  const [weightError, setWeightError] = useState({error1: false,error2: false});
-  const [sportTimeError, setSportTimeError] = useState({error1: false,error2: false});
+  const [weightError, setWeightError] = useState({
+    error1: false,
+    error2: false,
+  });
+  const [sportTimeError, setSportTimeError] = useState({
+    error1: false,
+    error2: false,
+  });
   const [genderError, setGenderError] = useState(false);
-  const [dailyNormError, setDailyNormError] = useState({error1: false,error2: false});
+  const [dailyNormError, setDailyNormError] = useState({
+    error1: false,
+    error2: false,
+  });
 
   const [waterIntake, setWaterIntake] = useState(1.5);
 
@@ -32,14 +41,7 @@ const SettingsModal = ({ onClose }) => {
     dailyNorm,
   } = useSelector(selectUser);
 
-<<<<<<< HEAD
-import { useTranslation } from "react-i18next"; //моє
-
-const SettingsModal = () => {
   const { t } = useTranslation(); //моє
-
-=======
->>>>>>> main
   const dispatch = useDispatch();
 
   const { register, handleSubmit, watch } = useForm({
@@ -94,20 +96,18 @@ const SettingsModal = () => {
       filteredUserData.dailySportTime = data.dailySportTime;
     if (dailyNorm !== Number(parseFloat(waterIntake) * 1000))
       filteredUserData.dailyNorm = Number(parseFloat(waterIntake) * 1000);
-    
+
     if (Object.keys(filteredUserData).length === 0) {
       toast.error("Please change the data!");
       return;
     }
 
     try {
-
       await settingsSchema.validate(userData, { abortEarly: false });
       await dispatch(updateUser(filteredUserData)).unwrap();
       toast.success("Successfully updated!");
-      onClose(false)
+      onClose(false);
     } catch (error) {
-
       error.errors.forEach((item) => {
         if (item === "Choose gender") {
           setGenderError(true);

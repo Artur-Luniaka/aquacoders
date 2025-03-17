@@ -1,8 +1,6 @@
 import s from "./DailyWaterItem.module.css";
 import sprite from "../../assets/sprite.svg";
 
-import { useTranslation } from "react-i18next"; //моє
-
 const DailyWaterItem = ({
   volume,
   date,
@@ -11,19 +9,11 @@ const DailyWaterItem = ({
   entryId,
   setSelectedId,
 }) => {
-  const { t } = useTranslation(); //моє
-
   const handleDelete = async () => {
     try {
       setSelectedId(entryId);
       onDelete(true);
-<<<<<<< HEAD
-      toast.success(<p>{t("others_ent")}</p>);
     } catch (e) {
-      toast.error(<p>{t("others_fail")}</p>);
-=======
-    } catch (e) {
->>>>>>> main
       e;
     }
   };

@@ -4,30 +4,32 @@ import s from "./DeleteEntryModal.module.css";
 import { useDispatch } from "react-redux";
 
 import { deleteWaterEntry } from "../../redux/water/operations/waterOperations.js";
+import { changeMonthlyStats } from "../../redux/water/slice.js";
 
-<<<<<<< HEAD
 import { useTranslation } from "react-i18next"; //моє
 
-const DeleteEntryModal = ({ onCloseModal }) => {
+const DeleteEntryModal = ({ onCloseModal, entryId }) => {
   const { t } = useTranslation(); //моє
 
-=======
-const DeleteEntryModal = ({ onCloseModal, entryId }) => {
->>>>>>> main
   const dispatch = useDispatch();
+
+  const extractDate = (isoString) => {
+    return isoString.split("T")[0];
+  };
+
   const handleDelete = async () => {
     try {
-      await toast.promise(dispatch(deleteWaterEntry(entryId)).unwrap(), {
-<<<<<<< HEAD
+      await toast.promise(dispatch(deleteWaterEntry(entryId._id)).unwrap(), {
         loading: <p>{t("others_proc")}</p>,
         success: <p>{t("others_suc")}</p>,
-        error: <p>{t("others_fail")}</p>,
-=======
-        loading: "Processing...",
-        success: "Successfully deleted entry!",
->>>>>>> main
       });
       onCloseModal();
+      dispatch(
+        changeMonthlyStats({
+          date: extractDate(entryId.date),
+          stats: -entryId.volume,
+        })
+      );
     } catch (e) {
       toast.error(e.data.message || "Something went wrong. Please try again.");
     }
@@ -43,17 +45,10 @@ const DeleteEntryModal = ({ onCloseModal, entryId }) => {
         <p className={s.text}>{t("del_are")}</p>
         <div className={s.buttons_container}>
           <button className={s.delete} onClick={handleDelete}>
-<<<<<<< HEAD
             {t("del_del")}
           </button>
           <button className={s.cancel} onClick={handleCancel}>
             {t("del_can")}
-=======
-            Delete
-          </button>
-          <button className={s.cancel} onClick={handleCancel}>
-            Cancel
->>>>>>> main
           </button>
         </div>
       </div>

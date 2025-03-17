@@ -12,10 +12,6 @@ import aqua from "../../redux/aqua.js";
 
 import { useTranslation } from "react-i18next"; //моє
 
-// const validationSchema = Yup.object({
-//   email: Yup.string().email("Invalid email").required("Email is required"),
-// });
-
 const SendEmailReset = () => {
   const { t } = useTranslation(); //моє
 
@@ -28,8 +24,6 @@ const SendEmailReset = () => {
     reset,
     formState: { errors, isSubmitSuccessful },
   } = useForm({
-    // resolver: yupResolver(validationSchema),
-    // інакше не спрацьовує useTrans... з t
     resolver: yupResolver(
       Yup.object({
         email: Yup.string().email(t("reset_in")).required(t("reset_em")),
@@ -65,7 +59,6 @@ const SendEmailReset = () => {
 
   return (
     <div className={s.container}>
-      {/* <h2 className={s.title}>Reset Password</h2> */}
       <h2 className={s.title}>{t("reset_title")}</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>

@@ -7,6 +7,7 @@ import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./AddWaterForm.module.css";
 import Modal from "../Modal/Modal.jsx";
+import { changeMonthlyStats } from "../../redux/water/slice.js";
 
 import { useTranslation } from "react-i18next"; //моє
 
@@ -53,6 +54,10 @@ const AddWaterForm = ({ onCloseModal }) => {
     }
   };
 
+  const extractDate = (isoString) => {
+    return isoString.split("T")[0];
+  };
+
   const onSubmit = async (data) => {
     try {
       const now = new Date();
@@ -66,25 +71,19 @@ const AddWaterForm = ({ onCloseModal }) => {
         volume: data.volume,
         date: formattedDate,
       };
-
       await toast.promise(dispatch(addWaterEntry(requestData)).unwrap(), {
-<<<<<<< HEAD
         loading: <p>{t("others_add")}</p>,
         success: <b>{t("add_wat")}</b>,
-        error: <b>{t("add_fail")}</b>,
-=======
-        loading: "Adding water entry...",
-        success: <b>Water added successfully!</b>,
->>>>>>> main
       });
-
+      dispatch(
+        changeMonthlyStats({
+          date: extractDate(requestData.date),
+          stats: data.volume,
+        })
+      );
       onCloseModal();
     } catch (e) {
-<<<<<<< HEAD
       toast.error(e.message || <p>{t("others_add")}</p>);
-=======
-      toast.error(e.data.message || "Something went wrong. Please try again.");
->>>>>>> main
     }
   };
 
