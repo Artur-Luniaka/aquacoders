@@ -7,6 +7,7 @@ import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./AddWaterForm.module.css";
 import Modal from "../Modal/Modal.jsx";
+import { changeMonthlyStats } from "../../redux/water/slice.js";
 
 const AddWaterForm = ({ onCloseModal }) => {
   const dispatch = useDispatch();
@@ -49,6 +50,10 @@ const AddWaterForm = ({ onCloseModal }) => {
     }
   };
 
+  const extractDate = (isoString) => {
+    return isoString.split("T")[0];
+  };
+
   const onSubmit = async (data) => {
     try {
       const now = new Date();
@@ -62,15 +67,19 @@ const AddWaterForm = ({ onCloseModal }) => {
         volume: data.volume,
         date: formattedDate,
       };
-
       await toast.promise(dispatch(addWaterEntry(requestData)).unwrap(), {
         loading: "Adding water entry...",
         success: <b>Water added successfully!</b>,
       });
-
+      dispatch(
+        changeMonthlyStats({
+          date: extractDate(requestData.date),
+          stats: data.volume,
+        })
+      );
       onCloseModal();
     } catch (e) {
-      toast.error(e.data.message || "Something went wrong. Please try again.");
+      toast.error(e.message || "Something went wrong. Please try again.");
     }
   };
 
