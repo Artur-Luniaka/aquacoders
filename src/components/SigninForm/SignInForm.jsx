@@ -66,9 +66,7 @@ const SignInForm = () => {
             className={errors.email ? `${s.input} ${s.input_error}` : s.input}
             {...register("email")}
           />
-          {errors.email && (
-            <span className={s.error_text}>{errors.email.message}</span>
-          )}
+          <span className={s.error_text}>{errors.email?.message}</span>
         </div>
         <div className={s.input_group}>
           <label htmlFor="password" className={s.label}>
@@ -92,9 +90,7 @@ const SignInForm = () => {
               />
             </svg>
           </button>
-          {errors.password && (
-            <span className={s.error_text}>{errors.password.message}</span>
-          )}
+          <span className={s.error_text}>{errors.password?.message}</span>
         </div>
         <button type="submit" className={s.signin_button}>
           {t("in_title")}

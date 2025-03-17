@@ -104,8 +104,11 @@ const SettingsModal = ({ onClose }) => {
 
     try {
       await settingsSchema.validate(userData, { abortEarly: false });
-      await dispatch(updateUser(filteredUserData)).unwrap();
-      toast.success("Successfully updated!");
+      await toast.promise(dispatch(updateUser(filteredUserData)).unwrap(), {
+        loading: "Updating...",
+        success: "Updated profile successfully!",
+      });
+      console.log(data);
       onClose(false);
     } catch (error) {
       error.errors.forEach((item) => {

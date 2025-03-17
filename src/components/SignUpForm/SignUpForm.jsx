@@ -73,11 +73,7 @@ const SignUpForm = () => {
             placeholder={t("in_email_enter")}
             className={`${s.input} ${errors.email ? s.error_input : ""}`}
           />
-          {errors.email ? (
-            <span className={s.error_message}>{errors.email.message}</span>
-          ) : (
-            <span className={s.error_placeholder}></span>
-          )}
+          <span className={s.error_message}>{errors.password?.message}</span>
         </div>
         <div className={s.input_group}>
           <label htmlFor="password" className={s.label}>
@@ -105,11 +101,7 @@ const SignUpForm = () => {
               </svg>
             </button>
           </div>
-          {errors.password ? (
-            <span className={s.error_message}>{errors.password.message}</span>
-          ) : (
-            <span className={s.error_placeholder}></span>
-          )}
+          <span className={s.error_message}>{errors.password?.message}</span>
         </div>
         <div className={s.input_group}>
           <label htmlFor="repeatPassword" className={s.label}>
@@ -139,6 +131,7 @@ const SignUpForm = () => {
               </svg>
             </button>
           </div>
+          <span className={s.error_message}>{errors.password?.message}</span>
         </div>
         <button className={s.button} type="submit">
           {t("up_title")}
