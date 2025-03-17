@@ -9,7 +9,15 @@ import { deleteWaterEntry } from "./operations/waterOperations.js";
 const slice = createSlice({
   name: "water",
   initialState,
-  reducers: {},
+  reducers: {
+    changeMonthlyStats: (state, action) => {
+      const { date, stats } = action.payload;
+      const entry = state.find((item) => item.date === date);
+      if (entry) {
+        entry.stats = stats;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getMonthlyDate.fulfilled, (state, { payload }) => {
@@ -39,3 +47,4 @@ const slice = createSlice({
 });
 
 export const waterReducer = slice.reducer;
+export const { changeMonthlyStats } = slice.actions;

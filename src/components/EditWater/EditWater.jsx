@@ -70,10 +70,16 @@ const EditWater = ({ onCloseModal, record }) => {
     }
 
     const validatedAmount = Math.min(5000, data.amountOfWater);
-
     const formattedDate = new Date(record.date)
       .toISOString()
       .replace(/\.\d{3}Z$/, ".000+00:00");
+
+    const updateTime = (isoString, timeString) => {
+      const [hours, minutes] = timeString.split(":").map(Number);
+      const date = new Date(isoString);
+      date.setUTCHours(hours, minutes, 0, 0);
+      return date.toISOString();
+    };
 
     try {
       await toast.promise(
@@ -81,13 +87,12 @@ const EditWater = ({ onCloseModal, record }) => {
           updateWaterRecord({
             id: record._id,
             volume: validatedAmount,
-            date: formattedDate,
+            date: updateTime(formattedDate, timeValue),
           })
         ).unwrap(),
         {
           loading: "Processing...",
           success: "Successfully updated water record!",
-          error: "Failed to update water data. Try again!",
         }
       );
 
