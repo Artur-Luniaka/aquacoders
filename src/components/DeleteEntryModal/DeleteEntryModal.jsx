@@ -4,16 +4,28 @@ import s from "./DeleteEntryModal.module.css";
 import { useDispatch } from "react-redux";
 
 import { deleteWaterEntry } from "../../redux/water/operations/waterOperations.js";
+import { changeMonthlyStats } from "../../redux/water/slice.js";
 
 const DeleteEntryModal = ({ onCloseModal, entryId }) => {
   const dispatch = useDispatch();
+
+  const extractDate = (isoString) => {
+    return isoString.split("T")[0];
+  };
+
   const handleDelete = async () => {
     try {
-      await toast.promise(dispatch(deleteWaterEntry(entryId)).unwrap(), {
+      await toast.promise(dispatch(deleteWaterEntry(entryId._id)).unwrap(), {
         loading: "Processing...",
         success: "Successfully deleted entry!",
       });
       onCloseModal();
+      dispatch(
+        changeMonthlyStats({
+          date: extractDate(entryId.date),
+          stats: -entryId.volume,
+        })
+      );
     } catch (e) {
       toast.error(e.data.message || "Something went wrong. Please try again.");
     }

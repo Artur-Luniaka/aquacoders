@@ -7,6 +7,7 @@ import Modal from "../Modal/Modal.jsx";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { updateWaterRecord } from "../../redux/water/operations/updateWaterRecord.js";
+import { changeMonthlyStats } from "../../redux/water/slice.js";
 
 const EditWater = ({ onCloseModal, record }) => {
   const { register, handleSubmit, setValue, watch } = useForm({
@@ -81,6 +82,10 @@ const EditWater = ({ onCloseModal, record }) => {
       return date.toISOString();
     };
 
+    const extractDate = (isoString) => {
+      return isoString.split("T")[0];
+    };
+
     try {
       await toast.promise(
         dispatch(
@@ -95,7 +100,12 @@ const EditWater = ({ onCloseModal, record }) => {
           success: "Successfully updated water record!",
         }
       );
-
+      dispatch(
+        changeMonthlyStats({
+          date: extractDate(updateTime(formattedDate, timeValue)),
+          stats: validatedAmount - record.volume,
+        })
+      );
       onCloseModal();
     } catch (e) {
       toast.error(e.message || "Something went wrong. Please try again.");

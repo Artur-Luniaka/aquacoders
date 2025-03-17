@@ -12,9 +12,9 @@ const slice = createSlice({
   reducers: {
     changeMonthlyStats: (state, action) => {
       const { date, stats } = action.payload;
-      const entry = state.find((item) => item.date === date);
+      const entry = state.monthData.find((item) => item.date === date);
       if (entry) {
-        entry.stats = stats;
+        entry.stats += stats;
       }
     },
   },
