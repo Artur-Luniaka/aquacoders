@@ -1,6 +1,7 @@
 @import url("./fonts/fonts.css");
 
 #root {
+  position: relative;
   max-width: 100%;
   margin: 0 auto;
   padding: 0 16px;
@@ -42,4 +43,9 @@
 
   --input-inactive-focus-col: rgba(47, 47, 47, 0.2);
   --input-active-col: rgba(47, 47, 47, 0.4);
+}
+
+.refresh {
+  position: fixed;
+  z-index: 20;
 }
