@@ -21,7 +21,7 @@ const App = () => {
   return (
     <>
       <Layout>
-        {refresh && (
+        {!refresh && (
           <div className="refresh">
             <Refresh />
           </div>

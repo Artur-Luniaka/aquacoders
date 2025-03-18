@@ -6,6 +6,9 @@
   height: 100%;
 }
 .loader {
+  border-radius: 50%;
+  background-color: rgba(240, 248, 255, 0.418);
+  box-shadow: 0 0 15px 15px rgba(240, 248, 255, 0.418);
   display: block;
   position: relative;
   left: 50%;
@@ -28,7 +31,7 @@
   bottom: 5px;
   border-radius: 50%;
   border: 3px solid transparent;
-  border-top-color: #55b6d3;
+  border-top-color: #9be1a0;
   -webkit-animation: spin 3s linear infinite;
   animation: spin 3s linear infinite;
 }
@@ -41,7 +44,7 @@
   bottom: 15px;
   border-radius: 50%;
   border: 3px solid transparent;
-  border-top-color: #0077ff;
+  border-top-color: #007aff;
   -webkit-animation: spin 1.5s linear infinite;
   animation: spin 1.5s linear infinite;
 }
