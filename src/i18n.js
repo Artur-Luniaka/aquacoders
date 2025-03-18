@@ -141,6 +141,8 @@ i18n.use(initReactI18next).init({
         sett_w_more: "Workout time cannot be more than 24",
         sett_d_less: "Daily norm cannot be less than 500ml",
         sett_d_more: "Daily norm cannot be more than 15000ml",
+        sett_success: "Account updated successfully!",
+        sett_pending: "Updating...",
 
         edit_title: "Edit the entered amount of water",
         edit_cor: "Correct entered data:",
