@@ -14,4 +14,5 @@ export const initialState = {
   sessionId: null,
   isLoggedIn: false,
   lastUsers: null,
+  status: "idle", // 'idle', 'loading', 'succeeded', 'failed'
 };
