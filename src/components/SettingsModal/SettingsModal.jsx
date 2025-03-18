@@ -167,6 +167,7 @@ const SettingsModal = ({ onClose }) => {
                   <div className={s.radio_group}>
                     <label htmlFor="weight-woman" className={s.radio_label}>
                       <input
+                        defaultChecked
                         type="radio"
                         value="female"
                         id="weight-woman"

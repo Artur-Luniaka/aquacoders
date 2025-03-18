@@ -76,8 +76,6 @@ const AddWaterForm = ({ onCloseModal }) => {
         volume: data.volume,
         date: formattedDate,
       };
-      console.log(recordingDateTime);
-      console.log(formattedDate);
 
       await toast.promise(dispatch(addWaterEntry(requestData)).unwrap(), {
         loading: "Adding water entry...",

@@ -37,8 +37,9 @@
 .current_name > span {
   font-family: var(--gilroy-bold);
   font-weight: 700;
+  font-size: 30px;
   @media screen and (min-width: 768px) {
-    font-size: 36px;
+    font-size: 32px;
     line-height: 1.05556;
   }
 }
