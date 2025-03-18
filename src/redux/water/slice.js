@@ -19,7 +19,7 @@ const slice = createSlice({
       if (entryIndex !== -1) {
         state.monthData[entryIndex] = {
           ...state.monthData[entryIndex],
-          stats: state.monthData[entryIndex].stats + stats,
+          stats: state.monthData[entryIndex].stats + Number(stats),
         };
       }
     },
