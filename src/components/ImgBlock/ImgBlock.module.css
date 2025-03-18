@@ -1,4 +1,5 @@
 .box {
+  animation: start 0.5s ease-in-out;
   width: 343px;
   border-radius: 30px;
   position: relative;
@@ -7,5 +8,13 @@
   }
   @media (min-width: 1440px) {
     width: 672px;
+  }
+}
+@keyframes start {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
   }
 }

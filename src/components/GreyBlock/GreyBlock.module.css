@@ -1,5 +1,6 @@
 .box {
   background-color: var(--color-lightgrey);
+  animation: start 0.5s ease-in-out;
   padding: 24px 16px 67px 16px;
   width: 343px;
   border-radius: 30px;
@@ -10,5 +11,13 @@
   @media (min-width: 1440px) {
     padding: 32px;
     width: 672px;
+  }
+}
+@keyframes start {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
   }
 }

@@ -9,7 +9,7 @@
   flex-direction: column;
   gap: 16px;
   margin: auto;
-
+  animation: start 0.8s ease-in-out;
   @media (min-width: 375px) {
     max-width: 375px;
   }
@@ -48,4 +48,17 @@
 .refresh {
   position: fixed;
   z-index: 20;
+}
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-darkblue) transparent;
+}
+@keyframes start {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
