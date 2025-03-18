@@ -1,15 +1,26 @@
 import { useTranslation } from "react-i18next";
 import s from "./LanguageSwitcher.module.css";
-import { useState } from "react";
+import { setLang } from "../../redux/common/slice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLang } from "../../redux/common/selectors.js";
+import { useEffect } from "react";
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
-  const [activeLang, setActiveLang] = useState(i18n.language);
+  const dispatch = useDispatch();
+  const activeLang = useSelector(selectLang);
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
-    setActiveLang(lng);
+    dispatch(setLang(lng));
   };
+
+  useEffect(() => {
+    if (activeLang === "ua") {
+      i18n.changeLanguage("ua");
+      dispatch(setLang("ua"));
+    }
+  }, [dispatch, activeLang, i18n]);
 
   return (
     <div className={s.wrapper_btn}>

@@ -105,8 +105,8 @@ const SettingsModal = ({ onClose }) => {
     try {
       await settingsSchema.validate(userData, { abortEarly: false });
       await toast.promise(dispatch(updateUser(filteredUserData)).unwrap(), {
-        loading: "Updating...",
-        success: "Updated profile successfully!",
+        loading: t("sett_pending"),
+        success: t("sett_success"),
       });
       onClose(false);
     } catch (error) {
@@ -158,7 +158,7 @@ const SettingsModal = ({ onClose }) => {
   return (
     <Modal onCloseModal={onClose}>
       <div className={s.modal_settings}>
-        <h2 className={s.title_modal}>Setting</h2>
+        <h2 className={s.title_modal}>{t("home_set")}</h2>
         <SettingsAvatarModal />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={s.content_box}>

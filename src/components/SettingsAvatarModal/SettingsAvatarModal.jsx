@@ -35,8 +35,8 @@ const SettingsAvatarModal = () => {
 
     try {
       await toast.promise(dispatch(uploadAvatar(formData)).unwrap(), {
-        loading: "Updating avatar...",
-        success: "Avatar uploaded successfully!",
+        loading: t("sett_pending"),
+        success: t("sett_success"),
       });
     } catch (error) {
       toast.error(error?.message || "Failed to upload avatar");

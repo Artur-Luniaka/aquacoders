@@ -1,18 +1,18 @@
 .modal_settings {
   display: flex;
   flex-direction: column;
-  max-width: 343px;
+  width: 343px;
   padding: 40px 20px;
   margin-bottom: 40px;
   height: 90vh;
   color: var(--color-darkblue);
   margin-bottom: 60px;
   @media screen and (min-width: 768px) {
-    max-width: 648px;
+    width: 648px;
     padding: 40px;
   }
   @media screen and (min-width: 1440px) {
-    max-width: 920px;
+    width: 920px;
   }
 }
 
@@ -57,11 +57,11 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .part_content {
-    /* width: 50%;
+  /* .part_content {
+    width: 50%;
     max-width: 50%;
-    box-sizing: border-box; */
-  }
+    box-sizing: border-box;
+  } */
   .part_content:last-child {
     padding-top: 68px;
   }
@@ -83,8 +83,7 @@
 
 .radio_group {
   display: flex;
-  justify-content: space-between;
-  width: 150px;
+  gap: 8px;
 }
 
 .radio_label {
