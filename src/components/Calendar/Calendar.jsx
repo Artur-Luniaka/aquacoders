@@ -1,5 +1,5 @@
 import s from "./Calendar.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CalendarDayStatus from "../CalendarDayStatus/CalendarDayStatus.jsx";
 import CalendarMonthStatus from "../CalendarMonthStatus/CalendarMonthStatus.jsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,8 +28,20 @@ const Calendar = () => {
 
   const monthData = useSelector(selectMonthData);
   const dailyNorm = useSelector(selectDailyNorm);
-
+  const dailyNormRef = useRef({
+    data1: null,
+    data2: null,
+    data3: null,
+    data4: null,
+  });
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dailyNormRef.current.data1 = Number(dailyNorm / 1000).toFixed(2);
+    dailyNormRef.current.data2 = Number(dailyNorm / 1000 / 2).toFixed(2);
+    dailyNormRef.current.data3 = Number(dailyNorm / 1000 / 4).toFixed(2);
+    dailyNormRef.current.data4 = Number(dailyNorm / 1000 / 1.4).toFixed(2);
+  }, [dailyNorm]);
 
   useEffect(() => {
     dispatch(
@@ -73,7 +85,6 @@ const Calendar = () => {
         stats: item.stats / 1000,
       }));
   };
-  console.log(transformData(monthData));
 
   return (
     <section className={s.calendar_section}>
@@ -102,7 +113,9 @@ const Calendar = () => {
               ))}
             </div>
           ) : (
-            <div className={s.empty_calendar_list}>...Loading</div>
+            <div className={s.empty_calendar_list}>
+              <span className={s.loader}>Loading...</span>
+            </div>
           )}
         </>
       ) : (
@@ -119,8 +132,14 @@ const Calendar = () => {
                 tick={{ fill: "#333", fontSize: 12 }}
                 axisLine={{ stroke: "#555" }}
                 tickFormatter={(value) => `${value}L`}
-                domain={[0, 2.5]}
-                ticks={[0, 0.5, 1, 1.5, 2, 2.5]}
+                domain={[0, dailyNormRef.current.data1]}
+                ticks={[
+                  0,
+                  dailyNormRef.current.data3,
+                  dailyNormRef.current.data2,
+                  dailyNormRef.current.data4,
+                  dailyNormRef.current.data1,
+                ]}
               />
               <Tooltip />
               <Area
@@ -128,7 +147,7 @@ const Calendar = () => {
                 dataKey="stats"
                 stroke="none"
                 fill="#87D28D"
-                fillOpacity={0.3}
+                fillOpacity={0.4}
               />
               <Line
                 type="monotone"

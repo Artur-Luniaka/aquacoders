@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SaveButton from "../SaveButton/SaveButton.jsx";
@@ -8,6 +7,7 @@ import Modal from "../Modal/Modal.jsx";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { updateWaterRecord } from "../../redux/water/operations/updateWaterRecord.js";
+import { changeMonthlyStats } from "../../redux/water/slice.js";
 
 const EditWater = ({ onCloseModal, record }) => {
   const { register, handleSubmit, setValue, watch } = useForm({
@@ -23,12 +23,11 @@ const EditWater = ({ onCloseModal, record }) => {
 
   const amountOfWater = watch("amountOfWater");
 
-  const [timeValue, setTimeValue] = useState(record?.time || "");
+  const [timeValue, setTimeValue] = useState(record.date.slice(11, 16) || "");
 
   useEffect(() => {
     const now = new Date();
     const formattedTime = now.toTimeString().slice(0, 5);
-    setTimeValue(formattedTime);
     setValue("time", formattedTime);
   }, [setValue, record]);
 
@@ -71,33 +70,41 @@ const EditWater = ({ onCloseModal, record }) => {
     }
 
     const validatedAmount = Math.min(5000, data.amountOfWater);
-
     const formattedDate = new Date(record.date)
       .toISOString()
       .replace(/\.\d{3}Z$/, ".000+00:00");
 
-    try {
-      console.log("📩 Дані, які відправляємо на сервер:", {
-        id: record._id,
-        volume: validatedAmount,
-        date: formattedDate,
-      });
+    const updateTime = (isoString, timeString) => {
+      const [hours, minutes] = timeString.split(":").map(Number);
+      const date = new Date(isoString);
+      date.setUTCHours(hours, minutes, 0, 0);
+      return date.toISOString();
+    };
 
+    const extractDate = (isoString) => {
+      return isoString.split("T")[0];
+    };
+
+    try {
       await toast.promise(
         dispatch(
           updateWaterRecord({
             id: record._id,
             volume: validatedAmount,
-            date: formattedDate,
+            date: updateTime(formattedDate, timeValue),
           })
         ).unwrap(),
         {
           loading: "Processing...",
           success: "Successfully updated water record!",
-          error: "Failed to update water data. Try again!",
         }
       );
-
+      dispatch(
+        changeMonthlyStats({
+          date: extractDate(updateTime(formattedDate, timeValue)),
+          stats: validatedAmount - record.volume,
+        })
+      );
       onCloseModal();
     } catch (e) {
       toast.error(e.message || "Something went wrong. Please try again.");

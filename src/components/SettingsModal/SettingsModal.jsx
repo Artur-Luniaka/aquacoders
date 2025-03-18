@@ -13,13 +13,21 @@ import { selectUser } from "../../redux/auth/selectors.js";
 import toast from "react-hot-toast";
 
 const SettingsModal = ({ onClose }) => {
-
   const [nameError, setNameError] = useState({ error1: false, error2: false });
   const [emailError, setEmailError] = useState(false);
-  const [weightError, setWeightError] = useState({error1: false,error2: false});
-  const [sportTimeError, setSportTimeError] = useState({error1: false,error2: false});
+  const [weightError, setWeightError] = useState({
+    error1: false,
+    error2: false,
+  });
+  const [sportTimeError, setSportTimeError] = useState({
+    error1: false,
+    error2: false,
+  });
   const [genderError, setGenderError] = useState(false);
-  const [dailyNormError, setDailyNormError] = useState({error1: false,error2: false});
+  const [dailyNormError, setDailyNormError] = useState({
+    error1: false,
+    error2: false,
+  });
 
   const [waterIntake, setWaterIntake] = useState(1.5);
 
@@ -86,21 +94,20 @@ const SettingsModal = ({ onClose }) => {
       filteredUserData.dailySportTime = data.dailySportTime;
     if (dailyNorm !== Number(parseFloat(waterIntake) * 1000))
       filteredUserData.dailyNorm = Number(parseFloat(waterIntake) * 1000);
-    
+
     if (Object.keys(filteredUserData).length === 0) {
       toast.error("Please change the data!");
       return;
     }
 
     try {
-
       await settingsSchema.validate(userData, { abortEarly: false });
-      dispatch(updateUser(filteredUserData));
-      onClose(false)
-      toast.success("Successfully updated!");
-
+      await toast.promise(dispatch(updateUser(filteredUserData)).unwrap(), {
+        loading: "Updating...",
+        success: "Updated profile successfully!",
+      });
+      onClose(false);
     } catch (error) {
-
       error.errors.forEach((item) => {
         if (item === "Choose gender") {
           setGenderError(true);
@@ -160,6 +167,7 @@ const SettingsModal = ({ onClose }) => {
                   <div className={s.radio_group}>
                     <label htmlFor="weight-woman" className={s.radio_label}>
                       <input
+                        defaultChecked
                         type="radio"
                         value="female"
                         id="weight-woman"

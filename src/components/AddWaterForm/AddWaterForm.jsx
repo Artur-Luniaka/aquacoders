@@ -7,11 +7,13 @@ import SaveButton from "../SaveButton/SaveButton.jsx";
 import icons from "../../assets/sprite.svg";
 import s from "./AddWaterForm.module.css";
 import Modal from "../Modal/Modal.jsx";
+import { changeMonthlyStats } from "../../redux/water/slice.js";
 
 const AddWaterForm = ({ onCloseModal }) => {
   const dispatch = useDispatch();
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: { volume: 50, date: "" },
+    mode: "onChange",
   });
 
   const waterAmount = watch("volume");
@@ -48,14 +50,27 @@ const AddWaterForm = ({ onCloseModal }) => {
     }
   };
 
+  const extractDate = (isoString) => {
+    return isoString.split("T")[0];
+  };
+
   const onSubmit = async (data) => {
     try {
       const now = new Date();
       const [hours, minutes] = data.date.split(":");
+
       const recordingDateTime = new Date(
-        `${now.toISOString().slice(0, 10)}T${hours}:${minutes}:00.000Z`
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        hours,
+        minutes,
+        0
       );
-      const formattedDate = recordingDateTime.toISOString();
+      const formattedDate = new Date(
+        recordingDateTime.getTime() -
+          recordingDateTime.getTimezoneOffset() * 60000
+      ).toISOString();
 
       const requestData = {
         volume: data.volume,
@@ -65,9 +80,13 @@ const AddWaterForm = ({ onCloseModal }) => {
       await toast.promise(dispatch(addWaterEntry(requestData)).unwrap(), {
         loading: "Adding water entry...",
         success: <b>Water added successfully!</b>,
-        error: <b>Failed to add water. Try again!</b>,
       });
-
+      dispatch(
+        changeMonthlyStats({
+          date: extractDate(requestData.date),
+          stats: data.volume,
+        })
+      );
       onCloseModal();
     } catch (e) {
       toast.error(e.message || "Something went wrong. Please try again.");

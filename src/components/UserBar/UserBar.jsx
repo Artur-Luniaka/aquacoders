@@ -40,11 +40,20 @@ const UserBar = () => {
     };
   }, [dropStatus]);
 
+  const checkName = () => {
+    return userName
+      ? userName
+      : userEmail?.length > 12
+      ? `${userEmail?.slice(0, 12)}...`
+      : userEmail;
+  };
+
   return (
     <section className={s.drop_down_container}>
       <h2 className={s.current_name}>
-        Hello
-        <span>, {userName ? userName : userEmail}!</span>
+        Hello,
+        {""}
+        <span> {checkName() ? checkName() : "User"}!</span>
       </h2>
       <div onClick={(e) => e.stopPropagation()}>
         <button
@@ -52,12 +61,12 @@ const UserBar = () => {
           className={s.menu_container}
           onClick={() => setDropStatus((prev) => !prev)}
         >
-          <span>{userName ? userName : userEmail}</span>
+          <span>{checkName() ? checkName() : ""}</span>
           <span className={s.user_avatar_container}>
             <img
               className={s.user_avatar}
               src={userAvatar()}
-              alt={userName ? userName : userEmail}
+              alt={checkName() ? checkName() : "User"}
             />
           </span>
           <span
@@ -68,7 +77,7 @@ const UserBar = () => {
             </svg>
           </span>
         </button>
-        <UserBarPopover dropStatus={dropStatus} />
+        <UserBarPopover dropStatus={dropStatus} setDropStatus={setDropStatus} />
       </div>
     </section>
   );

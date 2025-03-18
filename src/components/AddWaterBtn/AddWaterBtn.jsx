@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import s from "./AddWaterBtn.module.css";
 import icons from "../../assets/sprite.svg";

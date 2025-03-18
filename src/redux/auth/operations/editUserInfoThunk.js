@@ -9,7 +9,7 @@ export const updateUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.error(
-        "❌ Update user error:",
+        " Update user error:",
         error.response?.data || error.message
       );
       return thunkAPI.rejectWithValue(error.response?.data || "Unknown error");

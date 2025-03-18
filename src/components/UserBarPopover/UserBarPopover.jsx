@@ -6,12 +6,13 @@ import LogOutModal from "../LogOutModal/LogOutModal";
 import SettingsModal from "../SettingsModal/SettingsModal";
 import { Link } from "react-router-dom";
 
-const UserBarPopover = ({ dropStatus }) => {
+const UserBarPopover = ({ dropStatus, setDropStatus }) => {
   const [showLogOutModal, setShowLogOutModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     setShowLogOutModal(true);
+    setDropStatus(false);
   };
 
   const closeModal = () => {
@@ -22,7 +23,10 @@ const UserBarPopover = ({ dropStatus }) => {
     <>
       <div className={clsx(s.drop_menu, dropStatus && s.drop_menu_open)}>
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            setIsModalOpen(true);
+            setDropStatus(false);
+          }}
           className={s.drop_button}
           type="button"
         >

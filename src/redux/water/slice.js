@@ -9,7 +9,21 @@ import { deleteWaterEntry } from "./operations/waterOperations.js";
 const slice = createSlice({
   name: "water",
   initialState,
-  reducers: {},
+  reducers: {
+    changeMonthlyStats: (state, action) => {
+      const { date, stats } = action.payload;
+      const entryIndex = state.monthData.findIndex(
+        (item) => item.date === date
+      );
+
+      if (entryIndex !== -1) {
+        state.monthData[entryIndex] = {
+          ...state.monthData[entryIndex],
+          stats: state.monthData[entryIndex].stats + Number(stats),
+        };
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getMonthlyDate.fulfilled, (state, { payload }) => {
@@ -17,11 +31,13 @@ const slice = createSlice({
       })
 
       .addCase(getDailyInfo.fulfilled, (state, { payload }) => {
-        state.waterList = payload.data;
+        state.waterList = payload.info.data.toSorted(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
         state.clickedDay = payload.day;
       })
-      .addCase(addWaterEntry.fulfilled, (state, { payload }) => {
-        state.waterList.unshift({ ...payload, payload });
+      .addCase(addWaterEntry.fulfilled, (state, action) => {
+        state.waterList.push({ ...action.payload.data });
       })
       .addCase(updateWaterRecord.fulfilled, (state, { payload }) => {
         state.waterList = state.waterList.map((item) =>
@@ -30,10 +46,11 @@ const slice = createSlice({
       })
       .addCase(deleteWaterEntry.fulfilled, (state, { payload }) => {
         state.waterList = state.waterList.filter(
-          (item) => item._id !== payload._id
+          (item) => item._id !== payload
         );
       });
   },
 });
 
 export const waterReducer = slice.reducer;
+export const { changeMonthlyStats } = slice.actions;

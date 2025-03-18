@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectLastUsers } from "../../redux/auth/selectors.js";
 import { getLastUsers } from "../../redux/auth/operations/getLastUsers.js";
 import clsx from "clsx";
+import Loader from "../Loader/Loader.jsx";
 
 const OurHappyCustomers = () => {
   const [activeBlock, setActiveBlock] = useState(false);
@@ -33,7 +34,7 @@ const OurHappyCustomers = () => {
               />
             ))
           ) : (
-            <span className={s.loader}>Loading...</span>
+            <span className={s.loader}><Loader/></span>
           )}
         </div>
         <p className={s.paragraph}>
@@ -41,7 +42,7 @@ const OurHappyCustomers = () => {
         </p>
       </div>
       <div className={clsx(s.count_customers, activeBlock && s.active)}>
-        {lastUsers?.usersCounter ? lastUsers?.usersCounter : "Loading..."}
+        {lastUsers?.usersCounter ? lastUsers?.usersCounter : <span className={s.loader}><Loader/></span>}
       </div>
     </div>
   );

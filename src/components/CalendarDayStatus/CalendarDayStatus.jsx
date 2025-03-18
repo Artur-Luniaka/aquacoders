@@ -18,7 +18,8 @@ const CalendarDayStatus = ({
   const checkFutureDay = () => {
     if (year > currentYear) return true;
     if (year === currentYear && month > currentMonth) return true;
-    if (year === currentYear && month === currentMonth && day > currentDay) return true;
+    if (year === currentYear && month === currentMonth && day > currentDay)
+      return true;
     return false;
   };
 
@@ -27,29 +28,41 @@ const CalendarDayStatus = ({
     if (checkFutureDay()) return;
 
     setCalendarData((prevData) => {
-      const isAlreadyActive = prevData.some((item) => item.day === clickedDay && item.isActive);
+      const isAlreadyActive = prevData.some(
+        (item) => item.day === clickedDay && item.isActive
+      );
 
       if (isAlreadyActive) return prevData;
 
       dispatch(getDailyInfo(date));
 
       return prevData.map((item) =>
-        item.day === clickedDay ? { ...item, isActive: true } : { ...item, isActive: false }
+        item.day === clickedDay
+          ? { ...item, isActive: true }
+          : { ...item, isActive: false }
       );
     });
   };
 
   const checkButtonState = () => {
-    return clsx(s.number, currentDay === day && isActive && currentMonth === month && currentYear === year && s.current_active_day,
-      currentDay === day && currentMonth === month && currentYear === year && !isActive && s.current_not_active_day,
+    return clsx(
+      s.number,
+      currentDay === day &&
+        isActive &&
+        currentMonth === month &&
+        currentYear === year &&
+        s.current_active_day,
+      currentDay === day &&
+        currentMonth === month &&
+        currentYear === year &&
+        !isActive &&
+        s.current_not_active_day,
       currentDay !== day && isActive && s.not_current_active_day,
       currentMonth !== month && isActive && s.not_current_active_day,
       checkFutureDay() && s.future_days,
       stats < 100 && s.low_percent
     );
   };
-
-
 
   return (
     <button
