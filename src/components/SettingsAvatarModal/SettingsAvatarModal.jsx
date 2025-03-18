@@ -5,10 +5,13 @@ import { selectAvatarUrl } from "../../redux/auth/selectors.js";
 import { uploadAvatar } from "../../redux/auth/operations/editAvatar.js";
 import avatarPlaceholder from "../../assets/avatar.png";
 import sprite from "../../assets/sprite.svg";
+import { useTranslation } from "react-i18next"; //моє
 import s from "./SettingsAvatarModal.module.css";
 import toast from "react-hot-toast";
 
 const SettingsAvatarModal = () => {
+  const { t } = useTranslation(); //моє
+
   const avatarUrlFromStore = useSelector(selectAvatarUrl);
   const dispatch = useDispatch();
   const [imagePreview, setImagePreview] = useState(
@@ -32,8 +35,8 @@ const SettingsAvatarModal = () => {
 
     try {
       await toast.promise(dispatch(uploadAvatar(formData)).unwrap(), {
-        loading: "Updating avatar...",
-        success: "Avatar uploaded successfully!",
+        loading: t("sett_pending"),
+        success: t("sett_success"),
       });
     } catch (error) {
       toast.error(error?.message || "Failed to upload avatar");
@@ -55,7 +58,7 @@ const SettingsAvatarModal = () => {
             <svg className={s.icon} width="18" height="18">
               <use href={`${sprite}#icon-upload-photo`}></use>
             </svg>
-            <span className={s.upload_text}>Upload a photo</span>
+            <span className={s.upload_text}>{t("sett_upload")}</span>
           </span>
         </label>
         <input

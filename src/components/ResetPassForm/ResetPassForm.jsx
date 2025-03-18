@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import aqua from "../../redux/aqua.js";
 import { logOut } from "../../redux/auth/operations/logOutThunk.js";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const validationSchema = Yup.object({
   password: Yup.string()
     .min(5, "Password must be at least 5 characters")
@@ -22,6 +24,8 @@ const validationSchema = Yup.object({
 });
 
 const ResetPassForm = ({ token }) => {
+  const { t } = useTranslation(); //моє
+
   const [showPassword, setShowPassword] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const navigate = useNavigate();
@@ -46,13 +50,13 @@ const ResetPassForm = ({ token }) => {
       await toast.promise(
         aqua.post("/users/reset-password", { password, token }),
         {
-          loading: "Reset password...",
-          success: "Password was successfully reset!",
+          loading: <p>{t("others_res")}</p>,
+          success: <p>{t("others_pas")}</p>,
         }
       );
       await toast.promise(dispatch(logOut()).unwrap(), {
-        loading: "Logout...",
-        success: "Successfully logged out!",
+        loading: <p>{t("others_logo")}</p>,
+        success: <p>{t("others_succ")}</p>,
       });
       navigate("/signin");
     } catch (error) {
@@ -70,18 +74,18 @@ const ResetPassForm = ({ token }) => {
 
   return (
     <div className={s.container}>
-      <h2 className={s.title}>Reset Password</h2>
+      <h2 className={s.title}>{t("reset_title")}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <div className={s.input_group}>
           <label htmlFor="password" className={s.label}>
-            Password
+            {t("reset_pas")}
           </label>
           <div className={s.password_wrapper}>
             <input
               {...register("password")}
               id="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
+              placeholder={t("reset_ent")}
               className={`${s.input} ${errors.password ? s.error_input : ""}`}
             />
             <button
@@ -106,14 +110,14 @@ const ResetPassForm = ({ token }) => {
         </div>
         <div className={s.input_group}>
           <label htmlFor="repeatPassword" className={s.label}>
-            Repeat password
+            {t("reset_rep")}
           </label>
           <div className={s.password_wrapper}>
             <input
               id="repeatPassword"
               {...register("repeatPassword")}
               type={showPassword ? "text" : "password"}
-              placeholder="Repeat password"
+              placeholder={t("reset_rep_two")}
               className={`${s.input} ${
                 errors.repeatPassword ? s.error_input : ""
               }`}
@@ -141,14 +145,14 @@ const ResetPassForm = ({ token }) => {
           )}
         </div>
         <button className={s.button} type="submit">
-          Change Password
+          {t("reset_chan")}
         </button>
       </form>
       {!isLoggedIn && (
         <p className={s.paragraph}>
-          Don't have an account?
+          {t("reset_don")}
           <Link to="/signup" className={s.link}>
-            Sign Up
+            {t("reset_up")}
           </Link>
         </p>
       )}

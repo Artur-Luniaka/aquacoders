@@ -9,16 +9,22 @@ import sprite from "../../assets/sprite.svg";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../redux/auth/operations/signUpThunk";
 
-const validationSchema = Yup.object({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .min(5, "Password must be at least 5 characters")
-    .max(50, "Password must be maximum 50 characters")
-    .required("Password is required"),
-  repeatPassword: Yup.string().required("Repeat Password is required"),
-});
+import { useTranslation } from "react-i18next"; //моє
 
 const SignUpForm = () => {
+  const { t } = useTranslation(); //моє
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email(<p>{t("in_val_inv")}</p>)
+      .required(<p>{t("in_val_em")}</p>),
+    password: Yup.string()
+      .min(5, <p>{t("up_val_l")}</p>)
+      .max(50, <p>{t("up_val_max")}</p>)
+      .required(<p>{t("in_val_pas")}</p>),
+    repeatPassword: Yup.string().required(<p>{t("up_val_rep")}</p>),
+  });
+
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,8 +49,8 @@ const SignUpForm = () => {
 
     try {
       await toast.promise(dispatch(signUp({ email, password })).unwrap(), {
-        loading: "Signing up...",
-        success: "Account created successfully!",
+        loading: <p>{t("up_s_up")}</p>,
+        success: <p>{t("up_ac_cr")}</p>,
       });
       navigate("/signin");
     } catch (e) {
@@ -54,31 +60,31 @@ const SignUpForm = () => {
 
   return (
     <div className={s.container}>
-      <h2 className={s.title}>Sign Up</h2>
+      <h2 className={s.title}>{t("up_title")}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <div className={s.input_group}>
           <label htmlFor="email" className={s.label}>
-            Email
+            {t("up_email")}
           </label>
           <input
             {...register("email")}
             id="email"
             type="email"
-            placeholder="Enter your email"
+            placeholder={t("in_email_enter")}
             className={`${s.input} ${errors.email ? s.error_input : ""}`}
           />
           <span className={s.error_message}>{errors.password?.message}</span>
         </div>
         <div className={s.input_group}>
           <label htmlFor="password" className={s.label}>
-            Password
+            {t("up_pass")}
           </label>
           <div className={s.password_wrapper}>
             <input
               {...register("password")}
               id="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
+              placeholder={t("in_pass_enter")}
               className={`${s.input} ${errors.password ? s.error_input : ""}`}
             />
             <button
@@ -99,14 +105,14 @@ const SignUpForm = () => {
         </div>
         <div className={s.input_group}>
           <label htmlFor="repeatPassword" className={s.label}>
-            Repeat password
+            {t("reset_rep")}
           </label>
           <div className={s.password_wrapper}>
             <input
               id="repeatPassword"
               {...register("repeatPassword")}
               type={showPassword ? "text" : "password"}
-              placeholder="Repeat password"
+              placeholder={t("up_repeat")}
               className={`${s.input} ${
                 errors.repeatPassword ? s.error_input : ""
               }`}
@@ -128,13 +134,13 @@ const SignUpForm = () => {
           <span className={s.error_message}>{errors.password?.message}</span>
         </div>
         <button className={s.button} type="submit">
-          Sign Up
+          {t("up_title")}
         </button>
       </form>
       <p className={s.paragraph}>
-        Already have an account?{" "}
+        {t("up_already")}{" "}
         <Link to="/signin" className={s.link}>
-          Sign In
+          {t("in_title")}
         </Link>
       </p>
     </div>

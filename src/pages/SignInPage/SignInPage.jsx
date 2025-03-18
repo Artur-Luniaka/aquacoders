@@ -7,6 +7,8 @@ import MainImg from "../../components/MainImg/MainImg.jsx";
 import OurHappyCustomers from "../../components/OurHappyCustomers/OurHappyCustomers.jsx";
 import SigninForm from "../../components/SigninForm/SignInForm.jsx";
 
+import LanguageSwitcher from "../../components/Language/LanguageSwitcher.jsx"; //моє
+
 const SignInPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
 
@@ -27,6 +29,7 @@ const SignInPage = () => {
     <>
       <GreyBlock>
         <Logo />
+        <LanguageSwitcher />
         <SigninForm />
       </GreyBlock>
       {hideImgBlock && (

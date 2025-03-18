@@ -6,7 +6,11 @@ import { useDispatch } from "react-redux";
 import { deleteWaterEntry } from "../../redux/water/operations/waterOperations.js";
 import { changeMonthlyStats } from "../../redux/water/slice.js";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const DeleteEntryModal = ({ onCloseModal, entryId }) => {
+  const { t } = useTranslation(); //моє
+
   const dispatch = useDispatch();
 
   const extractDate = (isoString) => {
@@ -16,8 +20,8 @@ const DeleteEntryModal = ({ onCloseModal, entryId }) => {
   const handleDelete = async () => {
     try {
       await toast.promise(dispatch(deleteWaterEntry(entryId._id)).unwrap(), {
-        loading: "Processing...",
-        success: "Successfully deleted entry!",
+        loading: <p>{t("others_proc")}</p>,
+        success: <p>{t("others_suc")}</p>,
       });
       onCloseModal();
       dispatch(
@@ -37,14 +41,14 @@ const DeleteEntryModal = ({ onCloseModal, entryId }) => {
   return (
     <Modal onCloseModal={onCloseModal}>
       <div className={s.container}>
-        <h2 className={s.title}>Delete entry</h2>
-        <p className={s.text}>Are you sure you want to delete the entry?</p>
+        <h2 className={s.title}>{t("del_title")}</h2>
+        <p className={s.text}>{t("del_are")}</p>
         <div className={s.buttons_container}>
           <button className={s.delete} onClick={handleDelete}>
-            Delete
+            {t("del_del")}
           </button>
           <button className={s.cancel} onClick={handleCancel}>
-            Cancel
+            {t("del_can")}
           </button>
         </div>
       </div>

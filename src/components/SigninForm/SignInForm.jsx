@@ -9,14 +9,18 @@ import s from "./SignInForm.module.css";
 import sprite from "../../assets/sprite.svg";
 import { Link } from "react-router-dom";
 
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
-  password: Yup.string().required("Password is required"),
-});
+import { useTranslation } from "react-i18next"; //моє
 
 const SignInForm = () => {
+  const { t } = useTranslation(); //моє
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email(<p>{t("in_val_inv")}</p>)
+      .required(<p>{t("in_val_em")}</p>),
+    password: Yup.string().required(<p>{t("in_val_pas")}</p>),
+  });
+
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
@@ -35,8 +39,8 @@ const SignInForm = () => {
   const onSubmit = async (data) => {
     try {
       await toast.promise(dispatch(signIn(data)).unwrap(), {
-        loading: "Signing in...",
-        success: "Successfully signed in!",
+        loading: <p>{t("in_sig_in")}</p>,
+        success: <p>{t("in_suc_sig")}</p>,
       });
     } catch (e) {
       toast.error(e.data.message || "Something went wrong. Please try again.");
@@ -45,7 +49,7 @@ const SignInForm = () => {
 
   return (
     <div className={s.signin_container}>
-      <h2 className={s.signin_title}>Sign In</h2>
+      <h2 className={s.signin_title}>{t("in_title")}</h2>
       <form
         className={s.signin_form}
         noValidate
@@ -53,12 +57,12 @@ const SignInForm = () => {
       >
         <div className={s.input_group}>
           <label htmlFor="email" className={s.label}>
-            Email
+            {t("in_email")}
           </label>
           <input
             type="email"
             id="email"
-            placeholder="Enter your email"
+            placeholder={t("in_email_enter")}
             className={errors.email ? `${s.input} ${s.input_error}` : s.input}
             {...register("email")}
           />
@@ -66,12 +70,12 @@ const SignInForm = () => {
         </div>
         <div className={s.input_group}>
           <label htmlFor="password" className={s.label}>
-            Password
+            {t("in_pass")}
           </label>
           <input
             type={showPassword ? "text" : "password"}
             id="password"
-            placeholder="Enter your password"
+            placeholder={t("in_pass_enter")}
             className={errors.email ? `${s.input} ${s.input_error}` : s.input}
             {...register("password")}
           />
@@ -89,17 +93,17 @@ const SignInForm = () => {
           <span className={s.error_text}>{errors.password?.message}</span>
         </div>
         <button type="submit" className={s.signin_button}>
-          Sign In
+          {t("in_title")}
         </button>
       </form>
       <div className={s.signup_box}>
-        <p className={s.signup_text}>Don’t have an account?</p>
+        <p className={s.signup_text}>{t("reset_don")}</p>
         <Link to="/signup" className={s.signup_link}>
-          Sign Up
+          {t("up_title")}
         </Link>
       </div>
       <Link to="/reset-password" className={s.signup_link}>
-        Reset Password
+        {t("reset_title")}
       </Link>
     </div>
   );

@@ -8,6 +8,9 @@ const slice = createSlice({
     setRefresh: (state, { payload }) => {
       state.refresh = payload;
     },
+    setLang: (state, { payload }) => {
+      state.lang = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -40,4 +43,4 @@ const slice = createSlice({
 });
 
 export default slice.reducer;
-export const { setRefresh } = slice.actions;
+export const { setRefresh, setLang } = slice.actions;

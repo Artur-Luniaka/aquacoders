@@ -11,6 +11,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../../redux/auth/operations/getCurrentUser.js";
 
+import LanguageSwitcher from "../../components/Language/LanguageSwitcher.jsx"; //моє
+
 const UserPage = () => {
   const dispatch = useDispatch();
 
@@ -22,6 +24,7 @@ const UserPage = () => {
     <>
       <GreenBlock>
         <Logo />
+        <LanguageSwitcher />
         <DailyNorma />
         <WaterProgressBar />
         <AddWaterBtn />
