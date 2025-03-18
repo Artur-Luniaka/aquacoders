@@ -12,7 +12,7 @@ import { changeMonthlyStats } from "../../redux/water/slice.js";
 import { useTranslation } from "react-i18next"; //моє
 
 const AddWaterForm = ({ onCloseModal }) => {
-  const { t } = useTranslation(); //моє
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const { register, handleSubmit, setValue, watch } = useForm({
