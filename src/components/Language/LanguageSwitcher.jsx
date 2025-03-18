@@ -1,26 +1,18 @@
 import { useTranslation } from "react-i18next";
 import s from "./LanguageSwitcher.module.css";
-import { setLang } from "../../redux/common/slice.js";
-import { useDispatch, useSelector } from "react-redux";
-import { selectLang } from "../../redux/common/selectors.js";
-import { useEffect } from "react";
+import enFlag from "/src/assets/en.png";
+import uaFlag from "/src/assets/ua.png";
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
-  const dispatch = useDispatch();
-  const activeLang = useSelector(selectLang);
+  const activeLang = localStorage.getItem("lang") || "en";
 
   const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    dispatch(setLang(lng));
-  };
-
-  useEffect(() => {
-    if (activeLang === "ua") {
-      i18n.changeLanguage("ua");
-      dispatch(setLang("ua"));
+    if (activeLang !== lng) {
+      i18n.changeLanguage(lng);
+      localStorage.setItem("lang", lng);
     }
-  }, [dispatch, activeLang, i18n]);
+  };
 
   return (
     <div className={s.wrapper_btn}>
@@ -28,13 +20,13 @@ const LanguageSwitcher = () => {
         className={`${s.btn_lan} ${activeLang === "en" ? s.active : ""}`}
         onClick={() => changeLanguage("en")}
       >
-        <img src="/src/assets/en.png" alt="EN Flag" />
+        <img src={enFlag} alt="EN Flag" />
       </button>
       <button
         className={`${s.btn_lan} ${activeLang === "ua" ? s.active : ""}`}
         onClick={() => changeLanguage("ua")}
       >
-        <img src="/src/assets/ua.png" alt="EN Flag" />
+        <img src={uaFlag} alt="UA Flag" />
       </button>
     </div>
   );
