@@ -49,7 +49,7 @@ const App = () => {
               <PrivateRoute redirectTo="/signin" component={<UserPage />} />
             }
           />
-          <Route path="/users/confirm-oauth" element={<GoogleCallbackPage />} />
+          <Route path="/confirm-oauth" element={<GoogleCallbackPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/reset-password" element={<ResetPassPage />} />
         </Routes>
