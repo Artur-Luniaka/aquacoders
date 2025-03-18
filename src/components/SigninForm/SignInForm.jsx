@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import s from "./SignInForm.module.css";
 import sprite from "../../assets/sprite.svg";
 import { Link } from "react-router-dom";
+import GoogleAuthButton from "../GoogleAuthButton/GoogleAuthButton.jsx";
 
 import { useTranslation } from "react-i18next"; //моє
 
@@ -102,6 +103,7 @@ const SignInForm = () => {
           {t("up_title")}
         </Link>
       </div>
+      <GoogleAuthButton />
       <Link to="/reset-password" className={s.signup_link}>
         {t("reset_title")}
       </Link>

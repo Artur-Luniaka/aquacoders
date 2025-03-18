@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { signUp } from "../../redux/auth/operations/signUpThunk";
 
 import { useTranslation } from "react-i18next"; //моє
+import GoogleAuthButton from "../GoogleAuthButton/GoogleAuthButton.jsx";
 
 const SignUpForm = () => {
   const { t } = useTranslation(); //моє
@@ -143,6 +144,7 @@ const SignUpForm = () => {
           {t("in_title")}
         </Link>
       </p>
+      <GoogleAuthButton />
     </div>
   );
 };

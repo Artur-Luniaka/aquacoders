@@ -190,6 +190,8 @@ i18n.use(initReactI18next).init({
         reset_up: "Sign Up",
         reset_in: "Invalid email",
         reset_em: "Email is required",
+
+        google: "Sign In with Google",
       },
     },
     ua: {
@@ -376,6 +378,8 @@ i18n.use(initReactI18next).init({
         reset_up: "Зареєструйтеся",
         reset_in: "Неправильний email",
         reset_em: "Email є обов'язковим",
+
+        google: "Увійти за допомогою Google",
       },
     },
   },
