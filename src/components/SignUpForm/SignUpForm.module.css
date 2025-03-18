@@ -2,11 +2,11 @@
   width: 100%;
   max-width: 320px;
   text-align: center;
-  margin: 126px auto 103px;
+  margin: 80px auto;
 
   @media (min-width: 768px) {
     max-width: 436px;
-    margin: 171px auto 195px;
+    margin: 100px auto;
   }
 
   @media (min-width: 1440px) {
