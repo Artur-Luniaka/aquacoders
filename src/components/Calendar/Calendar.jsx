@@ -16,7 +16,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import Loader from "../Loader/Loader.jsx";
 
 const currentDay = new Date().getDate();
 const currentMonth = new Date().getMonth() + 1;
@@ -115,7 +114,7 @@ const Calendar = () => {
             </div>
           ) : (
             <div className={s.empty_calendar_list}>
-              <Loader />
+              <span className={s.loader}>Loading...</span>
             </div>
           )}
         </>

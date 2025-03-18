@@ -35,12 +35,14 @@
   }
 }
 
-
-
+.loader {
+  font-family: var(--poppins-bold);
+  color: #323f479a;
+}
 
 .chart_wrapper {
-width: 303px;
-max-width: 303px;
+  width: 303px;
+  max-width: 303px;
   min-height: 242px;
   display: flex;
   align-items: center;
