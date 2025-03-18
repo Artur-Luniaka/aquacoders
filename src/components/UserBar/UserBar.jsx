@@ -51,8 +51,9 @@ const UserBar = () => {
   return (
     <section className={s.drop_down_container}>
       <h2 className={s.current_name}>
-        Hello
-        <span>, {checkName() ? checkName() : "User"}!</span>
+        Hello,
+        <br />
+        <span> {checkName() ? checkName() : "User"}!</span>
       </h2>
       <div onClick={(e) => e.stopPropagation()}>
         <button

@@ -106,9 +106,6 @@ const SettingsModal = ({ onClose }) => {
         loading: "Updating...",
         success: "Updated profile successfully!",
       });
-      // dispatch(setUser(data.data));
-      console.log(data);
-
       onClose(false);
     } catch (error) {
       error.errors.forEach((item) => {
