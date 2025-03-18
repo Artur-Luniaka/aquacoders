@@ -13,8 +13,8 @@ const slice = createSlice({
     builder
       .addMatcher(
         (action) => action.type.endsWith("/pending"),
-        (state) => {
-          if (!state.isLoader) {
+        (state, action) => {
+          if (!state.isLoader && action.type !== "auth/getLastUsers/pending") {
             state.isLoader = true;
             state.refresh = true;
           }
