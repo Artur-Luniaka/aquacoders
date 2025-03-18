@@ -1,10 +1,10 @@
-.info_container{
+.info_container {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 }
-  
-.label{
+
+.label {
   font-family: var(--poppins-bold);
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -16,13 +16,13 @@
   justify-content: center;
   padding: 9px 12px;
 
-@media (min-width: 768px) {
-  font-size: 12px;
-  padding: 11px 16px;
-    }
+  @media (min-width: 768px) {
+    font-size: 12px;
+    padding: 11px 16px;
+  }
 }
 
-.info_list{
+.info_list {
   position: absolute;
   display: flex;
   flex-wrap: wrap;
@@ -30,21 +30,21 @@
   left: 159px;
   top: 265px;
 
-@media (min-width: 768px) {
-  top: 336px;
-  bottom: 32px;
-  left: 430px;
-  gap: 10px;
-    }
-    
-@media (min-width: 1440px) {
-  top: 594px;
-  bottom: 64px;
-  left: 398px;
-    }
+  @media (min-width: 768px) {
+    top: 336px;
+    bottom: 32px;
+    left: 430px;
+    gap: 10px;
+  }
+
+  @media (min-width: 1440px) {
+    top: 594px;
+    bottom: 64px;
+    left: 398px;
+  }
 }
 
-.dark{
+.dark {
   min-width: 81px;
   max-width: 81px;
   background-color: var(--color-darkblue);
@@ -57,14 +57,14 @@
     min-width: 111px;
     max-width: 111px;
   }
-  }
-
-.dark::before{
-  content: "●"; 
-  color:  var(--color-lightgreen);
 }
 
-.green{
+.dark::before {
+  content: "●";
+  color: var(--color-lightgreen);
+}
+
+.green {
   min-width: 83px;
   max-width: 83px;
   background-color: var(--color-lightgreen);
@@ -72,11 +72,11 @@
 
   @media (min-width: 768px) {
     min-width: 121px;
-    max-width: 83px;;
+    max-width: 83px;
   }
 }
 
-.white{
+.white {
   min-width: 108px;
   max-width: 108px;
   padding: 9px 12px;
@@ -89,6 +89,3 @@
     padding: 11px 16px;
   }
 }
-
-
-

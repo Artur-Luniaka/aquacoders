@@ -6,7 +6,11 @@ import { getLastUsers } from "../../redux/auth/operations/getLastUsers.js";
 import clsx from "clsx";
 import Loader from "../Loader/Loader.jsx";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const OurHappyCustomers = () => {
+  const { t } = useTranslation(); //моє
+
   const [activeBlock, setActiveBlock] = useState(false);
 
   const lastUsers = useSelector(selectLastUsers);
@@ -34,15 +38,25 @@ const OurHappyCustomers = () => {
               />
             ))
           ) : (
-            <span className={s.loader}><Loader/></span>
+            <span className={s.loader}>
+              <Loader />
+            </span>
           )}
         </div>
         <p className={s.paragraph}>
-          Our <span className={s.highlight}>happy</span> customers
+          {t("main_our_o")}{" "}
+          <span className={s.highlight}>{t("main_our_h")}</span>{" "}
+          {t("main_our_c")}
         </p>
       </div>
       <div className={clsx(s.count_customers, activeBlock && s.active)}>
-        {lastUsers?.usersCounter ? lastUsers?.usersCounter : <span className={s.loader}><Loader/></span>}
+        {lastUsers?.usersCounter ? (
+          lastUsers?.usersCounter
+        ) : (
+          <span className={s.loader}>
+            <Loader />
+          </span>
+        )}
       </div>
     </div>
   );

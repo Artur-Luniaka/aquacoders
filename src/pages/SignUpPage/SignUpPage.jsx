@@ -7,6 +7,8 @@ import MainImg from "../../components/MainImg/MainImg.jsx";
 import OurHappyCustomers from "../../components/OurHappyCustomers/OurHappyCustomers.jsx";
 import SignUpForm from "../../components/SignUpForm/SignUpForm.jsx";
 
+import LanguageSwitcher from "../../components/Language/LanguageSwitcher.jsx"; //моє
+
 const SignUpPage = () => {
   const [hideImgBlock, setHideImgBlock] = useState(false);
 
@@ -27,6 +29,7 @@ const SignUpPage = () => {
     <>
       <GreyBlock>
         <Logo />
+        <LanguageSwitcher />
         <SignUpForm />
       </GreyBlock>
       {hideImgBlock && (

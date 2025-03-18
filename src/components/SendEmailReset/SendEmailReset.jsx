@@ -10,11 +10,11 @@ import { selectEmail, selectIsLoggedIn } from "../../redux/auth/selectors.js";
 import { useSelector } from "react-redux";
 import aqua from "../../redux/aqua.js";
 
-const validationSchema = Yup.object({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-});
+import { useTranslation } from "react-i18next"; //моє
 
 const SendEmailReset = () => {
+  const { t } = useTranslation(); //моє
+
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const email = useSelector(selectEmail);
   const navigate = useNavigate();
@@ -24,7 +24,11 @@ const SendEmailReset = () => {
     reset,
     formState: { errors, isSubmitSuccessful },
   } = useForm({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(
+      Yup.object({
+        email: Yup.string().email(t("reset_in")).required(t("reset_em")),
+      })
+    ),
     defaultValues: { email: email || "" },
   });
   useEffect(() => {
@@ -35,8 +39,8 @@ const SendEmailReset = () => {
   const onSubmit = async (data) => {
     try {
       await toast.promise(aqua.post("/users/send-reset-email", data), {
-        loading: "Sending email...",
-        success: "Successfully sent reset email!",
+        loading: <p>{t("others_sen")}</p>,
+        success: <p>{t("others_suc_sen")}</p>,
       });
 
       navigate("/");
@@ -55,18 +59,19 @@ const SendEmailReset = () => {
 
   return (
     <div className={s.container}>
-      <h2 className={s.title}>Reset Password</h2>
+      <h2 className={s.title}>{t("reset_title")}</h2>
+
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <div className={s.input_group}>
           <label htmlFor="email" className={s.label}>
-            Enter Your Account Email
+            {t("reset_enter")}
           </label>
           <input
             {...register("email")}
             id="email"
             type="text"
             disabled={email}
-            placeholder="Enter your email"
+            placeholder={t("reset_enter")}
             className={`${s.input} ${errors.email ? s.error_input : ""}`}
           />
           {errors.email ? (
@@ -76,14 +81,14 @@ const SendEmailReset = () => {
           )}
         </div>
         <button className={s.button} type="submit">
-          Send reset Email
+          {t("reset_send")}
         </button>
       </form>
       {!isLoggedIn && (
         <p className={s.paragraph}>
-          Don't have an account?{" "}
+          {t("reset_don")}{" "}
           <Link to="/signup" className={s.link}>
-            Sign Up
+            {t("reset_up")}
           </Link>
         </p>
       )}

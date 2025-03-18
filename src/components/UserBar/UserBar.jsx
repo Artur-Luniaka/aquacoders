@@ -12,7 +12,11 @@ import {
   selectUserName,
 } from "../../redux/auth/selectors.js";
 
+import { useTranslation } from "react-i18next"; //моє
+
 const UserBar = () => {
+  const { t } = useTranslation(); //моє
+
   const [dropStatus, setDropStatus] = useState(false);
 
   const userName = useSelector(selectUserName);
@@ -51,9 +55,9 @@ const UserBar = () => {
   return (
     <section className={s.drop_down_container}>
       <h2 className={s.current_name}>
-        Hello,
+        {t("home_hello")}
         {""}
-        <span> {checkName() ? checkName() : "User"}!</span>
+        <span>, {checkName() ? checkName() : "User"}!</span>
       </h2>
       <div onClick={(e) => e.stopPropagation()}>
         <button

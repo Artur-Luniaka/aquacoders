@@ -11,6 +11,7 @@ import { settingsSchema } from "../../utils/validationSchema.js";
 import SettingsAvatarModal from "../SettingsAvatarModal/SettingsAvatarModal.jsx";
 import { selectUser } from "../../redux/auth/selectors.js";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next"; //моє
 
 const SettingsModal = ({ onClose }) => {
   const [nameError, setNameError] = useState({ error1: false, error2: false });
@@ -40,6 +41,7 @@ const SettingsModal = ({ onClose }) => {
     dailyNorm,
   } = useSelector(selectUser);
 
+  const { t } = useTranslation(); //моє
   const dispatch = useDispatch();
 
   const { register, handleSubmit, watch } = useForm({
@@ -103,8 +105,8 @@ const SettingsModal = ({ onClose }) => {
     try {
       await settingsSchema.validate(userData, { abortEarly: false });
       await toast.promise(dispatch(updateUser(filteredUserData)).unwrap(), {
-        loading: "Updating...",
-        success: "Updated profile successfully!",
+        loading: t("sett_pending"),
+        success: t("sett_success"),
       });
       onClose(false);
     } catch (error) {
@@ -156,14 +158,14 @@ const SettingsModal = ({ onClose }) => {
   return (
     <Modal onCloseModal={onClose}>
       <div className={s.modal_settings}>
-        <h2 className={s.title_modal}>Setting</h2>
+        <h2 className={s.title_modal}>{t("home_set")}</h2>
         <SettingsAvatarModal />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={s.content_box}>
             <div className={s.box}>
               <div className={s.part_content}>
                 <div className={s.radio_gender}>
-                  <span className={s.radio_title}>Your gender identity</span>
+                  <span className={s.radio_title}>{t("sett_your")}</span>
                   <div className={s.radio_group}>
                     <label htmlFor="weight-woman" className={s.radio_label}>
                       <input
@@ -174,7 +176,7 @@ const SettingsModal = ({ onClose }) => {
                         {...register("gender")}
                         className={s.radio_input}
                       />
-                      <span className={s.custom_radio}></span> Woman
+                      <span className={s.custom_radio}></span> {t("sett_woman")}
                     </label>
                     <label htmlFor="weight-man" className={s.radio_label}>
                       <input
@@ -184,65 +186,63 @@ const SettingsModal = ({ onClose }) => {
                         {...register("gender")}
                         className={s.radio_input}
                       />
-                      <span className={s.custom_radio}></span> Man
+                      <span className={s.custom_radio}></span> {t("sett_man")}
                     </label>
                   </div>
                 </div>
                 {genderError && (
-                  <span className={s.errors}>Gender is required</span>
+                  <span className={s.errors}>{t("sett_gen")}</span>
                 )}
                 <div className={s.input_box}>
                   <label htmlFor="name" className={s.radio_title}>
-                    Your name
+                    {t("sett_your_n")}
                   </label>
                   <input
                     type="text"
-                    placeholder="Your name"
+                    placeholder={t("sett_nadia")}
                     id="name"
                     {...register("name")}
                     className={s.input}
                   />
                   {nameError.error1 && (
-                    <span className={s.errors}>Min 2 characters</span>
+                    <span className={s.errors}>{t("sett_min")}</span>
                   )}
                   {nameError.error2 && (
-                    <span className={s.errors}>Max 12 characters</span>
+                    <span className={s.errors}>{t("sett_max")}</span>
                   )}
                   <label htmlFor="email" className={s.radio_title}>
-                    Email
+                    {t("sett_email")}
                   </label>
                   <input
                     type="email"
-                    placeholder="Email"
+                    placeholder={t("sett_com")}
                     id="email"
                     {...register("email")}
                     className={s.input}
                   />
                   {emailError && (
-                    <span className={s.errors}>Incorrect email</span>
+                    <span className={s.errors}>{t("sett_inc")}</span>
                   )}
                 </div>
                 <div className={s.daily_box}>
-                  <div className={s.radio_title}>My daily norma</div>
+                  <div className={s.radio_title}>{t("sett_my")}</div>
                   <div className={s.formulas_box}>
                     <div className={s.box_formula}>
-                      <p className={s.title_formula}>For woman:</p>
+                      <p className={s.title_formula}>{t("sett_for_woman")}</p>
                       <div className={s.formula}>V=(M*0,03) + (T*0,4)</div>
                     </div>
                     <div className={s.box_formula}>
-                      <p className={s.title_formula}>For man:</p>
+                      <p className={s.title_formula}>{t("sett_for_man")}</p>
                       <div className={s.formula}>V=(M*0,04) + (T*0,6)</div>
                     </div>
                   </div>
                   <p className={s.description_formula}>
-                    <span className={s.green}>* </span>V is the volume of the
-                    water norm in liters per day, M is your body weight, T is
-                    the time of active sports, or another type of activity
-                    commensurate in terms of loads (in the absence of these, you
-                    must set 0)
+                    <span className={s.green}>* </span>
+                    {t("sett_v")}
                   </p>
                   <span className={s.active_time}>
-                    <span className={s.green}>! </span>Active time in hours
+                    <span className={s.green}>! </span>
+                    {t("sett_act")}
                   </span>
                 </div>
               </div>
@@ -250,7 +250,7 @@ const SettingsModal = ({ onClose }) => {
                 <div className={s.user_data}>
                   <div className={s.input_box}>
                     <label htmlFor="user-weight" className={s.user_description}>
-                      Your weight in kilograms
+                      {t("sett_kilo")}
                     </label>
                     <input
                       type="number"
@@ -260,17 +260,13 @@ const SettingsModal = ({ onClose }) => {
                       className={s.input}
                     />
                     {weightError.error1 && (
-                      <span className={s.errors}>
-                        Weight cannot be negative
-                      </span>
+                      <span className={s.errors}>{t("sett_w_neg")}</span>
                     )}
                     {weightError.error2 && (
-                      <span className={s.errors}>
-                        Weight cannot exceed 250 kg
-                      </span>
+                      <span className={s.errors}>{t("sett_w_kg")}</span>
                     )}
                     <label htmlFor="time-sport" className={s.user_description}>
-                      The time of active participation in sports
+                      {t("sett_time")}
                     </label>
                     <input
                       type="number"
@@ -280,20 +276,16 @@ const SettingsModal = ({ onClose }) => {
                       className={s.input}
                     />
                     {sportTimeError.error1 && (
-                      <span className={s.errors}>
-                        Workout time cannot be less than 0
-                      </span>
+                      <span className={s.errors}>{t("sett_w_less")}</span>
                     )}
                     {sportTimeError.error2 && (
-                      <span className={s.errors}>
-                        Workout time cannot be more than 24
-                      </span>
+                      <span className={s.errors}>{t("sett_w_more")}</span>
                     )}
                   </div>
                   {/* //required water */}
                   <div className={s.result_text}>
                     <label htmlFor="required-water" className={s.title_bold}>
-                      The required amount of water in liters per day:
+                      {t("sett_req")}
                     </label>
                     <input
                       type="text"
@@ -303,14 +295,10 @@ const SettingsModal = ({ onClose }) => {
                       readOnly
                     />
                     {dailyNormError.error1 && (
-                      <span className={s.errors}>
-                        Daily norm cannot be less than 500ml
-                      </span>
+                      <span className={s.errors}>{t("sett_d_less")}</span>
                     )}
                     {dailyNormError.error2 && (
-                      <span className={s.errors}>
-                        Daily norm cannot be more than 15000ml
-                      </span>
+                      <span className={s.errors}>{t("sett_d_more")}</span>
                     )}
                   </div>
                 </div>

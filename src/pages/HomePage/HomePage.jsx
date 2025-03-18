@@ -6,11 +6,14 @@ import AdvantagesSection from "../../components/AdvantegesSection/AdvantagesSect
 import WelcomeSection from "../../components/WelcomeSection/WelcomeSection.jsx";
 import OurHappyCustomers from "../../components/OurHappyCustomers/OurHappyCustomers.jsx";
 
+import LanguageSwitcher from "../../components/Language/LanguageSwitcher.jsx"; //моє
+
 const HomePage = () => {
   return (
     <>
       <GreyBlock>
         <Logo />
+        <LanguageSwitcher />
         <WelcomeSection />
       </GreyBlock>
       <ImgBlock>

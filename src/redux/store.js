@@ -20,14 +20,23 @@ const authPersistConfig = {
   storage,
   whitelist: ["token", "isLoggedIn", "refreshToken", "sessionId", "user"],
 };
+const commonPersistConfig = {
+  key: "common",
+  storage,
+  whitelist: ["lang"],
+};
 
+const persistedCommonReducer = persistReducer(
+  commonPersistConfig,
+  commonReducer
+);
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     water: waterReducer,
-    common: commonReducer,
+    common: persistedCommonReducer,
   },
 
   middleware: (getDefaultMiddleware) =>
