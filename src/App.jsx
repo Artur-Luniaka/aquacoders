@@ -5,6 +5,9 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import { useSelector } from "react-redux";
+import { selectRefresh } from "./redux/common/selectors.js";
+import Refresh from "./components/Refresh/Refresh.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
@@ -16,9 +19,15 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 import "./i18n.js"; //моє
 
 const App = () => {
+  const refresh = useSelector(selectRefresh);
   return (
     <>
       <Layout>
+        {refresh && (
+          <div className="refresh">
+            <Refresh />
+          </div>
+        )}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route

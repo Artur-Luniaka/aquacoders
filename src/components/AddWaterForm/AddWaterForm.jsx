@@ -62,15 +62,25 @@ const AddWaterForm = ({ onCloseModal }) => {
     try {
       const now = new Date();
       const [hours, minutes] = data.date.split(":");
+
       const recordingDateTime = new Date(
-        `${now.toISOString().slice(0, 10)}T${hours}:${minutes}:00.000Z`
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        hours,
+        minutes,
+        0
       );
-      const formattedDate = recordingDateTime.toISOString();
+      const formattedDate = new Date(
+        recordingDateTime.getTime() -
+          recordingDateTime.getTimezoneOffset() * 60000
+      ).toISOString();
 
       const requestData = {
         volume: data.volume,
         date: formattedDate,
       };
+
       await toast.promise(dispatch(addWaterEntry(requestData)).unwrap(), {
         loading: <p>{t("others_add")}</p>,
         success: <b>{t("add_wat")}</b>,

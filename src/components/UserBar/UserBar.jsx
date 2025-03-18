@@ -56,6 +56,7 @@ const UserBar = () => {
     <section className={s.drop_down_container}>
       <h2 className={s.current_name}>
         {t("home_hello")}
+        {""}
         <span>, {checkName() ? checkName() : "User"}!</span>
       </h2>
       <div onClick={(e) => e.stopPropagation()}>
@@ -80,7 +81,7 @@ const UserBar = () => {
             </svg>
           </span>
         </button>
-        <UserBarPopover dropStatus={dropStatus} />
+        <UserBarPopover dropStatus={dropStatus} setDropStatus={setDropStatus} />
       </div>
     </section>
   );

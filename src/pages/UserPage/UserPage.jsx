@@ -18,7 +18,7 @@ const UserPage = () => {
 
   useEffect(() => {
     dispatch(getCurrentUser());
-  });
+  }, [dispatch]);
 
   return (
     <>

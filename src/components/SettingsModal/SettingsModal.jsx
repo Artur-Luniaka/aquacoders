@@ -108,7 +108,6 @@ const SettingsModal = ({ onClose }) => {
         loading: "Updating...",
         success: "Updated profile successfully!",
       });
-      console.log(data);
       onClose(false);
     } catch (error) {
       error.errors.forEach((item) => {
@@ -170,6 +169,7 @@ const SettingsModal = ({ onClose }) => {
                   <div className={s.radio_group}>
                     <label htmlFor="weight-woman" className={s.radio_label}>
                       <input
+                        defaultChecked
                         type="radio"
                         value="female"
                         id="weight-woman"

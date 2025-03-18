@@ -23,6 +23,13 @@ const Modal = ({ onCloseModal, children }) => {
     }
   };
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   return (
     <div onClick={onBackdropClick} className={s.backdrop}>
       <div className={s.modal}>

@@ -8,14 +8,14 @@ import { Link } from "react-router-dom";
 
 import { useTranslation } from "react-i18next"; //моє
 
-const UserBarPopover = ({ dropStatus }) => {
+const UserBarPopover = ({ dropStatus, setDropStatus }) => {
   const { t } = useTranslation(); //моє
-
   const [showLogOutModal, setShowLogOutModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     setShowLogOutModal(true);
+    setDropStatus(false);
   };
 
   const closeModal = () => {
@@ -26,7 +26,10 @@ const UserBarPopover = ({ dropStatus }) => {
     <>
       <div className={clsx(s.drop_menu, dropStatus && s.drop_menu_open)}>
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            setIsModalOpen(true);
+            setDropStatus(false);
+          }}
           className={s.drop_button}
           type="button"
         >
