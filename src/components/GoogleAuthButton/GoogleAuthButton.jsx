@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import aqua from "../../redux/aqua.js";
+import s from "./GoogleAuthButton.module.css";
+import { useTranslation } from "react-i18next";
 
 const GoogleAuthButton = () => {
   const [googleAuthURL, setGoogleAuthURL] = useState(null);
+  const { t } = useTranslation(); //моє
 
   useEffect(() => {
     const getGoogleAuthURL = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/users/get-oauth-url"
-        );
+        const response = await aqua.get("/users/get-oauth-url");
         setGoogleAuthURL(response.data.data.url);
       } catch (error) {
-        console.error("Ошибка при получении Google Auth URL:", error);
+        console.error("Google Auth URL:", error);
       }
     };
 
@@ -22,12 +23,16 @@ const GoogleAuthButton = () => {
   const handleGoogleSignIn = () => {
     if (googleAuthURL) {
       window.location.assign(googleAuthURL);
-    } else {
-      console.log("Google Auth URL не получен");
     }
   };
 
-  return <button onClick={handleGoogleSignIn}>Sign In with Google</button>;
+  return (
+    <div className={s.box}>
+      <button onClick={handleGoogleSignIn} className={s.login_with_google_btn}>
+        {t("google")}
+      </button>
+    </div>
+  );
 };
 
 export default GoogleAuthButton;

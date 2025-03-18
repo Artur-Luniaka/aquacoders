@@ -4,9 +4,9 @@ import { store } from "./store";
 import { refreshAccessToken } from "./auth/operations/refreshAccessToken";
 
 const aqua = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://aquacoders.onrender.com",
 });
-/*baseURL: "https://aquacoders.onrender.com",*/
+
 
 aqua.interceptors.request.use((config) => {
   const token = store.getState().auth.token;
