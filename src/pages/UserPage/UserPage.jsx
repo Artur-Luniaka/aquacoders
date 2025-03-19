@@ -8,7 +8,7 @@ import Logo from "../../components/Logo/Logo.jsx";
 import UserBar from "../../components/UserBar/UserBar.jsx";
 import DailyWaterList from "../../components/DailyWaterList/DailyWaterList.jsx";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../../redux/auth/operations/getCurrentUser.js";
 import { useEffect } from "react";
 
@@ -16,13 +16,10 @@ import LanguageSwitcher from "../../components/Language/LanguageSwitcher.jsx"; /
 
 const UserPage = () => {
   const dispatch = useDispatch();
-  const { user, status } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!user && status !== "loading") {
-      dispatch(getCurrentUser());
-    }
-  }, [dispatch, user, status]);
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
   return (
     <>
